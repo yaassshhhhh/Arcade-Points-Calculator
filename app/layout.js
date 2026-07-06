@@ -1,9 +1,59 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "TACTICAL HQ — Arcade Survival Command",
+  title: "Arcade Points Calculator | Google Cloud Skills Boost",
   description:
-    "Track your survival in the Arcade. Calculate deployment points, milestone zones, and badge achievements.",
+    "The ultimate Google Cloud Arcade Points Calculator. Track your Arcade games, skill badges, and milestones instantly using your Cloud Skills Boost public profile URL.",
+  keywords: [
+    "Google Cloud Arcade",
+    "Arcade Points Calculator",
+    "Google Cloud Skills Boost",
+    "GCP Arcade",
+    "Google Arcade Program",
+    "Cloud Skills Boost Profile",
+    "Google Cloud Facilitator Program",
+    "Arcade Badges",
+    "Skill Badges",
+    "Calculate Arcade Points"
+  ],
+  authors: [{ name: "Yash Mahajan" }],
+  creator: "Yash Mahajan",
+  openGraph: {
+    title: "Arcade Points Calculator | Google Cloud Skills Boost",
+    description: "Track your Arcade games, skill badges, and milestones instantly.",
+    url: "https://arcade-points-calculator.vercel.app",
+    siteName: "Arcade Points Calculator",
+    images: [
+      {
+        url: "/og-image.png", // Assuming an OG image exists or will fallback
+        width: 1200,
+        height: 630,
+        alt: "Arcade Points Calculator Preview",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Arcade Points Calculator",
+    description: "Easily calculate your Google Cloud Arcade points and track milestones.",
+    creator: "@yaassshhhhh",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  alternates: {
+    canonical: "https://arcade-points-calculator.vercel.app",
+  },
 };
 
 export default function RootLayout({ children }) {
