@@ -1,0 +1,6 @@
+[
+  { "name": "Milestone 1", "gamesRequired": 6, "skillBadgesRequired": 18, "bonusPoints": 5 },
+  { "name": "Milestone 2", "gamesRequired": 8, "skillBadgesRequired": 34, "bonusPoints": 15 },
+  { "name": "Milestone 3", "gamesRequired": 10, "skillBadgesRequired": 50, "bonusPoints": 25 },
+  { "name": "Ultimate Milestone", "gamesRequired": 12, "skillBadgesRequired": 66, "bonusPoints": 35 }
+]
