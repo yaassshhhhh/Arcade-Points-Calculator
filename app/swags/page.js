@@ -81,16 +81,18 @@ export default function SwagsPage() {
     { title: "Sticker Sheet", image: "/images/sticker-sheet.png" },
     { title: "Laptop Sleeve", image: "/images/laptop-sleeve.png" },
     { title: "Pen Duo", image: "/images/pen-duo.png" },
-    { title: "Mini Printer", image: "/images/arc1.jpeg" },
-    { title: "Google Cloud Jug", image: "/images/arc2.jpeg" },
-    { title: "Desk Vacuum", image: "/images/arc3.jpeg" },
-    { title: "Polo Shirt", image: "/images/arc4.jpeg" },
+    { title: "Google Cloud Jug", image: "/images/arc1.jpeg" },
+    { title: "Mini Printer", image: "/images/arc2.jpeg" },
+    { title: "20 in 1 Cleaning Kit", image: "/images/arc3.jpeg" },
+    { title: "Polo T-Shirt", image: "/images/arc4.jpeg" },
     { title: "Wireless Charger", image: "/images/arc5.jpeg" },
-    { title: "Tech Backpack", image: "/images/arc6.jpeg" },
-    { title: "Crystal Pens", image: "/images/arc7.jpeg" },
-    { title: "Cloud Lamp", image: "/images/arc8.jpeg" },
-    { title: "Rolltop Backpack", image: "/images/arc9.jpeg" },
-    { title: "Lego Notebook", image: "/images/arc10.jpeg" }
+    { title: "Desk Vacuum", image: "/images/arc6.jpeg" },
+    { title: "Classic Backpack", image: "/images/arc7.jpeg" },
+    { title: "Crystal Pens", image: "/images/arc8.jpeg" },
+    { title: "Premium Backpack", image: "/images/arc9.jpeg" },
+    { title: "Cloud Lamp", image: "/images/arc10.jpeg" },
+    { title: "Rolltop Backpack", image: "/images/arc11.jpeg" },
+    { title: "Lego Notebook", image: "/images/arc12.jpeg" }
   ];
 
   return (
