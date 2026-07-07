@@ -7,7 +7,6 @@ import dynamic from "next/dynamic";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { motion } from "framer-motion";
 import MoneyHeistAnimation from "../../components/MoneyHeistAnimation";
 import {
   Target,
@@ -621,7 +620,7 @@ function DashboardContent() {
             { label: "Facilitator", href: "/facilitator", active: false, highlight: true },
             { label: "Skill Badges", href: "/skill-badges", active: false },
             { label: "Resources", href: "/resources", active: false },
-            { label: "The Loot", href: "/swags", active: false },
+            { label: "Swags", href: "/swags", active: false },
           ].map((link) => (
             <Link
               key={link.label}
@@ -872,12 +871,12 @@ function DashboardContent() {
                   style={{
                     fontFamily: "'Share Tech Mono', monospace",
                     fontSize: "0.7rem",
-                    color: "var(--br-red)",
+                    color: "var(--br-green)",
                     letterSpacing: "0.2em",
                     marginBottom: "0.4rem",
                   }}
                 >
-                  // HEIST MEMBER AUTHENTICATED
+                  // PLAYER IDENTIFIED — PROFILE AUTHENTICATED
                 </div>
                 <h1
                   style={{
@@ -933,24 +932,24 @@ function DashboardContent() {
                 </div>
               </div>
 
-              <motion.div
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ type: "spring", delay: 0.2 }}
+              {/* Survival Points */}
+              <div
                 className="br-panel-orange p-6 flex flex-col items-center justify-center text-center"
+                style={{ animation: "fade-slide 0.5s ease-out 100ms both" }}
               >
                 <div
                   style={{
                     fontFamily: "'Share Tech Mono', monospace",
-                    fontSize: "0.8rem",
+                    fontSize: "0.7rem",
                     color: "var(--br-orange)",
                     letterSpacing: "0.2em",
                     marginBottom: "0.75rem",
                   }}
                 >
-                  TOTAL LOOT (PTS)
+                  SURVIVAL POINTS
                 </div>
 
+                {/* Hex badge container around the number */}
                 <div
                   style={{
                     width: 130,
@@ -992,7 +991,7 @@ function DashboardContent() {
                 >
                   TOTAL HEIST EXTRACTION
                 </div>
-              </motion.div>
+              </div>
             </div>
 
             {/* Row 2: Category Breakdown + Zone Progress */}

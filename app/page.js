@@ -7,7 +7,6 @@ import dynamic from "next/dynamic";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { motion } from "framer-motion";
 
 // Dynamically import Three.js scene to prevent SSR issues
 const CanvasScene = dynamic(() => import("../components/CanvasScene"), { ssr: false });
@@ -170,11 +169,50 @@ const PointRow = ({ name, pts, accentColor }) => (
 export default function Home() {
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef(null);
   const router = useRouter();
 
   const containerRef = useRef(null);
   const consoleRef = useRef(null);
   const formRef = useRef(null);
+
+  const toggleAudio = () => {
+    if (!audioRef.current) {
+      // Use standard mp3 format for broader browser support
+      audioRef.current = new Audio("/Bela Chaw Chaw.mp3");
+      audioRef.current.loop = true;
+    }
+    
+    if (isPlaying) {
+      audioRef.current.pause();
+      setIsPlaying(false);
+    } else {
+      setIsPlaying(true); // Optimistically set playing to true
+      // Wrap play in a promise catch to prevent NotSupportedError crashes
+      const playPromise = audioRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise.catch((error) => {
+          if (error.name !== "AbortError") {
+            console.error("Audio playback failed:", error);
+            alert("Could not play audio. Check your browser settings.");
+          }
+          setIsPlaying(false);
+        });
+      }
+    }
+  };
+
+  useEffect(() => {
+    // Cleanup audio when component unmounts (e.g. user navigates away)
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.src = "";
+        audioRef.current = null;
+      }
+    };
+  }, []);
 
   useGSAP(() => {
     // Reveal Vault Console on scroll
@@ -290,9 +328,28 @@ export default function Home() {
           ))}
         </div>
 
-        {/* Status indicator */}
+        {/* Status indicator and Audio */}
         <div className="flex items-center gap-4">
-
+          <button 
+            onClick={toggleAudio}
+            style={{ 
+              background: "transparent", 
+              border: "1px solid var(--br-red)", 
+              padding: "0.25rem 0.5rem", 
+              color: "var(--br-red)", 
+              cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+              gap: "5px",
+              fontFamily: "'Share Tech Mono', monospace",
+              fontSize: "0.75rem",
+              textTransform: "uppercase"
+            }}
+          >
+            {isPlaying ? <Volume2 size={16} /> : <VolumeX size={16} />}
+            {isPlaying ? "AUDIO ON" : "AUDIO OFF"}
+          </button>
+          
           <div className="flex items-center gap-2">
             <Radio size={14} color="var(--br-red)" />
             <span
@@ -334,11 +391,8 @@ export default function Home() {
             </div>
 
             {/* Main heading */}
-            <motion.h1
+            <h1
               className="hero-text"
-              initial={{ filter: "blur(10px)", scale: 0.9 }}
-              animate={{ filter: "blur(0px)", scale: 1 }}
-              transition={{ duration: 1.5, ease: "easeOut" }}
               style={{
                 fontFamily: "'Staatliches', sans-serif",
                 fontSize: "clamp(3.5rem, 8vw, 6rem)",
@@ -352,14 +406,8 @@ export default function Home() {
             >
               EL PROFESOR'S
               <br />
-              <motion.span 
-                animate={{ color: ["#E50914", "#FFFFFF", "#E50914"] }}
-                transition={{ duration: 4, repeat: Infinity }}
-                style={{ color: "var(--br-red)" }}
-              >
-                HEIST
-              </motion.span>
-            </motion.h1>
+              <span style={{ color: "var(--br-red)" }}>ARCADE</span>
+            </h1>
 
             <p
               className="hero-text"
