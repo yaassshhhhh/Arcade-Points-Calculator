@@ -10,7 +10,7 @@
 :root {
   --br-red:        #C0122F; /* Money Heist Blood Red */
   --br-red-bright: #E01527;
-  --br-dark:       #0A0A0A; /* Deep Black */
+  --br-dark:       #000000; /* Deep Black */
   --br-dark2:      #121212;
   --br-orange:     #F2C230; /* Gold/Yellow accents */
   --br-olive:      #4A5D23; /* Keeping for compatibility */
@@ -51,36 +51,6 @@ body {
 a {
   text-decoration: none;
   color: inherit;
-}
-
-/* ─── Tactical Background ───────────────────────────────────────────────────── */
-/* Subtle diagonal grid overlay */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(192, 18, 47, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(192, 18, 47, 0.05) 1px, transparent 1px);
-  background-size: 40px 40px;
-  z-index: 0;
-  pointer-events: none;
-}
-
-/* CRT scanline overlay — very subtle */
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(0, 0, 0, 0.04) 2px,
-    rgba(0, 0, 0, 0.04) 4px
-  );
-  z-index: 9998;
-  pointer-events: none;
 }
 
 /* ─── Typography Base ───────────────────────────────────────────────────────── */

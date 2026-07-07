@@ -8,8 +8,6 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 
-// Dynamically import Three.js scene to prevent SSR issues
-const CanvasScene = dynamic(() => import("../components/CanvasScene"), { ssr: false });
 gsap.registerPlugin(ScrollTrigger);
 import {
   Target,
@@ -264,7 +262,6 @@ export default function Home() {
 
   return (
     <main ref={containerRef}>
-      <CanvasScene />
       <div style={{ position: "relative", zIndex: 10, pointerEvents: "none" }}>
       {/* ── Navbar ────────────────────────────────────────────────────────── */}
       <nav className="br-nav" style={{ pointerEvents: "auto", background: "rgba(10,10,10,0.85)", borderBottom: "1px solid rgba(192, 18, 47, 0.4)" }}>
