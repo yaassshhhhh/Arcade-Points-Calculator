@@ -1,4 +1,5 @@
 import "./globals.css";
+import VisitorCounter from "@/components/VisitorCounter";
 
 export const metadata = {
   title: "Arcade Points Calculator | Google Cloud Skills Boost",
@@ -117,6 +118,8 @@ export default function RootLayout({ children }) {
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.5 12 3.5 12 3.5s-7.505 0-9.377.55a3.016 3.016 0 0 0-2.122 2.136C0 8.074 0 12 0 12s0 3.926.501 5.814a3.016 3.016 0 0 0 2.122 2.136c1.872.55 9.377.55 9.377.55s7.505 0 9.377-.55a3.016 3.016 0 0 0 2.122-2.136C24 15.926 24 12 24 12s0-3.926-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
               </a>
             </div>
+            
+            <VisitorCounter />
           </footer>
         </div>
       </body>
