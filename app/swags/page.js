@@ -5,7 +5,8 @@ import Link from "next/link";
 import Image from "next/image";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { Crosshair, Package, Gift, Award, Star, Zap } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Crosshair, Package, Gift, Award, Star, Zap, Lock, ShieldAlert } from "lucide-react";
 
 export default function SwagsPage() {
   const container = useRef(null);
@@ -155,38 +156,42 @@ export default function SwagsPage() {
         }}
       >
         <div style={{ display: "inline-block", position: "relative" }}>
-          <h1
+          <motion.h1
+            initial={{ y: -50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ type: "spring", stiffness: 100, damping: 10 }}
             style={{
-              fontFamily: "'Rajdhani', sans-serif",
-              fontWeight: 700,
-              fontSize: "clamp(2.5rem, 6vw, 4.5rem)",
+              fontFamily: "'Staatliches', sans-serif",
+              fontSize: "clamp(3.5rem, 8vw, 5.5rem)",
               lineHeight: 1.1,
-              letterSpacing: "0.02em",
+              letterSpacing: "0.05em",
               textTransform: "uppercase",
-              background: "linear-gradient(90deg, #FFFFFF, var(--br-muted))",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
+              color: "#fff",
               marginBottom: "1rem",
-              textShadow: "0 0 40px rgba(255,255,255,0.1)",
+              textShadow: "0 0 40px rgba(229, 9, 20, 0.4)",
             }}
           >
-            Arcade <span style={{ color: "var(--br-orange)", WebkitTextFillColor: "var(--br-orange)" }}>Swags</span>
-          </h1>
-          <div
+            THE ROYAL <span style={{ color: "var(--br-red)", WebkitTextFillColor: "var(--br-red)" }}>VAULT</span>
+          </motion.h1>
+          <motion.div
+            animate={{ rotate: [0, 360] }}
+            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
             style={{
               position: "absolute",
               top: "-20px",
               right: "-30px",
-              color: "var(--br-orange)",
+              color: "var(--br-red)",
               opacity: 0.5,
-              animation: "pulse 2s infinite",
             }}
           >
-            <Gift size={40} />
-          </div>
+            <Lock size={40} />
+          </motion.div>
         </div>
 
-        <p
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
           style={{
             fontFamily: "'Share Tech Mono', monospace",
             fontSize: "1.1rem",
@@ -194,10 +199,14 @@ export default function SwagsPage() {
             maxWidth: "600px",
             margin: "0 auto",
             lineHeight: 1.6,
+            borderLeft: "2px solid var(--br-red)",
+            paddingLeft: "15px",
+            backgroundColor: "rgba(0,0,0,0.4)",
+            padding: "1rem"
           }}
         >
-          Check out all the exclusive swag drops for the Google Cloud Arcade 2026 program. Earn points, hit milestones, and claim your rewards!
-        </p>
+          Target acquired. These are the items secured inside the Royal Mint of Google Cloud. Calculate your points and claim the loot before the authorities arrive.
+        </motion.p>
       </header>
 
       {/* ── Swags Section ───────────────────────────────────────────────── */}
@@ -210,29 +219,27 @@ export default function SwagsPage() {
           }}
         >
           {swags.map((swag, i) => (
-            <div
+            <motion.div
               key={i}
-              className="swag-card br-glass"
+              className="swag-card br-panel"
+              initial={{ scale: 0.9, opacity: 0 }}
+              whileInView={{ scale: 1, opacity: 1 }}
+              whileHover={{ 
+                scale: 1.05, 
+                boxShadow: "0 0 30px rgba(229, 9, 20, 0.4)",
+                borderColor: "rgba(229, 9, 20, 1)"
+              }}
+              viewport={{ once: true, margin: "-50px" }}
               style={{
-                borderRadius: "16px",
+                borderRadius: "8px",
                 overflow: "hidden",
                 position: "relative",
-                transition: "transform 0.3s, box-shadow 0.3s, border-color 0.3s",
                 cursor: "default",
                 display: "flex",
                 flexDirection: "column",
-                border: "1px solid rgba(255,255,255,0.05)",
+                border: "2px solid rgba(229, 9, 20, 0.3)",
                 height: "100%",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "translateY(-5px)";
-                e.currentTarget.style.boxShadow = `0 10px 30px rgba(0,0,0,0.5), 0 0 20px ${swag.color}20`;
-                e.currentTarget.style.borderColor = `${swag.color}50`;
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.boxShadow = "none";
-                e.currentTarget.style.borderColor = "rgba(255,255,255,0.05)";
+                background: "rgba(10, 10, 10, 0.95)"
               }}
             >
               <div 
@@ -272,56 +279,47 @@ export default function SwagsPage() {
                 </div>
               </div>
 
+              {/* ── Content ────────────────────────────────────────────── */}
               <div style={{ padding: "1.5rem", flex: 1, display: "flex", flexDirection: "column" }}>
-                <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.5rem" }}>
-                  <span style={{ color: swag.color, fontFamily: "'Rajdhani', sans-serif", fontSize: "0.9rem", textTransform: "uppercase", letterSpacing: "0.1em" }}>
-                    {swag.tier} Tier
-                  </span>
+                <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: "1rem" }}>
+                  <h3
+                    style={{
+                      fontFamily: "'Share Tech Mono', monospace",
+                      fontSize: "1.2rem",
+                      fontWeight: 700,
+                      color: "#fff",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.05em",
+                    }}
+                  >
+                    {swag.title}
+                  </h3>
+                  {swag.icon}
                 </div>
-                <h3
+                
+                <p
                   style={{
-                    fontFamily: "'Rajdhani', sans-serif",
-                    fontWeight: 600,
-                    fontSize: "1.4rem",
-                    color: "var(--br-text)",
-                    marginBottom: "0.5rem",
+                    fontSize: "0.85rem",
+                    color: "var(--br-muted)",
+                    lineHeight: 1.5,
+                    marginBottom: "1.5rem",
+                    flex: 1,
                   }}
                 >
-                  {swag.title}
-                </h3>
-                <p style={{ color: "var(--br-muted)", fontSize: "0.95rem", lineHeight: 1.5, flex: 1 }}>
                   {swag.description}
                 </p>
-                
-                <button
-                  style={{
-                    marginTop: "1.5rem",
-                    background: "rgba(255,255,255,0.05)",
-                    border: `1px solid ${swag.color}40`,
-                    padding: "0.8rem",
-                    borderRadius: "8px",
-                    color: swag.color,
-                    fontFamily: "'Share Tech Mono', monospace",
-                    fontSize: "0.9rem",
-                    transition: "all 0.2s",
-                    cursor: "pointer",
-                    width: "100%",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    gap: "0.5rem"
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = `${swag.color}15`;
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = "rgba(255,255,255,0.05)";
-                  }}
-                >
-                  <Zap size={16} /> Claim Details
-                </button>
+
+                {/* Status Bar */}
+                <div style={{ marginTop: "auto", borderTop: "1px solid rgba(229, 9, 20, 0.3)", paddingTop: "1rem" }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.5rem" }}>
+                    <span style={{ fontSize: "0.75rem", color: "var(--br-muted)", textTransform: "uppercase", letterSpacing: "0.1em" }}>Target Value</span>
+                    <span style={{ fontFamily: "'Share Tech Mono', monospace", color: "var(--br-red)", fontWeight: 700, fontSize: "1.1rem" }}>
+                      {swag.points} PTS
+                    </span>
+                  </div>
+                </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </section>
@@ -350,30 +348,32 @@ export default function SwagsPage() {
           }}
         >
           {oldSwags.map((swag, i) => (
-            <div
+            <motion.div
               key={i}
-              className="swag-card br-glass"
+              className="br-panel"
+              initial={{ scale: 0.9, opacity: 0 }}
+              whileInView={{ scale: 1, opacity: 1 }}
+              whileHover={{ scale: 1.05, borderColor: "var(--br-orange)" }}
+              viewport={{ once: true, margin: "-20px" }}
               style={{
-                borderRadius: "12px",
+                borderRadius: "4px",
                 overflow: "hidden",
-                border: "1px solid rgba(255,255,255,0.05)",
+                border: "1px solid rgba(229,9,20,0.2)",
+                background: "rgba(10,10,10,0.9)",
                 display: "flex",
                 flexDirection: "column",
-                alignItems: "center",
-                padding: "1rem",
-                transition: "transform 0.3s, box-shadow 0.3s",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "translateY(-5px)";
-                e.currentTarget.style.boxShadow = "0 10px 30px rgba(0,0,0,0.5)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.boxShadow = "none";
+                cursor: "default"
               }}
             >
               <div 
-                style={{ position: "relative", height: "150px", width: "100%", marginBottom: "1rem", cursor: "pointer" }}
+                style={{ 
+                  position: "relative", 
+                  width: "100%", 
+                  paddingTop: "100%", 
+                  background: "#000",
+                  cursor: "pointer",
+                  borderBottom: "1px solid rgba(229,9,20,0.2)"
+                }}
                 onClick={() => setSelectedImage(swag.image)}
               >
                 <Image
@@ -383,19 +383,20 @@ export default function SwagsPage() {
                   style={{ objectFit: "contain" }}
                 />
               </div>
-              <h3
-                style={{
-                  fontFamily: "'Rajdhani', sans-serif",
-                  fontWeight: 600,
-                  fontSize: "1.1rem",
-                  color: "var(--br-muted)",
-                  textAlign: "center",
-                  margin: 0
-                }}
-              >
-                {swag.title}
-              </h3>
-            </div>
+              <div style={{ padding: "0.75rem", textAlign: "center" }}>
+                <span
+                  style={{
+                    fontFamily: "'Share Tech Mono', monospace",
+                    fontSize: "0.85rem",
+                    color: "var(--br-muted)",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.05em",
+                  }}
+                >
+                  {swag.title}
+                </span>
+              </div>
+            </motion.div>
           ))}
         </div>
       </section>

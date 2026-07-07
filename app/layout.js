@@ -1,5 +1,6 @@
 import "./globals.css";
 import VisitorCounter from "@/components/VisitorCounter";
+import AudioPlayer from "@/components/AudioPlayer";
 
 export const metadata = {
   title: "Arcade Points Calculator | Google Cloud Skills Boost",
@@ -61,14 +62,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body suppressHydrationWarning>
-        {/* Tactical radial background gradient */}
+        {/* Tactical radial background gradient (Vault Theme) */}
         <div
           aria-hidden="true"
           style={{
             position: "fixed",
             inset: 0,
             background:
-              "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(74,93,35,0.12) 0%, transparent 70%), linear-gradient(180deg, #0d1117 0%, #1a1f16 100%)",
+              "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(229, 9, 20, 0.12) 0%, transparent 70%), linear-gradient(180deg, #000000 0%, #121212 100%)",
             zIndex: 0,
             pointerEvents: "none",
           }}
@@ -121,6 +122,7 @@ export default function RootLayout({ children }) {
             
             <VisitorCounter />
           </footer>
+          <AudioPlayer />
         </div>
       </body>
     </html>

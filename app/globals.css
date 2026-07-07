@@ -6,22 +6,21 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ─── CSS Variables (MONEY HEIST) ─────────────────────────────────────────────────────────── */
+/* ─── CSS Variables (MONEY HEIST THEME) ─────────────────────────────────────────────────────────── */
 :root {
-  --br-red:        #C0122F; /* Money Heist Blood Red */
-  --br-red-bright: #E01527;
-  --br-dark:       #0A0A0A; /* Deep Black */
-  --br-dark2:      #121212;
-  --br-orange:     #F2C230; /* Gold/Yellow accents */
-  --br-olive:      #4A5D23; /* Keeping for compatibility */
-  --br-green:      #F2C230; /* Overridden to gold for compatibility */
+  --br-red:        #E50914; /* Deep Blood Red */
+  --br-red-bright: #FF1E27; /* Bright alarm red */
+  --br-dark:       #000000; /* Pure Black */
+  --br-dark2:      #121212; /* Anthracite */
+  --br-orange:     #F1C40F; /* Gold / Dali Mask Yellow */
+  --br-olive:      #4A0A0A; /* Dark Red */
+  --br-green:      #2ECC71; /* Success Green */
   
   --br-text:       #E8E8E8;
-  --br-muted:      #8A8A8A;
+  --br-muted:      #9CA3AF;
   
-  --br-orange-dim: rgba(242, 194, 48, 0.15); /* Gold dim */
-  --br-red-dim:    rgba(192, 18, 47, 0.25);
-  --br-green-dim:  rgba(242, 194, 48, 0.20);
+  --br-orange-dim: rgba(241, 196, 15, 0.15); /* Gold dim */
+  --br-red-dim:    rgba(229, 9, 20, 0.25);
   --br-glass:      rgba(10, 10, 10, 0.85);
 }
 
@@ -53,21 +52,20 @@ a {
   color: inherit;
 }
 
-/* ─── Tactical Background ───────────────────────────────────────────────────── */
-/* Subtle diagonal grid overlay */
+/* ─── Tactical Background (Vault Wall) ───────────────────────────────────────────────────── */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   background-image:
-    linear-gradient(rgba(192, 18, 47, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(192, 18, 47, 0.05) 1px, transparent 1px);
-  background-size: 40px 40px;
+    linear-gradient(rgba(229, 9, 20, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(229, 9, 20, 0.05) 1px, transparent 1px);
+  background-size: 50px 50px;
   z-index: 0;
   pointer-events: none;
 }
 
-/* CRT scanline overlay — very subtle */
+/* CRT scanline overlay */
 body::after {
   content: '';
   position: fixed;
@@ -76,8 +74,8 @@ body::after {
     0deg,
     transparent,
     transparent 2px,
-    rgba(0, 0, 0, 0.04) 2px,
-    rgba(0, 0, 0, 0.04) 4px
+    rgba(229, 9, 20, 0.03) 2px,
+    rgba(229, 9, 20, 0.03) 4px
   );
   z-index: 9998;
   pointer-events: none;
@@ -94,21 +92,22 @@ h1, h2, h3, h4, h5, h6 {
 /* ─── Custom Component Classes ──────────────────────────────────────────────── */
 @layer components {
 
-  /* ── Tactical Panel ──────────────────────────────────────────────────────── */
+  /* ── Heist Panel ──────────────────────────────────────────────────────── */
   .br-panel {
     @apply relative overflow-hidden;
     background: var(--br-glass);
-    border: 1px solid rgba(74, 93, 35, 0.5);
+    border: 1px solid rgba(229, 9, 20, 0.4);
     clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    box-shadow: 0 0 30px rgba(74, 93, 35, 0.12), inset 0 0 20px rgba(74, 93, 35, 0.05);
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 0 30px rgba(229, 9, 20, 0.1), inset 0 0 20px rgba(229, 9, 20, 0.05);
+    transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
   }
 
   .br-panel:hover {
-    box-shadow: 0 0 40px rgba(255, 107, 0, 0.15), inset 0 0 20px rgba(255, 107, 0, 0.05);
+    box-shadow: 0 0 40px rgba(241, 196, 15, 0.15), inset 0 0 20px rgba(241, 196, 15, 0.05);
     transform: scale(1.01);
+    border-color: rgba(241, 196, 15, 0.5);
   }
 
   /* Corner targeting brackets — top-left */
@@ -119,10 +118,11 @@ h1, h2, h3, h4, h5, h6 {
     left: 6px;
     width: 14px;
     height: 14px;
-    border-top: 2px solid var(--br-orange);
-    border-left: 2px solid var(--br-orange);
+    border-top: 2px solid var(--br-red);
+    border-left: 2px solid var(--br-red);
     z-index: 10;
     pointer-events: none;
+    transition: border-color 0.3s ease;
   }
 
   /* Corner targeting brackets — bottom-right */
@@ -133,54 +133,32 @@ h1, h2, h3, h4, h5, h6 {
     right: 6px;
     width: 14px;
     height: 14px;
-    border-bottom: 2px solid var(--br-orange);
-    border-right: 2px solid var(--br-orange);
+    border-bottom: 2px solid var(--br-red);
+    border-right: 2px solid var(--br-red);
     z-index: 10;
     pointer-events: none;
+    transition: border-color 0.3s ease;
   }
 
-  /* ── Orange-accented panel variant ─────────────────────────────────────── */
-  .br-panel-orange {
-    @apply br-panel;
-    border-color: rgba(255, 107, 0, 0.4);
-    box-shadow: 0 0 30px var(--br-orange-dim), inset 0 0 15px var(--br-orange-dim);
-  }
-
-  /* ── Red-accented panel variant ─────────────────────────────────────────── */
-  .br-panel-red {
-    @apply br-panel;
-    border-color: rgba(196, 30, 30, 0.5);
-    box-shadow: 0 0 30px var(--br-red-dim), inset 0 0 15px var(--br-red-dim);
-  }
-  .br-panel-red::before, .br-panel-red::after {
-    border-color: var(--br-red);
-  }
-
-  /* ── Green-accented panel variant ───────────────────────────────────────── */
-  .br-panel-green {
-    @apply br-panel;
-    border-color: rgba(124, 181, 24, 0.45);
-    box-shadow: 0 0 25px var(--br-green-dim), inset 0 0 10px var(--br-green-dim);
-  }
-  .br-panel-green::before, .br-panel-green::after {
-    border-color: var(--br-green);
+  .br-panel:hover::before, .br-panel:hover::after {
+    border-color: var(--br-orange);
   }
 
   /* ── Navbar ─────────────────────────────────────────────────────────────── */
   .br-nav {
     @apply flex items-center justify-between sticky top-0 z-50;
-    background: rgba(13, 17, 23, 0.95);
-    border-bottom: 1px solid rgba(74, 93, 35, 0.4);
+    background: rgba(0, 0, 0, 0.95);
+    border-bottom: 1px solid rgba(229, 9, 20, 0.6);
     padding: 0.875rem 2rem;
     backdrop-filter: blur(16px);
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 4px 24px rgba(229, 9, 20, 0.2);
   }
 
-  /* ── Input — Tactical ───────────────────────────────────────────────────── */
+  /* ── Input — Vault Code ───────────────────────────────────────────────────── */
   .br-input {
     @apply w-full outline-none transition-all duration-300;
-    background: rgba(0, 0, 0, 0.6);
-    border: 1px solid rgba(74, 93, 35, 0.6);
+    background: rgba(18, 18, 18, 0.8);
+    border: 1px solid rgba(229, 9, 20, 0.6);
     color: var(--br-text);
     font-family: 'Share Tech Mono', monospace;
     font-size: 1rem;
@@ -203,20 +181,20 @@ h1, h2, h3, h4, h5, h6 {
   .br-btn-deploy {
     @apply relative overflow-hidden cursor-pointer transition-all duration-300 font-bold uppercase tracking-widest;
     background: transparent;
-    border: 2px solid var(--br-orange);
-    color: var(--br-orange);
+    border: 2px solid var(--br-red);
+    color: var(--br-red);
     font-family: 'Rajdhani', sans-serif;
     font-size: 1.1rem;
     padding: 0.9rem 2.5rem;
     clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
-    box-shadow: 0 0 15px var(--br-orange-dim);
+    box-shadow: 0 0 15px var(--br-red-dim);
   }
 
   .br-btn-deploy::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: var(--br-orange);
+    background: var(--br-red);
     transform: translateX(-100%);
     transition: transform 0.3s ease;
     z-index: -1;
@@ -224,34 +202,22 @@ h1, h2, h3, h4, h5, h6 {
 
   .br-btn-deploy:hover {
     color: #000;
-    box-shadow: 0 0 30px var(--br-orange), 0 0 60px rgba(255, 107, 0, 0.4);
+    box-shadow: 0 0 30px var(--br-red), 0 0 60px rgba(229, 9, 20, 0.4);
     text-shadow: none;
+    border-color: var(--br-red-bright);
   }
 
   .br-btn-deploy:hover::before {
     transform: translateX(0);
+    background: var(--br-red-bright);
   }
 
   .br-btn-deploy:disabled {
     opacity: 0.6;
     cursor: not-allowed;
-  }
-
-  /* ── Secondary Button ───────────────────────────────────────────────────── */
-  .br-btn-secondary {
-    @apply cursor-pointer transition-all duration-200 font-bold uppercase tracking-wider;
-    background: transparent;
-    border: 1px solid rgba(74, 93, 35, 0.7);
+    border-color: var(--br-muted);
     color: var(--br-muted);
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 0.875rem;
-    padding: 0.5rem 1.25rem;
-  }
-
-  .br-btn-secondary:hover {
-    border-color: var(--br-orange);
-    color: var(--br-orange);
-    box-shadow: 0 0 10px var(--br-orange-dim);
+    box-shadow: none;
   }
 
   /* ── Stat Bar Row ────────────────────────────────────────────────────────── */
@@ -259,7 +225,7 @@ h1, h2, h3, h4, h5, h6 {
     @apply w-full relative overflow-hidden;
     height: 8px;
     background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(74, 93, 35, 0.3);
+    border: 1px solid rgba(229, 9, 20, 0.3);
   }
 
   .br-stat-bar-fill {
@@ -269,69 +235,20 @@ h1, h2, h3, h4, h5, h6 {
     width: var(--bar-target, 0%);
     animation: bar-fill 1.2s ease-out forwards;
     box-shadow: 0 0 8px currentColor;
-  }
-
-  /* ── Zone Checkpoint ─────────────────────────────────────────────────────── */
-  .br-checkpoint {
-    @apply flex flex-col items-center;
-  }
-
-  .br-checkpoint-dot {
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    border: 2px solid var(--br-muted);
-    background: var(--br-dark);
-    position: relative;
-    transition: all 0.3s ease;
-  }
-
-  .br-checkpoint-dot.achieved {
-    border-color: var(--br-green);
-    background: var(--br-green);
-    box-shadow: 0 0 12px var(--br-green), 0 0 24px var(--br-green-dim);
-  }
-
-  .br-checkpoint-dot.current {
-    border-color: var(--br-orange);
-    background: transparent;
-    box-shadow: 0 0 12px var(--br-orange);
-    animation: pulse-glow-dot 1.5s ease-in-out infinite;
-  }
-
-  /* ── Hex Badge Container ─────────────────────────────────────────────────── */
-  .br-hex-badge {
-    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-    @apply flex items-center justify-center;
-    background: rgba(13, 17, 23, 0.9);
-    border: none;
-  }
-
-  /* ── Badge Card (collection grid) ───────────────────────────────────────── */
-  .br-badge-card {
-    @apply relative overflow-hidden;
-    background: rgba(13, 17, 23, 0.9);
-    border: 1px solid rgba(74, 93, 35, 0.4);
-    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    animation: fade-slide 0.5s ease-out both;
-  }
-
-  .br-badge-card:hover {
-    transform: scale(1.04) translateY(-4px);
+    background: var(--br-orange);
   }
 
   /* ── Accordion ───────────────────────────────────────────────────────────── */
   .br-accordion-item {
     @apply overflow-hidden;
-    background: rgba(13, 17, 23, 0.7);
-    border: 1px solid rgba(74, 93, 35, 0.3);
+    background: rgba(18, 18, 18, 0.9);
+    border: 1px solid rgba(229, 9, 20, 0.4);
     margin-bottom: 0.75rem;
     transition: border-color 0.3s ease;
   }
 
   .br-accordion-item.open {
-    border-color: rgba(255, 107, 0, 0.5);
+    border-color: rgba(241, 196, 15, 0.6);
   }
 
   .br-accordion-header {
@@ -342,13 +259,13 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 1rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: var(--br-muted);
+    color: var(--br-text);
     transition: color 0.2s ease, background 0.2s ease;
   }
 
   .br-accordion-header:hover {
-    color: var(--br-text);
-    background: rgba(74, 93, 35, 0.12);
+    color: var(--br-orange);
+    background: rgba(229, 9, 20, 0.1);
   }
 
   .br-accordion-item.open .br-accordion-header {
@@ -373,9 +290,9 @@ h1, h2, h3, h4, h5, h6 {
   .br-skeleton {
     background: linear-gradient(
       90deg,
-      rgba(74, 93, 35, 0.1) 25%,
-      rgba(255, 107, 0, 0.15) 50%,
-      rgba(74, 93, 35, 0.1) 75%
+      rgba(229, 9, 20, 0.1) 25%,
+      rgba(241, 196, 15, 0.15) 50%,
+      rgba(229, 9, 20, 0.1) 75%
     );
     background-size: 200% 100%;
     animation: br-shimmer 1.8s infinite;
@@ -384,7 +301,7 @@ h1, h2, h3, h4, h5, h6 {
   /* ── Section divider line ────────────────────────────────────────────────── */
   .br-divider {
     height: 1px;
-    background: linear-gradient(90deg, transparent, var(--br-olive), transparent);
+    background: linear-gradient(90deg, transparent, var(--br-red), transparent);
     margin: 0;
     opacity: 0.5;
   }
@@ -394,31 +311,31 @@ h1, h2, h3, h4, h5, h6 {
 @keyframes pulse-glow {
   0%, 100% {
     text-shadow:
-      0 0 20px rgba(255, 107, 0, 0.8),
-      0 0 40px rgba(255, 107, 0, 0.4),
-      0 0 80px rgba(255, 107, 0, 0.2);
+      0 0 20px rgba(229, 9, 20, 0.8),
+      0 0 40px rgba(229, 9, 20, 0.4);
   }
   50% {
     text-shadow:
-      0 0 30px rgba(255, 107, 0, 1),
-      0 0 60px rgba(255, 107, 0, 0.7),
-      0 0 100px rgba(255, 107, 0, 0.4);
+      0 0 30px rgba(241, 196, 15, 1),
+      0 0 60px rgba(241, 196, 15, 0.7);
   }
 }
 
-@keyframes pulse-glow-dot {
-  0%, 100% { box-shadow: 0 0 8px var(--br-orange); }
-  50%       { box-shadow: 0 0 20px var(--br-orange), 0 0 35px rgba(255, 107, 0, 0.5); }
+@keyframes glitch-text {
+  0% { transform: translate(0) }
+  20% { transform: translate(-2px, 2px) }
+  40% { transform: translate(-2px, -2px) }
+  60% { transform: translate(2px, 2px) }
+  80% { transform: translate(2px, -2px) }
+  100% { transform: translate(0) }
 }
 
-@keyframes scan-cursor {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0; }
-}
-
-@keyframes fade-slide {
-  from { opacity: 0; transform: translateY(18px); }
-  to   { opacity: 1; transform: translateY(0); }
+@keyframes glitch-skew {
+  0% { transform: skew(0deg) }
+  10% { transform: skew(-5deg) }
+  20% { transform: skew(5deg) }
+  30% { transform: skew(0deg) }
+  100% { transform: skew(0deg) }
 }
 
 @keyframes bar-fill {
@@ -431,18 +348,12 @@ h1, h2, h3, h4, h5, h6 {
   100% { background-position:  200% 0; }
 }
 
-@keyframes count-up-bounce {
-  0%   { transform: scale(1); }
-  50%  { transform: scale(1.06); }
-  100% { transform: scale(1); }
+@keyframes vault-spin {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
-@keyframes zone-pulse {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0.4; }
-}
-
-/* ─── Layout utilities (used across both pages) ──────────────────────────────── */
+/* ─── Layout utilities ──────────────────────────────── */
 .container-br {
   max-width: 1400px;
   margin: 0 auto;
@@ -451,7 +362,6 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 1;
 }
 
-/* ─── Responsive grid helpers ────────────────────────────────────────────────── */
 @media (max-width: 768px) {
   .br-nav {
     padding: 0.75rem 1rem;

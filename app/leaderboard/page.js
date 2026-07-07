@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Target, Trophy, Medal, Award, User, RefreshCw, AlertTriangle } from 'lucide-react';
+import { Target, Trophy, Medal, Award, User, RefreshCw, AlertTriangle, Shield } from 'lucide-react';
+import { motion } from 'framer-motion';
 import styles from '../page.module.css';
 
 export default function Leaderboard() {
@@ -64,22 +65,21 @@ export default function Leaderboard() {
             </div>
             <div>
               <h1 style={{
-                fontFamily: "'Rajdhani', sans-serif",
-                fontSize: "1.8rem",
-                fontWeight: 700,
+                fontFamily: "'Staatliches', sans-serif",
+                fontSize: "2.2rem",
                 textTransform: "uppercase",
                 letterSpacing: "0.1em",
                 lineHeight: 1,
               }}>
-                Arcade Points<span style={{ color: "var(--br-orange)" }}>_</span>
+                INTERPOL <span style={{ color: "var(--br-red)" }}>DATABASE</span>
               </h1>
               <div style={{
                 fontFamily: "'Share Tech Mono', monospace",
-                fontSize: "0.8rem",
-                color: "var(--br-muted)",
+                fontSize: "0.85rem",
+                color: "var(--br-red)",
                 letterSpacing: "0.2em",
               }}>
-                GLOBAL RANKINGS
+                MOST WANTED
               </div>
             </div>
           </div>
@@ -130,15 +130,17 @@ export default function Leaderboard() {
               </p>
             </div>
             
-            <button 
+            <motion.button 
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               onClick={fetchLeaderboard}
               disabled={loading}
-              className="br-btn-secondary" 
-              style={{ display: "flex", alignItems: "center", gap: "0.5rem", padding: "0.5rem 1rem" }}
+              className="br-btn-deploy" 
+              style={{ display: "flex", alignItems: "center", gap: "0.5rem", padding: "0.5rem 1rem", fontSize: "0.9rem" }}
             >
               <RefreshCw size={16} className={loading ? "spin" : ""} />
-              {loading ? "SYNCING..." : "REFRESH"}
-            </button>
+              {loading ? "SEARCHING..." : "PULL RECORDS"}
+            </motion.button>
           </div>
 
           <div className="br-panel" style={{ padding: 0, overflow: "hidden" }}>
@@ -244,8 +246,8 @@ export default function Leaderboard() {
                               fontFamily: "'Share Tech Mono', monospace",
                               fontSize: isTop3 ? "1.5rem" : "1.25rem",
                               fontWeight: 700,
-                              color: "var(--br-green)",
-                              textShadow: isTop3 ? "0 0 10px rgba(124,181,24,0.4)" : "none"
+                              color: "var(--br-red)",
+                              textShadow: isTop3 ? "0 0 10px rgba(229,9,20,0.4)" : "none"
                             }}>
                               {Number.isInteger(user.points) ? user.points : user.points.toFixed(1)}
                             </div>
