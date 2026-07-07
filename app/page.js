@@ -168,6 +168,7 @@ export default function Home() {
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [volume, setVolume] = useState(0.5);
   const audioRef = useRef(null);
   const router = useRouter();
 
@@ -180,6 +181,7 @@ export default function Home() {
       // Use standard mp3 format for broader browser support
       audioRef.current = new Audio("/Bela Chaw Chaw.mp3");
       audioRef.current.loop = true;
+      audioRef.current.volume = volume;
     }
     
     if (isPlaying) {
@@ -201,7 +203,31 @@ export default function Home() {
     }
   };
 
+  const handleVolumeChange = (e) => {
+    const newVolume = parseFloat(e.target.value);
+    setVolume(newVolume);
+    if (audioRef.current) {
+      audioRef.current.volume = newVolume;
+    }
+  };
+
   useEffect(() => {
+    if (!audioRef.current) {
+      audioRef.current = new Audio("/Bela Chaw Chaw.mp3");
+      audioRef.current.loop = true;
+      audioRef.current.volume = volume;
+    }
+    
+    const playPromise = audioRef.current.play();
+    if (playPromise !== undefined) {
+      playPromise.then(() => {
+        setIsPlaying(true);
+      }).catch((error) => {
+        setIsPlaying(false);
+        console.log("Autoplay blocked by browser.");
+      });
+    }
+
     // Cleanup audio when component unmounts (e.g. user navigates away)
     return () => {
       if (audioRef.current) {
@@ -327,25 +353,36 @@ export default function Home() {
 
         {/* Status indicator and Audio */}
         <div className="flex items-center gap-4">
-          <button 
-            onClick={toggleAudio}
-            style={{ 
-              background: "transparent", 
-              border: "1px solid var(--br-red)", 
-              padding: "0.25rem 0.5rem", 
-              color: "var(--br-red)", 
-              cursor: "pointer",
-              display: "flex",
-              alignItems: "center",
-              gap: "5px",
-              fontFamily: "'Share Tech Mono', monospace",
-              fontSize: "0.75rem",
-              textTransform: "uppercase"
-            }}
-          >
-            {isPlaying ? <Volume2 size={16} /> : <VolumeX size={16} />}
-            {isPlaying ? "AUDIO ON" : "AUDIO OFF"}
-          </button>
+          <div className="flex items-center gap-2 hidden sm:flex">
+            <button 
+              onClick={toggleAudio}
+              style={{ 
+                background: "transparent", 
+                border: "1px solid var(--br-red)", 
+                padding: "0.25rem 0.5rem", 
+                color: "var(--br-red)", 
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                gap: "5px",
+                fontFamily: "'Share Tech Mono', monospace",
+                fontSize: "0.75rem",
+                textTransform: "uppercase"
+              }}
+            >
+              {isPlaying ? <Volume2 size={16} /> : <VolumeX size={16} />}
+              {isPlaying ? "AUDIO ON" : "AUDIO OFF"}
+            </button>
+            <input 
+              type="range"
+              min="0"
+              max="1"
+              step="0.01"
+              value={volume}
+              onChange={handleVolumeChange}
+              style={{ width: "60px", accentColor: "var(--br-red)" }}
+            />
+          </div>
           
           <div className="flex items-center gap-2">
             <Radio size={14} color="var(--br-red)" />
