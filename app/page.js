@@ -1025,7 +1025,7 @@ export default function Home() {
                 letterSpacing: "0.1em",
               }}
             >
-              © 2024 TACTICAL HQ — ALL RIGHTS RESERVED
+              © 2026 TACTICAL HQ — ALL RIGHTS RESERVED
             </span>
             <div className="flex items-center gap-2">
               <div
