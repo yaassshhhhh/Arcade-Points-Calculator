@@ -178,6 +178,7 @@ export default function ResourcesPage() {
             { label: "Facilitator", href: "/facilitator", active: false, highlight: true },
             { label: "Skill Badges", href: "/skill-badges", active: false },
             { label: "Resources", href: "/resources", active: true },
+            { label: "Swags", href: "/swags", active: false },
           ].map((link) => (
             <Link
               key={link.label}

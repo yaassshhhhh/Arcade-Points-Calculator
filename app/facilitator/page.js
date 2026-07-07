@@ -231,6 +231,7 @@ export default function FacilitatorPage() {
     { label: "Facilitator", href: "/facilitator", active: true, highlight: true },
     { label: "Skill Badges", href: "/skill-badges", active: false },
     { label: "Resources", href: "/resources", active: false },
+    { label: "Swags", href: "/swags", active: false },
   ];
 
   const milestones = [
@@ -1017,7 +1018,7 @@ export default function FacilitatorPage() {
                 Quick Links
               </h4>
               <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-                {["Calculator", "Dashboard", "Leaderboard", "Facilitator"].map((link) => (
+                {["Calculator", "Dashboard", "Leaderboard", "Facilitator", "Swags"].map((link) => (
                   <li key={link}>
                     <Link
                       href={link === "Calculator" ? "/" : `/${link.toLowerCase()}`}
