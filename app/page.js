@@ -262,7 +262,7 @@ export default function Home() {
 
   return (
     <main ref={containerRef}>
-      <div style={{ position: "relative", zIndex: 10, pointerEvents: "none" }}>
+      <div style={{ position: "relative", zIndex: 10 }}>
       {/* ── Navbar ────────────────────────────────────────────────────────── */}
       <nav className="br-nav" style={{ pointerEvents: "auto", background: "rgba(10,10,10,0.85)", borderBottom: "1px solid rgba(192, 18, 47, 0.4)" }}>
         {/* Logo */}
@@ -363,7 +363,7 @@ export default function Home() {
         </div>
       </nav>
 
-      <div className="container-br" style={{ pointerEvents: "none" }}>
+      <div className="container-br">
 
         {/* ── Hero / Mission Briefing ─────────────────────────────────────── */}
         <section
