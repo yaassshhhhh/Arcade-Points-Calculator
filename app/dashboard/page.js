@@ -3,6 +3,11 @@
 import { useEffect, useState, useRef, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
+import dynamic from "next/dynamic";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+import MoneyHeistAnimation from "../../components/MoneyHeistAnimation";
 import {
   Target,
   Shield,
@@ -505,6 +510,7 @@ function DashboardContent() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
   const [loadingText, setLoadingText] = useState("SCANNING PROFILE");
+  const [showAnimation, setShowAnimation] = useState(false);
 
   // Cycle loading messages
   useEffect(() => {
@@ -540,6 +546,9 @@ function DashboardContent() {
         const result = await res.json();
         if (res.ok) {
           setData(result.data);
+          if (result.data.milestones?.achieved?.length > 0) {
+            setShowAnimation(true);
+          }
         } else {
           setError(result.error || "Failed to authenticate profile.");
         }
@@ -582,6 +591,7 @@ function DashboardContent() {
 
   return (
     <main style={{ minHeight: "100vh" }}>
+      {showAnimation && <MoneyHeistAnimation onComplete={() => setShowAnimation(false)} />}
 
       {/* ── Navbar ──────────────────────────────────────────────────────── */}
       <nav className="br-nav">

@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import * as cheerio from 'cheerio';
-import { calculateScore, checkMilestones, classifyBadge } from '../../../lib/arcadePoints';
+import { calculateScore, checkMilestones, checkFacilitatorMilestones, classifyBadge } from '../../../lib/arcadePoints';
 import { updateLeaderboard } from '../../../lib/leaderboardStore';
 // Simple in-memory cache to prevent hammering Google's servers
 const cache = new Map();
@@ -84,7 +84,7 @@ export async function POST(req) {
 
     // 5. Logic Integration
     const { counts, totalPoints } = calculateScore(badges);
-    const milestonesInfo = checkMilestones(counts);
+    const milestonesInfo = checkFacilitatorMilestones(badges);
 
     const data = {
       userName,
