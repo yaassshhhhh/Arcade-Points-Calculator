@@ -161,13 +161,9 @@ export default function ResourcesPage() {
               fontWeight: 700,
               fontSize: "1.3rem",
               letterSpacing: "0.12em",
-              background: "linear-gradient(90deg, var(--br-orange), #FFB347)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
             }}
           >
-            Google Cloud
+            <span style={{ color: "#4285F4" }}>G</span><span style={{ color: "#EA4335" }}>o</span><span style={{ color: "#FBBC05" }}>o</span><span style={{ color: "#4285F4" }}>g</span><span style={{ color: "#34A853" }}>l</span><span style={{ color: "#EA4335" }}>e</span> Cloud
           </span>
         </Link>
 

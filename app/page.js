@@ -860,15 +860,10 @@ export default function Home() {
                     fontWeight: 700,
                     fontSize: "1.6rem",
                     letterSpacing: "0.1em",
-                    background:
-                      "linear-gradient(90deg, var(--br-orange), #FFB347)",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    backgroundClip: "text",
                     textTransform: "uppercase",
                   }}
                 >
-                  Google Cloud
+                  <span style={{ color: "#4285F4" }}>G</span><span style={{ color: "#EA4335" }}>o</span><span style={{ color: "#FBBC05" }}>o</span><span style={{ color: "#4285F4" }}>g</span><span style={{ color: "#34A853" }}>l</span><span style={{ color: "#EA4335" }}>e</span> Cloud
                 </span>
               </div>
               <p
@@ -1026,7 +1021,7 @@ export default function Home() {
                 letterSpacing: "0.1em",
               }}
             >
-              © 2026 Google Cloud — ALL RIGHTS RESERVED
+              © 2026 <span style={{ color: "#4285F4" }}>G</span><span style={{ color: "#EA4335" }}>o</span><span style={{ color: "#FBBC05" }}>o</span><span style={{ color: "#4285F4" }}>g</span><span style={{ color: "#34A853" }}>l</span><span style={{ color: "#EA4335" }}>e</span> Cloud — ALL RIGHTS RESERVED
             </span>
             <div className="flex items-center gap-2">
               <div
