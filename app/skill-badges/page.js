@@ -173,58 +173,72 @@ export default function SkillBadgesPage() {
                 }}
                 onClick={() => window.open(`https://www.skills.google${badge.path}`, "_blank")}
               >
-                {/* Certificate "Image" Area */}
+                {/* Certificate "Image" Container */}
                 <div style={{ 
-                  background: "#ffffff", 
-                  position: "relative", 
-                  padding: "2.5rem 1.5rem 3rem", 
-                  textAlign: "center",
-                  borderBottom: "1px solid rgba(255,255,255,0.1)"
+                  background: "rgba(255,255,255,0.02)", 
+                  padding: "1.5rem", 
+                  display: "flex", 
+                  justifyContent: "center",
+                  borderBottom: "1px solid rgba(255,255,255,0.05)",
+                  position: "relative"
                 }}>
-                  {/* Google Cloud Logo */}
-                  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '1.25rem' }}>
-                    <span style={{ fontSize: '1.3rem', fontWeight: 500, fontFamily: "'Product Sans', sans-serif" }}>
-                      <span style={{ color: '#4285F4' }}>G</span>
-                      <span style={{ color: '#EA4335' }}>o</span>
-                      <span style={{ color: '#FBBC05' }}>o</span>
-                      <span style={{ color: '#4285F4' }}>g</span>
-                      <span style={{ color: '#34A853' }}>l</span>
-                      <span style={{ color: '#EA4335' }}>e</span>
-                      <span style={{ color: '#5f6368', marginLeft: '6px' }}>Cloud</span>
-                    </span>
-                  </div>
-                  
-                  {/* Title */}
-                  <h3 style={{ 
-                    fontFamily: "'Product Sans', 'Roboto', sans-serif", 
-                    fontSize: "1.4rem", 
-                    color: "#5f6368", 
-                    fontWeight: 500, 
-                    marginBottom: "1rem", 
-                    lineHeight: 1.3 
+                  {/* The Certificate Card */}
+                  <div style={{ 
+                    background: "#ffffff", 
+                    position: "relative", 
+                    padding: "1.5rem 1rem 2rem", 
+                    textAlign: "center",
+                    width: "100%",
+                    maxWidth: "260px",
+                    boxShadow: "0 10px 30px rgba(0,0,0,0.5)",
+                    // Creative shape: chamfered corners
+                    clipPath: "polygon(12px 0, calc(100% - 12px) 0, 100% 12px, 100% calc(100% - 12px), calc(100% - 12px) 100%, 12px 100%, 0 calc(100% - 12px), 0 12px)"
                   }}>
-                    {badge.title}
-                  </h3>
+                    {/* Google Cloud Logo */}
+                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '1rem' }}>
+                      <span style={{ fontSize: '1.1rem', fontWeight: 500, fontFamily: "'Product Sans', sans-serif" }}>
+                        <span style={{ color: '#4285F4' }}>G</span>
+                        <span style={{ color: '#EA4335' }}>o</span>
+                        <span style={{ color: '#FBBC05' }}>o</span>
+                        <span style={{ color: '#4285F4' }}>g</span>
+                        <span style={{ color: '#34A853' }}>l</span>
+                        <span style={{ color: '#EA4335' }}>e</span>
+                        <span style={{ color: '#5f6368', marginLeft: '6px' }}>Cloud</span>
+                      </span>
+                    </div>
+                    
+                    {/* Title */}
+                    <h3 style={{ 
+                      fontFamily: "'Product Sans', 'Roboto', sans-serif", 
+                      fontSize: "1.1rem", 
+                      color: "#5f6368", 
+                      fontWeight: 500, 
+                      marginBottom: "0.75rem", 
+                      lineHeight: 1.3 
+                    }}>
+                      {badge.title}
+                    </h3>
                   
-                  {/* Subtitle */}
-                  <p style={{ fontSize: "1rem", color: "#5f6368", marginBottom: "1.5rem" }}>
-                    Google Cloud Skills Boost
-                  </p>
-                  
-                  {/* Divider */}
-                  <div style={{ width: "40px", height: "1px", background: "#dadce0", margin: "0 auto 1.5rem auto" }} />
-                  
-                  {/* Level */}
-                  <div style={{ fontSize: "0.75rem", color: "#5f6368", textTransform: "uppercase", letterSpacing: "0.15em", fontWeight: 500 }}>
-                    SKILL BADGE • {badge.level || "INTERMEDIATE"}
-                  </div>
-                  
-                  {/* Bottom Colored Strip */}
-                  <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "6px", display: "flex" }}>
-                    <div style={{ flex: 1, background: "#EA4335" }} />
-                    <div style={{ flex: 1, background: "#4285F4" }} />
-                    <div style={{ flex: 1, background: "#34A853" }} />
-                    <div style={{ flex: 1, background: "#FBBC05" }} />
+                    {/* Subtitle */}
+                    <p style={{ fontSize: "0.85rem", color: "#5f6368", marginBottom: "1rem" }}>
+                      Google Cloud Skills Boost
+                    </p>
+                    
+                    {/* Divider */}
+                    <div style={{ width: "30px", height: "1px", background: "#dadce0", margin: "0 auto 1rem auto" }} />
+                    
+                    {/* Level */}
+                    <div style={{ fontSize: "0.65rem", color: "#5f6368", textTransform: "uppercase", letterSpacing: "0.15em", fontWeight: 500 }}>
+                      SKILL BADGE • {badge.level || "INTERMEDIATE"}
+                    </div>
+                    
+                    {/* Bottom Colored Strip */}
+                    <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "6px", display: "flex" }}>
+                      <div style={{ flex: 1, background: "#EA4335" }} />
+                      <div style={{ flex: 1, background: "#4285F4" }} />
+                      <div style={{ flex: 1, background: "#34A853" }} />
+                      <div style={{ flex: 1, background: "#FBBC05" }} />
+                    </div>
                   </div>
                 </div>
 
