@@ -370,63 +370,9 @@ export default function Home() {
           className="grid md:grid-cols-2 gap-12 items-center py-20"
           style={{ minHeight: "100vh" }}
         >
-          {/* Left: text */}
-          <div>
-            {/* Pre-title */}
-            <div
-              className="hero-text"
-              style={{
-                fontFamily: "'Share Tech Mono', monospace",
-                fontSize: "0.9rem",
-                color: "var(--br-red)",
-                letterSpacing: "0.3em",
-                marginBottom: "0.75rem",
-                textShadow: "0 0 10px rgba(192, 18, 47, 0.5)"
-              }}
-            >
-              // PLAN DE PARIS //
-            </div>
-
-            {/* Main heading */}
-            <h1
-              className="hero-text"
-              style={{
-                fontFamily: "'Staatliches', sans-serif",
-                fontSize: "clamp(3.5rem, 8vw, 6rem)",
-                color: "#fff",
-                textTransform: "uppercase",
-                letterSpacing: "0.08em",
-                lineHeight: 0.95,
-                marginBottom: "1.25rem",
-                textShadow: "0 0 30px rgba(192, 18, 47, 0.6)"
-              }}
-            >
-              EL PROFESOR'S
-              <br />
-              <span style={{ color: "var(--br-red)" }}>ARCADE</span>
-            </h1>
-
-            <p
-              className="hero-text"
-              style={{
-                fontFamily: "'Share Tech Mono', monospace",
-                fontSize: "1.1rem",
-                color: "var(--br-muted)",
-                maxWidth: 520,
-                lineHeight: 1.75,
-                marginBottom: "2rem",
-                backgroundColor: "rgba(0,0,0,0.5)",
-                padding: "1rem",
-                borderLeft: "4px solid var(--br-red)",
-              }}
-            >
-              "The plan is designed so that we don't steal anyone's money. We are the Resistance. Enter your public profile to calculate your extraction points."
-            </p>
-
-            <div className="hero-text" style={{ marginTop: "3rem" }}>
-              <p style={{ fontFamily: "'Share Tech Mono', monospace", color: "var(--br-red)", marginBottom: "0.5rem" }}>SCROLL TO UNLOCK VAULT</p>
-              <ChevronDown color="var(--br-red)" />
-            </div>
+          {/* Left: Video Placeholder */}
+          <div id="video-placeholder" style={{ pointerEvents: "auto", width: "100%", height: "100%", minHeight: "300px" }}>
+            {/* The user will add a video here later */}
           </div>
 
           {/* Right: form panel */}
