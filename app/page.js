@@ -371,8 +371,15 @@ export default function Home() {
           style={{ minHeight: "100vh" }}
         >
           {/* Left: Video Placeholder */}
-          <div id="video-placeholder" style={{ pointerEvents: "auto", width: "100%", height: "100%", minHeight: "300px" }}>
-            {/* The user will add a video here later */}
+          <div id="video-placeholder" style={{ pointerEvents: "auto", width: "100%", height: "100%", minHeight: "300px", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden", borderRadius: "12px", border: "1px solid rgba(192, 18, 47, 0.3)" }}>
+            <video 
+              src="/hero section image.mp4" 
+              autoPlay 
+              loop 
+              muted 
+              playsInline
+              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+            />
           </div>
 
           {/* Right: form panel */}
