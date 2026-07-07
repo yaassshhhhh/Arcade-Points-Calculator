@@ -78,22 +78,31 @@ export async function POST(req) {
       }
     });
 
-    if (badges.length === 0) {
-      return NextResponse.json({ error: 'No badges found on this profile. Verify the profile has completed activities.' }, { status: 404 });
+    // Filter out badges earned before Jan 5, 2026
+    const GLOBAL_CUTOFF_TIMESTAMP = Date.parse("2026-01-05T00:00:00Z");
+    const validBadges = badges.filter(badge => {
+      const cleanDateStr = badge.earnedDate.replace(/^Earned\s+/i, "").trim();
+      const earnedTimestamp = Date.parse(cleanDateStr);
+      // Count if valid date and >= Jan 5 2026. If date is totally invalid, skip it.
+      return !isNaN(earnedTimestamp) && earnedTimestamp >= GLOBAL_CUTOFF_TIMESTAMP;
+    });
+
+    if (validBadges.length === 0) {
+      return NextResponse.json({ error: 'No eligible badges found after Jan 5, 2026.' }, { status: 404 });
     }
 
     // 5. Logic Integration
-    const { counts, totalPoints, workMeetsPlayBonus } = calculateScore(badges);
-    const milestonesInfo = checkFacilitatorMilestones(badges);
+    const { counts, totalPoints, workMeetsPlayBonus } = calculateScore(validBadges);
+    const milestonesInfo = checkFacilitatorMilestones(validBadges);
 
     const data = {
       userName,
       totalPoints,
-      badgeCount: badges.length,
+      badgeCount: validBadges.length,
       counts,
       milestones: milestonesInfo,
       workMeetsPlayBonus,
-      badges
+      badges: validBadges
     };
 
     // 6. Caching & Leaderboard
@@ -103,7 +112,7 @@ export async function POST(req) {
     Promise.resolve().then(() => updateLeaderboard({
       userName,
       points: totalPoints,
-      badgeCount: badges.length,
+      badgeCount: validBadges.length,
       url: url // Keep the url just in case
     })).catch(err => console.error("Leaderboard update failed:", err));
 
