@@ -108,13 +108,17 @@ export async function POST(req) {
     // 6. Caching & Leaderboard
     cache.set(url, { data, timestamp: Date.now() });
     
-    // Asynchronously update the leaderboard (fire and forget to not delay response)
-    Promise.resolve().then(() => updateLeaderboard({
-      userName,
-      points: totalPoints,
-      badgeCount: validBadges.length,
-      url: url // Keep the url just in case
-    })).catch(err => console.error("Leaderboard update failed:", err));
+    // Wait for the leaderboard to update before returning so Vercel doesn't kill the function early
+    try {
+      await updateLeaderboard({
+        userName,
+        points: totalPoints,
+        badgeCount: validBadges.length,
+        url: url
+      });
+    } catch (err) {
+      console.error("Leaderboard update failed:", err);
+    }
 
     return NextResponse.json({ success: true, data });
 

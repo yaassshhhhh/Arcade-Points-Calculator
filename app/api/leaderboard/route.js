@@ -7,9 +7,10 @@ export const revalidate = 0;
 
 export async function GET() {
   try {
-    const leaderboard = getLeaderboard();
+    const leaderboard = await getLeaderboard();
     
-    // Return only top 50 users to avoid massive payload
+    // The top 50 logic is now handled in getLeaderboard directly,
+    // but we can slice again just in case, though it's redundant.
     const topUsers = leaderboard.slice(0, 50);
     
     return NextResponse.json({ success: true, data: topUsers });
