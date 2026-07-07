@@ -299,6 +299,7 @@ export default function Home() {
             { label: "Leaderboard", href: "/leaderboard", active: false },
             { label: "Facilitator", href: "/facilitator", active: false, highlight: true },
             { label: "Skill Badges", href: "/skill-badges", active: false },
+            { label: "Resources", href: "/resources", active: false },
           ].map((link) => (
             <Link
               key={link.label}
@@ -867,7 +868,7 @@ export default function Home() {
                     textTransform: "uppercase",
                   }}
                 >
-                  TACTICAL HQ
+                  Google Cloud
                 </span>
               </div>
               <p
@@ -1025,7 +1026,7 @@ export default function Home() {
                 letterSpacing: "0.1em",
               }}
             >
-              © 2026 TACTICAL HQ — ALL RIGHTS RESERVED
+              © 2026 Google Cloud — ALL RIGHTS RESERVED
             </span>
             <div className="flex items-center gap-2">
               <div

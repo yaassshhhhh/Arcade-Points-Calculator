@@ -230,6 +230,7 @@ export default function FacilitatorPage() {
     { label: "Leaderboard", href: "/leaderboard", active: false },
     { label: "Facilitator", href: "/facilitator", active: true, highlight: true },
     { label: "Skill Badges", href: "/skill-badges", active: false },
+    { label: "Resources", href: "/resources", active: false },
   ];
 
   const milestones = [
@@ -294,7 +295,7 @@ export default function FacilitatorPage() {
               backgroundClip: "text",
             }}
           >
-            TACTICAL HQ
+            Google Cloud
           </span>
         </Link>
 
@@ -991,7 +992,7 @@ export default function FacilitatorPage() {
                     textTransform: "uppercase",
                   }}
                 >
-                  TACTICAL HQ
+                  Google Cloud
                 </span>
               </div>
               <p
@@ -1114,7 +1115,7 @@ export default function FacilitatorPage() {
                 letterSpacing: "0.1em",
               }}
             >
-              © 2026 TACTICAL HQ — ALL RIGHTS RESERVED
+              © 2026 Google Cloud — ALL RIGHTS RESERVED
             </span>
             <div className="flex items-center gap-2">
               <div

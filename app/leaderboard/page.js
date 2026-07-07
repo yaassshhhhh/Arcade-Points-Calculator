@@ -91,6 +91,7 @@ export default function Leaderboard() {
               { label: "Leaderboard", href: "/leaderboard", active: true },
               { label: "Facilitator", href: "/facilitator", active: false, highlight: true },
               { label: "Skill Badges", href: "/skill-badges", active: false },
+              { label: "Resources", href: "/resources", active: false },
             ].map((link) => (
               <Link
                 key={link.label}

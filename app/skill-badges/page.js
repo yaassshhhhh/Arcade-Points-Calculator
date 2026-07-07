@@ -45,7 +45,7 @@ export default function SkillBadgesPage() {
               backgroundClip: "text",
             }}
           >
-            TACTICAL HQ
+            Google Cloud
           </span>
         </Link>
 
@@ -59,6 +59,7 @@ export default function SkillBadgesPage() {
             { label: "Leaderboard", href: "/leaderboard", active: false },
             { label: "Facilitator", href: "/facilitator", active: false, highlight: true },
             { label: "Skill Badges", href: "/skill-badges", active: true },
+            { label: "Resources", href: "/resources", active: false },
           ].map((link) => (
             <Link
               key={link.label}
