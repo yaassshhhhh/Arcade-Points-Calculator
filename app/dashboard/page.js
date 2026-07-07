@@ -372,6 +372,7 @@ const CAT_CONFIG = {
   skillBadge: { label: "SKILL",      color: "var(--br-green)",  bg: "rgba(124,181,24,0.08)" },
   special:    { label: "SPECIAL",    color: "#FFB347",          bg: "rgba(255,179,71,0.08)" },
   specialGame: { label: "GAME",      color: "var(--br-orange)", bg: "rgba(255,107,0,0.08)" },
+  specialGame3: { label: "GAME",     color: "var(--br-orange)", bg: "rgba(255,107,0,0.08)" },
   labFree:    { label: "LAB-FREE",   color: "var(--br-muted)",  bg: "rgba(138,154,123,0.06)" },
   unknown:    { label: "UNKNOWN",    color: "var(--br-muted)",  bg: "rgba(138,154,123,0.04)" },
 };
@@ -584,6 +585,7 @@ function DashboardContent() {
         data.counts.skillBadge,
         data.counts.special,
         data.counts.specialGame,
+        data.counts.specialGame3,
         data.counts.labFree,
         1
       )
@@ -1046,6 +1048,14 @@ function DashboardContent() {
                 <StatBar
                   label="Bonus Games (2 pts)"
                   count={data.counts.specialGame}
+                  max={catMax}
+                  color="var(--br-red)"
+                  icon={Zap}
+                  delay={150}
+                />
+                <StatBar
+                  label="Bonus Games (3 pts)"
+                  count={data.counts.specialGame3}
                   max={catMax}
                   color="var(--br-red)"
                   icon={Zap}
