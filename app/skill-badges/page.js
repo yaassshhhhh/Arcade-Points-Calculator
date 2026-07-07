@@ -155,11 +155,13 @@ export default function SkillBadgesPage() {
             {filteredBadges.map((badge, idx) => (
               <div 
                 key={idx} 
-                className="br-panel p-5 flex flex-col h-full"
+                className="br-panel flex flex-col h-full"
                 style={{ 
                   animation: `fade-slide 0.5s ease-out ${idx * 50}ms both`,
                   transition: "transform 0.2s, box-shadow 0.2s",
                   cursor: "pointer",
+                  padding: 0,
+                  overflow: "hidden"
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform = "translateY(-4px)";
@@ -171,78 +173,88 @@ export default function SkillBadgesPage() {
                 }}
                 onClick={() => window.open(`https://www.skills.google${badge.path}`, "_blank")}
               >
-                <div className="flex justify-between items-start mb-4">
-                  <div 
-                    style={{ 
-                      width: 40, height: 40, 
-                      background: "rgba(255, 107, 0, 0.1)", 
-                      border: "1px solid rgba(255, 107, 0, 0.3)",
-                      display: "flex", alignItems: "center", justifyContent: "center",
-                      clipPath: "polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px))"
-                    }}
-                  >
-                    <Award size={20} color="var(--br-orange)" />
+                {/* Certificate "Image" Area */}
+                <div style={{ 
+                  background: "#ffffff", 
+                  position: "relative", 
+                  padding: "2.5rem 1.5rem 3rem", 
+                  textAlign: "center",
+                  borderBottom: "1px solid rgba(255,255,255,0.1)"
+                }}>
+                  {/* Google Cloud Logo */}
+                  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '1.25rem' }}>
+                    <span style={{ fontSize: '1.3rem', fontWeight: 500, fontFamily: "'Product Sans', sans-serif" }}>
+                      <span style={{ color: '#4285F4' }}>G</span>
+                      <span style={{ color: '#EA4335' }}>o</span>
+                      <span style={{ color: '#FBBC05' }}>o</span>
+                      <span style={{ color: '#4285F4' }}>g</span>
+                      <span style={{ color: '#34A853' }}>l</span>
+                      <span style={{ color: '#EA4335' }}>e</span>
+                      <span style={{ color: '#5f6368', marginLeft: '6px' }}>Cloud</span>
+                    </span>
                   </div>
                   
-                  {badge.level && (
-                    <span 
-                      style={{ 
-                        fontSize: "0.7rem", 
-                        textTransform: "uppercase", 
-                        fontFamily: "'Share Tech Mono', monospace",
-                        color: badge.level === "introductory" ? "var(--br-green)" : 
-                               badge.level === "intermediate" ? "#FFD700" : "var(--br-orange)",
-                        padding: "2px 8px",
-                        border: `1px solid ${
-                          badge.level === "introductory" ? "rgba(74, 222, 128, 0.3)" : 
-                          badge.level === "intermediate" ? "rgba(255, 215, 0, 0.3)" : "rgba(255, 107, 0, 0.3)"
-                        }`,
-                        background: badge.level === "introductory" ? "rgba(74, 222, 128, 0.05)" : 
-                                    badge.level === "intermediate" ? "rgba(255, 215, 0, 0.05)" : "rgba(255, 107, 0, 0.05)",
-                        borderRadius: "2px"
-                      }}
-                    >
-                      {badge.level}
-                    </span>
-                  )}
+                  {/* Title */}
+                  <h3 style={{ 
+                    fontFamily: "'Product Sans', 'Roboto', sans-serif", 
+                    fontSize: "1.4rem", 
+                    color: "#5f6368", 
+                    fontWeight: 500, 
+                    marginBottom: "1rem", 
+                    lineHeight: 1.3 
+                  }}>
+                    {badge.title}
+                  </h3>
+                  
+                  {/* Subtitle */}
+                  <p style={{ fontSize: "1rem", color: "#5f6368", marginBottom: "1.5rem" }}>
+                    Google Cloud Skills Boost
+                  </p>
+                  
+                  {/* Divider */}
+                  <div style={{ width: "40px", height: "1px", background: "#dadce0", margin: "0 auto 1.5rem auto" }} />
+                  
+                  {/* Level */}
+                  <div style={{ fontSize: "0.75rem", color: "#5f6368", textTransform: "uppercase", letterSpacing: "0.15em", fontWeight: 500 }}>
+                    SKILL BADGE • {badge.level || "INTERMEDIATE"}
+                  </div>
+                  
+                  {/* Bottom Colored Strip */}
+                  <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "6px", display: "flex" }}>
+                    <div style={{ flex: 1, background: "#EA4335" }} />
+                    <div style={{ flex: 1, background: "#4285F4" }} />
+                    <div style={{ flex: 1, background: "#34A853" }} />
+                    <div style={{ flex: 1, background: "#FBBC05" }} />
+                  </div>
                 </div>
 
-                <h3 
-                  style={{ 
-                    fontFamily: "'Share Tech Mono', monospace", 
-                    fontSize: "1.2rem", 
-                    marginBottom: "0.75rem",
-                    color: "var(--br-text)",
-                    lineHeight: 1.3
-                  }}
-                >
-                  {badge.title}
-                </h3>
+                {/* Dark Theme Description Area */}
+                <div style={{ padding: "1.5rem", display: "flex", flexDirection: "column", flexGrow: 1 }}>
+                  <p 
+                    style={{ 
+                      color: "var(--br-muted)", 
+                      fontSize: "0.9rem", 
+                      lineHeight: 1.5,
+                      marginBottom: "1.5rem",
+                      flexGrow: 1,
+                      display: "-webkit-box",
+                      WebkitLineClamp: 3,
+                      WebkitBoxOrient: "vertical",
+                      overflow: "hidden"
+                    }}
+                  >
+                    {badge.description}
+                  </p>
 
-                <p 
-                  style={{ 
-                    color: "var(--br-muted)", 
-                    fontSize: "0.9rem", 
-                    lineHeight: 1.5,
-                    marginBottom: "1.5rem",
-                    flexGrow: 1,
-                    display: "-webkit-box",
-                    WebkitLineClamp: 4,
-                    WebkitBoxOrient: "vertical",
-                    overflow: "hidden"
-                  }}
-                >
-                  {badge.description}
-                </p>
-
-                <div className="flex gap-4 mt-auto pt-4" style={{ borderTop: "1px solid rgba(255, 255, 255, 0.05)" }}>
-                  <div className="flex items-center gap-1.5" style={{ color: "var(--br-muted)", fontSize: "0.8rem", fontFamily: "'Rajdhani', sans-serif", textTransform: "uppercase" }}>
-                    <Clock size={14} />
-                    {badge.duration}
-                  </div>
-                  <div className="flex items-center gap-1.5" style={{ color: "var(--br-muted)", fontSize: "0.8rem", fontFamily: "'Rajdhani', sans-serif", textTransform: "uppercase" }}>
-                    <BookOpen size={14} />
-                    {badge.type}
+                  <div className="flex gap-4 mt-auto pt-4" style={{ borderTop: "1px solid rgba(255, 255, 255, 0.05)" }}>
+                    <div className="flex items-center gap-1.5" style={{ color: "var(--br-muted)", fontSize: "0.8rem", fontFamily: "'Rajdhani', sans-serif", textTransform: "uppercase" }}>
+                      <Clock size={14} />
+                      {badge.duration}
+                    </div>
+                    <div className="flex items-center gap-1.5" style={{ color: "var(--br-muted)", fontSize: "0.8rem", fontFamily: "'Rajdhani', sans-serif", textTransform: "uppercase" }}>
+                      <BookOpen size={14} />
+                      {badge.type}
+                    </div>
                   </div>
                 </div>
               </div>
