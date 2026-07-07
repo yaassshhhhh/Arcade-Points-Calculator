@@ -69,7 +69,7 @@ export default function GlobalAudioPlayer() {
   return (
     <div style={{
       position: "fixed",
-      bottom: "20px",
+      bottom: "80px",
       right: "20px",
       zIndex: 9999,
       display: "flex",
