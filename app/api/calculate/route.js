@@ -83,7 +83,7 @@ export async function POST(req) {
     }
 
     // 5. Logic Integration
-    const { counts, totalPoints } = calculateScore(badges);
+    const { counts, totalPoints, workMeetsPlayBonus } = calculateScore(badges);
     const milestonesInfo = checkFacilitatorMilestones(badges);
 
     const data = {
@@ -92,6 +92,7 @@ export async function POST(req) {
       badgeCount: badges.length,
       counts,
       milestones: milestonesInfo,
+      workMeetsPlayBonus,
       badges
     };
 

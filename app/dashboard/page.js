@@ -373,6 +373,7 @@ const CAT_CONFIG = {
   special:    { label: "SPECIAL",    color: "#FFB347",          bg: "rgba(255,179,71,0.08)" },
   specialGame: { label: "GAME",      color: "var(--br-orange)", bg: "rgba(255,107,0,0.08)" },
   specialGame3: { label: "GAME",     color: "var(--br-orange)", bg: "rgba(255,107,0,0.08)" },
+  workMeetsPlay: { label: "GAME",    color: "var(--br-orange)", bg: "rgba(255,107,0,0.08)" },
   labFree:    { label: "LAB-FREE",   color: "var(--br-muted)",  bg: "rgba(138,154,123,0.06)" },
   unknown:    { label: "UNKNOWN",    color: "var(--br-muted)",  bg: "rgba(138,154,123,0.04)" },
 };
@@ -586,6 +587,7 @@ function DashboardContent() {
         data.counts.special,
         data.counts.specialGame,
         data.counts.specialGame3,
+        data.counts.workMeetsPlay,
         data.counts.labFree,
         1
       )
@@ -1062,6 +1064,14 @@ function DashboardContent() {
                   delay={150}
                 />
                 <StatBar
+                  label="Work Meets Play"
+                  count={data.counts.workMeetsPlay}
+                  max={catMax}
+                  color="var(--br-orange)"
+                  icon={Target}
+                  delay={150}
+                />
+                <StatBar
                   label="Lab-Free Courses"
                   count={data.counts.labFree}
                   max={catMax}
@@ -1070,6 +1080,23 @@ function DashboardContent() {
                   delay={320}
                 />
               </div>
+
+              {/* Work Meets Play Bonus Message */}
+              {data.workMeetsPlayBonus && (
+                <div style={{
+                  padding: "1rem",
+                  background: "rgba(255, 107, 0, 0.15)",
+                  border: "1px solid var(--br-orange)",
+                  borderRadius: "8px",
+                  marginTop: "1.5rem",
+                  fontFamily: "'Share Tech Mono', monospace",
+                  color: "var(--br-orange)",
+                  textAlign: "center",
+                  animation: "fade-slide 0.5s ease-out 0.3s both"
+                }}>
+                  🎉 7 additional points for completing Work Meets Play all months !!
+                </div>
+              )}
 
               {/* Zone Progress (Milestones) */}
               <div
