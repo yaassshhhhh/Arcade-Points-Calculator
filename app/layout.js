@@ -1,5 +1,6 @@
 import "./globals.css";
 import VisitorCounter from "@/components/VisitorCounter";
+import GlobalAudioPlayer from "@/components/GlobalAudioPlayer";
 
 export const metadata = {
   title: "Arcade Points Calculator | Google Cloud Skills Boost",
@@ -61,6 +62,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body suppressHydrationWarning>
+        <GlobalAudioPlayer />
         {/* Tactical radial background gradient */}
         <div
           aria-hidden="true"
