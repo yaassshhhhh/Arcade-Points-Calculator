@@ -55,15 +55,29 @@ export default function ScrollVideo({ videoSrc }) {
       );
     };
 
-    if (video.readyState >= 2) { // HAVE_CURRENT_DATA or more
+    const handleVideoLoad = () => {
+      // Force video to pause and reset so seeking works reliably on all devices
+      video.pause();
+      video.currentTime = 0;
+      // Some browsers (like Safari) need a tiny play/pause nudge to unlock the video for seeking
+      video.play().then(() => {
+        video.pause();
+      }).catch(() => {
+        // Autoplay might be blocked, that's okay, we just want to seek
+      });
       setupScroll();
+    };
+
+    if (video.readyState >= 3) { // HAVE_FUTURE_DATA
+      handleVideoLoad();
     } else {
-      video.addEventListener('loadedmetadata', setupScroll);
+      // Use loadeddata instead of loadedmetadata to ensure the first frame is actually ready
+      video.addEventListener('loadeddata', handleVideoLoad);
     }
 
     return () => {
       if (video) {
-        video.removeEventListener('loadedmetadata', setupScroll);
+        video.removeEventListener('loadeddata', handleVideoLoad);
       }
       if (tl) {
         tl.kill();
