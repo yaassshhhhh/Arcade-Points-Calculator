@@ -27,18 +27,9 @@ export default function SwagsPage() {
   const swags = [
     {
       title: "Swags Coming Soon...",
-      points: "120",
-      tier: "Legend",
-      icon: <Package size={32} color="var(--mint-gold)" />,
-      color: "var(--mint-gold)",
-      image: "https://images.unsplash.com/photo-1614729939124-032f0b56c9ce?auto=format&fit=crop&q=80&w=800",
-      description: "Please stay tuned for the official drop!"
-    },
-    {
-      title: "Swags Coming Soon...",
-      points: "95",
-      tier: "Champion",
-      icon: <Star size={32} color="var(--mint-gold)" />,
+      points: "50",
+      tier: "Trooper",
+      icon: <Award size={32} color="var(--mint-gold)" />,
       color: "var(--mint-gold)",
       image: "https://images.unsplash.com/photo-1614729939124-032f0b56c9ce?auto=format&fit=crop&q=80&w=800",
       description: "Please stay tuned for the official drop!"
@@ -54,9 +45,18 @@ export default function SwagsPage() {
     },
     {
       title: "Swags Coming Soon...",
-      points: "50",
-      tier: "Trooper",
-      icon: <Award size={32} color="var(--mint-gold)" />,
+      points: "95",
+      tier: "Champion",
+      icon: <Star size={32} color="var(--mint-gold)" />,
+      color: "var(--mint-gold)",
+      image: "https://images.unsplash.com/photo-1614729939124-032f0b56c9ce?auto=format&fit=crop&q=80&w=800",
+      description: "Please stay tuned for the official drop!"
+    },
+    {
+      title: "Swags Coming Soon...",
+      points: "120",
+      tier: "Legend",
+      icon: <Package size={32} color="var(--mint-gold)" />,
       color: "var(--mint-gold)",
       image: "https://images.unsplash.com/photo-1614729939124-032f0b56c9ce?auto=format&fit=crop&q=80&w=800",
       description: "Please stay tuned for the official drop!"
