@@ -181,3 +181,15 @@ h1, h2, h3, h4, h5, h6 {
     scroll-behavior: auto !important;
   }
 }
+
+/* ─── Custom Text Selection ─────────────────────────────────────────────────── */
+::selection {
+  background-color: var(--heist-red);
+  color: #FFFFFF;
+}
+
+::-moz-selection {
+  background-color: var(--heist-red);
+  color: #FFFFFF;
+}
+
