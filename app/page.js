@@ -41,14 +41,15 @@ export default function Home() {
           <section className="flex flex-col items-center justify-center pb-12 pt-2 md:pt-4 -mt-8">
             
             <div className="text-center max-w-3xl z-10 w-full">
-              <motion.h1 
+              <h1 className="sr-only">Google Cloud Arcade Points Calculator 2026</h1>
+              <motion.h2 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3, duration: 0.8 }}
                 className="text-6xl md:text-8xl font-shlop text-white mb-4 tracking-wider drop-shadow-[0_0_20px_rgba(193,18,31,0.6)] uppercase"
               >
                 The Plan Is Set
-              </motion.h1>
+              </motion.h2>
               
               <motion.p 
                 initial={{ opacity: 0 }}

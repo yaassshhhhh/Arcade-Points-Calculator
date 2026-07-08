@@ -4,9 +4,9 @@ import GlobalAudioPlayer from "@/components/GlobalAudioPlayer";
 import DashboardModal from "@/components/DashboardModal";
 
 export const metadata = {
-  title: "Arcade Points Calculator | Google Cloud Skills Boost",
+  title: "Google Cloud Arcade Points Calculator 2026 | Track Badges & Swags",
   description:
-    "The ultimate Google Cloud Arcade Points Calculator. Track your Arcade games, skill badges, and milestones instantly using your Cloud Skills Boost public profile URL.",
+    "The ultimate Google Cloud Arcade Points Calculator for 2026. Instantly track your Arcade games, skill badges, points, and swags using your Cloud Skills Boost profile.",
   keywords: [
     "Google Cloud Arcade",
     "Arcade Points Calculator",
@@ -22,8 +22,8 @@ export const metadata = {
   authors: [{ name: "Yash Mahajan" }],
   creator: "Yash Mahajan",
   openGraph: {
-    title: "Arcade Points Calculator | Google Cloud Skills Boost",
-    description: "Track your Arcade games, skill badges, and milestones instantly.",
+    title: "Google Cloud Arcade Points Calculator 2026",
+    description: "Instantly track your Arcade games, skill badges, points, and swags.",
     url: "https://arcade-points-calculator.vercel.app",
     siteName: "Arcade Points Calculator",
     images: [
@@ -39,8 +39,8 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Arcade Points Calculator",
-    description: "Easily calculate your Google Cloud Arcade points and track milestones.",
+    title: "Google Cloud Arcade Points Calculator",
+    description: "Easily calculate your Google Cloud Arcade points and track milestones and swags.",
     creator: "@yaassshhhhh",
     images: ["/Mafer.jpeg"],
   },

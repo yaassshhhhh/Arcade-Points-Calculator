@@ -30,6 +30,18 @@ export default function sitemap() {
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/resources`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/swags`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.8,
     }
   ];
 }
