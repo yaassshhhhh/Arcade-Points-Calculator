@@ -9,7 +9,7 @@ module.exports = {
     extend: {
       colors: {
         // Battle Royale palette
-        'br-orange':  '#FF6B00',
+        'br-orange':  '#C0122F',
         'br-olive':   '#4A5D23',
         'br-red':     '#C41E1E',
         'br-green':   '#7CB518',
@@ -18,7 +18,7 @@ module.exports = {
         'br-text':    '#E8E8E8',
         'br-muted':   '#8A9A7B',
         // dim / glow variants
-        'br-orange-dim': 'rgba(255,107,0,0.18)',
+        'br-orange-dim': 'rgba(192,18,47,0.18)',
         'br-olive-dim':  'rgba(74,93,35,0.35)',
         'br-red-dim':    'rgba(196,30,30,0.25)',
         'br-green-dim':  'rgba(124,181,24,0.20)',
@@ -29,7 +29,7 @@ module.exports = {
         mono:    ['"Share Tech Mono"', 'monospace'],
       },
       boxShadow: {
-        'orange-glow': '0 0 20px rgba(255,107,0,0.6), 0 0 40px rgba(255,107,0,0.3)',
+        'orange-glow': '0 0 20px rgba(192,18,47,0.6), 0 0 40px rgba(192,18,47,0.3)',
         'olive-glow':  '0 0 15px rgba(74,93,35,0.5)',
         'red-glow':    '0 0 20px rgba(196,30,30,0.6)',
         'green-glow':  '0 0 15px rgba(124,181,24,0.5)',
@@ -44,8 +44,8 @@ module.exports = {
       },
       keyframes: {
         'pulse-glow': {
-          '0%, 100%': { textShadow: '0 0 20px rgba(255,107,0,0.8), 0 0 40px rgba(255,107,0,0.4)' },
-          '50%':       { textShadow: '0 0 40px rgba(255,107,0,1),   0 0 80px rgba(255,107,0,0.6)' },
+          '0%, 100%': { textShadow: '0 0 20px rgba(192,18,47,0.8), 0 0 40px rgba(192,18,47,0.4)' },
+          '50%':       { textShadow: '0 0 40px rgba(192,18,47,1),   0 0 80px rgba(192,18,47,0.6)' },
         },
         'scan-cursor': {
           '0%, 100%': { opacity: '1' },
