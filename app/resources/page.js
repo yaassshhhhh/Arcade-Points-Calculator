@@ -182,8 +182,8 @@ export default function ResourcesPage() {
 
           {/* GAMES SECTION */}
           <div className="mb-16">
-            <div className="flex items-center gap-4 border-b border-[var(--vault-outline)] pb-4 mb-8">
-              <h2 className="font-display text-3xl md:text-4xl tracking-widest text-white uppercase m-0">
+            <div className="flex items-center justify-center gap-4 border-b border-[var(--vault-outline)] pb-4 mb-8">
+              <h2 className="font-shlop text-3xl md:text-4xl tracking-widest text-white uppercase m-0">
                 CURRENT MONTH GAMES
               </h2>
               <span className="bg-[var(--heist-red)] text-white px-3 py-1 text-xs font-mono font-bold tracking-widest rounded-sm animate-pulse">LIVE</span>
@@ -254,8 +254,8 @@ export default function ResourcesPage() {
 
           {/* VIDEOS SECTION */}
           <div className="mb-16">
-            <div className="flex items-center gap-4 border-b border-[var(--vault-outline)] pb-4 mb-8">
-              <h2 className="font-display text-3xl md:text-4xl tracking-widest text-white uppercase m-0">
+            <div className="flex items-center justify-center gap-4 border-b border-[var(--vault-outline)] pb-4 mb-8">
+              <h2 className="font-shlop text-3xl md:text-4xl tracking-widest text-white uppercase m-0">
                 GUIDES & TUTORIALS
               </h2>
               <span className="bg-[#FF0000] text-white px-3 py-1 text-xs font-mono font-bold tracking-widest rounded-sm">YOUTUBE</span>
@@ -304,8 +304,8 @@ export default function ResourcesPage() {
 
           {/* COMMUNITIES SECTION */}
           <div className="mb-16">
-            <div className="flex items-center gap-4 border-b border-[var(--vault-outline)] pb-4 mb-8">
-              <h2 className="font-display text-3xl md:text-4xl tracking-widest text-white uppercase m-0">
+            <div className="flex items-center justify-center gap-4 border-b border-[var(--vault-outline)] pb-4 mb-8">
+              <h2 className="font-shlop text-3xl md:text-4xl tracking-widest text-white uppercase m-0">
                 COMMUNITIES
               </h2>
               <span className="bg-[#25D366] text-white px-3 py-1 text-xs font-mono font-bold tracking-widest rounded-sm">SOCIAL</span>
