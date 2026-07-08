@@ -117,6 +117,35 @@ export async function POST(req) {
       badges: validBadges
     };
 
+    // 5.5 Facilitator mapping (After July 13, 2026)
+    const facilitatorCutoff = new Date("2026-07-13T00:00:00Z");
+    let facilitatorCode = null;
+    let facilitatorName = null;
+    
+    if (Date.now() >= facilitatorCutoff.getTime()) {
+      try {
+        const participantMapping = JSON.parse(process.env.PARTICIPANT_MAPPING || '{}');
+        const facilitatorsData = JSON.parse(process.env.FACILITATORS_DATA || '{}');
+        
+        // Find if this URL is mapped to a referral code
+        const refCode = participantMapping[formattedUrl] || participantMapping[url];
+        
+        if (refCode && facilitatorsData[refCode]) {
+          facilitatorCode = refCode;
+          // Join the team member names as the facilitator name
+          facilitatorName = facilitatorsData[refCode].join(' & ');
+          
+          // Attach to data for dashboard display
+          data.facilitatorDetails = {
+            code: facilitatorCode,
+            name: facilitatorName
+          };
+        }
+      } catch (err) {
+        console.error("Error parsing facilitator data from env:", err);
+      }
+    }
+
     // 6. Caching & Leaderboard
     cache.set(url, { data, timestamp: Date.now() });
     
@@ -126,7 +155,9 @@ export async function POST(req) {
         userName,
         points: totalPoints,
         badgeCount: validBadges.length,
-        url: url
+        url: url,
+        facilitatorCode: facilitatorCode,
+        facilitatorName: facilitatorName
       });
     } catch (err) {
       console.error("Leaderboard update failed:", err);

@@ -163,6 +163,16 @@ function DashboardContent() {
                   <span className="font-mono text-[var(--text-muted)] text-sm uppercase tracking-widest block mb-1">OPERATIVE</span>
                   <h4 className="font-shlop text-4xl md:text-5xl text-white tracking-[0.05em] uppercase drop-shadow-[0_0_10px_rgba(255,255,255,0.2)] mt-2">{data.userName}</h4>
                 </div>
+                
+                {data.facilitatorDetails && (
+                  <div className="bg-[var(--heist-red-dim)] border border-[var(--heist-red)] px-6 py-4 rounded-lg shadow-[0_0_20px_rgba(193,18,31,0.3)] text-center mt-4 w-full">
+                    <span className="font-mono text-[var(--text-muted)] text-xs uppercase tracking-widest block mb-1">ENROLLED FACILITATOR</span>
+                    <h5 className="font-mono text-xl text-white font-bold tracking-wider mb-2">{data.facilitatorDetails.code}</h5>
+                    <div className="text-sm text-[var(--mint-gold)] font-mono uppercase tracking-widest border-t border-[var(--vault-outline)] pt-2">
+                      {data.facilitatorDetails.name}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </section>
