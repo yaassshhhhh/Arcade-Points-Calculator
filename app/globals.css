@@ -1,34 +1,55 @@
 /* ─── Google Fonts ─────────────────────────────────────────────────────────── */
-@import url('https://fonts.googleapis.com/css2?family=Staatliches&family=Rajdhani:wght@400;600;700&family=Orbitron:wght@700;900&family=Share+Tech+Mono&family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Special+Elite&display=swap');
+
+@font-face {
+  font-family: 'Shlop';
+  src: url('/fonts/shlop/SHLOP.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 
 /* ─── Tailwind Directives ───────────────────────────────────────────────────── */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* ─── CSS Variables (MONEY HEIST) ─────────────────────────────────────────────────────────── */
+/* ─── CSS Variables (LA CASA DE PAPEL. - MONEY HEIST) ─────────────────────────────────────────────────────────── */
 :root {
-  --br-red:        #C0122F; /* Money Heist Blood Red */
-  --br-red-bright: #E01527;
-  --br-dark:       #0A0A0A; /* Deep Black */
-  --br-dark2:      #121212;
-  --br-orange:     #C0122F; /* Gold/Yellow accents */
-  --br-olive:      #4A5D23; /* Keeping for compatibility */
-  --br-green:      #C0122F; /* Overridden to gold for compatibility */
-  
-  --br-text:       #E8E8E8;
-  --br-muted:      #8A8A8A;
-  
-  --br-orange-dim: rgba(192, 18, 47, 0.15); /* Gold dim */
-  --br-red-dim:    rgba(192, 18, 47, 0.25);
-  --br-green-dim:  rgba(192, 18, 47, 0.20);
-  --br-glass:      rgba(10, 10, 10, 0.85);
+  /* Primary heist reds */
+  --heist-red: #C1121F;
+  --heist-red-dark: #7A0C14;
+  --heist-red-bright: #E8112D;
+  --heist-red-glow: rgba(193, 18, 31, 0.45);
+
+  /* Vault blacks */
+  --vault-black: #0B0B0D;
+  --vault-charcoal: #1A1A1E;
+  --vault-slate: #232327;
+  --vault-outline: #2E2E33;
+
+  /* Gold / mint accents */
+  --mint-gold: #D4AF37;
+  --mint-gold-bright: #F4D160;
+  --mint-gold-dim: #8A722A;
+
+  /* Paper / dossier tones */
+  --paper-cream: #EDE6D6;
+  --paper-aged: #D8CBAA;
+  --ink-black: #17140F;
+
+  /* Status */
+  --success-green: #2ECC71;
+  --alarm-amber: #FFB020;
+  --danger-flash: #FF2E2E;
+
+  /* Text */
+  --text-primary: #F5F1E8;
+  --text-secondary: #B8B2A3;
+  --text-muted: #6E6A61;
 }
 
 /* ─── Base Reset & Body ─────────────────────────────────────────────────────── */
-*,
-*::before,
-*::after {
+*, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -39,13 +60,26 @@ html {
 }
 
 body {
-  background-color: var(--br-dark);
-  color: var(--br-text);
+  background-color: var(--vault-black);
+  color: var(--text-primary);
   font-family: 'Inter', sans-serif;
   min-height: 100vh;
   overflow-x: hidden;
   position: relative;
   line-height: 1.6;
+}
+
+/* Texture Overlays */
+body::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: 
+    linear-gradient(rgba(212, 175, 55, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(212, 175, 55, 0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: -1;
 }
 
 a {
@@ -55,377 +89,95 @@ a {
 
 /* ─── Typography Base ───────────────────────────────────────────────────────── */
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Staatliches', 'Rajdhani', sans-serif;
-  font-weight: 400;
-  letter-spacing: 0.1em;
-  line-height: 1.15;
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  line-height: 1.1;
 }
 
 /* ─── Custom Component Classes ──────────────────────────────────────────────── */
 @layer components {
-
-  /* ── Tactical Panel ──────────────────────────────────────────────────────── */
-  .br-panel {
-    @apply relative overflow-hidden;
-    background: var(--br-glass);
-    border: 1px solid rgba(74, 93, 35, 0.5);
-    clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    box-shadow: 0 0 30px rgba(74, 93, 35, 0.12), inset 0 0 20px rgba(74, 93, 35, 0.05);
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  /* Panel / Vault Door Feel */
+  .heist-panel {
+    @apply relative overflow-hidden rounded-2xl;
+    background: var(--vault-charcoal);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
   }
 
-  .br-panel:hover {
-    box-shadow: 0 0 40px rgba(192, 18, 47, 0.15), inset 0 0 20px rgba(192, 18, 47, 0.05);
-    transform: scale(1.01);
+  .heist-panel:hover {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4), inset 0 0 20px rgba(212, 175, 55, 0.05);
   }
 
-  /* Corner targeting brackets — top-left */
-  .br-panel::before {
-    content: '';
-    position: absolute;
-    top: 6px;
-    left: 6px;
-    width: 14px;
-    height: 14px;
-    border-top: 2px solid var(--br-orange);
-    border-left: 2px solid var(--br-orange);
-    z-index: 10;
-    pointer-events: none;
+  /* Red Jump Suit Button */
+  .heist-btn-primary {
+    @apply relative overflow-hidden cursor-pointer transition-all duration-300 font-bold uppercase;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 0.1em;
+    padding: 0.75rem 2.5rem;
+    background: var(--heist-red);
+    color: var(--text-primary);
+    border: 1px solid var(--mint-gold);
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(193, 18, 31, 0.2);
   }
 
-  /* Corner targeting brackets — bottom-right */
-  .br-panel::after {
-    content: '';
-    position: absolute;
-    bottom: 6px;
-    right: 6px;
-    width: 14px;
-    height: 14px;
-    border-bottom: 2px solid var(--br-orange);
-    border-right: 2px solid var(--br-orange);
-    z-index: 10;
-    pointer-events: none;
+  .heist-btn-primary:hover {
+    background: var(--heist-red-bright);
+    box-shadow: 0 0 24px var(--heist-red-glow);
   }
 
-  /* ── Orange-accented panel variant ─────────────────────────────────────── */
-  .br-panel-orange {
-    @apply br-panel;
-    border-color: rgba(192, 18, 47, 0.4);
-    box-shadow: 0 0 30px var(--br-orange-dim), inset 0 0 15px var(--br-orange-dim);
-  }
-
-  /* ── Red-accented panel variant ─────────────────────────────────────────── */
-  .br-panel-red {
-    @apply br-panel;
-    border-color: rgba(196, 30, 30, 0.5);
-    box-shadow: 0 0 30px var(--br-red-dim), inset 0 0 15px var(--br-red-dim);
-  }
-  .br-panel-red::before, .br-panel-red::after {
-    border-color: var(--br-red);
-  }
-
-  /* ── Green-accented panel variant ───────────────────────────────────────── */
-  .br-panel-green {
-    @apply br-panel;
-    border-color: rgba(124, 181, 24, 0.45);
-    box-shadow: 0 0 25px var(--br-green-dim), inset 0 0 10px var(--br-green-dim);
-  }
-  .br-panel-green::before, .br-panel-green::after {
-    border-color: var(--br-green);
-  }
-
-  /* ── Navbar ─────────────────────────────────────────────────────────────── */
-  .br-nav {
-    @apply flex items-center justify-between sticky top-0 z-50;
-    background: rgba(13, 17, 23, 0.95);
-    border-bottom: 1px solid rgba(74, 93, 35, 0.4);
-    padding: 0.875rem 2rem;
-    backdrop-filter: blur(16px);
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
-  }
-
-  /* ── Input — Tactical ───────────────────────────────────────────────────── */
-  .br-input {
-    @apply w-full outline-none transition-all duration-300;
-    background: rgba(0, 0, 0, 0.6);
-    border: 1px solid rgba(74, 93, 35, 0.6);
-    color: var(--br-text);
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 1rem;
-    padding: 0.9rem 1.1rem;
-    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
-  }
-
-  .br-input::placeholder {
-    color: var(--br-muted);
-    opacity: 0.7;
-  }
-
-  .br-input:focus {
-    border-color: var(--br-orange);
-    box-shadow: 0 0 20px var(--br-orange-dim);
-    color: #fff;
-  }
-
-  /* ── Deploy Button ──────────────────────────────────────────────────────── */
-  .br-btn-deploy {
-    @apply relative overflow-hidden cursor-pointer transition-all duration-300 font-bold uppercase tracking-widest;
-    background: transparent;
-    border: 2px solid var(--br-orange);
-    color: var(--br-orange);
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 1.1rem;
-    padding: 0.9rem 2.5rem;
-    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
-    box-shadow: 0 0 15px var(--br-orange-dim);
-  }
-
-  .br-btn-deploy::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: var(--br-orange);
-    transform: translateX(-100%);
-    transition: transform 0.3s ease;
-    z-index: -1;
-  }
-
-  .br-btn-deploy:hover {
-    color: #000;
-    box-shadow: 0 0 30px var(--br-orange), 0 0 60px rgba(192, 18, 47, 0.4);
-    text-shadow: none;
-  }
-
-  .br-btn-deploy:hover::before {
-    transform: translateX(0);
-  }
-
-  .br-btn-deploy:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-  }
-
-  /* ── Secondary Button ───────────────────────────────────────────────────── */
-  .br-btn-secondary {
+  /* Secondary Outline Button */
+  .heist-btn-secondary {
     @apply cursor-pointer transition-all duration-200 font-bold uppercase tracking-wider;
     background: transparent;
-    border: 1px solid rgba(74, 93, 35, 0.7);
-    color: var(--br-muted);
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 0.875rem;
-    padding: 0.5rem 1.25rem;
+    border: 1px solid var(--vault-outline);
+    color: var(--text-secondary);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.25rem;
+    padding: 0.5rem 1.5rem;
+    border-radius: 4px;
   }
 
-  .br-btn-secondary:hover {
-    border-color: var(--br-orange);
-    color: var(--br-orange);
-    box-shadow: 0 0 10px var(--br-orange-dim);
+  .heist-btn-secondary:hover {
+    border-color: var(--heist-red);
+    color: var(--heist-red-bright);
+    box-shadow: 0 0 15px var(--heist-red-glow);
   }
 
-  /* ── Stat Bar Row ────────────────────────────────────────────────────────── */
-  .br-stat-bar-track {
-    @apply w-full relative overflow-hidden;
-    height: 8px;
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(74, 93, 35, 0.3);
+  /* Nav */
+  .heist-nav {
+    @apply flex items-center justify-between sticky top-0 z-50;
+    background: rgba(11, 11, 13, 0.95);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    padding: 1rem 2rem;
+    backdrop-filter: blur(10px);
   }
 
-  .br-stat-bar-fill {
-    position: absolute;
-    top: 0; left: 0;
-    height: 100%;
-    width: var(--bar-target, 0%);
-    animation: bar-fill 1.2s ease-out forwards;
-    box-shadow: 0 0 8px currentColor;
-  }
-
-  /* ── Zone Checkpoint ─────────────────────────────────────────────────────── */
-  .br-checkpoint {
-    @apply flex flex-col items-center;
-  }
-
-  .br-checkpoint-dot {
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    border: 2px solid var(--br-muted);
-    background: var(--br-dark);
-    position: relative;
-    transition: all 0.3s ease;
-  }
-
-  .br-checkpoint-dot.achieved {
-    border-color: var(--br-green);
-    background: var(--br-green);
-    box-shadow: 0 0 12px var(--br-green), 0 0 24px var(--br-green-dim);
-  }
-
-  .br-checkpoint-dot.current {
-    border-color: var(--br-orange);
-    background: transparent;
-    box-shadow: 0 0 12px var(--br-orange);
-    animation: pulse-glow-dot 1.5s ease-in-out infinite;
-  }
-
-  /* ── Hex Badge Container ─────────────────────────────────────────────────── */
-  .br-hex-badge {
-    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-    @apply flex items-center justify-center;
-    background: rgba(13, 17, 23, 0.9);
-    border: none;
-  }
-
-  /* ── Badge Card (collection grid) ───────────────────────────────────────── */
-  .br-badge-card {
-    @apply relative overflow-hidden;
-    background: rgba(13, 17, 23, 0.9);
-    border: 1px solid rgba(74, 93, 35, 0.4);
-    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    animation: fade-slide 0.5s ease-out both;
-  }
-
-  .br-badge-card:hover {
-    transform: scale(1.04) translateY(-4px);
-  }
-
-  /* ── Accordion ───────────────────────────────────────────────────────────── */
-  .br-accordion-item {
-    @apply overflow-hidden;
-    background: rgba(13, 17, 23, 0.7);
-    border: 1px solid rgba(74, 93, 35, 0.3);
-    margin-bottom: 0.75rem;
-    transition: border-color 0.3s ease;
-  }
-
-  .br-accordion-item.open {
-    border-color: rgba(192, 18, 47, 0.5);
-  }
-
-  .br-accordion-header {
-    @apply flex items-center justify-between cursor-pointer select-none;
-    padding: 1.1rem 1.5rem;
-    font-family: 'Rajdhani', sans-serif;
-    font-weight: 700;
+  /* Input */
+  .heist-input {
+    @apply w-full outline-none transition-all duration-300 rounded-md;
+    background: var(--vault-slate);
+    border: 1px solid var(--vault-outline);
+    color: var(--text-primary);
+    font-family: 'JetBrains Mono', monospace;
     font-size: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--br-muted);
-    transition: color 0.2s ease, background 0.2s ease;
+    padding: 1rem 1.25rem;
   }
 
-  .br-accordion-header:hover {
-    color: var(--br-text);
-    background: rgba(74, 93, 35, 0.12);
-  }
-
-  .br-accordion-item.open .br-accordion-header {
-    color: var(--br-orange);
-  }
-
-  .br-accordion-content {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease, padding 0.3s ease;
-    color: var(--br-muted);
-    font-size: 0.95rem;
-    padding: 0 1.5rem;
-  }
-
-  .br-accordion-item.open .br-accordion-content {
-    max-height: 500px;
-    padding: 0 1.5rem 1.5rem;
-  }
-
-  /* ── Skeleton shimmer ────────────────────────────────────────────────────── */
-  .br-skeleton {
-    background: linear-gradient(
-      90deg,
-      rgba(74, 93, 35, 0.1) 25%,
-      rgba(192, 18, 47, 0.15) 50%,
-      rgba(74, 93, 35, 0.1) 75%
-    );
-    background-size: 200% 100%;
-    animation: br-shimmer 1.8s infinite;
-  }
-
-  /* ── Section divider line ────────────────────────────────────────────────── */
-  .br-divider {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--br-olive), transparent);
-    margin: 0;
-    opacity: 0.5;
+  .heist-input:focus {
+    border-color: var(--heist-red);
+    box-shadow: 0 0 15px var(--heist-red-glow);
   }
 }
 
-/* ─── Keyframe Animations ────────────────────────────────────────────────────── */
-@keyframes pulse-glow {
-  0%, 100% {
-    text-shadow:
-      0 0 20px rgba(192, 18, 47, 0.8),
-      0 0 40px rgba(192, 18, 47, 0.4),
-      0 0 80px rgba(192, 18, 47, 0.2);
-  }
-  50% {
-    text-shadow:
-      0 0 30px rgba(192, 18, 47, 1),
-      0 0 60px rgba(192, 18, 47, 0.7),
-      0 0 100px rgba(192, 18, 47, 0.4);
-  }
-}
-
-@keyframes pulse-glow-dot {
-  0%, 100% { box-shadow: 0 0 8px var(--br-orange); }
-  50%       { box-shadow: 0 0 20px var(--br-orange), 0 0 35px rgba(192, 18, 47, 0.5); }
-}
-
-@keyframes scan-cursor {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0; }
-}
-
-@keyframes fade-slide {
-  from { opacity: 0; transform: translateY(18px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes bar-fill {
-  from { width: 0%; }
-  to   { width: var(--bar-target, 0%); }
-}
-
-@keyframes br-shimmer {
-  0%   { background-position: -200% 0; }
-  100% { background-position:  200% 0; }
-}
-
-@keyframes count-up-bounce {
-  0%   { transform: scale(1); }
-  50%  { transform: scale(1.06); }
-  100% { transform: scale(1); }
-}
-
-@keyframes zone-pulse {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0.4; }
-}
-
-/* ─── Layout utilities (used across both pages) ──────────────────────────────── */
-.container-br {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
-  position: relative;
-  z-index: 1;
-}
-
-/* ─── Responsive grid helpers ────────────────────────────────────────────────── */
-@media (max-width: 768px) {
-  .br-nav {
-    padding: 0.75rem 1rem;
-    flex-wrap: wrap;
-    gap: 0.5rem;
+/* Utility to respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

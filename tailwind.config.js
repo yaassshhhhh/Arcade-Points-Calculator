@@ -8,67 +8,58 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Battle Royale palette
-        'br-orange':  '#C0122F',
-        'br-olive':   '#4A5D23',
-        'br-red':     '#C41E1E',
-        'br-green':   '#7CB518',
-        'br-dark':    '#0d1117',
-        'br-dark2':   '#1a1f16',
-        'br-text':    '#E8E8E8',
-        'br-muted':   '#8A9A7B',
-        // dim / glow variants
-        'br-orange-dim': 'rgba(192,18,47,0.18)',
-        'br-olive-dim':  'rgba(74,93,35,0.35)',
-        'br-red-dim':    'rgba(196,30,30,0.25)',
-        'br-green-dim':  'rgba(124,181,24,0.20)',
+        'heist-red': 'var(--heist-red)',
+        'heist-red-dark': 'var(--heist-red-dark)',
+        'heist-red-bright': 'var(--heist-red-bright)',
+        'heist-red-glow': 'var(--heist-red-glow)',
+        
+        'vault-black': 'var(--vault-black)',
+        'vault-charcoal': 'var(--vault-charcoal)',
+        'vault-slate': 'var(--vault-slate)',
+        'vault-outline': 'var(--vault-outline)',
+        
+        'mint-gold': 'var(--mint-gold)',
+        'mint-gold-bright': 'var(--mint-gold-bright)',
+        'mint-gold-dim': 'var(--mint-gold-dim)',
+        
+        'paper-cream': 'var(--paper-cream)',
+        'paper-aged': 'var(--paper-aged)',
+        'ink-black': 'var(--ink-black)',
+        
+        'success-green': 'var(--success-green)',
+        'alarm-amber': 'var(--alarm-amber)',
+        'danger-flash': 'var(--danger-flash)',
+        
+        'text-primary': 'var(--text-primary)',
+        'text-secondary': 'var(--text-secondary)',
+        'text-muted': 'var(--text-muted)',
       },
       fontFamily: {
-        display: ['Rajdhani', 'Orbitron', 'sans-serif'],
-        body:    ['Inter', 'Roboto', 'sans-serif'],
-        mono:    ['"Share Tech Mono"', 'monospace'],
-      },
-      boxShadow: {
-        'orange-glow': '0 0 20px rgba(192,18,47,0.6), 0 0 40px rgba(192,18,47,0.3)',
-        'olive-glow':  '0 0 15px rgba(74,93,35,0.5)',
-        'red-glow':    '0 0 20px rgba(196,30,30,0.6)',
-        'green-glow':  '0 0 15px rgba(124,181,24,0.5)',
+        display: ['Anton', 'sans-serif'],
+        body: ['Inter', 'sans-serif'],
+        mono: ['"Space Mono"', 'monospace'],
+        dossier: ['"Special Elite"', 'monospace'],
+        shlop: ['Shlop', 'sans-serif'],
       },
       animation: {
-        'pulse-glow':   'pulse-glow 2s ease-in-out infinite',
-        'scan-cursor':  'scan-cursor 1s step-end infinite',
-        'fade-slide':   'fade-slide 0.5s ease-out forwards',
-        'bar-fill':     'bar-fill 1.2s ease-out forwards',
-        'count-up':     'count-up 1.5s ease-out forwards',
-        'scanline':     'scanline 8s linear infinite',
+        'alarm-pulse': 'alarm-pulse 2s infinite ease-in-out',
+        'fade-slide': 'fade-slide 0.5s ease-out forwards',
+        'vault-open': 'vault-open 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards',
       },
       keyframes: {
-        'pulse-glow': {
-          '0%, 100%': { textShadow: '0 0 20px rgba(192,18,47,0.8), 0 0 40px rgba(192,18,47,0.4)' },
-          '50%':       { textShadow: '0 0 40px rgba(192,18,47,1),   0 0 80px rgba(192,18,47,0.6)' },
-        },
-        'scan-cursor': {
-          '0%, 100%': { opacity: '1' },
-          '50%':      { opacity: '0' },
+        'alarm-pulse': {
+          '0%, 100%': { opacity: 0.3, boxShadow: '0 0 10px var(--danger-flash)' },
+          '50%': { opacity: 0.8, boxShadow: '0 0 30px var(--danger-flash)' },
         },
         'fade-slide': {
           from: { opacity: '0', transform: 'translateY(20px)' },
-          to:   { opacity: '1', transform: 'translateY(0)' },
+          to: { opacity: '1', transform: 'translateY(0)' },
         },
-        'bar-fill': {
-          from: { width: '0%' },
-          to:   { width: 'var(--bar-target)' },
+        'vault-open': {
+          from: { transform: 'scale(1)', opacity: 1 },
+          to: { transform: 'scale(1.5)', opacity: 0 },
         },
-        'scanline': {
-          '0%':   { backgroundPosition: '0 0' },
-          '100%': { backgroundPosition: '0 100%' },
-        },
-      },
-      clipPath: {
-        'hex':    'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)',
-        'panel':  'polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px))',
-        'panel-sm': 'polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px))',
-      },
+      }
     },
   },
   plugins: [],
