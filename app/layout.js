@@ -28,7 +28,7 @@ export const metadata = {
     siteName: "Arcade Points Calculator",
     images: [
       {
-        url: "/og-image.png", // Assuming an OG image exists or will fallback
+        url: "/Mafer.jpeg",
         width: 1200,
         height: 630,
         alt: "Arcade Points Calculator Preview",
@@ -42,6 +42,7 @@ export const metadata = {
     title: "Arcade Points Calculator",
     description: "Easily calculate your Google Cloud Arcade points and track milestones.",
     creator: "@yaassshhhhh",
+    images: ["/Mafer.jpeg"],
   },
   robots: {
     index: true,
