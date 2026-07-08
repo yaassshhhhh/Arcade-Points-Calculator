@@ -202,8 +202,8 @@ export default function SwagsPage() {
         
         {/* ── Old Swags Section ────────────────────────────────────────────── */}
         <section className="max-w-6xl mx-auto px-6 mb-24 relative z-1">
-          <div className="flex items-center gap-4 border-b border-[var(--vault-outline)] pb-4 mb-8">
-            <h2 className="font-display text-3xl md:text-4xl tracking-widest text-white uppercase m-0">
+          <div className="flex items-center justify-center border-b border-[var(--vault-outline)] pb-6 mb-8 mt-12">
+            <h2 className="font-shlop text-5xl md:text-7xl text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.4)] uppercase text-center m-0">
               PREVIOUS DROPS
             </h2>
           </div>

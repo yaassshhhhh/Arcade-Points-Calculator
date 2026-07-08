@@ -98,22 +98,13 @@ export default function MilestoneModal({ isOpen, onClose, pointsSecured, pointsR
             transition={{ type: "spring", damping: 20, stiffness: 100, delay: 0.2 }}
             className="text-center p-8 max-w-xl w-full"
           >
-            <h2 className="font-display text-7xl md:text-8xl text-[var(--mint-gold)] mb-4 drop-shadow-[0_0_20px_var(--mint-gold-dim)]">
+            <h2 className="font-shlop text-7xl md:text-9xl text-[var(--heist-red)] mb-4 drop-shadow-[0_0_20px_rgba(193,18,31,0.8)] tracking-widest uppercase">
               THE MINT IS OURS.
             </h2>
             
-            <p className="font-body text-xl text-[var(--text-primary)] mb-8">
-              You've secured <span className="font-mono text-[var(--heist-red-bright)] font-bold">{pointsSecured}</span> points. 
-              <br/>
-              <span className="font-mono text-[var(--mint-gold-bright)]">{pointsRemaining}</span> to go before the vault is empty.
+            <p className="font-mono text-xl md:text-2xl text-[var(--mint-gold)] mb-10 tracking-widest uppercase mt-4 flex items-center justify-center">
+              You've secured <span className="font-shlop text-5xl text-white mx-3">{pointsSecured}</span> points. 
             </p>
-            
-            <button 
-              onClick={onClose}
-              className="heist-btn-primary mx-auto"
-            >
-              CONTINUE THE HEIST
-            </button>
           </motion.div>
         </div>
       )}

@@ -67,6 +67,16 @@ function DashboardContent() {
         const result = await res.json();
         if (res.ok) {
           setData(result.data);
+
+          // Play shoutout music
+          try {
+            const audio = new Audio('/freesound_community-dj-airhorn-sound-39405.mp3');
+            audio.volume = 0.5;
+            audio.play().catch(e => console.log('Audio autoplay blocked by browser', e));
+          } catch (err) {
+            console.log('Audio error', err);
+          }
+
           // Trigger milestone modal if they have significant points (just an example threshold)
           if (result.data.totalPoints > 0 && result.data.totalPoints > lastTotal) {
             setLastTotal(result.data.totalPoints);
@@ -158,7 +168,7 @@ function DashboardContent() {
           </section>
 
           {/* Stats Breakdown Grid */}
-          <section className="mb-16 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 max-w-6xl mx-auto px-4">
+          <section className="mb-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 max-w-6xl mx-auto px-4">
             {[
               { label: "SKILL LABS", value: data.counts.skillBadge || 0, color: "var(--heist-red)", bgClass: "bg-[var(--heist-red-dim)]" },
               { label: "GAMES", value: data.counts.game || 0, color: "var(--mint-gold)", bgClass: "bg-[var(--mint-gold-dim)]" },
@@ -217,9 +227,16 @@ function DashboardContent() {
                     
                     <div className="relative z-10 w-full flex flex-col items-center mt-4">
                       {badge.imageSrc ? (
-                        <img src={badge.imageSrc} alt={badge.name} className="w-36 h-36 p-3 bg-white mb-6 rounded-[50%_0_50%_0] drop-shadow-[0_0_10px_rgba(255,255,255,0.1)] group-hover:drop-shadow-[0_0_15px_rgba(212,175,55,0.4)] transition-transform duration-500 group-hover:scale-110 object-contain" />
+                        <div className="w-36 h-36 mb-6 drop-shadow-[0_0_10px_rgba(255,255,255,0.1)] group-hover:drop-shadow-[0_0_15px_rgba(212,175,55,0.4)] relative flex items-center justify-center">
+                          <img 
+                            src={badge.imageSrc} 
+                            alt={badge.name} 
+                            className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110" 
+                            style={{ clipPath: 'inset(0px 0px 0px 6px)' }}
+                          />
+                        </div>
                       ) : (
-                        <div className="w-36 h-36 p-3 mb-6 bg-[var(--vault-black)] rounded-[50%_0_50%_0] border border-[var(--vault-outline)] flex items-center justify-center text-xs text-[var(--text-muted)]">NO IMG</div>
+                        <div className="w-36 h-36 mb-6 bg-[var(--vault-black)] rounded-[50%_0_50%_0] border border-[var(--vault-outline)] flex items-center justify-center text-xs text-[var(--text-muted)]">NO IMG</div>
                       )}
                       
                       <div className="font-mono text-sm font-bold text-white mb-4 line-clamp-3 min-h-[3rem] group-hover:text-[var(--mint-gold)] transition-colors w-full flex items-center justify-center leading-relaxed">
