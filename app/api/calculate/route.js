@@ -63,6 +63,17 @@ export async function POST(req) {
        return NextResponse.json({ error: 'Failed to parse profile. The page structure may have changed.' }, { status: 500 });
     }
 
+    // Attempt to parse avatar
+    let userAvatar = $('.ql-avatar img').attr('src') || $('.profile-avatar img').attr('src') || $('img.avatar').attr('src') || null;
+    if (userAvatar && userAvatar.startsWith('/')) {
+       try {
+         const urlObj = new URL(formattedUrl);
+         userAvatar = `${urlObj.origin}${userAvatar}`;
+       } catch (e) {
+         // Ignore URL parsing errors
+       }
+    }
+
     // 4. Parsing Badges — works for both domain structures
     const badges = [];
     $('.profile-badge').each((i, el) => {
@@ -97,6 +108,7 @@ export async function POST(req) {
 
     const data = {
       userName,
+      userAvatar,
       totalPoints,
       badgeCount: validBadges.length,
       counts,

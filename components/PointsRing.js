@@ -1,97 +1,115 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-import { motion, animate } from 'framer-motion';
-import MaskIcon from './MaskIcon';
+import { useEffect, useState, useRef } from "react";
+import { motion, useAnimation, useInView } from "framer-motion";
+import { Vault } from "lucide-react";
+import GoldBar3D from "./GoldBar3D";
+import MaskIcon from "./MaskIcon";
 
-export default function PointsRing({ points, maxPoints = 2000 }) {
-  const [displayPoints, setDisplayPoints] = useState(0);
+export default function PointsRing({ points, maxPoints = 80 }) {
+  const [current, setCurrent] = useState(0);
+  const controls = useAnimation();
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.5 });
   
-  // Calculate percentage, capped at 100
-  const percentage = Math.min((points / maxPoints) * 100, 100);
-  
-  // Determine color based on progress
-  let ringColor = 'var(--heist-red)'; // 0-40%
-  if (percentage >= 75) {
-    ringColor = 'var(--mint-gold)'; // 75-100%
-  } else if (percentage >= 40) {
-    ringColor = 'var(--alarm-amber)'; // 40-75%
-  }
-
-  useEffect(() => {
-    const controls = animate(displayPoints, points, {
-      duration: 1.5,
-      ease: "easeOut",
-      onUpdate(value) {
-        setDisplayPoints(value);
-      }
-    });
-    return () => controls.stop();
-  }, [points]);
-
+  // Calculate stroke dasharray for the ring
   const radius = 120;
   const circumference = 2 * Math.PI * radius;
+  // Cap at 100% for the ring display
+  const percentage = Math.min((current / maxPoints) * 100, 100);
   const strokeDashoffset = circumference - (percentage / 100) * circumference;
 
+  useEffect(() => {
+    if (isInView) {
+      // Animate the points counting up
+      let start = 0;
+      const duration = 2000; // 2 seconds
+      const interval = 20;
+      const steps = duration / interval;
+      const increment = points / steps;
+
+      const timer = setInterval(() => {
+        start += increment;
+        if (start >= points) {
+          setCurrent(points);
+          clearInterval(timer);
+        } else {
+          setCurrent(Math.floor(start));
+        }
+      }, interval);
+
+      // Trigger the ring animation
+      controls.start({
+        strokeDashoffset: circumference - (Math.min((points / maxPoints) * 100, 100) / 100) * circumference,
+        transition: { duration: 2, ease: "easeOut" }
+      });
+
+      return () => clearInterval(timer);
+    }
+  }, [isInView, points, maxPoints, controls, circumference]);
+
   return (
-    <div className="relative flex flex-col items-center justify-center w-full my-8">
-      <div className="relative flex items-center justify-center w-[300px] h-[300px]">
-        {/* Background Track */}
-        <svg className="absolute w-full h-full -rotate-90" viewBox="0 0 300 300">
-          <circle 
-            cx="150" 
-            cy="150" 
-            r={radius} 
-            stroke="var(--vault-outline)" 
-            strokeWidth="16" 
-            fill="none" 
+    <div ref={ref} className="relative flex flex-col items-center justify-center p-4 sm:p-10 group">
+      {/* 3D Gold Bar Floating behind the ring - only shown when max points reached */}
+      {points >= maxPoints && (
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-20 z-0 scale-150 pointer-events-none group-hover:opacity-40 transition-opacity">
+           <GoldBar3D points={points} />
+        </div>
+      )}
+
+      {/* The Central Ring */}
+      <div className="relative flex items-center justify-center w-[250px] h-[250px] sm:w-[300px] sm:h-[300px]">
+        <svg className="w-full h-full -rotate-90 z-10" viewBox="0 0 300 300">
+          {/* Track */}
+          <circle
+            cx="150"
+            cy="150"
+            r={radius}
+            stroke="var(--vault-outline)"
+            strokeWidth="4"
+            fill="transparent"
+            className="opacity-20"
           />
-          {/* Animated Progress Ring */}
-          <motion.circle 
-            cx="150" 
-            cy="150" 
-            r={radius} 
-            stroke={ringColor} 
-            strokeWidth="16" 
-            fill="none" 
+          {/* Progress Ring */}
+          <motion.circle
+            cx="150"
+            cy="150"
+            r={radius}
+            stroke="var(--mint-gold)"
+            strokeWidth="12"
+            fill="transparent"
             strokeLinecap="round"
             initial={{ strokeDashoffset: circumference }}
-            animate={{ strokeDashoffset }}
-            transition={{ duration: 1.5, ease: "easeOut" }}
-            style={{ strokeDasharray: circumference }}
+            animate={controls}
+            style={{
+              strokeDasharray: circumference
+            }}
+          />
+          {/* Inner decorative dashed ring */}
+          <circle
+            cx="150"
+            cy="150"
+            r={radius - 16}
+            stroke="var(--vault-outline)"
+            strokeWidth="1"
+            fill="transparent"
+            strokeDasharray="4 4"
+            className="opacity-30"
           />
         </svg>
 
         {/* Center Content */}
-        <div className="absolute flex flex-col items-center justify-center text-center">
-          <div className="text-[var(--text-secondary)] font-body text-sm tracking-widest uppercase mb-2">
-            Gold Secured
+        <div className="absolute flex flex-col items-center justify-center z-20 text-center">
+          <div className="flex items-baseline gap-1">
+            <span className="font-shlop text-5xl sm:text-7xl text-white tracking-wider">
+              {current}
+            </span>
+            <span className="font-mono text-[var(--mint-gold)] text-sm sm:text-base">pt</span>
           </div>
-          <div className="text-6xl font-mono text-[var(--mint-gold)] font-bold drop-shadow-md">
-            {Number.isInteger(displayPoints) ? Math.floor(displayPoints) : displayPoints.toFixed(1)}
+          
+          <div className="font-display text-[var(--text-muted)] tracking-[0.2em] uppercase text-[10px] sm:text-xs mt-1">
+            Total Haul
           </div>
-          {percentage >= 100 && (
-            <motion.div 
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ delay: 1, type: "spring" }}
-              className="mt-2 text-green-500 flex items-center gap-2"
-            >
-              <MaskIcon size={20} className="text-[var(--success-green)]" />
-              <span className="font-display tracking-widest text-[var(--success-green)] text-lg">
-                VAULT BREACHED
-              </span>
-            </motion.div>
-          )}
-        </div>
-      </div>
-
-      <div className="mt-4 text-center">
-        <div className="text-[var(--text-primary)] font-body font-bold text-xl">
-          VAULT REMAINING: {Math.max(maxPoints - points, 0).toFixed(0)} pts
-        </div>
-        <div className="text-[var(--text-muted)] font-body text-sm tracking-wider uppercase">
-          To next milestone heist
         </div>
       </div>
     </div>

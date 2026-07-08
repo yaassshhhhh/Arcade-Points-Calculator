@@ -5,9 +5,37 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import HeaderNav from "@/components/HeaderNav";
 import PointsRing from "@/components/PointsRing";
-import StageCard from "@/components/StageCard";
 import MaskIcon from "@/components/MaskIcon";
 import MilestoneModal from "@/components/MilestoneModal";
+
+const getCategoryLabel = (category) => {
+  switch (category) {
+    case 'game': return 'ARCADE GAME';
+    case 'skillBadge': return 'SKILL BADGE';
+    case 'special': return 'SPECIAL BONUS';
+    case 'labFree': return 'TRIVIA / LAB FREE';
+    case 'specialGame': return 'SPECIAL GAME';
+    case 'specialGame3': return 'SPECIAL GAME (3x)';
+    case 'workMeetsPlay': return 'WORK MEETS PLAY';
+    default: return 'UNKNOWN ASSET';
+  }
+};
+
+const bgImages = ['/professor.png', '/missprofessor.png', '/berlin.png', '/nairobi.png'];
+
+const guessAvatar = (name) => {
+  if (!name) return '/professor.png';
+  const n = name.trim().split(' ')[0].toLowerCase();
+  const femaleEndings = ['a', 'i', 'y', 'e'];
+  const isFemale = femaleEndings.includes(n.slice(-1)) || n === 'nairobi' || n === 'tokyo' || n === 'lisbon';
+  
+  // Deterministic choice based on name length so it doesn't flip on re-renders
+  if (isFemale) {
+    return name.length % 2 === 0 ? '/nairobi.png' : '/missprofessor.png';
+  } else {
+    return name.length % 2 === 0 ? '/professor.png' : '/berlin.png';
+  }
+};
 
 function DashboardContent() {
   const searchParams = useSearchParams();
@@ -60,45 +88,13 @@ function DashboardContent() {
     fetchPoints();
   }, [url, router, lastTotal]);
 
-  const stages = useMemo(() => {
-    if (!data) return [];
-    
-    // Convert counts to heist stages
-    return [
-      {
-        id: "games",
-        title: "Arcade Games",
-        codename: "TOKYO'S RUN",
-        points: data.counts.game + data.counts.specialGame + data.counts.specialGame3,
-        maxPoints: 20, // Arbitrary goal for visuals
-      },
-      {
-        id: "skills",
-        title: "Skill Badges",
-        codename: "BERLIN'S VAULT",
-        points: data.counts.skillBadge / 2, // 1 point per 2 badges
-        maxPoints: 15,
-      },
-      {
-        id: "trivia",
-        title: "Trivia",
-        codename: "NAIROBI'S INTEL",
-        points: data.counts.labFree, // lab free = trivia
-        maxPoints: 10,
-      },
-      {
-        id: "bonus",
-        title: "Special Bonus",
-        codename: "DENVER'S STASH",
-        points: data.counts.special * 2,
-        maxPoints: 0, // No max, just show total
-      }
-    ];
-  }, [data]);
-
   return (
-    <main className="min-h-screen bg-[var(--vault-black)] text-[var(--text-primary)] pb-20">
-      <HeaderNav />
+    <main className="min-h-screen bg-[var(--vault-black)] text-[var(--text-primary)] pb-20 relative">
+      {/* Background Image Overlay */}
+      <div className="fixed inset-0 z-0 bg-[url('/faq-bg.jpg')] bg-cover bg-center bg-no-repeat opacity-15 pointer-events-none"></div>
+      
+      <div className="relative z-10">
+        <HeaderNav />
 
       {/* Loading State */}
       {loading && (
@@ -140,57 +136,114 @@ function DashboardContent() {
             
             {/* Intel Panel */}
             <div className="lg:col-span-4 flex flex-col justify-center">
-              <div className="heist-panel p-6 border-l-4 border-l-[var(--heist-red)]">
-                <div className="font-mono text-xs text-[var(--text-muted)] tracking-widest uppercase mb-4 pb-2 border-b border-[var(--vault-outline)]">
-                  // HEIST INTEL
+              <div className="flex flex-col items-center justify-center">
+                <div className="relative mb-6">
+                  <div className="absolute inset-0 rounded-full bg-[var(--heist-red-glow)] blur-lg animate-pulse"></div>
+                  <img 
+                    src={data.userAvatar || guessAvatar(data.userName)} 
+                    alt={data.userName} 
+                    className="relative z-10 w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-[var(--heist-red)] shadow-[0_0_20px_rgba(193,18,31,0.5)] object-cover bg-[var(--vault-black)]" 
+                    onError={(e) => {
+                      // Fallback if the avatar url is broken
+                      e.target.src = guessAvatar(data.userName);
+                    }}
+                  />
                 </div>
-                
-                <div className="mb-4">
-                  <div className="text-[var(--text-secondary)] text-sm mb-1 uppercase tracking-wider">Target Profile</div>
-                  <div className="font-mono text-[var(--mint-gold)] break-all truncate">
-                    {url.split('/public_profiles/')[1]?.substring(0, 16) || "CLASSIFIED"}...
-                  </div>
-                </div>
-
-                <div className="mb-4">
-                  <div className="text-[var(--text-secondary)] text-sm mb-1 uppercase tracking-wider">Badges Retrieved</div>
-                  <div className="font-display text-3xl">
-                    {data.badges.length} <span className="text-[var(--text-muted)] text-xl">ASSETS</span>
-                  </div>
-                </div>
-
-                <div className="mt-8 pt-4 border-t border-[var(--vault-outline)]">
-                  <button 
-                    className="heist-btn-secondary w-full flex items-center justify-center gap-2"
-                    onClick={() => setShowMilestone(true)} // For demo purposes, allow manual trigger
-                  >
-                    TEST ALARM (DEMO)
-                  </button>
+                <div className="bg-transparent border border-[var(--vault-outline)] px-8 py-3 rounded-lg shadow-lg text-center mt-2">
+                  <span className="font-mono text-[var(--text-muted)] text-sm uppercase tracking-widest block mb-1">OPERATIVE</span>
+                  <h4 className="font-shlop text-4xl md:text-5xl text-white tracking-[0.05em] uppercase drop-shadow-[0_0_10px_rgba(255,255,255,0.2)] mt-2">{data.userName}</h4>
                 </div>
               </div>
             </div>
           </section>
 
-          {/* Stages Grid */}
-          <section>
-            <div className="mb-8 border-b border-[var(--vault-outline)] pb-2 flex items-baseline gap-4">
-              <h2 className="font-display text-4xl tracking-wider">HEIST STAGES</h2>
-              <span className="font-mono text-sm text-[var(--text-muted)] uppercase">Status Report</span>
+          {/* Stats Breakdown Grid */}
+          <section className="mb-16 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 max-w-6xl mx-auto px-4">
+            {[
+              { label: "SKILL LABS", value: data.counts.skillBadge || 0, color: "var(--heist-red)", bgClass: "bg-[var(--heist-red-dim)]" },
+              { label: "GAMES", value: data.counts.game || 0, color: "var(--mint-gold)", bgClass: "bg-[var(--mint-gold-dim)]" },
+              { label: "2X SPECIAL GAMES", value: data.counts.specialGame || 0, color: "white", bgClass: "bg-[rgba(255,255,255,0.05)]" },
+              { label: "3X SPECIAL GAMES", value: data.counts.specialGame3 || 0, color: "#00f0ff", bgClass: "bg-[rgba(0,240,255,0.05)]" },
+              { label: "WORK MEET PLAY", value: data.counts.workMeetsPlay || 0, color: "var(--danger-flash)", bgClass: "bg-[rgba(255,0,0,0.1)]" }
+            ].map((stat, idx) => (
+              <div key={idx} className="bg-transparent border border-[var(--vault-outline)] p-4 md:p-6 flex flex-col items-center justify-center text-center rounded-lg shadow-[0_0_20px_rgba(0,0,0,0.5)] relative overflow-hidden group hover:border-[var(--mint-gold)] transition-all">
+                <div className={`absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity ${stat.bgClass}`}></div>
+                <div className="font-shlop text-6xl md:text-7xl mb-2" style={{ color: stat.color, textShadow: `0 0 15px ${stat.color}80` }}>
+                  {stat.value}
+                </div>
+                <div className="font-mono text-xs md:text-sm tracking-widest uppercase text-[var(--text-muted)] border-t border-[var(--vault-outline)] pt-3 w-full">
+                  {stat.label}
+                </div>
+              </div>
+            ))}
+          </section>
+
+          {/* Work Meets Play Bonus Banner */}
+          {data.workMeetsPlayBonus > 0 && (
+            <section className="mb-12 max-w-3xl mx-auto px-4">
+              <div className="bg-[var(--vault-charcoal)] border border-[var(--mint-gold)] py-3 px-4 text-center relative overflow-hidden rounded-lg shadow-[0_0_15px_rgba(212,175,55,0.2)]">
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[rgba(212,175,55,0.15)] to-transparent animate-pulse"></div>
+                <h3 className="font-shlop text-[12px] md:text-[16px] text-[var(--mint-gold)] tracking-[0.1em] uppercase relative z-10 drop-shadow-[0_0_5px_rgba(212,175,55,0.8)] px-2 leading-relaxed">
+                  Seven Additional Points for Completing The WORK MEET PLAY Each Month !!
+                </h3>
+              </div>
+            </section>
+          )}
+
+          {/* Secured Assets / Badges List */}
+          <section className="mt-16">
+            <div className="mb-12 border-b border-[var(--vault-outline)] pb-8 flex flex-col items-center justify-center text-center gap-4">
+              <h2 className="font-shlop text-5xl md:text-6xl tracking-[0.05em] text-[var(--heist-red)] drop-shadow-[0_0_15px_rgba(193,18,31,0.6)] uppercase">SECURED ASSETS</h2>
+              <h3 className="font-shlop text-2xl md:text-3xl text-[var(--mint-gold)] tracking-widest uppercase">Loot Retrieved from the Vault</h3>
             </div>
             
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {stages.map((stage, i) => (
-                <StageCard 
-                  key={stage.id}
-                  title={stage.title}
-                  codename={stage.codename}
-                  points={stage.points}
-                  maxPoints={stage.maxPoints}
-                  isLocked={stage.points === 0}
-                  isCleared={stage.points >= stage.maxPoints && stage.maxPoints > 0}
-                />
-              ))}
-            </div>
+            {data.badges && data.badges.length > 0 ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {data.badges.map((badge, i) => (
+                  <div key={i} className="bg-[var(--vault-charcoal)] border border-[var(--vault-outline)] rounded-lg p-6 flex flex-col items-center justify-start text-center group hover:border-[var(--mint-gold)] transition-all duration-300 relative overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.5)] hover:shadow-[0_0_20px_rgba(212,175,55,0.2)]">
+                    
+                    {/* Background Character Image */}
+                    <div 
+                      className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-[0.15] group-hover:opacity-[0.35] transition-all duration-500 pointer-events-none scale-110 group-hover:scale-100" 
+                      style={{ backgroundImage: `url('${bgImages[i % bgImages.length]}')` }}
+                    ></div>
+
+                    <div className="absolute inset-0 z-0 bg-[var(--mint-gold-dim)] opacity-0 group-hover:opacity-10 transition-opacity duration-300 pointer-events-none"></div>
+                    
+                    {/* Corner Tag */}
+                    <div className="absolute z-10 top-0 left-0 bg-[var(--vault-black)] border-b border-r border-[var(--vault-outline)] px-3 py-1.5 font-mono text-[0.65rem] text-[var(--heist-red)] font-bold">
+                      ASSET_{String(i + 1).padStart(3, '0')}
+                    </div>
+                    
+                    <div className="relative z-10 w-full flex flex-col items-center mt-4">
+                      {badge.imageSrc ? (
+                        <img src={badge.imageSrc} alt={badge.name} className="w-36 h-36 p-3 bg-white mb-6 rounded-[50%_0_50%_0] drop-shadow-[0_0_10px_rgba(255,255,255,0.1)] group-hover:drop-shadow-[0_0_15px_rgba(212,175,55,0.4)] transition-transform duration-500 group-hover:scale-110 object-contain" />
+                      ) : (
+                        <div className="w-36 h-36 p-3 mb-6 bg-[var(--vault-black)] rounded-[50%_0_50%_0] border border-[var(--vault-outline)] flex items-center justify-center text-xs text-[var(--text-muted)]">NO IMG</div>
+                      )}
+                      
+                      <div className="font-mono text-sm font-bold text-white mb-4 line-clamp-3 min-h-[3rem] group-hover:text-[var(--mint-gold)] transition-colors w-full flex items-center justify-center leading-relaxed">
+                        {badge.name}
+                      </div>
+                      
+                      <div className="text-xs text-[var(--text-muted)] uppercase tracking-wider font-mono border-t border-[var(--vault-outline)] pt-4 w-full flex flex-col gap-2">
+                        <div className="bg-[rgba(212,175,55,0.1)] text-[var(--mint-gold)] border border-[var(--mint-gold-dim)] px-2 py-1 text-center font-bold tracking-widest mb-1 shadow-[inset_0_0_10px_rgba(212,175,55,0.05)] backdrop-blur-sm">
+                          {getCategoryLabel(badge.category)}
+                        </div>
+                        <div className="flex justify-between items-center mt-1 bg-[rgba(0,0,0,0.4)] px-2 py-1 rounded backdrop-blur-sm">
+                          <span className="text-[var(--heist-red)] font-bold tracking-widest">ACQUIRED:</span>
+                          <span>{badge.earnedDate.replace(/Earned\s+/i, '')}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="bg-[var(--vault-charcoal)] border border-[var(--vault-outline)] p-8 text-center rounded-lg">
+                <span className="font-mono text-[var(--text-muted)] tracking-widest">NO ASSETS SECURED YET. THE VAULT REMAINS CLOSED.</span>
+              </div>
+            )}
           </section>
 
           {/* Milestone Modal Component */}
@@ -202,6 +255,7 @@ function DashboardContent() {
           />
         </div>
       )}
+      </div>
     </main>
   );
 }

@@ -3,32 +3,26 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-import { Crosshair, Package, Gift, Award, Star, Zap } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Package, Gift, Award, Star, Zap, Shield, Vault } from "lucide-react";
 import HeaderNav from "@/components/HeaderNav";
 
-export default function SwagsPage() {
-  const container = useRef(null);
-  const [selectedImage, setSelectedImage] = useState(null);
+// Framer motion variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1 }
+  }
+};
 
-  useGSAP(
-    () => {
-      // Setup entrance animations
-      gsap.fromTo(
-        ".swag-card",
-        { y: 50, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          stagger: 0.1,
-          duration: 0.8,
-          ease: "power3.out",
-        }
-      );
-    },
-    { scope: container }
-  );
+const itemVariants = {
+  hidden: { opacity: 0, scale: 0.9 },
+  show: { opacity: 1, scale: 1, transition: { type: "spring", stiffness: 100 } }
+};
+
+export default function SwagsPage() {
+  const [selectedImage, setSelectedImage] = useState(null);
 
   const swags = [
     {
@@ -97,322 +91,193 @@ export default function SwagsPage() {
   ];
 
   return (
-    <main ref={container} className="bg-[var(--vault-black)] text-[var(--text-primary)] min-h-screen">
-      <HeaderNav />
-
-      {/* ── Header ──────────────────────────────────────────────────────── */}
-      <header
-        className="br-container"
-        style={{
-          marginTop: "120px",
-          marginBottom: "60px",
-          textAlign: "center",
-          position: "relative",
-          zIndex: 1,
-        }}
-      >
-        <div style={{ display: "inline-block", position: "relative" }}>
-          <h1
-            style={{
-              fontFamily: "'Rajdhani', sans-serif",
-              fontWeight: 700,
-              fontSize: "clamp(2.5rem, 6vw, 4.5rem)",
-              lineHeight: 1.1,
-              letterSpacing: "0.02em",
-              textTransform: "uppercase",
-              background: "linear-gradient(90deg, #FFFFFF, var(--br-muted))",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              marginBottom: "1rem",
-              textShadow: "0 0 40px rgba(255,255,255,0.1)",
-            }}
-          >
-            Arcade <span style={{ color: "var(--br-orange)", WebkitTextFillColor: "var(--br-orange)" }}>Swags</span>
-          </h1>
-          <div
-            style={{
-              position: "absolute",
-              top: "-20px",
-              right: "-30px",
-              color: "var(--br-orange)",
-              opacity: 0.5,
-              animation: "pulse 2s infinite",
-            }}
-          >
-            <Gift size={40} />
-          </div>
-        </div>
-
-        <p
-          style={{
-            fontFamily: "'Share Tech Mono', monospace",
-            fontSize: "1.1rem",
-            color: "var(--br-muted)",
-            maxWidth: "600px",
-            margin: "0 auto",
-            lineHeight: 1.6,
-          }}
-        >
-          Check out all the exclusive swag drops for the Google Cloud Arcade 2026 program. Earn points, hit milestones, and claim your rewards!
-        </p>
-      </header>
-
-      {/* ── Swags Section ───────────────────────────────────────────────── */}
-      <section className="br-container" style={{ marginBottom: "100px", position: "relative", zIndex: 1 }}>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-            gap: "2rem",
-          }}
-        >
-          {swags.map((swag, i) => (
-            <div
-              key={i}
-              className="swag-card br-glass"
-              style={{
-                borderRadius: "16px",
-                overflow: "hidden",
-                position: "relative",
-                transition: "transform 0.3s, box-shadow 0.3s, border-color 0.3s",
-                cursor: "default",
-                display: "flex",
-                flexDirection: "column",
-                border: "1px solid rgba(255,255,255,0.05)",
-                height: "100%",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "translateY(-5px)";
-                e.currentTarget.style.boxShadow = `0 10px 30px rgba(0,0,0,0.5), 0 0 20px ${swag.color}20`;
-                e.currentTarget.style.borderColor = `${swag.color}50`;
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.boxShadow = "none";
-                e.currentTarget.style.borderColor = "rgba(255,255,255,0.05)";
-              }}
-            >
-              <div 
-                style={{ position: "relative", height: "200px", width: "100%", cursor: "pointer" }}
-                onClick={() => setSelectedImage(swag.image)}
-              >
-                <Image
-                  src={swag.image}
-                  alt={swag.title}
-                  fill
-                  style={{ objectFit: "cover", opacity: 0.8 }}
-                />
-                <div
-                  style={{
-                    position: "absolute",
-                    inset: 0,
-                    background: `linear-gradient(to top, var(--br-bg) 0%, transparent 100%)`,
-                  }}
-                />
-                <div
-                  style={{
-                    position: "absolute",
-                    top: "1rem",
-                    left: "1rem",
-                    background: swag.color,
-                    color: "#000",
-                    padding: "4px 12px",
-                    borderRadius: "20px",
-                    fontFamily: "'Share Tech Mono', monospace",
-                    fontSize: "0.8rem",
-                    fontWeight: "bold",
-                    textTransform: "uppercase",
-                    boxShadow: `0 0 10px ${swag.color}`
-                  }}
-                >
-                  {swag.points} Points
-                </div>
-              </div>
-
-              <div style={{ padding: "1.5rem", flex: 1, display: "flex", flexDirection: "column" }}>
-                <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.5rem" }}>
-                  <span style={{ color: swag.color, fontFamily: "'Rajdhani', sans-serif", fontSize: "0.9rem", textTransform: "uppercase", letterSpacing: "0.1em" }}>
-                    {swag.tier} Tier
-                  </span>
-                </div>
-                <h3
-                  style={{
-                    fontFamily: "'Rajdhani', sans-serif",
-                    fontWeight: 600,
-                    fontSize: "1.4rem",
-                    color: "var(--br-text)",
-                    marginBottom: "0.5rem",
-                  }}
-                >
-                  {swag.title}
-                </h3>
-                <p style={{ color: "var(--br-muted)", fontSize: "0.95rem", lineHeight: 1.5, flex: 1 }}>
-                  {swag.description}
-                </p>
-                
-                <button
-                  style={{
-                    marginTop: "1.5rem",
-                    background: "rgba(255,255,255,0.05)",
-                    border: `1px solid ${swag.color}40`,
-                    padding: "0.8rem",
-                    borderRadius: "8px",
-                    color: swag.color,
-                    fontFamily: "'Share Tech Mono', monospace",
-                    fontSize: "0.9rem",
-                    transition: "all 0.2s",
-                    cursor: "pointer",
-                    width: "100%",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    gap: "0.5rem"
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = `${swag.color}15`;
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = "rgba(255,255,255,0.05)";
-                  }}
-                >
-                  <Zap size={16} /> Claim Details
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+    <main className="bg-[var(--vault-black)] text-[var(--text-primary)] min-h-screen relative overflow-hidden">
       
-      {/* ── Old Swags Section ────────────────────────────────────────────── */}
-      <section className="br-container" style={{ marginBottom: "100px", position: "relative", zIndex: 1 }}>
-        <h2
-          style={{
-            fontFamily: "'Rajdhani', sans-serif",
-            fontWeight: 700,
-            fontSize: "2.5rem",
-            color: "var(--br-text)",
-            marginBottom: "2rem",
-            textAlign: "center",
-            textTransform: "uppercase",
-            letterSpacing: "0.05em"
-          }}
-        >
-          Previous Drops
-        </h2>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-            gap: "1.5rem",
-          }}
-        >
-          {oldSwags.map((swag, i) => (
-            <div
-              key={i}
-              className="swag-card br-glass"
-              style={{
-                borderRadius: "12px",
-                overflow: "hidden",
-                border: "1px solid rgba(255,255,255,0.05)",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                padding: "1rem",
-                transition: "transform 0.3s, box-shadow 0.3s",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "translateY(-5px)";
-                e.currentTarget.style.boxShadow = "0 10px 30px rgba(0,0,0,0.5)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.boxShadow = "none";
-              }}
-            >
-              <div 
-                style={{ position: "relative", height: "150px", width: "100%", marginBottom: "1rem", cursor: "pointer" }}
-                onClick={() => setSelectedImage(swag.image)}
-              >
-                <Image
-                  src={swag.image}
-                  alt={swag.title}
-                  fill
-                  style={{ objectFit: "contain" }}
-                />
-              </div>
-              <h3
-                style={{
-                  fontFamily: "'Rajdhani', sans-serif",
-                  fontWeight: 600,
-                  fontSize: "1.1rem",
-                  color: "var(--br-muted)",
-                  textAlign: "center",
-                  margin: 0
+      {/* Background Image */}
+      <div 
+        className="fixed inset-0 z-0 bg-cover bg-center opacity-20 pointer-events-none mix-blend-luminosity" 
+        style={{ backgroundImage: 'url("/heist-badges-bg.jpeg")' }}
+      ></div>
+      
+      {/* Red Glowing Overlays */}
+      <div className="fixed top-[-10%] right-[-10%] w-[40vw] h-[40vw] bg-[var(--heist-red)] blur-[120px] opacity-10 rounded-full pointer-events-none z-0"></div>
+      <div className="fixed bottom-[-10%] left-[-10%] w-[40vw] h-[40vw] bg-[var(--heist-red-dark)] blur-[150px] opacity-10 rounded-full pointer-events-none z-0"></div>
+
+      <div className="relative z-10">
+        <HeaderNav />
+
+        {/* ── Header ──────────────────────────────────────────────────────── */}
+        <header className="max-w-6xl mx-auto px-6" style={{ marginTop: "120px", marginBottom: "60px", textAlign: "center" }}>
+          <motion.div 
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16 relative inline-block"
+          >
+            <div className="font-mono text-sm text-[var(--heist-red)] tracking-[0.3em] uppercase mb-4 animate-pulse flex items-center justify-center gap-2">
+              <Gift size={16} className="text-[var(--heist-red)]" />
+              THE VAULT
+            </div>
+            <h1 className="font-shlop text-6xl md:text-8xl tracking-[0.05em] mb-4 text-white drop-shadow-[0_0_20px_rgba(255,0,0,0.3)] uppercase">
+              ARCADE SWAGS
+            </h1>
+            <p className="font-mono text-[var(--text-muted)] max-w-2xl mx-auto uppercase tracking-widest text-xs md:text-sm">
+              Check out all the exclusive swag drops for the Google Cloud Arcade 2026 program. Earn points, hit milestones, and claim your rewards!
+            </p>
+          </motion.div>
+        </header>
+
+        {/* ── Swags Section ───────────────────────────────────────────────── */}
+        <section className="max-w-6xl mx-auto px-6 mb-24">
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            animate="show"
+            className="grid grid-cols-1 md:grid-cols-2 gap-8"
+          >
+            {swags.map((swag, i) => (
+              <motion.div
+                key={i}
+                variants={itemVariants}
+                className="bg-[var(--vault-charcoal)] border border-[var(--vault-outline)] rounded-tl-[3rem] rounded-br-[3rem] rounded-tr-lg rounded-bl-lg overflow-hidden relative group transition-all duration-300 flex flex-col h-full min-h-[320px]"
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "translateY(-5px)";
+                  e.currentTarget.style.boxShadow = `0 10px 30px rgba(0,0,0,0.5), 0 0 20px ${swag.color}20`;
+                  e.currentTarget.style.borderColor = `${swag.color}50`;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "translateY(0)";
+                  e.currentTarget.style.boxShadow = "none";
+                  e.currentTarget.style.borderColor = "var(--vault-outline)";
                 }}
               >
-                {swag.title}
-              </h3>
-            </div>
-          ))}
-        </div>
-      </section>
+                {/* Professor Background */}
+                <div 
+                  className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-5 pointer-events-none group-hover:opacity-15 transition-opacity duration-500" 
+                  style={{ backgroundImage: 'url("/professor1.png")' }}
+                ></div>
 
-      {/* Footer padding */}
-      <div style={{ height: "50px" }}></div>
+                <div className="p-8 flex flex-col flex-1 relative z-10 h-full justify-between">
+                  <div>
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="font-display text-sm uppercase tracking-[0.1em]" style={{ color: swag.color }}>
+                        {swag.tier} Tier
+                      </span>
+                      <div
+                        className="text-black px-4 py-1 rounded-full font-mono text-xs font-bold uppercase shadow-lg"
+                        style={{ background: swag.color, boxShadow: `0 0 10px ${swag.color}40` }}
+                      >
+                        {swag.points} Points
+                      </div>
+                    </div>
+                    <h3 className="font-display text-3xl tracking-wider text-white mb-4 uppercase group-hover:text-white transition-colors">
+                      {swag.title}
+                    </h3>
+                    <p className="font-mono text-sm text-[var(--text-muted)] tracking-wider leading-relaxed">
+                    {swag.description}
+                  </p>
+                  </div>
+                  
+                  <button
+                    className="mt-6 border px-4 py-3 rounded-lg font-mono text-xs tracking-widest uppercase transition-all duration-300 flex items-center justify-center gap-2 w-full"
+                    style={{
+                      borderColor: `${swag.color}40`,
+                      color: swag.color,
+                      backgroundColor: "rgba(0,0,0,0.2)"
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = `${swag.color}15`;
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = "rgba(0,0,0,0.2)";
+                    }}
+                  >
+                    <Zap size={14} /> Claim Details
+                  </button>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </section>
+        
+        {/* ── Old Swags Section ────────────────────────────────────────────── */}
+        <section className="max-w-6xl mx-auto px-6 mb-24 relative z-1">
+          <div className="flex items-center gap-4 border-b border-[var(--vault-outline)] pb-4 mb-8">
+            <h2 className="font-display text-3xl md:text-4xl tracking-widest text-white uppercase m-0">
+              PREVIOUS DROPS
+            </h2>
+          </div>
+          
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.1 }}
+            className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6"
+          >
+            {oldSwags.map((swag, i) => (
+              <motion.div
+                key={i}
+                variants={itemVariants}
+                className="bg-[var(--vault-charcoal)] border border-[var(--vault-outline)] rounded-lg overflow-hidden flex flex-col items-center p-4 transition-all duration-300 group hover:border-[var(--heist-red)] hover:shadow-[0_0_15px_rgba(255,0,0,0.3)] cursor-pointer"
+                onClick={() => setSelectedImage(swag.image)}
+              >
+                <div className="relative h-24 w-full mb-4">
+                  <Image
+                    src={swag.image}
+                    alt={swag.title}
+                    fill
+                    style={{ objectFit: "contain" }}
+                    className="group-hover:scale-110 transition-transform duration-500 drop-shadow-[0_0_10px_rgba(255,255,255,0.1)]"
+                  />
+                </div>
+                <h3 className="font-display text-xs tracking-wider text-[var(--text-muted)] text-center uppercase group-hover:text-white transition-colors">
+                  {swag.title}
+                </h3>
+              </motion.div>
+            ))}
+          </motion.div>
+        </section>
+
+        {/* Footer padding */}
+        <div style={{ height: "50px" }}></div>
+      </div>
 
       {/* Image Modal */}
-      {selectedImage && (
-        <div 
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: "rgba(0,0,0,0.8)",
-            backdropFilter: "blur(5px)",
-            zIndex: 9999,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            cursor: "pointer"
-          }}
-          onClick={() => setSelectedImage(null)}
-        >
-          <div 
-            style={{ 
-              position: "relative", 
-              width: "90vw", 
-              height: "90vh",
-              maxWidth: "800px",
-              maxHeight: "800px"
-            }}
-            onClick={(e) => e.stopPropagation()}
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/90 backdrop-blur-md z-[9999] flex items-center justify-center cursor-pointer"
+            onClick={() => setSelectedImage(null)}
           >
-            <Image
-              src={selectedImage}
-              alt="Expanded swag"
-              fill
-              style={{ objectFit: "contain" }}
-            />
-            <button
-              onClick={() => setSelectedImage(null)}
-              style={{
-                position: "absolute",
-                top: "-40px",
-                right: "0",
-                background: "none",
-                border: "none",
-                color: "white",
-                fontSize: "2rem",
-                cursor: "pointer"
-              }}
+            <motion.div 
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="relative w-[90vw] h-[90vh] max-w-4xl max-h-[800px]"
+              onClick={(e) => e.stopPropagation()}
             >
-              &times;
-            </button>
-          </div>
-        </div>
-      )}
+              <Image
+                src={selectedImage}
+                alt="Expanded swag"
+                fill
+                style={{ objectFit: "contain" }}
+                className="drop-shadow-[0_0_50px_rgba(255,255,255,0.1)]"
+              />
+              <button
+                onClick={() => setSelectedImage(null)}
+                className="absolute -top-10 right-0 text-white hover:text-[var(--heist-red)] text-4xl transition-colors font-display"
+              >
+                &times;
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </main>
   );
 }

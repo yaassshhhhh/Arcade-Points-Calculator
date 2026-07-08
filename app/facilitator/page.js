@@ -9,8 +9,8 @@ import HeaderNav from "@/components/HeaderNav";
 import GoldBar3D from "@/components/GoldBar3D";
 import { 
   Crosshair, Shield, Award, Users, Info, HelpCircle, 
-  ChevronDown, ChevronUp, Lock, Zap, Radio, CheckCircle2,
-  Trophy, Clock, ChevronRight, Target, MessageCircle
+  ChevronDown, ChevronUp, Lock, Unlock, Copy, Zap, Radio, CheckCircle2,
+  Trophy, Clock, ChevronRight, Target, MessageCircle, X
 } from "lucide-react";
 
 if (typeof window !== "undefined") {
@@ -93,6 +93,18 @@ const faqs = [
 export default function FacilitatorPage() {
   const container = useRef(null);
   const [openFaq, setOpenFaq] = useState(null);
+  const [showBonusInfo, setShowBonusInfo] = useState(false);
+  
+  useEffect(() => {
+    if (showBonusInfo) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [showBonusInfo]);
   
   const milestones = [
     { 
@@ -213,7 +225,7 @@ export default function FacilitatorPage() {
           
           <div className="grid md:grid-cols-2 gap-8 text-left max-w-4xl mx-auto">
             {/* Registration Terminal */}
-            <div className="bg-[var(--vault-charcoal)] border border-[var(--vault-outline)] rounded-tl-[3rem] rounded-br-[3rem] rounded-tr-xl rounded-bl-xl p-8 relative overflow-hidden group hover:border-[var(--heist-red)] transition-colors">
+            <div className="bg-transparent border border-[var(--vault-outline)] rounded-tl-[3rem] rounded-br-[3rem] rounded-tr-xl rounded-bl-xl p-8 relative overflow-hidden group hover:border-[var(--heist-red)] transition-colors backdrop-blur-sm">
               <div className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-[0.1] group-hover:opacity-[0.25] transition-opacity duration-500" style={{ backgroundImage: `url('/Money heist (3).jpeg')` }}></div>
               <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--heist-red-glow)] blur-[50px] -z-10 rounded-full group-hover:bg-[var(--heist-red)] transition-colors duration-700"></div>
               <h3 className="relative z-10 font-display text-2xl text-white mb-2 uppercase tracking-wide">Registration Terminal</h3>
@@ -232,7 +244,7 @@ export default function FacilitatorPage() {
             </div>
 
             {/* Intel & Comms */}
-            <div className="bg-[var(--vault-charcoal)] border border-[var(--vault-outline)] rounded-tl-[3rem] rounded-br-[3rem] rounded-tr-xl rounded-bl-xl p-8 relative overflow-hidden group hover:border-[var(--mint-gold-dim)] transition-colors">
+            <div className="bg-transparent border border-[var(--vault-outline)] rounded-tl-[3rem] rounded-br-[3rem] rounded-tr-xl rounded-bl-xl p-8 relative overflow-hidden group hover:border-[var(--mint-gold-dim)] transition-colors backdrop-blur-sm">
               <div className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-[0.1] group-hover:opacity-[0.25] transition-opacity duration-500" style={{ backgroundImage: `url('/Money heist (3).jpeg')` }}></div>
               <div className="absolute bottom-0 left-0 w-32 h-32 bg-[var(--mint-gold-dim)] blur-[50px] opacity-20 -z-10 rounded-full group-hover:opacity-40 transition-opacity duration-700"></div>
               <h3 className="relative z-10 font-display text-2xl text-white mb-2 uppercase tracking-wide">Crew Comms</h3>
@@ -282,12 +294,19 @@ export default function FacilitatorPage() {
           </p>
           
           <div className="relative z-10 bg-[rgba(0,0,0,0.7)] border border-[var(--vault-outline)] p-5 flex flex-col sm:flex-row items-center justify-between gap-6 backdrop-blur-md group-hover:border-[var(--heist-red)] transition-colors">
-            <div className="font-mono text-2xl sm:text-3xl text-[var(--heist-red)] tracking-[0.2em] font-bold flex items-center gap-4">
-              <Lock size={24} className="text-[var(--text-muted)] opacity-50" />
-              <span className="animate-pulse drop-shadow-[0_0_10px_rgba(193,18,31,0.6)]">********-**-***-***</span>
+            <div className="font-mono text-xl sm:text-3xl text-white tracking-[0.1em] font-bold flex items-center gap-4">
+              <Unlock size={24} className="text-[var(--mint-gold)]" />
+              <span className="drop-shadow-[0_0_10px_rgba(255,255,255,0.4)]">GCAF26-IN-5F3-M7U</span>
             </div>
-            <button className="bg-[rgba(193,18,31,0.1)] border border-[var(--heist-red)] text-[var(--heist-red)] px-8 py-3 font-display text-xl tracking-widest cursor-not-allowed flex items-center gap-2 shadow-[inset_0_0_15px_rgba(193,18,31,0.2)]">
-              COMING SOON
+            <button 
+              onClick={() => {
+                navigator.clipboard.writeText("GCAF26-IN-5F3-M7U");
+                alert("Referral code copied to clipboard!");
+              }}
+              className="bg-[rgba(212,175,55,0.1)] border border-[var(--mint-gold)] text-[var(--mint-gold)] px-8 py-3 font-display text-xl tracking-widest cursor-pointer flex items-center gap-3 hover:bg-[var(--mint-gold)] hover:text-black transition-colors duration-300 shadow-[inset_0_0_15px_rgba(212,175,55,0.2)]"
+            >
+              <Copy size={20} />
+              COPY CODE
             </button>
           </div>
         </section>
@@ -298,6 +317,142 @@ export default function FacilitatorPage() {
             <h2 className="font-display text-5xl text-white mb-2 uppercase drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">The Blueprint</h2>
             <p className="font-mono text-sm text-[var(--text-muted)] uppercase tracking-[0.2em]">Milestones translated to Heist Phases. Secure the assets.</p>
           </div>
+
+          {/* BONUS MILESTONE BANNER */}
+          <div 
+            onClick={() => setShowBonusInfo(true)}
+            className="cursor-pointer gsap-section mb-12 bg-[var(--vault-charcoal)] border border-[var(--heist-red)] relative overflow-hidden group hover:border-[var(--heist-red-bright)] transition-colors duration-500 rounded-lg p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-[0_0_20px_rgba(193,18,31,0.2)] hover:shadow-[0_0_40px_rgba(193,18,31,0.4)]"
+          >
+            <div className="absolute inset-0 z-0 bg-[length:100%_100%] bg-center bg-no-repeat opacity-[0.2] group-hover:opacity-[0.05] transition-opacity duration-500 mix-blend-luminosity" style={{ backgroundImage: "url('/𝔅𝔢𝔩𝔩𝔞 ℭ𝔦𝔞𝔬.jpeg')" }}></div>
+            
+            {/* HOVER TEXT */}
+            <div className="absolute inset-0 z-20 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 backdrop-blur-sm">
+              <span className="font-shlop text-4xl md:text-5xl text-[var(--mint-gold)] drop-shadow-[0_0_15px_rgba(212,175,55,0.8)] animate-pulse tracking-widest text-center px-4">
+                Please click on me for more information
+              </span>
+            </div>
+            
+            <div className="relative z-10 flex-1 transition-transform duration-500 group-hover:scale-95 group-hover:opacity-30">
+              <div className="inline-block bg-[var(--heist-red)] text-white font-mono text-xs font-bold px-3 py-1 uppercase tracking-widest mb-3 shadow-[0_0_10px_var(--heist-red-glow)] animate-pulse">
+                [NEW] Bonus Milestone**
+              </div>
+              <h3 className="font-display text-2xl md:text-3xl text-white uppercase tracking-wider">
+                Completed 4 GEAR Skill Badges <br className="hidden md:block"/>& Create your 1st Agent
+              </h3>
+            </div>
+            
+            <div className="relative z-10 bg-[rgba(0,0,0,0.5)] border border-[var(--vault-outline)] p-4 md:p-6 text-center backdrop-blur-sm group-hover:border-[var(--heist-red)] transition-all duration-500 group-hover:scale-95 group-hover:opacity-30">
+              <div className="font-shlop text-6xl md:text-7xl text-[var(--mint-gold)] tracking-widest drop-shadow-[0_0_25px_var(--mint-gold)] animate-pulse" style={{ textShadow: "0 0 20px var(--mint-gold)" }}>
+                +10
+              </div>
+              <div className="font-mono text-sm text-[var(--text-secondary)] uppercase tracking-[0.2em] mt-1">
+                Extra Bonus Points
+              </div>
+            </div>
+          </div>
+
+          {/* BONUS MILESTONE MODAL */}
+          {showBonusInfo && (
+            <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
+              {/* Overlay */}
+              <div 
+                className="fixed inset-0 bg-[var(--vault-black)]/98 backdrop-blur-3xl cursor-pointer animate-in fade-in duration-300"
+                onClick={() => setShowBonusInfo(false)}
+              ></div>
+              
+              {/* Modal Content */}
+              <div className="relative bg-[var(--vault-black)] text-[var(--text-primary)] p-8 md:p-12 border border-[var(--heist-red)] shadow-[0_0_50px_rgba(193,18,31,0.5)] rounded-lg w-full max-w-5xl my-auto z-10 max-h-[90vh] overflow-y-auto group animate-in zoom-in-95 fade-in duration-300">
+                {/* Close Button */}
+                <button 
+                  onClick={() => setShowBonusInfo(false)}
+                  className="absolute top-4 right-4 text-[var(--text-secondary)] hover:text-[var(--heist-red)] transition-colors z-50 bg-[var(--vault-charcoal)] p-2 rounded-full border border-[var(--vault-outline)] hover:border-[var(--heist-red)] shadow-lg"
+                >
+                  <X size={24} />
+                </button>
+              {/* Background watermark */}
+              <div className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-[0.05] mix-blend-luminosity pointer-events-none" style={{ backgroundImage: "url('/Money heist (3).jpeg')" }}></div>
+              <div className="absolute top-0 right-0 w-96 h-96 bg-[var(--heist-red)] opacity-10 blur-[100px] rounded-full z-0 pointer-events-none"></div>
+
+              {/* Dossier Header */}
+              <div className="border-b border-[var(--vault-outline)] pb-4 mb-8 text-center relative z-10 flex flex-col items-center">
+                <h2 className="font-shlop text-5xl md:text-7xl uppercase tracking-widest text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">TOP SECRET INTEL</h2>
+                <div className="bg-[var(--heist-red)] text-white font-mono text-xs font-bold px-4 py-1 uppercase tracking-[0.3em] mt-4 shadow-[0_0_10px_var(--heist-red-glow)] animate-pulse">
+                  CLASSIFIED // PROFESSOR'S EYES ONLY
+                </div>
+              </div>
+              
+              <h3 className="font-display text-4xl md:text-5xl uppercase tracking-wide mb-8 text-[var(--heist-red)] drop-shadow-[0_0_10px_rgba(193,18,31,0.5)] relative z-10">
+                Introducing the Bonus Milestone <span className="text-[var(--mint-gold)] drop-shadow-[0_0_15px_rgba(212,175,55,0.8)]">🏆</span>
+              </h3>
+              
+              <div className="grid md:grid-cols-2 gap-10 font-mono text-sm md:text-base leading-relaxed text-justify relative z-10 text-[var(--text-secondary)]">
+                <div>
+                  <p className="mb-6">
+                    <span className="font-display text-6xl float-left mr-4 leading-[0.8] text-white">F</span>or the first time ever, there is more than one way to earn "Bonus Points" in the Arcade Facilitator program and this time we want to make sure that you actually step away with some <span className="text-white font-bold">industry-ready skills</span> after completing this and even <span className="bg-[var(--heist-red)] text-white px-2 py-0.5 font-bold shadow-[0_0_10px_rgba(193,18,31,0.5)]">create your FIRST AI Agent.</span>
+                  </p>
+                  <p className="mb-6">
+                    See the information below to learn about the "Bonus Milestone's" eligibility criteria and the steps required to complete the milestone to earn an <span className="text-[var(--mint-gold)] font-bold tracking-wider drop-shadow-[0_0_5px_rgba(212,175,55,0.8)]">EXTRA 10 Bonus points.</span>
+                  </p>
+                </div>
+                
+                <div className="space-y-6">
+                  <div className="bg-[rgba(193,18,31,0.05)] p-5 border-l-4 border-[var(--heist-red)] shadow-[inset_0_0_20px_rgba(193,18,31,0.05)] backdrop-blur-sm border-t border-r border-b border-[var(--vault-outline)]">
+                    <span className="font-bold text-[var(--heist-red-bright)] uppercase text-lg tracking-wider block mb-2">Pro-Tip</span> 
+                    If you do everything right, <span className="text-white font-bold">you can complete the Bonus Milestone in just ONE day.</span> So get started!
+                  </div>
+                  
+                  <div className="bg-[rgba(212,175,55,0.05)] p-5 border-l-4 border-[var(--mint-gold)] shadow-[inset_0_0_20px_rgba(212,175,55,0.05)] backdrop-blur-sm border-t border-r border-b border-[var(--vault-outline)]">
+                    <span className="font-bold text-[var(--mint-gold)] uppercase text-lg tracking-wider block mb-2">Recommendation</span> 
+                    It is advised that you <span className="text-white font-bold underline decoration-[var(--heist-red)] decoration-2 underline-offset-4">DO NOT</span> complete any steps in the Bonus Milestone before you successfully enrol in the program and receive your official enrolment email.
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex items-center my-12 relative z-10">
+                <div className="flex-1 border-t border-[var(--vault-outline)]"></div>
+                <div className="mx-6 font-display text-4xl text-[var(--heist-red)] tracking-widest drop-shadow-[0_0_10px_rgba(193,18,31,0.5)]">***</div>
+                <div className="flex-1 border-t border-[var(--vault-outline)]"></div>
+              </div>
+
+              <div className="relative z-10">
+                <h3 className="font-display text-3xl md:text-4xl uppercase tracking-wide mb-6 text-[var(--mint-gold)] drop-shadow-[0_0_10px_rgba(212,175,55,0.5)]">Eligibility Criteria</h3>
+                <p className="font-mono text-[var(--text-secondary)] leading-relaxed mb-8 max-w-4xl">
+                  We want to make sure that you have the necessary cloud and AI skills before you get started with creating your first AI agent, and thus the following eligibility criteria is <span className="text-white font-bold underline decoration-4 decoration-[var(--heist-red)] underline-offset-4 bg-[rgba(193,18,31,0.2)] px-1">REQUIRED</span> before you are eligible to participate in the <span className="text-white font-bold">Bonus Milestone</span>.
+                </p>
+                
+                <div className="bg-[var(--vault-charcoal)] border border-[var(--heist-red)] p-4 text-center mb-10 shadow-[0_0_15px_rgba(193,18,31,0.2)] relative overflow-hidden">
+                  <div className="absolute inset-0 bg-[var(--heist-red)] opacity-5 animate-pulse"></div>
+                  <p className="font-display text-xl tracking-widest text-white uppercase relative z-10">
+                    Please read the eligibility terms below CAREFULLY, complete if anything is pending and then proceed.
+                  </p>
+                </div>
+
+                <ul className="space-y-6 font-mono text-sm md:text-base text-[var(--text-secondary)]">
+                  <li className="flex flex-col md:flex-row gap-4 items-start group">
+                    <div className="font-shlop text-5xl md:text-6xl text-[var(--vault-outline)] group-hover:text-[var(--heist-red)] transition-colors duration-300 drop-shadow-[0_0_10px_rgba(193,18,31,0)] group-hover:drop-shadow-[0_0_15px_rgba(193,18,31,0.8)] leading-none pt-2">01</div>
+                    <div className="bg-[rgba(255,255,255,0.03)] p-5 border border-[var(--vault-outline)] group-hover:border-[var(--heist-red)] transition-colors duration-300 w-full rounded-tr-xl rounded-bl-xl">
+                      <span className="text-white font-bold uppercase tracking-wider block mb-1">Criteria 1:</span> You need to be <span className="text-white font-bold">an active enrolled user</span> in the Arcade Facilitator 2026 cohort. Users who are not enrolled are not eligible to participate.
+                    </div>
+                  </li>
+                  
+                  <li className="flex flex-col md:flex-row gap-4 items-start group">
+                    <div className="font-shlop text-5xl md:text-6xl text-[var(--vault-outline)] group-hover:text-[var(--mint-gold)] transition-colors duration-300 drop-shadow-[0_0_10px_rgba(212,175,55,0)] group-hover:drop-shadow-[0_0_15px_rgba(212,175,55,0.8)] leading-none pt-2">02</div>
+                    <div className="bg-[rgba(255,255,255,0.03)] p-5 border border-[var(--vault-outline)] group-hover:border-[var(--mint-gold)] transition-colors duration-300 w-full rounded-tr-xl rounded-bl-xl">
+                      <span className="text-white font-bold uppercase tracking-wider block mb-1">Criteria 2:</span> You must have signed up for the <a href="#" className="text-[var(--mint-gold)] hover:text-white hover:underline underline-offset-4 transition-colors font-bold drop-shadow-[0_0_5px_rgba(212,175,55,0.5)]">GEAR program</a> while enrolling and have <span className="text-white font-bold">earned the GEAR badge</span> on your Google Developer profile. If you have not already done so, then please go to the <a href="#" className="text-[var(--mint-gold)] hover:text-white hover:underline underline-offset-4 transition-colors font-bold drop-shadow-[0_0_5px_rgba(212,175,55,0.5)]">following link</a> and use <a href="#" className="text-[var(--mint-gold)] hover:text-white hover:underline underline-offset-4 transition-colors font-bold drop-shadow-[0_0_5px_rgba(212,175,55,0.5)]">these instructions</a> to sign up and earn the badge.
+                    </div>
+                  </li>
+                  
+                  <li className="flex flex-col md:flex-row gap-4 items-start group">
+                    <div className="font-shlop text-5xl md:text-6xl text-[var(--vault-outline)] group-hover:text-[var(--heist-red)] transition-colors duration-300 drop-shadow-[0_0_10px_rgba(193,18,31,0)] group-hover:drop-shadow-[0_0_15px_rgba(193,18,31,0.8)] leading-none pt-2">03</div>
+                    <div className="bg-[rgba(255,255,255,0.03)] p-5 border border-[var(--vault-outline)] group-hover:border-[var(--heist-red)] transition-colors duration-300 w-full rounded-tr-xl rounded-bl-xl">
+                      <span className="text-white font-bold uppercase tracking-wider block mb-1">Criteria 3:</span> You should have <span className="text-white font-bold">earned at least Milestone #1</span> in the facilitator program to become eligible to participate. If you haven't earned it yet, then please go to the <a href="#" className="text-[var(--heist-red-bright)] hover:text-white hover:underline underline-offset-4 transition-colors font-bold drop-shadow-[0_0_5px_rgba(193,18,31,0.8)]">points system section</a> and see how to earn it.
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              </div>
+            </div>
+          )}
 
           <div className="milestone-grid grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {milestones.map((stage) => (

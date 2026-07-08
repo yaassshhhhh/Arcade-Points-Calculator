@@ -3,32 +3,26 @@
 import { useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-import { Crosshair, Box, Play, Library, Cloud, Lock, Database, MessageCircle, Terminal, Clock, Shield, Cpu, Code, Globe, Layers, Zap } from "lucide-react";
+import { motion } from "framer-motion";
+import { Crosshair, Box, Play, Library, Cloud, Lock, Database, MessageCircle, Terminal, Clock, Shield, Cpu, Code, Globe, Layers, Zap, ScanLine } from "lucide-react";
 import HeaderNav from "@/components/HeaderNav";
+import MaskIcon from "@/components/MaskIcon";
+
+// Framer motion variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1 }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100 } }
+};
 
 export default function ResourcesPage() {
-  const container = useRef(null);
-
-  useGSAP(
-    () => {
-      // Setup entrance animations
-      gsap.fromTo(
-        ".game-card",
-        { y: 50, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          stagger: 0.1,
-          duration: 0.8,
-          ease: "power3.out",
-        }
-      );
-    },
-    { scope: container }
-  );
-
   const games = [
     {
       title: "The Arcade Basecamp",
@@ -126,39 +120,6 @@ export default function ResourcesPage() {
     }
   ];
 
-  const categories = [
-    {
-      title: "Active Game Codes",
-      icon: <Terminal size={24} color="var(--br-orange)" />,
-      items: [
-        { name: "Arcade Certification Zone", code: "1q-cert-133", status: "Active" },
-        { name: "Trivia: March 2024", code: "1q-trivia-98", status: "Active" },
-        { name: "Level 1: AI & ML", code: "1q-level1-45", status: "Active" },
-        { name: "Level 2: Data Engineering", code: "1q-level2-76", status: "Active" }
-      ]
-    },
-    {
-      title: "Upcoming Games",
-      icon: <Clock size={24} color="var(--br-green)" />,
-      items: [
-        { name: "Level 3: Cloud Architecture", code: "TBA", status: "Starts April 1" },
-        { name: "Trivia: April 2024", code: "TBA", status: "Starts April 1" },
-        { name: "Special: Earth Day", code: "TBA", status: "Starts April 20" }
-      ]
-    }
-  ];
-
-  const skillPaths = [
-    { name: "Cloud Architecture", icon: <Cloud size={32} color="#4285F4" />, color: "#4285F4" },
-    { name: "Data Engineering", icon: <Database size={32} color="#EA4335" />, color: "#EA4335" },
-    { name: "Machine Learning", icon: <Cpu size={32} color="#FBBC05" />, color: "#FBBC05" },
-    { name: "Security", icon: <Shield size={32} color="#34A853" />, color: "#34A853" },
-    { name: "Serverless", icon: <Zap size={32} color="#4285F4" />, color: "#4285F4" },
-    { name: "Networking", icon: <Globe size={32} color="#EA4335" />, color: "#EA4335" },
-    { name: "DevOps", icon: <Layers size={32} color="#FBBC05" />, color: "#FBBC05" },
-    { name: "App Development", icon: <Code size={32} color="#34A853" />, color: "#34A853" },
-  ];
-
   const communities = [
     {
       title: "Join Arcade Telegram Group",
@@ -184,363 +145,207 @@ export default function ResourcesPage() {
   ];
 
   return (
-    <main ref={container} className="bg-[var(--vault-black)] text-[var(--text-primary)] min-h-screen pb-20">
-      <HeaderNav />
+    <main className="bg-[var(--vault-black)] text-[var(--text-primary)] min-h-screen pb-20 relative overflow-hidden">
+      
+      {/* Background Image */}
+      <div 
+        className="fixed inset-0 z-0 bg-cover bg-center opacity-20 pointer-events-none mix-blend-luminosity" 
+        style={{ backgroundImage: 'url("/faq-bg.jpg")' }}
+      ></div>
+      
+      {/* Red Glowing Overlays */}
+      <div className="fixed top-[-10%] left-[-10%] w-[40vw] h-[40vw] bg-[var(--heist-red)] blur-[120px] opacity-10 rounded-full pointer-events-none z-0"></div>
+      <div className="fixed bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] bg-[var(--heist-red-dark)] blur-[150px] opacity-10 rounded-full pointer-events-none z-0"></div>
 
-      {/* ── Content ─────────────────────────────────────────────────────── */}
-      <div className="max-w-6xl mx-auto px-6 py-12" style={{ marginTop: "80px" }}>
-        <div style={{ textAlign: "center", marginBottom: "3rem" }}>
-          <h1
-            style={{
-              fontFamily: "'Rajdhani', sans-serif",
-              fontSize: "3rem",
-              fontWeight: 700,
-              letterSpacing: "0.05em",
-              color: "var(--br-text)",
-              marginBottom: "1rem"
-            }}
+      <div className="relative z-10">
+        <HeaderNav />
+
+        {/* ── Content ─────────────────────────────────────────────────────── */}
+        <div className="max-w-6xl mx-auto px-6 py-12" style={{ marginTop: "80px" }}>
+          <motion.div 
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16 relative"
           >
-            CURRENT ARCADE <span style={{ color: "var(--br-orange)" }}>RESOURCES</span>
-          </h1>
-          <p
-            style={{
-              fontFamily: "'Share Tech Mono', monospace",
-              color: "var(--br-muted)",
-              maxWidth: "600px",
-              margin: "0 auto",
-              fontSize: "1.1rem"
-            }}
-          >
-            Access the latest live games on Google Cloud Skills Boost. Copy the access codes below to join the games and earn points!
-          </p>
-        </div>
+            <div className="font-mono text-sm text-[var(--heist-red)] tracking-[0.3em] uppercase mb-4 animate-pulse flex items-center justify-center gap-2">
+              <Shield size={16} className="text-[var(--heist-red)]" />
+              INTEL REPOSITORY
+            </div>
+            <h1 className="font-shlop text-5xl md:text-7xl tracking-[0.05em] mb-4 text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.15)] uppercase">
+              CURRENT ARCADE RESOURCES
+            </h1>
+            <p className="font-mono text-[var(--text-muted)] max-w-2xl mx-auto uppercase tracking-widest text-xs md:text-sm">
+              Access the latest live games on Google Cloud Skills Boost. Copy the access codes below to join the games and earn points!
+            </p>
+          </motion.div>
 
-        <div style={{ marginBottom: "4rem" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "1rem", borderBottom: "1px solid rgba(255,255,255,0.1)", paddingBottom: "1rem", marginBottom: "2rem" }}>
-            <h2 style={{
-              fontFamily: "'Rajdhani', sans-serif",
-              fontSize: "2rem",
-              fontWeight: 600,
-              color: "var(--br-text)",
-              margin: 0
-            }}>
-              CURRENT MONTH GAMES
-            </h2>
-            <span style={{ background: "var(--br-orange)", color: "#000", padding: "2px 10px", borderRadius: "12px", fontSize: "0.8rem", fontWeight: "bold", fontFamily: "'Rajdhani', sans-serif" }}>LIVE</span>
-          </div>
+          {/* GAMES SECTION */}
+          <div className="mb-16">
+            <div className="flex items-center gap-4 border-b border-[var(--vault-outline)] pb-4 mb-8">
+              <h2 className="font-display text-3xl md:text-4xl tracking-widest text-white uppercase m-0">
+                CURRENT MONTH GAMES
+              </h2>
+              <span className="bg-[var(--heist-red)] text-white px-3 py-1 text-xs font-mono font-bold tracking-widest rounded-sm animate-pulse">LIVE</span>
+            </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {games.map((game, i) => (
-            <a
-              key={i}
-              href={game.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="game-card block"
-              style={{
-                textDecoration: "none",
-                background: "rgba(255, 255, 255, 0.03)",
-                border: "1px solid rgba(255, 255, 255, 0.08)",
-                borderRadius: "12px",
-                padding: "2rem",
-                position: "relative",
-                overflow: "hidden",
-                backdropFilter: "blur(10px)",
-                transition: "transform 0.3s, background 0.3s, border-color 0.3s",
-                cursor: "pointer"
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "translateY(-5px)";
-                e.currentTarget.style.background = "rgba(255, 255, 255, 0.05)";
-                e.currentTarget.style.borderColor = game.color;
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.background = "rgba(255, 255, 255, 0.03)";
-                e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.08)";
-              }}
+            <motion.div 
+              variants={containerVariants}
+              initial="hidden"
+              animate="show"
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
             >
-              <div
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  width: "100%",
-                  height: "4px",
-                  background: game.color,
-                  opacity: 0.8
-                }}
-              />
-              <div style={{ display: "flex", flexDirection: "column", gap: "1rem", marginBottom: "1.5rem" }}>
-                {game.image ? (
-                  <div style={{ width: "100%", height: "200px", position: "relative", borderRadius: "8px", overflow: "hidden" }}>
-                    <Image src={game.image} alt={game.title} fill style={{ objectFit: "cover" }} />
-                  </div>
-                ) : (
-                  <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-                    <div
-                      style={{
-                        padding: "12px",
-                        background: "rgba(255, 255, 255, 0.05)",
-                        borderRadius: "8px",
-                      }}
-                    >
-                      {game.icon}
-                    </div>
-                  </div>
-                )}
-                <h3
-                  style={{
-                    fontFamily: "'Rajdhani', sans-serif",
-                    fontSize: "1.5rem",
-                    fontWeight: 600,
-                    color: "var(--br-text)"
-                  }}
-                >
-                  {game.title}
-                </h3>
-              </div>
-
-              <div
-                style={{
-                  background: "rgba(0, 0, 0, 0.4)",
-                  padding: "1rem",
-                  borderRadius: "8px",
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "0.5rem"
-                }}
-              >
-                <span
-                  style={{
-                    fontFamily: "'Share Tech Mono', monospace",
-                    fontSize: "0.85rem",
-                    color: "var(--br-muted)",
-                    textTransform: "uppercase"
-                  }}
-                >
-                  Access Code
-                </span>
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                  <span
-                    style={{
-                      fontFamily: "'Share Tech Mono', monospace",
-                      fontSize: "1.2rem",
-                      color: game.color,
-                      fontWeight: "bold"
-                    }}
-                  >
-                    {game.code}
-                  </span>
-                  <button
-                    onClick={(e) => {
-                      e.preventDefault();
-                      navigator.clipboard.writeText(game.code);
-                      alert("Code copied to clipboard!");
-                    }}
-                    style={{
-                      background: "transparent",
-                      border: "1px solid rgba(255, 255, 255, 0.2)",
-                      color: "var(--br-text)",
-                      padding: "4px 10px",
-                      borderRadius: "4px",
-                      fontSize: "0.8rem",
-                      fontFamily: "'Rajdhani', sans-serif",
-                      cursor: "pointer",
-                      transition: "background 0.2s"
-                    }}
-                    onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(255, 255, 255, 0.1)" }}
-                    onMouseLeave={(e) => { e.currentTarget.style.background = "transparent" }}
-                  >
-                    COPY
-                  </button>
-                </div>
-              </div>
-            </a>
-          ))}
-          </div>
-        </div>
-
-        <div style={{ marginBottom: "4rem" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "1rem", borderBottom: "1px solid rgba(255,255,255,0.1)", paddingBottom: "1rem", marginBottom: "2rem" }}>
-            <h2 style={{
-              fontFamily: "'Rajdhani', sans-serif",
-              fontSize: "2rem",
-              fontWeight: 600,
-              color: "var(--br-text)",
-              margin: 0
-            }}>
-              GUIDES & TUTORIALS
-            </h2>
-            <span style={{ background: "#FF0000", color: "#FFF", padding: "2px 10px", borderRadius: "12px", fontSize: "0.8rem", fontWeight: "bold", fontFamily: "'Rajdhani', sans-serif" }}>YOUTUBE</span>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {videos.map((video, i) => (
-              <a
+            {games.map((game, i) => (
+              <motion.a
                 key={i}
-                href={video.url}
+                variants={itemVariants}
+                href={game.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="game-card block"
-                style={{
-                  textDecoration: "none",
-                  background: "rgba(255, 255, 255, 0.03)",
-                  border: "1px solid rgba(255, 255, 255, 0.08)",
-                  borderRadius: "12px",
-                  padding: "2rem",
-                  position: "relative",
-                  overflow: "hidden",
-                  backdropFilter: "blur(10px)",
-                  transition: "transform 0.3s, background 0.3s, border-color 0.3s",
-                  cursor: "pointer"
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = "translateY(-5px)";
-                  e.currentTarget.style.background = "rgba(255, 255, 255, 0.05)";
-                  e.currentTarget.style.borderColor = "#FF0000";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.background = "rgba(255, 255, 255, 0.03)";
-                  e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.08)";
-                }}
+                className="block bg-[var(--vault-charcoal)] border border-[var(--vault-outline)] hover:border-[var(--heist-red)] transition-colors duration-300 relative group overflow-hidden rounded-tl-[4rem] rounded-br-[4rem] rounded-tr-xl rounded-bl-xl shadow-[0_0_20px_rgba(0,0,0,0.5)]"
               >
-                <div
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    width: "100%",
-                    height: "4px",
-                    background: "#FF0000",
-                    opacity: 0.8
-                  }}
-                />
-                <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-                  <div style={{ width: "100%", height: "200px", position: "relative", borderRadius: "8px", overflow: "hidden" }}>
-                    <Image unoptimized src={`https://img.youtube.com/vi/${video.videoId}/maxresdefault.jpg`} alt={video.title} fill style={{ objectFit: "cover" }} />
-                    <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", background: "rgba(0,0,0,0.6)", borderRadius: "50%", padding: "1rem", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                       <Play size={32} color="#FFF" />
-                    </div>
-                    {video.isLatest && (
-                      <div style={{ position: "absolute", bottom: "10px", right: "10px", background: "linear-gradient(90deg, #FF0000, #ff4d4d)", color: "#FFF", padding: "4px 12px", borderRadius: "20px", fontSize: "0.75rem", fontWeight: "bold", fontFamily: "'Rajdhani', sans-serif", letterSpacing: "1px", boxShadow: "0 4px 6px rgba(0,0,0,0.3)", zIndex: 10, display: "flex", alignItems: "center", gap: "6px" }}>
-                        <span style={{ width: "6px", height: "6px", background: "#FFF", borderRadius: "50%", display: "inline-block", boxShadow: "0 0 8px #FFF", animation: "zone-pulse 2s ease-in-out infinite" }}></span> LATEST
-                      </div>
-                    )}
-                  </div>
-                  <h3
-                    style={{
-                      fontFamily: "'Rajdhani', sans-serif",
-                      fontSize: "1.2rem",
-                      fontWeight: 600,
-                      color: "var(--br-text)",
-                      lineHeight: "1.3"
-                    }}
-                  >
-                    {video.title}
-                  </h3>
-                </div>
-              </a>
-            ))}
-          </div>
-        </div>
+                {/* Professor Background */}
+                <div 
+                  className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-[0.05] pointer-events-none group-hover:opacity-[0.15] transition-opacity duration-500" 
+                  style={{ backgroundImage: 'url("/professor1.png")' }}
+                ></div>
 
-        <div style={{ marginBottom: "4rem" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "1rem", borderBottom: "1px solid rgba(255,255,255,0.1)", paddingBottom: "1rem", marginBottom: "2rem" }}>
-            <h2 style={{
-              fontFamily: "'Rajdhani', sans-serif",
-              fontSize: "2rem",
-              fontWeight: 600,
-              color: "var(--br-text)",
-              margin: 0
-            }}>
-              COMMUNITIES
-            </h2>
-            <span style={{ background: "#25D366", color: "#FFF", padding: "2px 10px", borderRadius: "12px", fontSize: "0.8rem", fontWeight: "bold", fontFamily: "'Rajdhani', sans-serif" }}>SOCIAL</span>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {communities.map((comm, i) => (
-              <a
-                key={i}
-                href={comm.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="game-card block"
-                style={{
-                  textDecoration: "none",
-                  background: "rgba(255, 255, 255, 0.03)",
-                  border: "1px solid rgba(255, 255, 255, 0.08)",
-                  borderRadius: "12px",
-                  padding: "2rem",
-                  position: "relative",
-                  overflow: "hidden",
-                  backdropFilter: "blur(10px)",
-                  transition: "transform 0.3s, background 0.3s, border-color 0.3s",
-                  cursor: "pointer",
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "1rem"
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = "translateY(-5px)";
-                  e.currentTarget.style.background = "rgba(255, 255, 255, 0.05)";
-                  e.currentTarget.style.borderColor = comm.color;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.background = "rgba(255, 255, 255, 0.03)";
-                  e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.08)";
-                }}
-              >
-                <div
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    width: "100%",
-                    height: "4px",
-                    background: comm.color,
-                    opacity: 0.8
-                  }}
-                />
+                {/* Left neon border */}
+                <div className="absolute left-0 top-0 bottom-0 w-1 bg-[var(--heist-red)] opacity-0 group-hover:opacity-100 transition-opacity z-10"></div>
                 
-                <div style={{ display: "flex", flexDirection: "column", gap: "1rem", width: "100%" }}>
-                  {comm.image ? (
-                    <div style={{ width: "100%", height: "200px", position: "relative", borderRadius: "8px", overflow: "hidden" }}>
-                      <Image src={comm.image} alt={comm.title} fill style={{ objectFit: "cover" }} />
+                <div className="relative z-10 p-6 h-full flex flex-col">
+                  {game.image ? (
+                    <div className="w-full h-48 relative rounded-xl overflow-hidden mb-6 border border-[var(--vault-outline)] group-hover:border-[var(--heist-red)]/50 transition-colors">
+                      <Image src={game.image} alt={game.title} fill style={{ objectFit: "cover" }} className="group-hover:scale-105 transition-transform duration-500" />
                     </div>
                   ) : (
-                    <div
-                      style={{
-                        padding: "16px",
-                        background: "rgba(255, 255, 255, 0.05)",
-                        borderRadius: "12px",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        alignSelf: "flex-start"
-                      }}
-                    >
-                      {comm.icon}
+                    <div className="mb-6 p-4 bg-black/40 rounded-xl inline-flex self-start border border-[var(--vault-outline)]">
+                      {game.icon}
                     </div>
                   )}
                   
-                  <h3
-                    style={{
-                      fontFamily: "'Rajdhani', sans-serif",
-                      fontSize: "1.5rem",
-                      fontWeight: 600,
-                      color: "var(--br-text)",
-                      lineHeight: "1.2"
-                    }}
-                  >
-                    {comm.title}
+                  <h3 className="font-display text-2xl tracking-widest text-white mb-6 uppercase group-hover:text-[var(--heist-red-bright)] transition-colors">
+                    {game.title}
                   </h3>
+
+                  <div className="mt-auto bg-black/60 p-4 rounded-lg border border-[var(--vault-outline)]">
+                    <span className="font-mono text-[10px] text-[var(--heist-red)] uppercase tracking-widest block mb-2">Access Code</span>
+                    <div className="flex items-center justify-between gap-4">
+                      <span className="font-mono text-sm md:text-base text-white tracking-wider truncate">
+                        {game.code}
+                      </span>
+                      <button
+                        onClick={(e) => {
+                          e.preventDefault();
+                          navigator.clipboard.writeText(game.code);
+                          alert("Code copied to clipboard!");
+                        }}
+                        className="bg-transparent border border-[var(--vault-outline)] text-white hover:bg-[var(--heist-red)] hover:border-[var(--heist-red)] px-3 py-1 rounded text-xs font-mono tracking-widest transition-colors flex-shrink-0"
+                      >
+                        COPY
+                      </button>
+                    </div>
+                  </div>
                 </div>
-              </a>
+              </motion.a>
             ))}
+            </motion.div>
+          </div>
+
+          {/* VIDEOS SECTION */}
+          <div className="mb-16">
+            <div className="flex items-center gap-4 border-b border-[var(--vault-outline)] pb-4 mb-8">
+              <h2 className="font-display text-3xl md:text-4xl tracking-widest text-white uppercase m-0">
+                GUIDES & TUTORIALS
+              </h2>
+              <span className="bg-[#FF0000] text-white px-3 py-1 text-xs font-mono font-bold tracking-widest rounded-sm">YOUTUBE</span>
+            </div>
+
+            <motion.div 
+              variants={containerVariants}
+              initial="hidden"
+              animate="show"
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            >
+              {videos.map((video, i) => (
+                <motion.a
+                  key={i}
+                  variants={itemVariants}
+                  href={video.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block bg-[var(--vault-charcoal)] border border-[var(--vault-outline)] hover:border-[var(--heist-red)] transition-colors duration-300 relative group overflow-hidden rounded-tl-[3rem] rounded-br-[3rem] rounded-tr-lg rounded-bl-lg shadow-[0_0_20px_rgba(0,0,0,0.5)]"
+                >
+                  {/* Left neon border */}
+                  <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#FF0000] opacity-0 group-hover:opacity-100 transition-opacity z-10"></div>
+                  
+                  <div className="relative z-10 p-6 flex flex-col gap-4">
+                    <div className="w-full h-40 relative rounded-lg overflow-hidden border border-[var(--vault-outline)] group-hover:border-[#FF0000]/50 transition-colors">
+                      <Image unoptimized src={`https://img.youtube.com/vi/${video.videoId}/maxresdefault.jpg`} alt={video.title} fill style={{ objectFit: "cover" }} className="group-hover:scale-105 transition-transform duration-500" />
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/40 group-hover:bg-transparent transition-colors">
+                         <div className="bg-[#FF0000] rounded-full p-3 shadow-lg transform group-hover:scale-110 transition-transform">
+                           <Play size={24} color="#FFF" fill="#FFF" />
+                         </div>
+                      </div>
+                      {video.isLatest && (
+                        <div className="absolute bottom-2 right-2 bg-[#FF0000] text-white px-2 py-1 text-[10px] font-mono font-bold tracking-widest flex items-center gap-1 shadow-md">
+                          <span className="w-1.5 h-1.5 bg-white rounded-full animate-ping"></span> LATEST
+                        </div>
+                      )}
+                    </div>
+                    <h3 className="font-display text-lg tracking-wider text-white uppercase group-hover:text-[#FF0000] transition-colors leading-snug">
+                      {video.title}
+                    </h3>
+                  </div>
+                </motion.a>
+              ))}
+            </motion.div>
+          </div>
+
+          {/* COMMUNITIES SECTION */}
+          <div className="mb-16">
+            <div className="flex items-center gap-4 border-b border-[var(--vault-outline)] pb-4 mb-8">
+              <h2 className="font-display text-3xl md:text-4xl tracking-widest text-white uppercase m-0">
+                COMMUNITIES
+              </h2>
+              <span className="bg-[#25D366] text-white px-3 py-1 text-xs font-mono font-bold tracking-widest rounded-sm">SOCIAL</span>
+            </div>
+
+            <motion.div 
+              variants={containerVariants}
+              initial="hidden"
+              animate="show"
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            >
+              {communities.map((comm, i) => (
+                <motion.a
+                  key={i}
+                  variants={itemVariants}
+                  href={comm.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block bg-[var(--vault-charcoal)] border border-[var(--vault-outline)] hover:border-[var(--heist-red)] transition-colors duration-300 relative group overflow-hidden rounded-tl-3xl rounded-br-3xl shadow-[0_0_20px_rgba(0,0,0,0.5)] p-6"
+                >
+                  <div className="absolute left-0 top-0 bottom-0 w-1 opacity-0 group-hover:opacity-100 transition-opacity z-10" style={{ backgroundColor: comm.color }}></div>
+                  
+                  <div className="relative z-10 flex flex-col gap-4 w-full">
+                    {comm.image ? (
+                      <div className="w-full h-40 relative rounded-lg overflow-hidden border border-[var(--vault-outline)] group-hover:border-white/20 transition-colors">
+                        <Image src={comm.image} alt={comm.title} fill style={{ objectFit: "cover" }} className="group-hover:scale-105 transition-transform duration-500" />
+                      </div>
+                    ) : (
+                      <div className="p-4 bg-black/40 rounded-lg inline-flex self-start border border-[var(--vault-outline)]">
+                        {comm.icon}
+                      </div>
+                    )}
+                    
+                    <h3 className="font-display text-xl tracking-wider text-white uppercase transition-colors" style={{ color: comm.color }}>
+                      {comm.title}
+                    </h3>
+                  </div>
+                </motion.a>
+              ))}
+            </motion.div>
           </div>
         </div>
       </div>

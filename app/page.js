@@ -64,7 +64,7 @@ export default function Home() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.9, duration: 0.5 }}
                 onSubmit={handleSubmit}
-                className="max-w-2xl mx-auto bg-[var(--vault-charcoal)] p-10 relative overflow-hidden group border border-[var(--heist-red)] hover:border-[var(--heist-red-bright)] transition-colors rounded-tl-[4rem] rounded-br-[4rem] rounded-tr-lg rounded-bl-lg shadow-[0_0_50px_rgba(193,18,31,0.3)]"
+                className="max-w-2xl mx-auto bg-[var(--vault-charcoal)] p-6 md:p-10 relative overflow-hidden group border border-[var(--heist-red)] hover:border-[var(--heist-red-bright)] transition-colors rounded-tl-[4rem] rounded-br-[4rem] rounded-tr-lg rounded-bl-lg shadow-[0_0_50px_rgba(193,18,31,0.3)]"
               >
                 {/* Cyberpunk details inside form */}
                 <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--heist-red)] blur-[60px] opacity-20 group-hover:opacity-40 transition-opacity pointer-events-none"></div>
