@@ -5,7 +5,7 @@ import { Volume2, VolumeX } from "lucide-react";
 
 export default function GlobalAudioPlayer() {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [volume, setVolume] = useState(0.5);
+  const volume = 0.3; // Default decent volume
   const audioRef = useRef(null);
 
   const toggleAudio = () => {
@@ -32,14 +32,6 @@ export default function GlobalAudioPlayer() {
     }
   };
 
-  const handleVolumeChange = (e) => {
-    const newVolume = parseFloat(e.target.value);
-    setVolume(newVolume);
-    if (audioRef.current) {
-      audioRef.current.volume = newVolume;
-    }
-  };
-
   useEffect(() => {
     if (!audioRef.current) {
       audioRef.current = new Audio("/Bela Chaw Chaw.mp3");
@@ -47,13 +39,14 @@ export default function GlobalAudioPlayer() {
       audioRef.current.volume = volume;
     }
     
+    // Attempt autoplay
     const playPromise = audioRef.current.play();
     if (playPromise !== undefined) {
       playPromise.then(() => {
         setIsPlaying(true);
       }).catch((error) => {
         setIsPlaying(false);
-        console.log("Autoplay blocked by browser.");
+        console.log("Autoplay blocked by browser. User must click to play.");
       });
     }
 
@@ -67,48 +60,12 @@ export default function GlobalAudioPlayer() {
   }, []);
 
   return (
-    <div style={{
-      position: "fixed",
-      bottom: "80px",
-      right: "20px",
-      zIndex: 9999,
-      display: "flex",
-      alignItems: "center",
-      gap: "10px",
-      background: "rgba(13, 17, 23, 0.8)",
-      backdropFilter: "blur(5px)",
-      border: "1px solid var(--br-red)",
-      padding: "8px 12px",
-      borderRadius: "8px",
-      boxShadow: "0 4px 12px rgba(0,0,0,0.5)"
-    }}>
-      <button 
-        onClick={toggleAudio}
-        style={{ 
-          background: "transparent", 
-          border: "none", 
-          color: "var(--br-red)", 
-          cursor: "pointer",
-          display: "flex",
-          alignItems: "center",
-          gap: "5px",
-          fontFamily: "'Share Tech Mono', monospace",
-          fontSize: "0.75rem",
-          textTransform: "uppercase"
-        }}
-      >
-        {isPlaying ? <Volume2 size={16} /> : <VolumeX size={16} />}
-      </button>
-      
-      <input 
-        type="range"
-        min="0"
-        max="1"
-        step="0.01"
-        value={volume}
-        onChange={handleVolumeChange}
-        style={{ width: "60px", accentColor: "var(--br-red)" }}
-      />
-    </div>
+    <button 
+      onClick={toggleAudio}
+      className="fixed bottom-5 left-5 z-[9999] flex items-center justify-center w-12 h-12 rounded-full bg-[var(--vault-charcoal)] border border-[var(--heist-red)] text-[var(--mint-gold)] shadow-[0_0_15px_rgba(193,18,31,0.5)] hover:bg-[var(--heist-red-dark)] hover:shadow-[0_0_20px_var(--heist-red-bright)] hover:scale-110 transition-all duration-300"
+      aria-label="Toggle Audio"
+    >
+      {isPlaying ? <Volume2 size={24} /> : <VolumeX size={24} />}
+    </button>
   );
 }
