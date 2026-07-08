@@ -1,8 +1,24 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
-import { Crosshair, Radio, Search, Award, Clock, BookOpen, Shield } from "lucide-react";
+import { motion } from "framer-motion";
+import { Search, Clock, BookOpen, Shield, ScanLine } from "lucide-react";
+import HeaderNav from "@/components/HeaderNav";
+import MaskIcon from "@/components/MaskIcon";
+
+// Framer motion variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1 }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 100 } }
+};
 
 export default function SkillBadgesPage() {
   const [badges, setBadges] = useState([]);
@@ -28,261 +44,195 @@ export default function SkillBadgesPage() {
   );
 
   return (
-    <main>
-      {/* ── Navbar ────────────────────────────────────────────────────────── */}
-      <nav className="br-nav">
-        <Link href="/" className="flex items-center gap-2">
-          <Crosshair size={22} color="var(--br-orange)" />
-          <span
-            style={{
-              fontFamily: "'Rajdhani', sans-serif",
-              fontWeight: 700,
-              fontSize: "1.4rem",
-              letterSpacing: "0.12em",
-            }}
+    <main className="bg-[var(--vault-black)] text-[var(--text-primary)] min-h-screen pb-20 relative overflow-hidden">
+      
+      {/* Background Image */}
+      <div 
+        className="fixed inset-0 z-0 bg-cover bg-center opacity-20 pointer-events-none mix-blend-luminosity" 
+        style={{ backgroundImage: 'url("/heist-badges-bg.jpeg")' }}
+      ></div>
+      
+      {/* Red Glowing Overlays */}
+      <div className="fixed top-[-10%] left-[-10%] w-[40vw] h-[40vw] bg-[var(--heist-red)] blur-[120px] opacity-10 rounded-full pointer-events-none z-0"></div>
+      <div className="fixed bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] bg-[var(--heist-red-dark)] blur-[150px] opacity-10 rounded-full pointer-events-none z-0"></div>
+
+      <div className="relative z-10">
+        <HeaderNav />
+
+        {/* ── Page Content ────────────────────────────────────────────────── */}
+        <div className="container mx-auto px-6 max-w-6xl mt-12 mb-12">
+          
+          <motion.header 
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16 relative"
           >
-            <span style={{ color: "#4285F4" }}>G</span><span style={{ color: "#EA4335" }}>o</span><span style={{ color: "#FBBC05" }}>o</span><span style={{ color: "#4285F4" }}>g</span><span style={{ color: "#34A853" }}>l</span><span style={{ color: "#EA4335" }}>e</span> Cloud
-          </span>
-        </Link>
-
-        <div
-          className="hidden md:flex items-center gap-6"
-          style={{ fontFamily: "'Rajdhani', sans-serif", fontSize: "0.875rem", letterSpacing: "0.1em" }}
-        >
-          {[
-            { label: "Calculator", href: "/", active: false },
-            { label: "Dashboard", href: "/dashboard", active: false },
-            { label: "Leaderboard", href: "/leaderboard", active: false },
-            { label: "Facilitator", href: "/facilitator", active: false, highlight: true },
-            { label: "Skill Badges", href: "/skill-badges", active: true },
-            { label: "Resources", href: "/resources", active: false },
-            { label: "Swags", href: "/swags", active: false },
-          ].map((link) => (
-            <Link
-              key={link.label}
-              href={link.href}
-              style={{
-                color: link.active ? "var(--br-orange)" : link.highlight ? "#FFD700" : "var(--br-muted)",
-                textTransform: "uppercase",
-                transition: "color 0.2s, text-shadow 0.2s",
-                borderBottom: link.active ? "1px solid var(--br-orange)" : link.highlight ? "1px solid #FFD700" : "none",
-                paddingBottom: "2px",
-                display: "flex",
-                alignItems: "center",
-                gap: "5px",
-              }}
-              onMouseEnter={(e) => { if (!link.active) e.currentTarget.style.color = "var(--br-text)"; }}
-              onMouseLeave={(e) => { if (!link.active) e.currentTarget.style.color = link.highlight ? "#FFD700" : "var(--br-muted)"; }}
-            >
-              {link.highlight && <span style={{ fontSize: "0.7rem" }}>⚡</span>}
-              {link.label}
-            </Link>
-          ))}
-        </div>
-
-        <div className="flex items-center gap-2">
-          <Radio size={14} color="var(--br-green)" />
-          <span
-            style={{
-              fontFamily: "'Share Tech Mono', monospace",
-              fontSize: "0.75rem",
-              color: "var(--br-green)",
-              letterSpacing: "0.1em",
-            }}
-          >
-            SYSTEM ONLINE
-          </span>
-        </div>
-      </nav>
-
-      {/* ── Page Content ────────────────────────────────────────────────── */}
-      <div className="container" style={{ paddingTop: "6rem", paddingBottom: "4rem", maxWidth: "1200px", margin: "0 auto", padding: "6rem 2rem 4rem" }}>
-        
-        <header className="mb-8" style={{ animation: "fade-slide 0.5s ease-out" }}>
-          <h1 
-            style={{ 
-              fontFamily: "'Share Tech Mono', monospace",
-              fontSize: "2.5rem",
-              color: "var(--br-text)",
-              marginBottom: "1rem",
-              textTransform: "uppercase",
-              display: "flex",
-              alignItems: "center",
-              gap: "1rem"
-            }}
-          >
-            <Shield size={36} color="var(--br-orange)" />
-            Skill Badges Archive
-          </h1>
-          <p style={{ color: "var(--br-muted)", fontSize: "1.1rem", maxWidth: "600px", lineHeight: 1.6 }}>
-            Browse and track the complete collection of Google Cloud skill badges. Secure your credentials and prove your technical expertise in the field.
-          </p>
-        </header>
-
-        {/* Search Bar */}
-        <div className="br-panel p-4 mb-8 flex items-center gap-3" style={{ animation: "fade-slide 0.6s ease-out both" }}>
-          <Search size={20} color="var(--br-muted)" />
-          <input 
-            type="text" 
-            placeholder="Search skill badges by name or description..." 
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            style={{
-              background: "transparent",
-              border: "none",
-              color: "var(--br-text)",
-              width: "100%",
-              outline: "none",
-              fontFamily: "'Rajdhani', sans-serif",
-              fontSize: "1.1rem"
-            }}
-          />
-        </div>
-
-        {/* Loading State */}
-        {loading && (
-          <div className="text-center py-12" style={{ color: "var(--br-muted)", fontFamily: "'Share Tech Mono', monospace" }}>
-            <div className="inline-block animate-spin mb-4">
-              <Radio size={32} color="var(--br-orange)" />
+            <div className="font-mono text-sm text-[var(--heist-red)] tracking-[0.3em] uppercase mb-4 animate-pulse flex items-center justify-center gap-2">
+              <Shield size={16} className="text-[var(--heist-red)]" />
+              CONFIDENTIAL ARCHIVE
             </div>
-            <div>FETCHING DATA FROM SECURE SERVERS...</div>
-          </div>
-        )}
+            <h1 className="font-shlop text-6xl md:text-8xl tracking-[0.05em] mb-4 text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.15)] uppercase">
+              SKILL BADGES ARCHIVE
+            </h1>
+            <p className="font-mono text-[var(--text-muted)] max-w-2xl mx-auto uppercase tracking-widest text-xs md:text-sm">
+              Browse and track the complete collection of Google Cloud skill badges. Secure your credentials and prove your technical expertise in the field.
+            </p>
+          </motion.header>
 
-        {/* Badge Grid */}
-        {!loading && (
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))", gap: "1.5rem" }}>
-            {filteredBadges.map((badge, idx) => (
-              <div 
-                key={idx} 
-                className="br-panel flex flex-col h-full"
-                style={{ 
-                  animation: `fade-slide 0.5s ease-out ${idx * 50}ms both`,
-                  transition: "transform 0.2s, box-shadow 0.2s",
-                  cursor: "pointer",
-                  padding: 0,
-                  overflow: "hidden"
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = "translateY(-4px)";
-                  e.currentTarget.style.boxShadow = "0 8px 30px rgba(255, 107, 0, 0.15)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = "none";
-                  e.currentTarget.style.boxShadow = "none";
-                }}
-                onClick={() => window.open(`https://www.skills.google${badge.path}`, "_blank")}
-              >
-                {/* Certificate "Image" Container */}
-                <div style={{ 
-                  background: "rgba(255,255,255,0.02)", 
-                  padding: "1.5rem", 
-                  display: "flex", 
-                  justifyContent: "center",
-                  borderBottom: "1px solid rgba(255,255,255,0.05)",
-                  position: "relative"
-                }}>
-                  {/* The Certificate Card */}
-                  <div style={{ 
-                    background: "#ffffff", 
-                    position: "relative", 
-                    padding: "1.5rem 1rem 2rem", 
-                    textAlign: "center",
-                    width: "100%",
-                    maxWidth: "260px",
-                    boxShadow: "0 10px 30px rgba(0,0,0,0.5)",
-                    // Creative shape: chamfered corners
-                    clipPath: "polygon(12px 0, calc(100% - 12px) 0, 100% 12px, 100% calc(100% - 12px), calc(100% - 12px) 100%, 12px 100%, 0 calc(100% - 12px), 0 12px)"
-                  }}>
-                    {/* Google Cloud Logo */}
-                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '1rem' }}>
-                      <span style={{ fontSize: '1.1rem', fontWeight: 500, fontFamily: "'Product Sans', sans-serif" }}>
-                        <span style={{ color: '#4285F4' }}>G</span>
-                        <span style={{ color: '#EA4335' }}>o</span>
-                        <span style={{ color: '#FBBC05' }}>o</span>
-                        <span style={{ color: '#4285F4' }}>g</span>
-                        <span style={{ color: '#34A853' }}>l</span>
-                        <span style={{ color: '#EA4335' }}>e</span>
-                        <span style={{ color: '#5f6368', marginLeft: '6px' }}>Cloud</span>
-                      </span>
-                    </div>
-                    
-                    {/* Title */}
-                    <h3 style={{ 
-                      fontFamily: "'Product Sans', 'Roboto', sans-serif", 
-                      fontSize: "1.1rem", 
-                      color: "#5f6368", 
-                      fontWeight: 500, 
-                      marginBottom: "0.75rem", 
-                      lineHeight: 1.3 
-                    }}>
-                      {badge.title}
-                    </h3>
-                  
-                    {/* Subtitle */}
-                    <p style={{ fontSize: "0.85rem", color: "#5f6368", marginBottom: "1rem" }}>
-                      Google Cloud Skills Boost
-                    </p>
-                    
-                    {/* Divider */}
-                    <div style={{ width: "30px", height: "1px", background: "#dadce0", margin: "0 auto 1rem auto" }} />
-                    
-                    {/* Level */}
-                    <div style={{ fontSize: "0.65rem", color: "#5f6368", textTransform: "uppercase", letterSpacing: "0.15em", fontWeight: 500 }}>
-                      SKILL BADGE • {badge.level || "INTERMEDIATE"}
-                    </div>
-                    
-                    {/* Bottom Colored Strip */}
-                    <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "6px", display: "flex" }}>
-                      <div style={{ flex: 1, background: "#EA4335" }} />
-                      <div style={{ flex: 1, background: "#4285F4" }} />
-                      <div style={{ flex: 1, background: "#34A853" }} />
-                      <div style={{ flex: 1, background: "#FBBC05" }} />
-                    </div>
-                  </div>
-                </div>
+          {/* Search Bar */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mb-12 max-w-3xl mx-auto relative group"
+          >
+            <div className="absolute inset-0 bg-[var(--heist-red)] blur-[15px] opacity-0 group-focus-within:opacity-20 transition-opacity duration-300"></div>
+            <div className="relative flex items-center gap-4 bg-[var(--vault-charcoal)] border-2 border-[var(--vault-outline)] p-4 shadow-[0_0_20px_rgba(0,0,0,0.5)] focus-within:border-[var(--heist-red)] transition-all">
+              <Search size={24} className="text-[var(--text-muted)] group-focus-within:text-[var(--heist-red)] transition-colors" />
+              <input 
+                type="text" 
+                placeholder="Search skill badges by name or description..." 
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="w-full bg-transparent border-none outline-none font-mono text-white text-sm md:text-base uppercase tracking-widest placeholder-[var(--text-muted)]"
+              />
+              <span className="text-[var(--heist-red)] text-[10px] font-mono animate-pulse absolute right-4 top-2">REC</span>
+            </div>
+          </motion.div>
 
-                {/* Dark Theme Description Area */}
-                <div style={{ padding: "1.5rem", display: "flex", flexDirection: "column", flexGrow: 1 }}>
-                  <p 
-                    style={{ 
-                      color: "var(--br-muted)", 
-                      fontSize: "0.9rem", 
-                      lineHeight: 1.5,
-                      marginBottom: "1.5rem",
-                      flexGrow: 1,
-                      display: "-webkit-box",
-                      WebkitLineClamp: 3,
-                      WebkitBoxOrient: "vertical",
-                      overflow: "hidden"
-                    }}
-                  >
-                    {badge.description}
-                  </p>
-
-                  <div className="flex gap-4 mt-auto pt-4" style={{ borderTop: "1px solid rgba(255, 255, 255, 0.05)" }}>
-                    <div className="flex items-center gap-1.5" style={{ color: "var(--br-muted)", fontSize: "0.8rem", fontFamily: "'Rajdhani', sans-serif", textTransform: "uppercase" }}>
-                      <Clock size={14} />
-                      {badge.duration}
-                    </div>
-                    <div className="flex items-center gap-1.5" style={{ color: "var(--br-muted)", fontSize: "0.8rem", fontFamily: "'Rajdhani', sans-serif", textTransform: "uppercase" }}>
-                      <BookOpen size={14} />
-                      {badge.type}
-                    </div>
-                  </div>
-                </div>
+          {/* Loading State */}
+          {loading && (
+            <div className="py-20 flex flex-col items-center justify-center gap-4">
+              <MaskIcon size={64} loading={true} className="text-[var(--heist-red)]" />
+              <div className="font-mono text-[var(--heist-red)] uppercase tracking-widest text-sm animate-pulse flex items-center gap-2">
+                <ScanLine size={16} />
+                FETCHING DATA FROM SECURE SERVERS...
               </div>
-            ))}
-          </div>
-        )}
+            </div>
+          )}
 
-        {!loading && filteredBadges.length === 0 && (
-          <div className="text-center py-12 br-panel" style={{ color: "var(--br-muted)", marginTop: "2rem" }}>
-            <Radio size={48} color="rgba(255, 107, 0, 0.3)" style={{ margin: "0 auto 1rem" }} />
-            <p style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: "1.2rem" }}>NO BADGES FOUND MATCHING YOUR CRITERIA</p>
-          </div>
-        )}
+          {/* Badge Grid */}
+          {!loading && (
+            <motion.div 
+              variants={containerVariants}
+              initial="hidden"
+              animate="show"
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            >
+              {filteredBadges.map((badge, idx) => (
+                <motion.div 
+                  key={idx} 
+                  variants={itemVariants}
+                  className="bg-[var(--vault-charcoal)] border border-[var(--vault-outline)] flex flex-col h-full overflow-hidden group cursor-pointer hover:border-[var(--heist-red)] transition-colors duration-300 relative rounded-tl-[4rem] rounded-br-[4rem] rounded-tr-xl rounded-bl-xl shadow-[0_0_20px_rgba(0,0,0,0.5)]"
+                  onClick={() => window.open(`https://www.skills.google${badge.path}`, "_blank")}
+                >
+                  {/* Professor Background for the ENTIRE CARD */}
+                  <div 
+                    className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-[0.08] pointer-events-none group-hover:opacity-[0.15] transition-opacity duration-500" 
+                    style={{ backgroundImage: 'url("/professor1.png")' }}
+                  ></div>
 
+                  {/* Hover effect glow line */}
+                  <div className="absolute left-0 top-0 bottom-0 w-1 bg-[var(--heist-red)] opacity-0 group-hover:opacity-100 transition-opacity z-10"></div>
+                  
+                  {/* Certificate "Image" Container */}
+                  <div className="bg-black/40 p-6 flex justify-center border-b border-[var(--vault-outline)] relative overflow-hidden group-hover:bg-[var(--heist-red)]/10 transition-colors duration-500 z-10">
+                    {/* The Certificate Card */}
+                    <div style={{ 
+                      backgroundImage: 'linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url("/Mafer.jpeg")',
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                      position: "relative", 
+                      padding: "1.5rem 1rem 2rem", 
+                      textAlign: "center",
+                      width: "100%",
+                      maxWidth: "260px",
+                      boxShadow: "0 10px 30px rgba(0,0,0,0.5)",
+                      clipPath: "polygon(30px 0, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%, 0 30px)"
+                    }} className="transform group-hover:scale-105 transition-transform duration-500 relative z-10 border-l-4 border-[var(--heist-red)]">
+                      {/* Google Cloud Logo */}
+                      <div className="flex justify-center items-center mb-4">
+                        <span style={{ fontSize: '1.1rem', fontWeight: 500, fontFamily: "'Product Sans', sans-serif" }}>
+                          <span style={{ color: '#4285F4' }}>G</span>
+                          <span style={{ color: '#EA4335' }}>o</span>
+                          <span style={{ color: '#FBBC05' }}>o</span>
+                          <span style={{ color: '#4285F4' }}>g</span>
+                          <span style={{ color: '#34A853' }}>l</span>
+                          <span style={{ color: '#EA4335' }}>e</span>
+                          <span style={{ color: '#F5F5DC', marginLeft: '6px' }}>Cloud</span>
+                        </span>
+                      </div>
+                      
+                      {/* Title */}
+                      <h3 style={{ 
+                        fontFamily: "'Product Sans', 'Roboto', sans-serif", 
+                        fontSize: "1.1rem", 
+                        color: "#F5F5DC", 
+                        fontWeight: 500, 
+                        marginBottom: "0.75rem", 
+                        lineHeight: 1.3 
+                      }}>
+                        {badge.title}
+                      </h3>
+                    
+                      {/* Subtitle */}
+                      <p style={{ fontSize: "0.85rem", color: "#F5F5DC", marginBottom: "1rem", opacity: 0.8 }}>
+                        Google Cloud Skills Boost
+                      </p>
+                      
+                      {/* Divider */}
+                      <div style={{ width: "30px", height: "1px", background: "rgba(245, 245, 220, 0.3)", margin: "0 auto 1rem auto" }} />
+                      
+                      {/* Level */}
+                      <div style={{ fontSize: "0.65rem", color: "#F5F5DC", textTransform: "uppercase", letterSpacing: "0.15em", fontWeight: 500, opacity: 0.9 }}>
+                        SKILL BADGE • {badge.level || "INTERMEDIATE"}
+                      </div>
+                      
+                      {/* Bottom Colored Strip */}
+                      <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "6px", display: "flex" }}>
+                        <div style={{ flex: 1, background: "#EA4335" }} />
+                        <div style={{ flex: 1, background: "#4285F4" }} />
+                        <div style={{ flex: 1, background: "#34A853" }} />
+                        <div style={{ flex: 1, background: "#FBBC05" }} />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Dark Theme Description Area */}
+                  <div className="p-6 flex flex-col flex-grow relative">
+                    <p className="text-[var(--text-secondary)] font-mono text-xs md:text-sm leading-relaxed mb-6 flex-grow line-clamp-3 uppercase tracking-wider group-hover:text-white transition-colors duration-300">
+                      {badge.description}
+                    </p>
+
+                    <div className="flex gap-6 mt-auto pt-4 border-t border-[var(--vault-outline)]">
+                      <div className="flex items-center gap-2 text-[var(--heist-red)] font-mono text-[10px] md:text-xs uppercase tracking-widest">
+                        <Clock size={14} />
+                        {badge.duration}
+                      </div>
+                      <div className="flex items-center gap-2 text-[var(--text-muted)] font-mono text-[10px] md:text-xs uppercase tracking-widest">
+                        <BookOpen size={14} />
+                        {badge.type}
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          )}
+
+          {!loading && filteredBadges.length === 0 && (
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="text-center py-20 bg-[var(--vault-charcoal)] border border-[var(--vault-outline)] mt-8"
+            >
+              <MaskIcon size={64} className="text-[var(--vault-outline)] mx-auto mb-6 opacity-50" />
+              <p className="font-mono text-lg text-[var(--text-muted)] uppercase tracking-widest">NO BADGES FOUND MATCHING YOUR CRITERIA</p>
+            </motion.div>
+          )}
+
+        </div>
       </div>
     </main>
   );

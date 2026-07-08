@@ -6,6 +6,7 @@ import Image from "next/image";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { Crosshair, Package, Gift, Award, Star, Zap } from "lucide-react";
+import HeaderNav from "@/components/HeaderNav";
 
 export default function SwagsPage() {
   const container = useRef(null);
@@ -34,8 +35,8 @@ export default function SwagsPage() {
       title: "Swags Coming Soon...",
       points: "120",
       tier: "Legend",
-      icon: <Package size={32} color="#F5BB11" />,
-      color: "#F5BB11",
+      icon: <Package size={32} color="var(--mint-gold)" />,
+      color: "var(--mint-gold)",
       image: "https://images.unsplash.com/photo-1614729939124-032f0b56c9ce?auto=format&fit=crop&q=80&w=800",
       description: "Please stay tuned for the official drop!"
     },
@@ -43,8 +44,8 @@ export default function SwagsPage() {
       title: "Swags Coming Soon...",
       points: "95",
       tier: "Champion",
-      icon: <Star size={32} color="#4285F4" />,
-      color: "#4285F4",
+      icon: <Star size={32} color="var(--mint-gold)" />,
+      color: "var(--mint-gold)",
       image: "https://images.unsplash.com/photo-1614729939124-032f0b56c9ce?auto=format&fit=crop&q=80&w=800",
       description: "Please stay tuned for the official drop!"
     },
@@ -52,8 +53,8 @@ export default function SwagsPage() {
       title: "Swags Coming Soon...",
       points: "75",
       tier: "Ranger",
-      icon: <Gift size={32} color="#EA4335" />,
-      color: "#EA4335",
+      icon: <Gift size={32} color="var(--mint-gold)" />,
+      color: "var(--mint-gold)",
       image: "https://images.unsplash.com/photo-1614729939124-032f0b56c9ce?auto=format&fit=crop&q=80&w=800",
       description: "Please stay tuned for the official drop!"
     },
@@ -61,8 +62,8 @@ export default function SwagsPage() {
       title: "Swags Coming Soon...",
       points: "50",
       tier: "Trooper",
-      icon: <Award size={32} color="#34A853" />,
-      color: "#34A853",
+      icon: <Award size={32} color="var(--mint-gold)" />,
+      color: "var(--mint-gold)",
       image: "https://images.unsplash.com/photo-1614729939124-032f0b56c9ce?auto=format&fit=crop&q=80&w=800",
       description: "Please stay tuned for the official drop!"
     }
@@ -96,52 +97,8 @@ export default function SwagsPage() {
   ];
 
   return (
-    <main ref={container} className="br-bg" style={{ minHeight: "100vh" }}>
-      {/* ── Navbar ──────────────────────────────────────────────────────── */}
-      <nav className="br-nav">
-        <Link href="/" className="flex items-center gap-2">
-          <Crosshair size={20} color="var(--br-orange)" />
-          <span
-            style={{
-              fontFamily: "'Rajdhani', sans-serif",
-              fontWeight: 700,
-              fontSize: "1.3rem",
-              letterSpacing: "0.12em",
-            }}
-          >
-            <span style={{ color: "#4285F4" }}>G</span><span style={{ color: "#EA4335" }}>o</span><span style={{ color: "#FBBC05" }}>o</span><span style={{ color: "#4285F4" }}>g</span><span style={{ color: "#34A853" }}>l</span><span style={{ color: "#EA4335" }}>e</span> Cloud
-          </span>
-        </Link>
-
-        <div
-          className="hidden md:flex items-center gap-5"
-          style={{ fontFamily: "'Rajdhani', sans-serif", fontSize: "0.85rem", letterSpacing: "0.1em" }}
-        >
-          {[
-            { label: "Calculator", href: "/", active: false },
-            { label: "Dashboard", href: "/dashboard", active: false },
-            { label: "Leaderboard", href: "/leaderboard", active: false },
-            { label: "Facilitator", href: "/facilitator", active: false, highlight: true },
-            { label: "Skill Badges", href: "/skill-badges", active: false },
-            { label: "Resources", href: "/resources", active: false },
-            { label: "Swags", href: "/swags", active: true },
-          ].map((link) => (
-            <Link
-              key={link.label}
-              href={link.href}
-              style={{
-                color: link.active ? "var(--br-orange)" : link.highlight ? "#FFD700" : "var(--br-muted)",
-                textTransform: "uppercase",
-                transition: "color 0.2s",
-                borderBottom: link.active ? "1px solid var(--br-orange)" : link.highlight ? "1px solid #FFD700" : "none",
-                paddingBottom: "2px",
-              }}
-            >
-              {link.label}
-            </Link>
-          ))}
-        </div>
-      </nav>
+    <main ref={container} className="bg-[var(--vault-black)] text-[var(--text-primary)] min-h-screen">
+      <HeaderNav />
 
       {/* ── Header ──────────────────────────────────────────────────────── */}
       <header

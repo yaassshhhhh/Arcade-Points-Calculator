@@ -1,277 +1,189 @@
 "use client";
 
-import { useEffect, useState } from 'react';
-import Link from 'next/link';
-import { Target, Trophy, Medal, Award, User, RefreshCw, AlertTriangle } from 'lucide-react';
-import styles from '../page.module.css';
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import Image from "next/image";
+import HeaderNav from "@/components/HeaderNav";
+
+// Framer motion variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1 }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, x: -30 },
+  show: { opacity: 1, x: 0, transition: { type: "spring", stiffness: 100 } }
+};
 
 export default function Leaderboard() {
-  const [leaderboard, setLeaderboard] = useState([]);
+  const [leaders, setLeaders] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
-
-  const fetchLeaderboard = async () => {
-    setLoading(true);
-    setError('');
-    try {
-      const res = await fetch('/api/leaderboard');
-      const result = await res.json();
-      if (res.ok && result.data) {
-        setLeaderboard(result.data);
-      } else {
-        setError(result.error || 'Failed to load rankings');
-      }
-    } catch (err) {
-      setError('Network error');
-    } finally {
-      setLoading(false);
-    }
-  };
+  const [error, setError] = useState(null);
 
   useEffect(() => {
+    async function fetchLeaderboard() {
+      try {
+        const res = await fetch("/api/leaderboard", { cache: "no-store" });
+        if (!res.ok) throw new Error("Failed to fetch leaderboard");
+        const json = await res.json();
+        const apiData = json.data || [];
+        
+        setLeaders(apiData);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    }
     fetchLeaderboard();
   }, []);
 
   return (
-    <div className={styles.container}>
-      {/* Background elements */}
-      <div className="grid-overlay" />
-      <div className="glow-orb" style={{ top: "10%", left: "5%", background: "radial-gradient(circle, rgba(255,107,0,0.15) 0%, transparent 70%)" }} />
-      <div className="glow-orb" style={{ bottom: "10%", right: "5%", background: "radial-gradient(circle, rgba(124,181,24,0.15) 0%, transparent 70%)" }} />
+    <main className="min-h-screen bg-[var(--vault-black)] text-[var(--text-primary)] pb-20 relative overflow-hidden">
+      {/* Background Image */}
+      <div 
+        className="fixed inset-0 z-0 bg-cover bg-center opacity-15 pointer-events-none mix-blend-luminosity" 
+        style={{ backgroundImage: 'url("/faq-bg.jpg")' }}
+      ></div>
+      
+      {/* Red Glowing Overlays */}
+      <div className="fixed top-[-10%] left-[-10%] w-[40vw] h-[40vw] bg-[var(--heist-red)] blur-[120px] opacity-10 rounded-full pointer-events-none z-0"></div>
+      <div className="fixed bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] bg-[var(--heist-red-dark)] blur-[150px] opacity-10 rounded-full pointer-events-none z-0"></div>
+      
+      <div className="relative z-10">
+        <HeaderNav />
 
-      <main style={{ width: "100%", maxWidth: "1200px", margin: "0 auto", padding: "4rem 2rem", minHeight: "100vh", display: "flex", flexDirection: "column" }}>
-        {/* Header / Nav */}
-        <header style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginBottom: "3rem",
-          width: "100%",
-          animation: "fade-slide 0.8s ease-out both",
-        }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-            <div style={{
-              width: "40px",
-              height: "40px",
-              background: "var(--br-dark)",
-              border: "1px solid var(--br-orange)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              boxShadow: "0 0 15px rgba(255,107,0,0.2)",
-            }}>
-              <Target size={20} color="var(--br-orange)" />
+        <div className="container mx-auto px-6 max-w-5xl mt-12">
+          <motion.div 
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16 relative"
+          >
+            <div className="font-mono text-sm text-[var(--heist-red)] tracking-[0.3em] uppercase mb-4 animate-pulse flex items-center justify-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-[var(--heist-red)] shadow-[0_0_8px_var(--heist-red)]"></span>
+              AUTHORIZED PERSONNEL ONLY
             </div>
-            <div>
-              <h1 style={{
-                fontFamily: "'Rajdhani', sans-serif",
-                fontSize: "1.8rem",
-                fontWeight: 700,
-                textTransform: "uppercase",
-                letterSpacing: "0.1em",
-                lineHeight: 1,
-              }}>
-                Arcade Points<span style={{ color: "var(--br-orange)" }}>_</span>
-              </h1>
-              <div style={{
-                fontFamily: "'Share Tech Mono', monospace",
-                fontSize: "0.8rem",
-                color: "var(--br-muted)",
-                letterSpacing: "0.2em",
-              }}>
-                GLOBAL RANKINGS
-              </div>
+            <h1 className="font-shlop text-7xl md:text-9xl tracking-widest mb-4 text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.15)] uppercase">
+              THE GANG
+            </h1>
+            <p className="font-mono text-[var(--text-muted)] max-w-xl mx-auto uppercase tracking-widest text-xs md:text-sm">
+              Top operatives currently breaching the Google Cloud vaults.<br/> Ranked by total gold secured.
+            </p>
+          </motion.div>
+
+          <div className="bg-[var(--vault-charcoal)] border border-[var(--vault-outline)] rounded-tl-[4rem] rounded-br-[4rem] rounded-tr-xl rounded-bl-xl shadow-[0_0_40px_rgba(0,0,0,0.8)] overflow-hidden relative">
+            {/* Tokyo Panel Background */}
+            <div 
+              className="absolute inset-0 z-0 bg-cover bg-center opacity-10 pointer-events-none mix-blend-luminosity" 
+              style={{ backgroundImage: 'url("/tokyo.jpeg")' }}
+            ></div>
+
+            {/* Subtle inner top red glow */}
+            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[var(--heist-red)] to-transparent opacity-30 z-10"></div>
+
+            {/* Header Row */}
+            <div className="relative z-10 grid grid-cols-12 gap-4 px-8 py-6 border-b border-[var(--vault-outline)] bg-black/40 text-[var(--text-secondary)] font-mono text-xs md:text-sm uppercase tracking-[0.2em]">
+              <div className="col-span-2 md:col-span-1 text-center">Rank</div>
+              <div className="col-span-6 md:col-span-7">Operative Profile</div>
+              <div className="col-span-4 text-right">Vault Status</div>
             </div>
-          </div>
 
-          <nav style={{ display: "flex", gap: "1rem" }}>
-            {[
-              { label: "Calculator", href: "/", active: false },
-              { label: "Dashboard", href: "/dashboard", active: false },
-              { label: "Leaderboard", href: "/leaderboard", active: true },
-              { label: "Facilitator", href: "/facilitator", active: false, highlight: true },
-              { label: "Skill Badges", href: "/skill-badges", active: false },
-              { label: "Resources", href: "/resources", active: false },
-              { label: "Swags", href: "/swags", active: false },
-            ].map((link) => (
-              <Link
-                key={link.label}
-                href={link.href}
-                className={link.highlight ? "br-btn-primary" : "br-btn-secondary"}
-                style={link.active ? { borderBottom: "2px solid var(--br-orange)", background: "rgba(255,107,0,0.1)" } : {}}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
-        </header>
-
-        {/* Content */}
-        <section style={{ width: "100%", margin: "0 auto", animation: "fade-slide 0.8s ease-out 100ms both" }}>
-          
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "1.5rem" }}>
-            <div>
-              <h2 style={{
-                fontFamily: "'Rajdhani', sans-serif",
-                fontSize: "2.5rem",
-                fontWeight: 700,
-                textTransform: "uppercase",
-                letterSpacing: "0.05em",
-                color: "var(--br-light)",
-                display: "flex",
-                alignItems: "center",
-                gap: "0.75rem",
-              }}>
-                <Trophy color="var(--br-orange)" size={32} />
-                Top Players
-              </h2>
-              <p style={{ color: "var(--br-muted)", fontFamily: "'Share Tech Mono', monospace", marginTop: "0.5rem" }}>
-                Rankings are updated automatically when points are calculated.
-              </p>
-            </div>
-            
-            <button 
-              onClick={fetchLeaderboard}
-              disabled={loading}
-              className="br-btn-secondary" 
-              style={{ display: "flex", alignItems: "center", gap: "0.5rem", padding: "0.5rem 1rem" }}
-            >
-              <RefreshCw size={16} className={loading ? "spin" : ""} />
-              {loading ? "SYNCING..." : "REFRESH"}
-            </button>
-          </div>
-
-          <div className="br-panel" style={{ padding: 0, overflow: "hidden" }}>
-            {error ? (
-              <div style={{ padding: "4rem 2rem", textAlign: "center", color: "var(--br-orange)" }}>
-                <AlertTriangle size={48} style={{ margin: "0 auto 1rem", opacity: 0.8 }} />
-                <h3 style={{ fontFamily: "'Rajdhani', sans-serif", fontSize: "1.5rem", marginBottom: "0.5rem" }}>SYSTEM ERROR</h3>
-                <p style={{ fontFamily: "'Share Tech Mono', monospace" }}>{error}</p>
-              </div>
-            ) : leaderboard.length === 0 && !loading ? (
-              <div style={{ padding: "4rem 2rem", textAlign: "center", color: "var(--br-muted)" }}>
-                <User size={48} style={{ margin: "0 auto 1rem", opacity: 0.3 }} />
-                <h3 style={{ fontFamily: "'Rajdhani', sans-serif", fontSize: "1.5rem", marginBottom: "0.5rem", color: "var(--br-light)" }}>NO DATA FOUND</h3>
-                <p style={{ fontFamily: "'Share Tech Mono', monospace" }}>Be the first to calculate your points!</p>
-              </div>
-            ) : (
-              <div style={{ width: "100%", overflowX: "auto" }}>
-                <table style={{ width: "100%", borderCollapse: "collapse", minWidth: "600px" }}>
-                  <thead>
-                    <tr style={{ 
-                      borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
-                      background: "rgba(0, 0, 0, 0.2)",
-                    }}>
-                      <th style={{ padding: "1.25rem 1.5rem", textAlign: "left", fontFamily: "'Share Tech Mono', monospace", color: "var(--br-muted)", fontWeight: "normal", letterSpacing: "0.1em" }}>RANK</th>
-                      <th style={{ padding: "1.25rem 1.5rem", textAlign: "left", fontFamily: "'Share Tech Mono', monospace", color: "var(--br-muted)", fontWeight: "normal", letterSpacing: "0.1em" }}>PLAYER</th>
-                      <th style={{ padding: "1.25rem 1.5rem", textAlign: "right", fontFamily: "'Share Tech Mono', monospace", color: "var(--br-muted)", fontWeight: "normal", letterSpacing: "0.1em" }}>BADGES</th>
-                      <th style={{ padding: "1.25rem 1.5rem", textAlign: "right", fontFamily: "'Share Tech Mono', monospace", color: "var(--br-muted)", fontWeight: "normal", letterSpacing: "0.1em" }}>POINTS</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {leaderboard.map((user, idx) => {
-                      const rank = idx + 1;
-                      const isTop3 = rank <= 3;
-                      
-                      let rankColor = "var(--br-text)";
-                      let rankIcon = null;
-                      let bgStyle = {};
-                      
-                      if (rank === 1) {
-                        rankColor = "#FFD700"; // Gold
-                        rankIcon = <Medal size={20} color="#FFD700" />;
-                        bgStyle = { background: "linear-gradient(90deg, rgba(255, 215, 0, 0.1) 0%, transparent 50%)", borderLeft: "3px solid #FFD700" };
-                      } else if (rank === 2) {
-                        rankColor = "#C0C0C0"; // Silver
-                        rankIcon = <Medal size={20} color="#C0C0C0" />;
-                        bgStyle = { background: "linear-gradient(90deg, rgba(192, 192, 192, 0.1) 0%, transparent 50%)", borderLeft: "3px solid #C0C0C0" };
-                      } else if (rank === 3) {
-                        rankColor = "#CD7F32"; // Bronze
-                        rankIcon = <Medal size={20} color="#CD7F32" />;
-                        bgStyle = { background: "linear-gradient(90deg, rgba(205, 127, 50, 0.1) 0%, transparent 50%)", borderLeft: "3px solid #CD7F32" };
-                      } else {
-                        bgStyle = { borderLeft: "3px solid transparent" };
-                      }
-
-                      return (
-                        <tr 
-                          key={user.userName + idx}
-                          className="leaderboard-row"
-                          style={{
-                            borderBottom: idx === leaderboard.length - 1 ? "none" : "1px solid rgba(255, 255, 255, 0.05)",
-                            transition: "background 0.2s ease",
-                            animation: `fade-slide 0.5s ease-out ${150 + (idx * 50)}ms both`,
-                            ...bgStyle
-                          }}
-                        >
-                          <td style={{ padding: "1.25rem 1.5rem" }}>
-                            <div style={{ 
-                              display: "flex", 
-                              alignItems: "center", 
-                              gap: "0.5rem",
-                              fontFamily: "'Rajdhani', sans-serif",
-                              fontSize: isTop3 ? "1.5rem" : "1.25rem",
-                              fontWeight: 700,
-                              color: rankColor
-                            }}>
-                              <span style={{ minWidth: "30px" }}>#{rank}</span>
-                              {rankIcon}
-                            </div>
-                          </td>
-                          <td style={{ padding: "1.25rem 1.5rem" }}>
-                            <div style={{ 
-                              fontFamily: "'Rajdhani', sans-serif",
-                              fontSize: "1.25rem",
-                              fontWeight: 600,
-                              color: "var(--br-light)",
-                              textTransform: "uppercase",
-                              letterSpacing: "0.05em"
-                            }}>
-                              {user.userName}
-                            </div>
-                          </td>
-                          <td style={{ padding: "1.25rem 1.5rem", textAlign: "right" }}>
-                            <div style={{ 
-                              fontFamily: "'Share Tech Mono', monospace",
-                              color: "var(--br-muted)",
-                              fontSize: "1rem"
-                            }}>
-                              {user.badgeCount}
-                            </div>
-                          </td>
-                          <td style={{ padding: "1.25rem 1.5rem", textAlign: "right" }}>
-                            <div style={{ 
-                              fontFamily: "'Share Tech Mono', monospace",
-                              fontSize: isTop3 ? "1.5rem" : "1.25rem",
-                              fontWeight: 700,
-                              color: "var(--br-green)",
-                              textShadow: isTop3 ? "0 0 10px rgba(124,181,24,0.4)" : "none"
-                            }}>
-                              {Number.isInteger(user.points) ? user.points : user.points.toFixed(1)}
-                            </div>
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
+            {/* Loading State */}
+            {loading && (
+              <div className="relative z-10 p-20 flex flex-col items-center justify-center gap-4">
+                <div className="relative w-16 h-16 animate-pulse opacity-50">
+                  <Image src="/professor1.png" alt="Loading" fill className="object-contain" />
+                </div>
+                <span className="font-mono text-[var(--text-muted)] uppercase tracking-widest text-sm animate-pulse">Scanning Network...</span>
               </div>
             )}
-          </div>
-        </section>
-      </main>
 
-      <style jsx global>{`
-        .spin {
-          animation: spin 1s linear infinite;
-        }
-        @keyframes spin {
-          100% { transform: rotate(360deg); }
-        }
-        .leaderboard-row:hover {
-          background: rgba(255, 255, 255, 0.03) !important;
-        }
-      `}</style>
-    </div>
+            {/* Error State */}
+            {error && !loading && (
+              <div className="relative z-10 p-16 text-center">
+                <span className="text-[var(--heist-red)] font-display text-2xl tracking-widest block mb-2">SYSTEM BREACH FAILED</span>
+                <span className="text-[var(--text-secondary)] font-mono text-sm uppercase tracking-widest">[ ERROR: {error} ]</span>
+              </div>
+            )}
+
+            {/* Empty State */}
+            {!loading && !error && leaders.length === 0 && (
+              <div className="relative z-10 p-16 text-center text-[var(--text-muted)] font-mono uppercase tracking-[0.2em] flex flex-col items-center gap-4">
+                <div className="relative w-16 h-16 opacity-30">
+                  <Image src="/professor1.png" alt="Empty" fill className="object-contain grayscale" />
+                </div>
+                No gang assembled yet.<br/> Recruitment terminal is open.
+              </div>
+            )}
+
+            {/* Data Rows */}
+            {!loading && !error && leaders.length > 0 && (
+              <motion.div 
+                variants={containerVariants}
+                initial="hidden"
+                animate="show"
+                className="relative z-10 divide-y divide-[var(--vault-outline)]"
+              >
+                {leaders.map((user, index) => {
+                  const isTop1 = index === 0;
+                  const isTop3 = index < 3;
+                  
+                  let rankColor = "text-[var(--text-secondary)]";
+                  if (index === 0) rankColor = "text-yellow-400 drop-shadow-[0_0_10px_rgba(250,204,21,0.5)]";
+                  else if (index === 1) rankColor = "text-gray-300 drop-shadow-[0_0_8px_rgba(209,213,219,0.3)]";
+                  else if (index === 2) rankColor = "text-amber-600";
+
+                  return (
+                    <motion.div 
+                      key={index}
+                      variants={itemVariants}
+                      className={`grid grid-cols-12 gap-4 px-8 py-5 items-center hover:bg-[var(--heist-red)]/20 transition-colors group cursor-default relative overflow-hidden ${isTop1 ? 'bg-black/20' : ''}`}
+                    >
+                      {/* Hover effect glow line */}
+                      <div className="absolute left-0 top-0 bottom-0 w-1 bg-[var(--heist-red)] opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                      
+                      {/* Rank */}
+                      <div className={`col-span-2 md:col-span-1 text-center font-display text-3xl md:text-4xl ${rankColor}`}>
+                        {index + 1}
+                      </div>
+                      
+                      {/* Profile */}
+                      <div className="col-span-6 md:col-span-7 flex items-center gap-4 md:gap-6 pl-2">
+                        <div className="relative">
+                          <div className={`relative ${isTop1 ? 'w-12 h-12' : 'w-10 h-10'} rounded-full overflow-hidden bg-black/50 border border-[var(--vault-outline)] group-hover:border-[var(--heist-red)] transition-colors`}>
+                             <Image src="/professor1.png" alt="Avatar" fill className="object-cover p-1" />
+                          </div>
+                          {isTop1 && <div className="absolute -top-1 -right-1 w-3 h-3 bg-yellow-400 rounded-full animate-ping"></div>}
+                        </div>
+                        <div>
+                          <div className={`font-display tracking-[0.1em] uppercase ${isTop1 ? 'text-2xl md:text-3xl text-white' : 'text-xl text-[var(--text-primary)]'} group-hover:text-white transition-colors drop-shadow-md`}>
+                            {user.userName}
+                          </div>
+                        </div>
+                      </div>
+                      
+                      {/* Stats */}
+                      <div className="col-span-4 text-right">
+                        <div className="font-display text-2xl md:text-3xl text-white group-hover:text-[var(--heist-red-bright)] transition-colors drop-shadow-md">
+                          {user.points} <span className="text-sm font-mono text-[var(--text-secondary)]">PTS</span>
+                        </div>
+                        <div className="font-mono text-[10px] md:text-xs text-[var(--heist-red)] mt-1 uppercase tracking-widest drop-shadow-md">
+                          {user.badgeCount} BADGES EXTRACTED
+                        </div>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </motion.div>
+            )}
+          </div>
+        </div>
+      </div>
+    </main>
   );
 }

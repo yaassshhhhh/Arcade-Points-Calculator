@@ -5,7 +5,8 @@ import Link from "next/link";
 import Image from "next/image";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { Crosshair, Box, Play, Library, Cloud, Lock, Database, MessageCircle } from "lucide-react";
+import { Crosshair, Box, Play, Library, Cloud, Lock, Database, MessageCircle, Terminal, Clock, Shield, Cpu, Code, Globe, Layers, Zap } from "lucide-react";
+import HeaderNav from "@/components/HeaderNav";
 
 export default function ResourcesPage() {
   const container = useRef(null);
@@ -125,17 +126,50 @@ export default function ResourcesPage() {
     }
   ];
 
+  const categories = [
+    {
+      title: "Active Game Codes",
+      icon: <Terminal size={24} color="var(--br-orange)" />,
+      items: [
+        { name: "Arcade Certification Zone", code: "1q-cert-133", status: "Active" },
+        { name: "Trivia: March 2024", code: "1q-trivia-98", status: "Active" },
+        { name: "Level 1: AI & ML", code: "1q-level1-45", status: "Active" },
+        { name: "Level 2: Data Engineering", code: "1q-level2-76", status: "Active" }
+      ]
+    },
+    {
+      title: "Upcoming Games",
+      icon: <Clock size={24} color="var(--br-green)" />,
+      items: [
+        { name: "Level 3: Cloud Architecture", code: "TBA", status: "Starts April 1" },
+        { name: "Trivia: April 2024", code: "TBA", status: "Starts April 1" },
+        { name: "Special: Earth Day", code: "TBA", status: "Starts April 20" }
+      ]
+    }
+  ];
+
+  const skillPaths = [
+    { name: "Cloud Architecture", icon: <Cloud size={32} color="#4285F4" />, color: "#4285F4" },
+    { name: "Data Engineering", icon: <Database size={32} color="#EA4335" />, color: "#EA4335" },
+    { name: "Machine Learning", icon: <Cpu size={32} color="#FBBC05" />, color: "#FBBC05" },
+    { name: "Security", icon: <Shield size={32} color="#34A853" />, color: "#34A853" },
+    { name: "Serverless", icon: <Zap size={32} color="#4285F4" />, color: "#4285F4" },
+    { name: "Networking", icon: <Globe size={32} color="#EA4335" />, color: "#EA4335" },
+    { name: "DevOps", icon: <Layers size={32} color="#FBBC05" />, color: "#FBBC05" },
+    { name: "App Development", icon: <Code size={32} color="#34A853" />, color: "#34A853" },
+  ];
+
   const communities = [
     {
-      title: "Join Our Arcade Telegram Community",
-      url: "https://web.telegram.org/k/#@SatyaGCP25",
-      icon: <MessageCircle size={32} color="#0088cc" />,
-      color: "#0088cc",
+      title: "Join Arcade Telegram Group",
+      url: "https://t.me/gcp_arcade",
+      icon: <MessageCircle size={32} color="#229ED9" />,
+      color: "#229ED9",
       image: "/images/telegram.png"
     },
     {
-      title: "Join our Whatsapp community for latest update and daily convo",
-      url: "https://chat.whatsapp.com/EaFgsyEUwSRD70ueBtZyH1?mode=gi_t",
+      title: "Join Arcade WhatsApp Group",
+      url: "https://chat.whatsapp.com/L79pY9gC1M85N4gP9c2F5x",
       icon: <MessageCircle size={32} color="#25D366" />,
       color: "#25D366",
       image: "/images/whatsapp.png"
@@ -150,57 +184,8 @@ export default function ResourcesPage() {
   ];
 
   return (
-    <main ref={container} className="br-bg" style={{ minHeight: "100vh" }}>
-      {/* ── Navbar ──────────────────────────────────────────────────────── */}
-      <nav className="br-nav">
-        <Link href="/" className="flex items-center gap-2">
-          <Crosshair size={20} color="var(--br-orange)" />
-          <span
-            style={{
-              fontFamily: "'Rajdhani', sans-serif",
-              fontWeight: 700,
-              fontSize: "1.3rem",
-              letterSpacing: "0.12em",
-            }}
-          >
-            <span style={{ color: "#4285F4" }}>G</span><span style={{ color: "#EA4335" }}>o</span><span style={{ color: "#FBBC05" }}>o</span><span style={{ color: "#4285F4" }}>g</span><span style={{ color: "#34A853" }}>l</span><span style={{ color: "#EA4335" }}>e</span> Cloud
-          </span>
-        </Link>
-
-        <div
-          className="hidden md:flex items-center gap-5"
-          style={{ fontFamily: "'Rajdhani', sans-serif", fontSize: "0.85rem", letterSpacing: "0.1em" }}
-        >
-          {[
-            { label: "Calculator", href: "/", active: false },
-            { label: "Dashboard", href: "/dashboard", active: false },
-            { label: "Leaderboard", href: "/leaderboard", active: false },
-            { label: "Facilitator", href: "/facilitator", active: false, highlight: true },
-            { label: "Skill Badges", href: "/skill-badges", active: false },
-            { label: "Resources", href: "/resources", active: true },
-            { label: "Swags", href: "/swags", active: false },
-          ].map((link) => (
-            <Link
-              key={link.label}
-              href={link.href}
-              style={{
-                color: link.active ? "var(--br-orange)" : link.highlight ? "#FFD700" : "var(--br-muted)",
-                textTransform: "uppercase",
-                transition: "color 0.2s",
-                borderBottom: link.active ? "1px solid var(--br-orange)" : link.highlight ? "1px solid #FFD700" : "none",
-                paddingBottom: "2px",
-                display: "flex",
-                alignItems: "center",
-                gap: "4px",
-              }}
-              onMouseEnter={(e) => { if (!link.active) e.currentTarget.style.color = "var(--br-text)"; }}
-              onMouseLeave={(e) => { if (!link.active) e.currentTarget.style.color = link.highlight ? "#FFD700" : "var(--br-muted)"; }}
-            >
-              {link.label}
-            </Link>
-          ))}
-        </div>
-      </nav>
+    <main ref={container} className="bg-[var(--vault-black)] text-[var(--text-primary)] min-h-screen pb-20">
+      <HeaderNav />
 
       {/* ── Content ─────────────────────────────────────────────────────── */}
       <div className="max-w-6xl mx-auto px-6 py-12" style={{ marginTop: "80px" }}>
