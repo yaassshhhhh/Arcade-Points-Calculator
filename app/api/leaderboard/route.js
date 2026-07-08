@@ -9,9 +9,8 @@ export async function GET() {
   try {
     const leaderboard = await getLeaderboard();
     
-    // The top 50 logic is now handled in getLeaderboard directly,
-    // but we can slice again just in case, though it's redundant.
-    const topUsers = leaderboard.slice(0, 50);
+    // The top 15 logic is requested by the user
+    const topUsers = leaderboard.slice(0, 15);
     
     return NextResponse.json({ success: true, data: topUsers });
   } catch (error) {
