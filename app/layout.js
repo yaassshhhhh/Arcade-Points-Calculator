@@ -67,8 +67,8 @@ export default function RootLayout({ children }) {
         <GlobalAudioPlayer />
         <DashboardModal />
         {/* Main content */}
-        <div style={{ position: "relative", zIndex: 1, minHeight: "100vh", display: "flex", flexDirection: "column" }}>
-          <div style={{ flex: 1 }}>
+        <div suppressHydrationWarning style={{ position: "relative", zIndex: 1, minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+          <div suppressHydrationWarning style={{ flex: 1 }}>
             {children}
           </div>
           <footer style={{
