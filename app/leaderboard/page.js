@@ -23,6 +23,8 @@ export default function Leaderboard() {
   const [leaders, setLeaders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 15;
 
   useEffect(() => {
     async function fetchLeaderboard() {
@@ -123,34 +125,36 @@ export default function Leaderboard() {
 
             {/* Data Rows */}
             {!loading && !error && leaders.length > 0 && (
-              <motion.div 
-                variants={containerVariants}
-                initial="hidden"
-                animate="show"
-                className="relative z-10 divide-y divide-[var(--vault-outline)]"
-              >
-                {leaders.slice(0, 15).map((user, index) => {
-                  const isTop1 = index === 0;
-                  const isTop3 = index < 3;
-                  
-                  let rankColor = "text-[var(--text-secondary)]";
-                  if (index === 0) rankColor = "text-yellow-400 drop-shadow-[0_0_10px_rgba(250,204,21,0.5)]";
-                  else if (index === 1) rankColor = "text-gray-300 drop-shadow-[0_0_8px_rgba(209,213,219,0.3)]";
-                  else if (index === 2) rankColor = "text-amber-600";
+              <div className="relative z-10">
+                <motion.div 
+                  variants={containerVariants}
+                  initial="hidden"
+                  animate="show"
+                  className="divide-y divide-[var(--vault-outline)]"
+                >
+                  {leaders.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage).map((user, localIndex) => {
+                    const index = (currentPage - 1) * itemsPerPage + localIndex;
+                    const isTop1 = index === 0;
+                    const isTop3 = index < 3;
+                    
+                    let rankColor = "text-[var(--text-secondary)]";
+                    if (index === 0) rankColor = "text-yellow-400 drop-shadow-[0_0_10px_rgba(250,204,21,0.5)]";
+                    else if (index === 1) rankColor = "text-gray-300 drop-shadow-[0_0_8px_rgba(209,213,219,0.3)]";
+                    else if (index === 2) rankColor = "text-amber-600";
 
-                  return (
-                    <motion.div 
-                      key={index}
-                      variants={itemVariants}
-                      className={`grid grid-cols-12 gap-4 px-8 py-5 items-center hover:bg-[var(--heist-red)]/20 transition-colors group cursor-default relative overflow-hidden ${isTop1 ? 'bg-black/20' : ''}`}
-                    >
-                      {/* Hover effect glow line */}
-                      <div className="absolute left-0 top-0 bottom-0 w-1 bg-[var(--heist-red)] opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                      
-                      {/* Rank */}
-                      <div className={`col-span-2 md:col-span-1 text-center font-display text-3xl md:text-4xl ${rankColor}`}>
-                        {index + 1}
-                      </div>
+                    return (
+                      <motion.div 
+                        key={index}
+                        variants={itemVariants}
+                        className={`grid grid-cols-12 gap-4 px-8 py-5 items-center hover:bg-[var(--heist-red)]/20 transition-colors group cursor-default relative overflow-hidden ${isTop1 ? 'bg-black/20' : ''}`}
+                      >
+                        {/* Hover effect glow line */}
+                        <div className="absolute left-0 top-0 bottom-0 w-1 bg-[var(--heist-red)] opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        
+                        {/* Rank */}
+                        <div className={`col-span-2 md:col-span-1 text-center font-display text-3xl md:text-4xl ${rankColor}`}>
+                          {index + 1}
+                        </div>
                       
                       {/* Profile */}
                       <div className="col-span-6 md:col-span-7 flex items-center gap-4 md:gap-6 pl-2">
@@ -179,7 +183,31 @@ export default function Leaderboard() {
                     </motion.div>
                   );
                 })}
-              </motion.div>
+                </motion.div>
+
+                {/* Pagination Controls */}
+                {leaders.length > itemsPerPage && (
+                  <div className="flex items-center justify-between px-8 py-6 border-t border-[var(--vault-outline)] bg-black/40">
+                    <button
+                      onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                      disabled={currentPage === 1}
+                      className="font-mono text-xs md:text-sm uppercase tracking-widest text-[var(--text-primary)] hover:text-[var(--heist-red)] disabled:opacity-30 disabled:hover:text-[var(--text-primary)] transition-colors px-4 py-2 border border-[var(--vault-outline)] rounded hover:border-[var(--heist-red)] disabled:hover:border-[var(--vault-outline)] disabled:cursor-not-allowed"
+                    >
+                      &lt; Previous
+                    </button>
+                    <div className="font-mono text-xs md:text-sm text-[var(--text-secondary)] tracking-widest">
+                      PAGE {currentPage} OF {Math.ceil(leaders.length / itemsPerPage)}
+                    </div>
+                    <button
+                      onClick={() => setCurrentPage(p => Math.min(Math.ceil(leaders.length / itemsPerPage), p + 1))}
+                      disabled={currentPage === Math.ceil(leaders.length / itemsPerPage)}
+                      className="font-mono text-xs md:text-sm uppercase tracking-widest text-[var(--text-primary)] hover:text-[var(--heist-red)] disabled:opacity-30 disabled:hover:text-[var(--text-primary)] transition-colors px-4 py-2 border border-[var(--vault-outline)] rounded hover:border-[var(--heist-red)] disabled:hover:border-[var(--vault-outline)] disabled:cursor-not-allowed"
+                    >
+                      Next &gt;
+                    </button>
+                  </div>
+                )}
+              </div>
             )}
           </div>
         </div>

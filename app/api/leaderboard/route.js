@@ -9,10 +9,8 @@ export async function GET() {
   try {
     const leaderboard = await getLeaderboard();
     
-    // The top 15 logic is requested by the user
-    const topUsers = leaderboard.slice(0, 15);
-    
-    return NextResponse.json({ success: true, data: topUsers });
+    // Return all users so the frontend can paginate through the full list
+    return NextResponse.json({ success: true, data: leaderboard });
   } catch (error) {
     console.error('Error fetching leaderboard API:', error);
     return NextResponse.json({ error: 'Failed to fetch leaderboard' }, { status: 500 });
