@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -88,6 +89,41 @@ const faqs = [
   { category: "Google Skills Queries", q: "Why does my Google Skills page shows a red banner with 'Quota Expired'?", a: "As part of the your free lab attempts, you have 5 attempts for each lab in the program. If you a try a lab more than 5 times, then your quota gets expired. If this happens, we request you to just wait for 24 hours and your quota will automatically get reset so that you can attempt the lab again." },
   { category: "Google Skills Queries", q: "I have followed the steps in the email to get the credits, still I have not received it, what should I do?", a: "Please repeat the steps again but this time in an incognito window and do remember to keep in mind the instructions given in the Google Skills related FAQs above and you will surely get your credits. Its also possible that your credits access code has expired." },
   { category: "Google Skills Queries", q: "How can I update my profile picture in Google Skills?", a: "You can update it by visiting your profile settings on the Google Skills Boost platform and uploading a new avatar." },
+];
+
+const gearBadges = [
+  {
+    num: 1,
+    title: "Create Your First Gemini Enterprise Application",
+    level: "INTRODUCTORY",
+    supporting: "GEAR Introduction to Agents and Google's Agent Ecosystem Learning Path",
+    url: "https://www.skills.google/course_templates/1586",
+    supportingUrl: "#"
+  },
+  {
+    num: 2,
+    title: "Engineer AI Agents with Agent Development Kit (ADK)",
+    level: "INTERMEDIATE",
+    supporting: "Develop Agents with Agent Development Kit (ADK) Learning Path",
+    url: "https://www.skills.google/course_templates/1596",
+    supportingUrl: "https://www.skills.google/paths/3545"
+  },
+  {
+    num: 3,
+    title: "Deploy Multi-Agent Architectures",
+    level: "INTERMEDIATE",
+    supporting: "Deploy Production Ready Agents Learning Path",
+    url: "https://www.skills.google/course_templates/1445",
+    supportingUrl: "https://www.skills.google/paths/3802"
+  },
+  {
+    num: 4,
+    title: "Orchestrate Multi-agent Workflows with Gemini Enterprise",
+    level: "INTERMEDIATE",
+    supporting: "Scale Agents Across the Enterprise",
+    url: "https://www.skills.google/course_templates/1682",
+    supportingUrl: "https://www.skills.google/paths/3980"
+  }
 ];
 
 export default function FacilitatorPage() {
@@ -198,7 +234,7 @@ export default function FacilitatorPage() {
   };
 
   return (
-    <main ref={container} className="bg-[var(--vault-black)] text-[var(--text-primary)] min-h-screen pb-20 relative overflow-hidden -mt-[7rem] pt-[7rem]">
+    <main ref={container} className={`bg-[var(--vault-black)] text-[var(--text-primary)] min-h-screen pb-20 relative overflow-hidden -mt-[7rem] pt-[7rem] transition-opacity duration-700 ${showBonusInfo ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
       <HeaderNav />
       
       {/* BLIMP VIDEO BACKGROUND */}
@@ -353,11 +389,11 @@ export default function FacilitatorPage() {
           </div>
 
           {/* BONUS MILESTONE MODAL */}
-          {showBonusInfo && (
+          {showBonusInfo && typeof document !== 'undefined' && createPortal(
             <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
               {/* Overlay */}
               <div 
-                className="fixed inset-0 bg-[var(--vault-black)]/98 backdrop-blur-3xl cursor-pointer animate-in fade-in duration-300"
+                className="fixed inset-0 bg-transparent cursor-pointer"
                 onClick={() => setShowBonusInfo(false)}
               ></div>
               
@@ -382,8 +418,8 @@ export default function FacilitatorPage() {
                 </div>
               </div>
               
-              <h3 className="font-display text-4xl md:text-5xl uppercase tracking-wide mb-8 text-[var(--heist-red)] drop-shadow-[0_0_10px_rgba(193,18,31,0.5)] relative z-10">
-                Introducing the Bonus Milestone <span className="text-[var(--mint-gold)] drop-shadow-[0_0_15px_rgba(212,175,55,0.8)]">🏆</span>
+              <h3 className="font-shlop text-center text-3xl md:text-4xl uppercase tracking-widest mb-8 text-[var(--heist-red)] drop-shadow-[0_0_10px_rgba(193,18,31,0.5)] relative z-10">
+                Introducing the Bonus Milestone
               </h3>
               
               <div className="grid md:grid-cols-2 gap-10 font-mono text-sm md:text-base leading-relaxed text-justify relative z-10 text-[var(--text-secondary)]">
@@ -416,8 +452,8 @@ export default function FacilitatorPage() {
               </div>
 
               <div className="relative z-10">
-                <h3 className="font-display text-3xl md:text-4xl uppercase tracking-wide mb-6 text-[var(--mint-gold)] drop-shadow-[0_0_10px_rgba(212,175,55,0.5)]">Eligibility Criteria</h3>
-                <p className="font-mono text-[var(--text-secondary)] leading-relaxed mb-8 max-w-4xl">
+                <h3 className="font-shlop text-center text-3xl md:text-4xl uppercase tracking-widest mb-6 text-[var(--mint-gold)] drop-shadow-[0_0_10px_rgba(212,175,55,0.5)]">Eligibility Criteria</h3>
+                <p className="font-mono text-center mx-auto text-[var(--text-secondary)] leading-relaxed mb-8 max-w-4xl">
                   We want to make sure that you have the necessary cloud and AI skills before you get started with creating your first AI agent, and thus the following eligibility criteria is <span className="text-white font-bold underline decoration-4 decoration-[var(--heist-red)] underline-offset-4 bg-[rgba(193,18,31,0.2)] px-1">REQUIRED</span> before you are eligible to participate in the <span className="text-white font-bold">Bonus Milestone</span>.
                 </p>
                 
@@ -451,8 +487,294 @@ export default function FacilitatorPage() {
                   </li>
                 </ul>
               </div>
+              
+              <div className="flex items-center my-12 relative z-10">
+                <div className="flex-1 border-t border-[var(--vault-outline)]"></div>
+                <div className="mx-6 font-display text-4xl text-[var(--heist-red)] tracking-widest drop-shadow-[0_0_10px_rgba(193,18,31,0.5)]">***</div>
+                <div className="flex-1 border-t border-[var(--vault-outline)]"></div>
               </div>
-            </div>
+
+              <div className="relative z-10">
+                <h3 className="font-shlop text-center text-3xl md:text-4xl uppercase tracking-widest mb-6 text-[var(--mint-gold)] drop-shadow-[0_0_10px_rgba(212,175,55,0.5)]">How to earn the Bonus Milestone? <span className="text-sm md:text-xl text-[var(--text-secondary)] lowercase tracking-normal font-mono block mt-2">(Less than a day required)</span></h3>
+                
+                <p className="font-mono text-center mx-auto text-[var(--text-secondary)] leading-relaxed mb-4 max-w-4xl">
+                  There are multiple &quot;steps&quot; involved for you to earn the Bonus Milestone and those <span className="text-white font-bold">extra 10 Bonus Points</span> in your account. Please go through each step below one-by-one and do remember to complete the current step before moving to the next one.
+                </p>
+                <p className="font-mono text-center mx-auto text-[var(--text-secondary)] leading-relaxed mb-8 max-w-4xl">
+                  As mentioned, if you do everything right, it will take you <span className="text-white font-bold">less than a day</span> to complete all the steps. We have also mentioned the time commitment of each step for your reference. Lets go!
+                </p>
+
+                {/* Step 1 */}
+                <div className="flex items-center my-12 relative z-10 opacity-60">
+                  <div className="flex-1 border-t border-dashed border-[var(--heist-red)]"></div>
+                  <div className="mx-4 font-mono text-[var(--heist-red)] text-xs tracking-[0.3em]">PHASE 01</div>
+                  <div className="flex-1 border-t border-dashed border-[var(--heist-red)]"></div>
+                </div>
+                
+                <div className="mb-14 relative group">
+                  <div className="absolute -left-4 top-0 bottom-0 w-1 bg-[var(--heist-red)] opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                  <h4 className="font-shlop text-3xl md:text-4xl uppercase tracking-widest mb-8 text-[var(--mint-gold)] text-center drop-shadow-[0_0_15px_rgba(212,175,55,0.4)]">
+                    Step 1 - Complete GEAR Badges <br className="md:hidden" />
+                    <span className="text-[var(--heist-red)] text-2xl align-middle font-mono tracking-widest ml-4 drop-shadow-[0_0_12px_rgba(193,18,31,0.9)]">&lt;5 HRS</span>
+                  </h4>
+                  <p className="font-mono text-[var(--text-secondary)] leading-relaxed mb-4">
+                    As your first step, you need to complete <span className="text-white font-bold">ALL 4 Skill Badges below</span> which are part of the <a href="#" className="text-[var(--mint-gold)] hover:text-white hover:underline underline-offset-4 transition-colors">Gemini Enterprise Agent Ready (GEAR)</a> program. We have also provided supporting material with each skill badge that will help you along the way.
+                  </p>
+                  <p className="font-mono text-[var(--text-secondary)] leading-relaxed mb-6">
+                    <span className="font-bold text-white">Note:</span> These skill badges will also be counted towards your normal milestones under the <a href="#" className="text-[var(--mint-gold)] hover:text-white hover:underline underline-offset-4 transition-colors">Points System</a>, so its a <span className="text-white font-bold">Win-Win</span>!
+                  </p>
+
+                  <div className="grid md:grid-cols-2 gap-8 mt-10">
+                    {gearBadges.map((badge) => (
+                      <div key={badge.num} className="bg-[var(--vault-charcoal)] border border-[var(--vault-outline)] flex flex-col h-full overflow-hidden group hover:border-[var(--heist-red)] transition-colors duration-300 relative rounded-tl-[3rem] rounded-br-[3rem] rounded-tr-xl rounded-bl-xl shadow-[0_0_20px_rgba(0,0,0,0.3)]">
+                        {/* Certificates "Image" Container */}
+                        <div className="bg-black/40 p-4 sm:p-6 flex flex-col xl:flex-row items-center justify-center gap-6 border-b border-[var(--vault-outline)] relative overflow-hidden group-hover:bg-[var(--heist-red)]/10 transition-colors duration-500 z-10">
+                          {/* Skill Badge Certificate Card */}
+                          <a href={badge.url} target="_blank" rel="noopener noreferrer" style={{ 
+                            backgroundImage: 'linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url("/Mafer.jpeg")',
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                            position: "relative", 
+                            padding: "1.5rem 1rem 2rem", 
+                            textAlign: "center",
+                            width: "100%",
+                            maxWidth: "260px",
+                            height: "100%",
+                            display: "flex",
+                            flexDirection: "column",
+                            boxShadow: "0 10px 30px rgba(0,0,0,0.5)",
+                            clipPath: "polygon(30px 0, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%, 0 30px)"
+                          }} className="transform hover:scale-105 transition-transform duration-500 relative z-10 border-l-4 border-[var(--heist-red)] cursor-pointer">
+                            {/* Google Cloud Logo */}
+                            <div className="flex justify-center items-center mb-4">
+                              <span style={{ fontSize: '1.1rem', fontWeight: 500, fontFamily: "'Product Sans', sans-serif" }}>
+                                <span style={{ color: '#4285F4' }}>G</span>
+                                <span style={{ color: '#EA4335' }}>o</span>
+                                <span style={{ color: '#FBBC05' }}>o</span>
+                                <span style={{ color: '#4285F4' }}>g</span>
+                                <span style={{ color: '#34A853' }}>l</span>
+                                <span style={{ color: '#EA4335' }}>e</span>
+                                <span style={{ color: '#F5F5DC', marginLeft: '6px' }}>Cloud</span>
+                              </span>
+                            </div>
+                            
+                            {/* Title */}
+                            <h3 style={{ 
+                              fontFamily: "'Product Sans', 'Roboto', sans-serif", 
+                              fontSize: "1.1rem", 
+                              color: "#F5F5DC", 
+                              fontWeight: 500, 
+                              marginBottom: "0.75rem", 
+                              lineHeight: 1.3,
+                              flexGrow: 1
+                            }}>
+                              {badge.title}
+                            </h3>
+                          
+                            {/* Subtitle */}
+                            <p style={{ fontSize: "0.85rem", color: "#F5F5DC", marginBottom: "1rem", opacity: 0.8 }}>
+                              Google Cloud Skills Boost
+                            </p>
+                            
+                            {/* Divider */}
+                            <div style={{ width: "30px", height: "1px", background: "rgba(245, 245, 220, 0.3)", margin: "0 auto 1rem auto" }} />
+                            
+                            {/* Level */}
+                            <div style={{ fontSize: "0.65rem", color: "#F5F5DC", textTransform: "uppercase", letterSpacing: "0.15em", fontWeight: 500, opacity: 0.9 }}>
+                              SKILL BADGE • {badge.level}
+                            </div>
+                            
+                            {/* Bottom Colored Strip */}
+                            <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "6px", display: "flex" }}>
+                              <div style={{ flex: 1, background: "#EA4335" }} />
+                              <div style={{ flex: 1, background: "#4285F4" }} />
+                              <div style={{ flex: 1, background: "#34A853" }} />
+                              <div style={{ flex: 1, background: "#FBBC05" }} />
+                            </div>
+                          </a>
+
+                          {/* Supporting Material Certificate Card */}
+                          <a href={badge.supportingUrl} target={badge.supportingUrl !== "#" ? "_blank" : undefined} rel={badge.supportingUrl !== "#" ? "noopener noreferrer" : undefined} style={{ 
+                            backgroundImage: 'linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url("/Mafer.jpeg")',
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                            position: "relative", 
+                            padding: "1.5rem 1rem 2rem", 
+                            textAlign: "center",
+                            width: "100%",
+                            maxWidth: "260px",
+                            height: "100%",
+                            display: "flex",
+                            flexDirection: "column",
+                            boxShadow: "0 10px 30px rgba(0,0,0,0.5)",
+                            clipPath: "polygon(30px 0, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%, 0 30px)"
+                          }} className={`transform hover:scale-105 transition-transform duration-500 relative z-10 border-l-4 border-[var(--mint-gold)] ${badge.supportingUrl === "#" ? "cursor-default opacity-80" : "cursor-pointer"}`}>
+                            {/* Google Cloud Logo */}
+                            <div className="flex justify-center items-center mb-4">
+                              <span style={{ fontSize: '1.1rem', fontWeight: 500, fontFamily: "'Product Sans', sans-serif" }}>
+                                <span style={{ color: '#4285F4' }}>G</span>
+                                <span style={{ color: '#EA4335' }}>o</span>
+                                <span style={{ color: '#FBBC05' }}>o</span>
+                                <span style={{ color: '#4285F4' }}>g</span>
+                                <span style={{ color: '#34A853' }}>l</span>
+                                <span style={{ color: '#EA4335' }}>e</span>
+                                <span style={{ color: '#F5F5DC', marginLeft: '6px' }}>Cloud</span>
+                              </span>
+                            </div>
+                            
+                            {/* Title */}
+                            <h3 style={{ 
+                              fontFamily: "'Product Sans', 'Roboto', sans-serif", 
+                              fontSize: "1rem", 
+                              color: "var(--mint-gold)", 
+                              fontWeight: 500, 
+                              marginBottom: "0.75rem", 
+                              lineHeight: 1.3,
+                              flexGrow: 1
+                            }}>
+                              {badge.supporting}
+                            </h3>
+                          
+                            {/* Subtitle */}
+                            <p style={{ fontSize: "0.85rem", color: "#F5F5DC", marginBottom: "1rem", opacity: 0.8 }}>
+                              Google Cloud Skills Boost
+                            </p>
+                            
+                            {/* Divider */}
+                            <div style={{ width: "30px", height: "1px", background: "rgba(245, 245, 220, 0.3)", margin: "0 auto 1rem auto" }} />
+                            
+                            {/* Level */}
+                            <div style={{ fontSize: "0.65rem", color: "#F5F5DC", textTransform: "uppercase", letterSpacing: "0.15em", fontWeight: 500, opacity: 0.9 }}>
+                              {badge.supportingUrl === "#" ? "SUPPORTING MATERIAL (COMING SOON)" : "SUPPORTING MATERIAL"}
+                            </div>
+                            
+                            {/* Bottom Colored Strip */}
+                            <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "6px", display: "flex" }}>
+                              <div style={{ flex: 1, background: "var(--mint-gold)" }} />
+                            </div>
+                          </a>
+                        </div>
+
+                        {/* Number Section */}
+                        <div className="p-6 flex items-center justify-center flex-grow relative z-10 bg-[var(--vault-black)] group-hover:bg-[var(--vault-charcoal)] transition-colors">
+                          <h4 className="font-shlop text-3xl md:text-4xl uppercase tracking-widest text-[var(--mint-gold)] drop-shadow-[0_0_15px_rgba(212,175,55,0.4)]">
+                            #{['ZERO', 'ONE', 'TWO', 'THREE', 'FOUR'][badge.num]}
+                          </h4>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Step 2 */}
+                <div className="flex items-center my-12 relative z-10 opacity-60">
+                  <div className="flex-1 border-t border-dashed border-[var(--heist-red)]"></div>
+                  <div className="mx-4 font-mono text-[var(--heist-red)] text-xs tracking-[0.3em]">PHASE 02</div>
+                  <div className="flex-1 border-t border-dashed border-[var(--heist-red)]"></div>
+                </div>
+
+                <div className="mb-14 relative group">
+                  <div className="absolute -left-4 top-0 bottom-0 w-1 bg-[var(--heist-red)] opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                  <h4 className="font-shlop text-3xl md:text-4xl uppercase tracking-widest mb-8 text-[var(--mint-gold)] text-center drop-shadow-[0_0_15px_rgba(212,175,55,0.4)]">
+                    Step 2 - Sign-up for Free Trial <br className="md:hidden" />
+                    <span className="text-[var(--heist-red)] text-2xl align-middle font-mono tracking-widest ml-4 drop-shadow-[0_0_12px_rgba(193,18,31,0.9)]">&lt;10 MINS</span>
+                  </h4>
+                  <div className="bg-[rgba(255,255,255,0.03)] p-4 border-l-4 border-[var(--text-muted)] mb-4 font-mono text-sm text-[var(--text-secondary)]">
+                    <span className="font-bold text-white">Note:</span> You can skip this step if you already have a billing account on Google Cloud with your enrolled email address. If you don&apos;t, then please sign up for the free trial using your enrolled email address. You will <span className="text-white font-bold underline">NOT</span> be able to achieve the Bonus Milestone without this step.
+                  </div>
+                  <p className="font-mono text-[var(--text-secondary)] leading-relaxed mb-4">
+                    Now that you have learned about how to build AI agents, its time to get what it takes to build AI agents i.e. <span className="text-white font-bold">Google Cloud Credits!</span>
+                  </p>
+                  <p className="font-mono text-[var(--text-secondary)] leading-relaxed mb-4">
+                    Use the instructions and the walkthrough video given below to sign up for <a href="#" className="text-[var(--mint-gold)] hover:text-white hover:underline underline-offset-4 transition-colors">Google Cloud Free Trial</a> which provides with <span className="text-white font-bold">$300 worth of Google Cloud credits in local currency for 90 days</span> so that you can build all the AI agents you want and start your Agentic AI journey.
+                  </p>
+                  <h5 className="font-bold text-white uppercase tracking-wider mb-2 mt-6">Prerequisites before you sign up</h5>
+                  <ul className="list-disc pl-5 font-mono text-sm text-[var(--text-secondary)] mb-6 space-y-2">
+                    <li>You would need a credit/debit card to sign up for the free trial.</li>
+                    <li><span className="text-white font-bold">Important:</span> No need to worry - <span className="text-white font-bold">you will NOT be charged anything</span> for the free trial and <span className="text-white font-bold">Google Cloud NEVER automatically charges your card</span> unless you choose to upgrade yourself manually.</li>
+                    <li>For specific countries, there are more options available like - UPI for India, Pix for Brazil and so on! You can see these options once you go through the free trial sign up.</li>
+                  </ul>
+                  
+                  <h5 className="font-bold text-white uppercase tracking-wider mb-2">**Instructions to Sign-up for the Free Trial**</h5>
+                  <p className="font-mono text-sm text-[var(--text-secondary)] mb-4">We have made it very easy to sign up for the Google Cloud Free trial and it will hardly take 10 minutes. Just use the instructions below and the provided walkthrough video to sign up and move on to the next step.</p>
+                  <ul className="list-disc pl-5 font-mono text-sm text-[var(--text-secondary)] mb-6 space-y-2">
+                    <li><span className="font-bold">Instructions:</span> <a href="#" className="text-[var(--mint-gold)] hover:text-white hover:underline underline-offset-4">Google Cloud Free Trial: Step-by-Step Sign-Up Guide</a></li>
+                    <li><span className="font-bold">Walkthrough Video</span> (~3 minutes)</li>
+                  </ul>
+                </div>
+
+                {/* Step 3 */}
+                <div className="flex items-center my-12 relative z-10 opacity-60">
+                  <div className="flex-1 border-t border-dashed border-[var(--heist-red)]"></div>
+                  <div className="mx-4 font-mono text-[var(--heist-red)] text-xs tracking-[0.3em]">PHASE 03</div>
+                  <div className="flex-1 border-t border-dashed border-[var(--heist-red)]"></div>
+                </div>
+
+                <div className="mb-14 relative group">
+                  <div className="absolute -left-4 top-0 bottom-0 w-1 bg-[var(--heist-red)] opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                  <h4 className="font-shlop text-3xl md:text-4xl uppercase tracking-widest mb-8 text-[var(--mint-gold)] text-center drop-shadow-[0_0_15px_rgba(212,175,55,0.4)]">
+                    Step 3 - Build your AI Agent <br className="md:hidden" />
+                    <span className="text-[var(--heist-red)] text-2xl align-middle font-mono tracking-widest ml-4 drop-shadow-[0_0_12px_rgba(193,18,31,0.9)]">&lt;10 MINS</span>
+                  </h4>
+                  <p className="font-mono text-[var(--text-secondary)] leading-relaxed mb-4">
+                    Now that you have the Google Cloud credits and have created your billing account on Google Cloud Console, its time to create your first AI agent using <span className="text-white font-bold">Vertex AI (Agent Platform)</span>.
+                  </p>
+                  <p className="font-mono text-[var(--text-secondary)] leading-relaxed mb-4">
+                    <span className="text-white font-bold">Important</span> - Note that you will be required to <span className="text-white font-bold">submit your agent for verification</span> after you have created it. You will learn how to do the same in the instructions provided in this step and Step 4.
+                  </p>
+                  
+                  <h5 className="font-bold text-white uppercase tracking-wider mb-2 mt-6">**Instructions to Build your First AI Agent**</h5>
+                  <p className="font-mono text-sm text-[var(--text-secondary)] mb-4">It may seem like a daunting task, but trust us when we say this, its doesn&apos;t get easier than. By the end of this step, you would have created your first, &quot;funny&quot;, AI agent that you can interact with in less than 10 minutes.</p>
+                  <ul className="list-disc pl-5 font-mono text-sm text-[var(--text-secondary)] mb-6 space-y-2">
+                    <li><span className="font-bold">Instructions:</span> <a href="#" className="text-[var(--mint-gold)] hover:text-white hover:underline underline-offset-4">GEAR Mini-Project: Build Your First AI Agent using Vertex AI (Agent Platform)</a></li>
+                    <li><span className="font-bold">Walkthrough Video</span> (~6 minutes)</li>
+                    <li><span className="font-bold">Note:</span> Do remember to <span className="text-white font-bold">carefully</span> follow the last step in the provided instructions to provide permission to our &quot;verifier&quot; email address so that we can verify the creation of your agent.</li>
+                  </ul>
+                </div>
+
+                {/* Step 4 */}
+                <div className="flex items-center my-12 relative z-10 opacity-60">
+                  <div className="flex-1 border-t border-dashed border-[var(--heist-red)]"></div>
+                  <div className="mx-4 font-mono text-[var(--heist-red)] text-xs tracking-[0.3em]">PHASE 04</div>
+                  <div className="flex-1 border-t border-dashed border-[var(--heist-red)]"></div>
+                </div>
+
+                <div className="mb-14 relative group">
+                  <div className="absolute -left-4 top-0 bottom-0 w-1 bg-[var(--heist-red)] opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                  <h4 className="font-shlop text-3xl md:text-4xl uppercase tracking-widest mb-8 text-[var(--mint-gold)] text-center drop-shadow-[0_0_15px_rgba(212,175,55,0.4)]">
+                    Step 4 - Submit For Verification <br className="md:hidden" />
+                    <span className="text-[var(--heist-red)] text-2xl align-middle font-mono tracking-widest ml-4 drop-shadow-[0_0_12px_rgba(193,18,31,0.9)]">&lt;5 MINS</span>
+                  </h4>
+                  <p className="font-mono text-[var(--text-secondary)] leading-relaxed mb-4">Congratulations! You&apos;ve made it here.</p>
+                  <p className="font-mono text-[var(--text-secondary)] leading-relaxed mb-4">Now all it takes is just a few minutes to submit your:</p>
+                  <ul className="list-disc pl-5 font-mono text-[var(--text-secondary)] mb-4 space-y-2">
+                    <li><span className="text-white font-bold">&quot;Unique Project Name&quot;</span> - the same project where you created your first agent, and</li>
+                    <li><span className="text-white font-bold">&quot;Unique Billing ID&quot;</span> of the same project</li>
+                  </ul>
+                  <p className="font-mono text-[var(--text-secondary)] leading-relaxed mb-6">so that we can verify your creation and credit you your <span className="text-[var(--mint-gold)] font-bold">10 extra Bonus Points</span>. 🚀</p>
+                  
+                  <h5 className="font-bold text-white uppercase tracking-wider mb-2 mt-8">**Instructions to make your Submission**</h5>
+                  <p className="font-mono text-sm text-[var(--text-secondary)] mb-4">Just use the button below to go to the form and submit the required information.</p>
+                  <ul className="list-disc pl-5 font-mono text-sm text-[var(--text-secondary)] mb-12 space-y-2">
+                    <li><span className="text-white font-bold">Project Name</span> - You should already have this with you when you completed Step 3.</li>
+                    <li><span className="text-white font-bold">Billing ID</span> - You can get this by navigating to the <span className="text-white font-bold">&quot;Billing&quot;</span> section of your project <i>(use the left-hand side bar to find this)</i>, then click on the blue <span className="text-white font-bold">&quot;Manage Billing Account&quot;</span> button and once there just copy the <span className="text-white font-bold">18 character</span> &quot;Billing Account ID&quot; i.e. in this format XXXXXX-XXXXXX-XXXXXX.</li>
+                  </ul>
+
+                  <div className="flex justify-center mb-8 relative z-10">
+                    <div className="absolute inset-0 bg-[var(--heist-red)] blur-[40px] opacity-20 rounded-full w-3/4 mx-auto"></div>
+                    <button className="relative bg-[rgba(19,19,23,0.8)] backdrop-blur-md border border-[var(--heist-red)] text-[var(--heist-red)] font-shlop uppercase tracking-widest py-4 px-12 text-3xl shadow-[inset_0_0_20px_rgba(193,18,31,0.2)] transition-all duration-300 rounded cursor-not-allowed opacity-80 group overflow-hidden" disabled>
+                      <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px] flex items-center justify-center opacity-100 z-10 transition-all border border-transparent">
+                        <span className="font-mono text-sm tracking-[0.4em] text-[var(--heist-red)] shadow-[0_0_10px_rgba(193,18,31,0.5)]">ACCESS DENIED</span>
+                      </div>
+                      <span className="relative z-0 blur-[2px] transition-all duration-300">Submissions Opening Soon</span>
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+              </div>
+            </div>,
+            document.body
           )}
 
           <div className="milestone-grid grid md:grid-cols-2 lg:grid-cols-4 gap-6">
