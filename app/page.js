@@ -37,8 +37,35 @@ export default function Home() {
 
       <div className="relative z-20 w-full bg-[var(--vault-black)] pb-24">
         <div className="container mx-auto px-6 max-w-7xl">
+          {/* ── Subscription Banner ───────────────────────────────────────── */}
+          <motion.div 
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1, duration: 0.8 }}
+            className="w-full max-w-4xl mx-auto mb-12 flex flex-col md:flex-row items-center justify-between bg-[var(--vault-charcoal)] border border-[var(--heist-red)] rounded-sm p-4 shadow-[0_0_15px_rgba(193,18,31,0.2)] relative overflow-hidden group"
+          >
+            <div className="absolute top-0 left-0 w-1 h-full bg-[var(--heist-red)] shadow-[0_0_10px_var(--heist-red)]"></div>
+            <div className="absolute inset-0 bg-[var(--heist-red)] opacity-0 group-hover:opacity-5 transition-opacity duration-500 pointer-events-none"></div>
+            
+            <div className="flex-1 px-4 mb-4 md:mb-0 z-10 text-center md:text-left">
+              <p className="text-[var(--text-primary)] font-mono text-xs md:text-sm leading-relaxed tracking-wide">
+                <span className="text-[var(--heist-red)] font-bold animate-pulse mr-2">[!] NOTICE:</span>
+                Subscription to the Google Skills Arcade is necessary to receive important email updates and perks. However, you can unsubscribe anytime you want.
+              </p>
+            </div>
+            
+            <div className="z-10 shrink-0">
+              <a 
+                href="#"
+                className="inline-block relative px-6 py-3 bg-gradient-to-r from-pink-500 to-rose-600 text-white font-mono font-bold tracking-[0.1em] text-sm uppercase shadow-[0_0_15px_rgba(225,29,72,0.4)] hover:shadow-[0_0_25px_rgba(225,29,72,0.8)] hover:scale-105 transition-all duration-300 before:absolute before:inset-0 before:border before:border-white/20 before:opacity-0 hover:before:opacity-100"
+              >
+                Subscribe here!
+              </a>
+            </div>
+          </motion.div>
+
           {/* ── Mission Briefing Form ─────────────────────────────────────── */}
-          <section className="flex flex-col items-center justify-center pb-12 pt-2 md:pt-4 -mt-8">
+          <section className="flex flex-col items-center justify-center pb-12 pt-2 md:pt-4">
             
             <div className="text-center max-w-3xl z-10 w-full">
               <h1 className="sr-only">Google Cloud Arcade Points Calculator 2026</h1>
