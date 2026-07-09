@@ -132,7 +132,7 @@ export default function RootLayout({ children }) {
                 </div>
                 <div className="absolute bottom-full hidden group-hover:flex flex-col pb-2 z-50 transform -translate-x-1/2 left-1/2">
                   <div className="flex flex-col bg-[rgba(11,11,13,0.9)] border border-[var(--vault-outline)] rounded-lg shadow-xl overflow-hidden min-w-[140px]">
-                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="px-4 py-3 hover:bg-[var(--heist-red)] hover:text-white transition-colors text-xs text-center whitespace-nowrap">
+                    <a href="https://www.instagram.com/satyagupta.dev/" target="_blank" rel="noopener noreferrer" className="px-4 py-3 hover:bg-[var(--heist-red)] hover:text-white transition-colors text-xs text-center whitespace-nowrap">
                       Satyanand Gupta
                     </a>
                   </div>
