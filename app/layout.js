@@ -73,9 +73,21 @@ export default function RootLayout({ children }) {
           </div>
           <footer className="w-full flex items-center justify-center py-8 mt-auto font-mono text-[var(--text-muted)] text-[0.85rem] tracking-[0.1em]">
             <div className="flex flex-wrap justify-center gap-6 items-center" style={{ fontSize: "0.9rem" }}>
-              <a href="https://linkedin.com/in/satyanand-gupta-836106282" target="_blank" rel="noopener noreferrer" className="hover:text-white hover:drop-shadow-[0_0_10px_currentColor] hover:scale-110 transition-all duration-300 transform" style={{ textDecoration: "none", color: "#0A66C2" }} aria-label="LinkedIn">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-              </a>
+              <div className="relative group flex items-center justify-center cursor-pointer">
+                <div className="hover:text-white hover:drop-shadow-[0_0_10px_currentColor] hover:scale-110 transition-all duration-300 transform" style={{ color: "#0A66C2" }}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                </div>
+                <div className="absolute bottom-full hidden group-hover:flex flex-col pb-2 z-50 transform -translate-x-1/2 left-1/2">
+                  <div className="flex flex-col bg-[rgba(11,11,13,0.9)] border border-[var(--vault-outline)] rounded-lg shadow-xl overflow-hidden min-w-[140px]">
+                    <a href="https://www.linkedin.com/in/yash-mahajan-045380289/" target="_blank" rel="noopener noreferrer" className="px-4 py-3 hover:bg-[var(--heist-red)] hover:text-white transition-colors border-b border-[var(--vault-outline)] text-xs text-center whitespace-nowrap">
+                      Yash Mahajan
+                    </a>
+                    <a href="https://linkedin.com/in/satyanand-gupta-836106282" target="_blank" rel="noopener noreferrer" className="px-4 py-3 hover:bg-[var(--heist-red)] hover:text-white transition-colors text-xs text-center whitespace-nowrap">
+                      Satyanand Gupta
+                    </a>
+                  </div>
+                </div>
+              </div>
               <a href="https://x.com/Satyana13916844" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--br-orange)] hover:drop-shadow-[0_0_10px_currentColor] hover:scale-110 transition-all duration-300 transform" style={{ textDecoration: "none", color: "#FFFFFF" }} aria-label="Twitter">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
               </a>
