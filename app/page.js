@@ -56,7 +56,7 @@ export default function Home() {
             
             <div className="z-10 shrink-0">
               <a 
-                href="#"
+                href="https://docs.google.com/forms/d/e/1FAIpQLScwpRj34Ysw5GEjeubPlkG49MECZTG3z820O_2Uz85IxJ9qcg/viewform" target="_blank" rel="noopener noreferrer"
                 className="inline-block relative px-6 py-3 bg-gradient-to-r from-pink-500 to-rose-600 text-white font-mono font-bold tracking-[0.1em] text-sm uppercase shadow-[0_0_15px_rgba(225,29,72,0.4)] hover:shadow-[0_0_25px_rgba(225,29,72,0.8)] hover:scale-105 transition-all duration-300 before:absolute before:inset-0 before:border before:border-white/20 before:opacity-0 hover:before:opacity-100"
               >
                 Subscribe here!
