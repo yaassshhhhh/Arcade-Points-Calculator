@@ -76,6 +76,13 @@ export default function ResourcesPage() {
 
   const videos = [
     {
+      title: "Claim Your 400+ FREE Google Cloud Credits",
+      url: "https://www.youtube.com/watch?v=lrPbSJyNCao",
+      videoId: "lrPbSJyNCao",
+      isLatest: true,
+      hoverText: "This is limited time deal so please grab your credits ASAP !!"
+    },
+    {
       title: "Google Cloud Arcade 2026 Explained",
       url: "https://www.youtube.com/watch?v=zra35r7rACA",
       videoId: "zra35r7rACA",
@@ -282,11 +289,16 @@ export default function ResourcesPage() {
                   <div className="relative z-10 p-6 flex flex-col gap-4">
                     <div className="w-full h-40 relative rounded-lg overflow-hidden border border-[var(--vault-outline)] group-hover:border-[#FF0000]/50 transition-colors">
                       <Image unoptimized src={`https://img.youtube.com/vi/${video.videoId}/maxresdefault.jpg`} alt={video.title} fill style={{ objectFit: "cover" }} className="group-hover:scale-105 transition-transform duration-500" />
-                      <div className="absolute inset-0 flex items-center justify-center bg-black/40 group-hover:bg-transparent transition-colors">
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/40 group-hover:bg-transparent transition-colors z-10">
                          <div className="bg-[#FF0000] rounded-full p-3 shadow-lg transform group-hover:scale-110 transition-transform">
                            <Play size={24} color="#FFF" fill="#FFF" />
                          </div>
                       </div>
+                      {video.hoverText && (
+                        <div className="absolute inset-0 flex items-center justify-center bg-[var(--vault-black)]/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-4 text-center z-20 backdrop-blur-sm">
+                          <p className="font-shlop text-2xl md:text-3xl text-[var(--heist-red-bright)] tracking-wider drop-shadow-[0_0_15px_rgba(232,17,45,0.6)] leading-tight">{video.hoverText}</p>
+                        </div>
+                      )}
                       {video.isLatest && (
                         <div className="absolute bottom-2 right-2 bg-[#FF0000] text-white px-2 py-1 text-[10px] font-mono font-bold tracking-widest flex items-center gap-1 shadow-md">
                           <span className="w-1.5 h-1.5 bg-white rounded-full animate-ping"></span> LATEST

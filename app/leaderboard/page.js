@@ -129,7 +129,7 @@ export default function Leaderboard() {
                 animate="show"
                 className="relative z-10 divide-y divide-[var(--vault-outline)]"
               >
-                {leaders.map((user, index) => {
+                {leaders.slice(0, 15).map((user, index) => {
                   const isTop1 = index === 0;
                   const isTop3 = index < 3;
                   
