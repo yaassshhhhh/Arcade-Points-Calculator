@@ -121,11 +121,7 @@ export default function ScrollVideo({ videoSrc }) {
         </div>
       </div>
       
-      {/* Scroll Down Indicator */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce flex flex-col items-center opacity-50 z-10 pointer-events-none">
-        <span className="text-[var(--text-muted)] font-mono text-xs uppercase tracking-[0.2em] mb-2">Scroll To Proceed</span>
-        <div className="w-[1px] h-12 bg-gradient-to-b from-transparent via-[var(--mint-gold-dim)] to-transparent"></div>
-      </div>
+
     </div>
   );
 }

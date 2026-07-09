@@ -26,7 +26,7 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-[var(--vault-black)] text-[var(--text-primary)]">
+    <main className="min-h-screen bg-[var(--vault-black)] text-[var(--text-primary)] -mt-[7rem]">
       <HeaderNav />
 
       {/* Cinematic Frame-by-Frame Scroll Video */}

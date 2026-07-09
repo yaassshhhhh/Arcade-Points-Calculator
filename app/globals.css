@@ -148,11 +148,12 @@ h1, h2, h3, h4, h5, h6 {
 
   /* Nav */
   .heist-nav {
-    @apply flex items-center justify-between sticky top-0 z-50;
-    background: rgba(11, 11, 13, 0.95);
-    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    @apply flex items-center justify-between fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl z-50 rounded-2xl;
+    background: rgba(11, 11, 13, 0.3);
+    border: 1px solid rgba(212, 175, 55, 0.2);
     padding: 1rem 2rem;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
   }
 
   /* Input */
