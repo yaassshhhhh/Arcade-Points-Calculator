@@ -50,7 +50,7 @@ function CountdownTimer({ targetDate }) {
         { val: timeLeft.mins, label: "MIN" },
         { val: timeLeft.secs, label: "SEC" },
       ].map(({ val, label }) => (
-        <div key={label} className="bg-[var(--vault-charcoal)] border border-[var(--heist-red)] p-2 min-w-[70px] text-center shadow-[0_0_10px_var(--heist-red-glow)] relative overflow-hidden group">
+        <div key={label} className="bg-[var(--vault-charcoal)] border border-[var(--heist-red)] p-2 min-w-[70px] text-center shadow-[0_0_10px_var(--heist-red-glow)] relative overflow-hidden group rounded-2xl">
           <div className="absolute inset-0 bg-[var(--heist-red)] opacity-0 group-hover:opacity-10 transition-opacity"></div>
           <div className="font-mono text-3xl font-bold text-[var(--heist-red)] leading-none">{String(val).padStart(2, "0")}</div>
           <div className="font-display text-[0.65rem] text-[var(--text-muted)] tracking-[0.2em] mt-1">{label}</div>
@@ -109,28 +109,28 @@ export default function FacilitatorPage() {
   const milestones = [
     { 
       tier: 1, title: "Heist Phase 1", games: 6, badges: 18, points: 15, bonusPoints: 5, desc: "First breach. The guards are unaware. Secure the initial assets.", color: "var(--text-muted)",
-      hoverOuter: "hover:border-[var(--text-muted)] hover:shadow-[0_0_15px_var(--text-muted)]",
+      hoverOuter: "hover:border-[var(--text-muted)] hover:shadow-[0_0_25px_var(--text-muted)] hover:-translate-y-3 transform",
       gradient: "to-[var(--text-muted)]",
       hoverInner: "group-hover:border-[var(--text-muted)]",
       image: "/professor.png"
     },
     { 
       tier: 2, title: "Heist Phase 2", games: 8, badges: 34, points: 25, bonusPoints: 15, desc: "Alarms triggered. Keep pushing through the outer vault doors.", color: "var(--mint-gold-dim)",
-      hoverOuter: "hover:border-[var(--mint-gold-dim)] hover:shadow-[0_0_15px_var(--mint-gold-dim)]",
+      hoverOuter: "hover:border-[var(--mint-gold-dim)] hover:shadow-[0_0_25px_var(--mint-gold-dim)] hover:-translate-y-3 transform",
       gradient: "to-[var(--mint-gold-dim)]",
       hoverInner: "group-hover:border-[var(--mint-gold-dim)]",
       image: "/missprofessor.png"
     },
     { 
       tier: 3, title: "Heist Phase 3", games: 10, badges: 50, points: 35, bonusPoints: 25, desc: "Inner sanctum accessed. We are now Elite Operators.", color: "var(--heist-red-bright)",
-      hoverOuter: "hover:border-[var(--heist-red-bright)] hover:shadow-[0_0_15px_var(--heist-red-bright)]",
+      hoverOuter: "hover:border-[var(--heist-red-bright)] hover:shadow-[0_0_25px_var(--heist-red-bright)] hover:-translate-y-3 transform",
       gradient: "to-[var(--heist-red-bright)]",
       hoverInner: "group-hover:border-[var(--heist-red-bright)]",
       image: "/berlin.png"
     },
     { 
       tier: 4, title: "The Royal Mint", games: 12, badges: 66, points: 45, bonusPoints: 35, desc: "The Ultimate Score. Maximum gold extracted. Absolute victory.", color: "var(--mint-gold)",
-      hoverOuter: "hover:border-[var(--mint-gold)] hover:shadow-[0_0_15px_var(--mint-gold)]",
+      hoverOuter: "hover:border-[var(--mint-gold)] hover:shadow-[0_0_25px_var(--mint-gold)] hover:-translate-y-3 transform",
       gradient: "to-[var(--mint-gold)]",
       hoverInner: "group-hover:border-[var(--mint-gold)]",
       image: "/nairobi.png"
@@ -171,7 +171,8 @@ export default function FacilitatorPage() {
         opacity: 1,
         stagger: 0.2,
         duration: 0.8,
-        ease: "power2.out"
+        ease: "power2.out",
+        clearProps: "transform"
       }
     );
     
@@ -197,7 +198,7 @@ export default function FacilitatorPage() {
   };
 
   return (
-    <main ref={container} className="bg-[var(--vault-black)] text-[var(--text-primary)] min-h-screen pb-20 relative overflow-hidden">
+    <main ref={container} className="bg-[var(--vault-black)] text-[var(--text-primary)] min-h-screen pb-20 relative overflow-hidden -mt-[7rem] pt-[7rem]">
       <HeaderNav />
       
       {/* BLIMP VIDEO BACKGROUND */}
@@ -231,12 +232,12 @@ export default function FacilitatorPage() {
               <h3 className="relative z-10 font-display text-2xl text-white mb-2 uppercase tracking-wide">Registration Terminal</h3>
               <p className="relative z-10 font-mono text-xs text-[var(--text-muted)] mb-6">Need authorization code from your Lead.</p>
               
-              <div className="bg-[var(--vault-black)] border border-[var(--heist-red)] p-4 mb-6 relative z-10">
+              <div className="bg-[var(--vault-black)] border border-[var(--heist-red)] p-4 mb-6 relative z-10 rounded-2xl">
                 <div className="absolute -top-3 left-4 bg-[var(--vault-black)] px-2 font-mono text-[0.65rem] text-[var(--heist-red)]">DOOR OPENS IN</div>
                 <CountdownTimer targetDate="2026-07-13T17:00:00+05:30" />
               </div>
               
-              <a href="https://rsvp.withgoogle.com/events/arcade-facilitator/form" target="_blank" rel="noopener noreferrer" className="relative z-10 overflow-hidden flex items-center justify-center gap-2 bg-[var(--heist-red)] text-white font-display text-xl py-4 w-full group border border-transparent hover:border-[var(--heist-red)] transition-colors duration-300">
+              <a href="https://rsvp.withgoogle.com/events/arcade-facilitator/form" target="_blank" rel="noopener noreferrer" className="relative z-10 overflow-hidden flex items-center justify-center gap-2 bg-[var(--heist-red)] text-white font-display text-xl py-4 w-full group border border-transparent hover:border-[var(--heist-red)] transition-colors duration-300 rounded-2xl">
                 <div className="absolute inset-0 bg-black -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out z-0"></div>
                 <span className="relative z-10 tracking-widest transition-all duration-300">ENTER AUTHORIZATION</span> 
                 <ChevronRight size={22} className="relative z-10 group-hover:translate-x-2 transition-transform duration-300" />
@@ -251,21 +252,21 @@ export default function FacilitatorPage() {
               <p className="relative z-10 font-mono text-xs text-[var(--text-muted)] mb-6">Secure channels for El Profesor's syndicate.</p>
               
               <div className="space-y-4 relative z-10">
-                <a href="https://t.me/gcp_arcade" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 bg-[rgba(11,11,13,0.8)] backdrop-blur-sm border border-[var(--vault-outline)] p-4 hover:border-[var(--mint-gold)] transition-colors group/link">
+                <a href="https://t.me/gcp_arcade" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 bg-[rgba(11,11,13,0.8)] backdrop-blur-sm border border-[var(--vault-outline)] p-4 hover:border-[var(--mint-gold)] transition-colors group/link rounded-2xl">
                   <Radio className="text-[var(--mint-gold)] group-hover/link:animate-pulse" size={24} />
                   <div>
                     <div className="font-display text-lg text-white tracking-wider">Telegram Syndicate</div>
                     <div className="font-mono text-[0.65rem] text-[var(--text-muted)]">Encrypted Channel</div>
                   </div>
                 </a>
-                <a href="https://discord.gg/google-cloud-community" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 bg-[rgba(11,11,13,0.8)] backdrop-blur-sm border border-[var(--vault-outline)] p-4 hover:border-[#5865F2] transition-colors group/link">
+                <a href="https://discord.gg/google-cloud-community" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 bg-[rgba(11,11,13,0.8)] backdrop-blur-sm border border-[var(--vault-outline)] p-4 hover:border-[#5865F2] transition-colors group/link rounded-2xl">
                   <Users className="text-[#5865F2] group-hover/link:animate-pulse" size={24} />
                   <div>
                     <div className="font-display text-lg text-white tracking-wider">Discord Headquarters</div>
                     <div className="font-mono text-[0.65rem] text-[var(--text-muted)]">Global Operatives</div>
                   </div>
                 </a>
-                <a href="https://chat.whatsapp.com/FacilitatorGroup" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 bg-[rgba(11,11,13,0.8)] backdrop-blur-sm border border-[var(--vault-outline)] p-4 hover:border-[#25D366] transition-colors group/link">
+                <a href="https://chat.whatsapp.com/FacilitatorGroup" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 bg-[rgba(11,11,13,0.8)] backdrop-blur-sm border border-[var(--vault-outline)] p-4 hover:border-[#25D366] transition-colors group/link rounded-2xl">
                   <MessageCircle className="text-[#25D366] group-hover/link:animate-pulse" size={24} />
                   <div>
                     <div className="font-display text-lg text-white tracking-wider">WhatsApp Line</div>
@@ -278,7 +279,7 @@ export default function FacilitatorPage() {
         </section>
         
         {/* REFERRAL SYSTEM SECTION */}
-        <section className="gsap-section max-w-4xl mx-auto mb-24 border border-[var(--heist-red)] bg-[var(--vault-charcoal)] p-8 relative overflow-hidden shadow-[0_0_30px_rgba(193,18,31,0.15)] group hover:border-[var(--heist-red-bright)] transition-colors duration-500">
+        <section className="gsap-section max-w-4xl mx-auto mb-24 border border-[var(--heist-red)] bg-[var(--vault-charcoal)] p-8 relative overflow-hidden shadow-[0_0_30px_rgba(193,18,31,0.15)] group hover:border-[var(--heist-red-bright)] transition-colors duration-500 rounded-3xl">
           {/* Animated Background Gradients & Image */}
           <div className="absolute inset-0 z-0 bg-contain bg-center bg-no-repeat opacity-[0.1] group-hover:opacity-[0.25] transition-opacity duration-500" style={{ backgroundImage: `url('/bank.png')` }}></div>
           <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--heist-red)] opacity-10 blur-[80px] rounded-full animate-pulse group-hover:opacity-20 transition-opacity z-0"></div>
@@ -293,7 +294,7 @@ export default function FacilitatorPage() {
             Use your unique referral code to recruit more members into your crew and increase your overall syndicate bonus.
           </p>
           
-          <div className="relative z-10 bg-[rgba(0,0,0,0.7)] border border-[var(--vault-outline)] p-5 flex flex-col sm:flex-row items-center justify-between gap-6 backdrop-blur-md group-hover:border-[var(--heist-red)] transition-colors">
+          <div className="relative z-10 bg-[rgba(0,0,0,0.7)] border border-[var(--vault-outline)] p-5 flex flex-col sm:flex-row items-center justify-between gap-6 backdrop-blur-md group-hover:border-[var(--heist-red)] transition-colors rounded-2xl">
             <div className="font-mono text-xl sm:text-3xl text-white tracking-[0.1em] font-bold flex items-center gap-4">
               <Unlock size={24} className="text-[var(--mint-gold)]" />
               <span className="drop-shadow-[0_0_10px_rgba(255,255,255,0.4)]">GCAF26-IN-5F3-M7U</span>
@@ -303,7 +304,7 @@ export default function FacilitatorPage() {
                 navigator.clipboard.writeText("GCAF26-IN-5F3-M7U");
                 alert("Referral code copied to clipboard!");
               }}
-              className="bg-[rgba(212,175,55,0.1)] border border-[var(--mint-gold)] text-[var(--mint-gold)] px-8 py-3 font-display text-xl tracking-widest cursor-pointer flex items-center gap-3 hover:bg-[var(--mint-gold)] hover:text-black transition-colors duration-300 shadow-[inset_0_0_15px_rgba(212,175,55,0.2)]"
+              className="bg-[rgba(212,175,55,0.1)] border border-[var(--mint-gold)] text-[var(--mint-gold)] px-8 py-3 font-display text-xl tracking-widest cursor-pointer flex items-center gap-3 hover:bg-[var(--mint-gold)] hover:text-black transition-colors duration-300 shadow-[inset_0_0_15px_rgba(212,175,55,0.2)] rounded-2xl"
             >
               <Copy size={20} />
               COPY CODE
@@ -314,7 +315,7 @@ export default function FacilitatorPage() {
         {/* THE HEIST PHASES (Milestones) */}
         <section className="gsap-section mb-24 border-t border-[var(--vault-outline)] pt-16">
           <div className="text-center mb-12">
-            <h2 className="font-display text-5xl text-white mb-2 uppercase drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">The Blueprint</h2>
+            <h2 className="font-shlop text-6xl md:text-7xl text-white mb-2 uppercase tracking-wider drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">The Blueprint</h2>
             <p className="font-mono text-sm text-[var(--text-muted)] uppercase tracking-[0.2em]">Milestones translated to Heist Phases. Secure the assets.</p>
           </div>
 
@@ -510,7 +511,7 @@ export default function FacilitatorPage() {
         <section className="gsap-section mb-24 border-t border-[var(--vault-outline)] pt-16 relative">
           
           <div className="text-center mb-12 relative z-10">
-            <h2 className="font-display text-5xl text-white mb-2 uppercase drop-shadow-[0_0_15px_rgba(212,175,55,0.2)]">FAQ / Intel</h2>
+            <h2 className="font-shlop text-6xl md:text-7xl text-white mb-2 uppercase tracking-wider drop-shadow-[0_0_15px_rgba(212,175,55,0.2)]">FAQ / Intel</h2>
             <p className="font-mono text-sm text-[var(--text-muted)] uppercase tracking-[0.2em]">Crucial operational knowledge before the breach.</p>
           </div>
 
