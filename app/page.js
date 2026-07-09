@@ -57,9 +57,10 @@ export default function Home() {
             <div className="z-10 shrink-0">
               <a 
                 href="https://docs.google.com/forms/d/e/1FAIpQLScwpRj34Ysw5GEjeubPlkG49MECZTG3z820O_2Uz85IxJ9qcg/viewform" target="_blank" rel="noopener noreferrer"
-                className="inline-block relative px-6 py-3 bg-gradient-to-r from-pink-500 to-rose-600 text-white font-mono font-bold tracking-[0.1em] text-sm uppercase shadow-[0_0_15px_rgba(225,29,72,0.4)] hover:shadow-[0_0_25px_rgba(225,29,72,0.8)] hover:scale-105 transition-all duration-300 before:absolute before:inset-0 before:border before:border-white/20 before:opacity-0 hover:before:opacity-100"
+                className="group/subbtn relative overflow-hidden inline-flex items-center justify-center px-8 py-3 bg-[var(--heist-red)] text-white font-shlop text-3xl tracking-widest uppercase border border-[var(--heist-red)] hover:border-white transition-all duration-300 hover:scale-105 shadow-[0_0_15px_rgba(193,18,31,0.5)] hover:shadow-[0_0_30px_var(--heist-red)]"
               >
-                Subscribe here!
+                <div className="absolute inset-0 bg-black translate-y-full group-hover/subbtn:translate-y-0 transition-transform duration-500 ease-out z-0"></div>
+                <span className="relative z-10 drop-shadow-[0_2px_5px_rgba(0,0,0,0.8)] group-hover/subbtn:text-[var(--heist-red)] group-hover/subbtn:drop-shadow-[0_0_10px_var(--heist-red)] transition-colors duration-300 mt-2">Subscribe here!</span>
               </a>
             </div>
           </motion.div>
