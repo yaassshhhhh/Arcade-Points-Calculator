@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import HeaderNav from "@/components/HeaderNav";
 import MaskIcon from "@/components/MaskIcon";
 import dynamic from 'next/dynamic';
@@ -12,7 +13,15 @@ import ScrollVideo from "@/components/ScrollVideo";
 export default function Home() {
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowPopup(true);
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -140,6 +149,55 @@ export default function Home() {
         </motion.div>
         </div>
       </div>
+
+      {/* WhatsApp Popup Modal */}
+      <AnimatePresence>
+        {showPopup && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm px-4"
+          >
+            <motion.div 
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 20 }}
+              className="bg-[var(--vault-black)] border border-[var(--heist-red)] rounded-3xl p-8 max-w-md w-full relative shadow-[0_0_50px_rgba(193,18,31,0.4)] flex flex-col items-center text-center"
+            >
+              {/* Close Button */}
+              <button 
+                onClick={() => setShowPopup(false)}
+                className="absolute top-4 right-4 text-[var(--text-muted)] hover:text-white transition-colors"
+              >
+                ✕
+              </button>
+
+              <h3 className="font-shlop text-4xl text-white mb-2 tracking-widest uppercase drop-shadow-[0_0_10px_rgba(193,18,31,0.8)]">
+                Ultimate Support
+              </h3>
+              
+              <p className="font-mono text-[var(--text-secondary)] text-sm mb-6 leading-relaxed">
+                <span className="text-[var(--mint-gold)]">Join with our code and get Ultimate help and support.</span>
+              </p>
+
+              {/* QR Code */}
+              <div className="bg-white p-2 rounded-xl mb-6 shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+                <div className="relative w-48 h-48 rounded-lg overflow-hidden">
+                  <Image src="/whatsapp_qr.png" alt="WhatsApp QR Code" fill style={{ objectFit: 'contain' }} />
+                </div>
+              </div>
+
+              <button
+                onClick={() => router.push('/facilitator')}
+                className="w-full py-4 bg-[var(--heist-red)] text-white font-shlop text-2xl tracking-widest uppercase hover:bg-[var(--heist-red-bright)] hover:shadow-[0_0_20px_var(--heist-red)] transition-all rounded-tl-2xl rounded-br-2xl rounded-tr-sm rounded-bl-sm border border-transparent hover:border-white"
+              >
+                Go To Facilitator Section
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </main>
   );
 }
