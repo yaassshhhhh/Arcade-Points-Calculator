@@ -94,7 +94,7 @@ export default function Home() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full relative overflow-hidden bg-[var(--heist-red)] text-white font-shlop text-4xl tracking-widest py-5 hover:bg-[var(--heist-red-bright)] hover:shadow-[0_0_30px_var(--heist-red)] transition-all group/btn border border-transparent hover:border-white uppercase"
+                  className="w-full relative overflow-hidden bg-[var(--heist-red)] text-white font-shlop text-4xl tracking-widest py-5 hover:bg-[var(--heist-red-bright)] hover:shadow-[0_0_30px_var(--heist-red)] transition-all group/btn border border-transparent hover:border-white uppercase rounded-tl-2xl rounded-br-2xl rounded-tr-sm rounded-bl-sm"
                 >
                   <div className="absolute inset-0 bg-black -translate-x-full group-hover/btn:translate-x-0 transition-transform duration-500 ease-out z-0"></div>
                   <div className="relative z-10 flex justify-center items-center gap-3 mt-1">
@@ -131,7 +131,7 @@ export default function Home() {
           <div className="z-10 shrink-0 md:pr-4">
             <a 
               href="https://docs.google.com/forms/d/e/1FAIpQLScwpRj34Ysw5GEjeubPlkG49MECZTG3z820O_2Uz85IxJ9qcg/viewform" target="_blank" rel="noopener noreferrer"
-              className="group/subbtn relative overflow-hidden inline-flex items-center justify-center px-10 py-4 bg-[var(--heist-red)] text-white font-shlop text-3xl md:text-4xl tracking-widest uppercase border border-[var(--heist-red)] hover:border-white transition-all duration-300 hover:scale-105 shadow-[0_0_15px_rgba(193,18,31,0.5)] hover:shadow-[0_0_30px_var(--heist-red)] rounded-sm"
+              className="group/subbtn relative overflow-hidden inline-flex items-center justify-center px-10 py-4 bg-[var(--heist-red)] text-white font-shlop text-3xl md:text-4xl tracking-widest uppercase border border-[var(--heist-red)] hover:border-white transition-all duration-300 hover:scale-105 shadow-[0_0_15px_rgba(193,18,31,0.5)] hover:shadow-[0_0_30px_var(--heist-red)] rounded-tl-2xl rounded-br-2xl rounded-tr-sm rounded-bl-sm"
             >
               <div className="absolute inset-0 bg-black translate-y-full group-hover/subbtn:translate-y-0 transition-transform duration-500 ease-out z-0"></div>
               <span className="relative z-10 drop-shadow-[0_2px_5px_rgba(0,0,0,0.8)] group-hover/subbtn:text-[var(--heist-red)] group-hover/subbtn:drop-shadow-[0_0_10px_var(--heist-red)] transition-colors duration-300 mt-2">Subscribe here!</span>
