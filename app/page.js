@@ -163,26 +163,29 @@ export default function Home() {
               initial={{ scale: 0.9, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.9, y: 20 }}
-              className="bg-[var(--vault-black)] border border-[var(--heist-red)] rounded-3xl p-8 max-w-md w-full relative shadow-[0_0_50px_rgba(193,18,31,0.4)] flex flex-col items-center text-center"
+              className="bg-[var(--vault-black)] border border-[var(--heist-red)] rounded-3xl p-8 max-w-md w-full relative shadow-[0_0_50px_rgba(193,18,31,0.4)] flex flex-col items-center text-center overflow-hidden"
             >
+              {/* Background Image */}
+              <div className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-[0.15] mix-blend-screen pointer-events-none" style={{ backgroundImage: "url('/professor.png')" }}></div>
+
               {/* Close Button */}
               <button 
                 onClick={() => setShowPopup(false)}
-                className="absolute top-4 right-4 text-[var(--text-muted)] hover:text-white transition-colors"
+                className="absolute top-4 right-4 z-10 text-[var(--text-muted)] hover:text-white transition-colors"
               >
                 ✕
               </button>
 
-              <h3 className="font-shlop text-4xl text-white mb-2 tracking-widest uppercase drop-shadow-[0_0_10px_rgba(193,18,31,0.8)]">
+              <h3 className="font-shlop text-4xl text-white mb-2 tracking-widest uppercase drop-shadow-[0_0_10px_rgba(193,18,31,0.8)] relative z-10">
                 Ultimate Support
               </h3>
               
-              <p className="font-mono text-[var(--text-secondary)] text-sm mb-6 leading-relaxed">
+              <p className="font-mono text-[var(--text-secondary)] text-sm mb-6 leading-relaxed relative z-10">
                 <span className="text-[var(--mint-gold)]">Join with our code and get Ultimate help and support.</span>
               </p>
 
               {/* QR Code */}
-              <div className="bg-white p-2 rounded-xl mb-6 shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+              <div className="bg-white p-2 rounded-xl mb-6 shadow-[0_0_20px_rgba(255,255,255,0.2)] relative z-10">
                 <div className="relative w-48 h-48 rounded-lg overflow-hidden">
                   <Image src="/whatsapp_qr.png" alt="WhatsApp QR Code" fill style={{ objectFit: 'contain' }} />
                 </div>
@@ -190,7 +193,7 @@ export default function Home() {
 
               <button
                 onClick={() => router.push('/facilitator')}
-                className="w-full py-4 bg-[var(--heist-red)] text-white font-shlop text-2xl tracking-widest uppercase hover:bg-[var(--heist-red-bright)] hover:shadow-[0_0_20px_var(--heist-red)] transition-all rounded-tl-2xl rounded-br-2xl rounded-tr-sm rounded-bl-sm border border-transparent hover:border-white"
+                className="w-full py-4 bg-[var(--heist-red)] text-white font-shlop text-2xl tracking-widest uppercase hover:bg-[var(--heist-red-bright)] hover:shadow-[0_0_20px_var(--heist-red)] transition-all rounded-tl-2xl rounded-br-2xl rounded-tr-sm rounded-bl-sm border border-transparent hover:border-white relative z-10"
               >
                 Go To Facilitator Section
               </button>
