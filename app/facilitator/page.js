@@ -312,21 +312,21 @@ export default function FacilitatorPage() {
               <p className="relative z-10 font-mono text-xs text-[var(--text-muted)] mb-6">Secure channels for El Profesor's syndicate.</p>
               
               <div className="space-y-4 relative z-10">
-                <a href="https://t.me/gcp_arcade" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 bg-[rgba(11,11,13,0.8)] backdrop-blur-sm border border-[var(--vault-outline)] p-4 hover:border-[var(--mint-gold)] transition-colors group/link rounded-2xl">
+                <a href="https://t.me/SatyaGCP25" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 bg-[rgba(11,11,13,0.8)] backdrop-blur-sm border border-[var(--vault-outline)] p-4 hover:border-[var(--mint-gold)] transition-colors group/link rounded-2xl">
                   <Radio className="text-[var(--mint-gold)] group-hover/link:animate-pulse" size={24} />
                   <div>
                     <div className="font-display text-lg text-white tracking-wider">Telegram Syndicate</div>
                     <div className="font-mono text-[0.65rem] text-[var(--text-muted)]">Encrypted Channel</div>
                   </div>
                 </a>
-                <a href="https://discord.gg/google-cloud-community" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 bg-[rgba(11,11,13,0.8)] backdrop-blur-sm border border-[var(--vault-outline)] p-4 hover:border-[#5865F2] transition-colors group/link rounded-2xl">
+                <a href="https://discord.com/invite/gQEP4TyFh" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 bg-[rgba(11,11,13,0.8)] backdrop-blur-sm border border-[var(--vault-outline)] p-4 hover:border-[#5865F2] transition-colors group/link rounded-2xl">
                   <Users className="text-[#5865F2] group-hover/link:animate-pulse" size={24} />
                   <div>
                     <div className="font-display text-lg text-white tracking-wider">Discord Headquarters</div>
                     <div className="font-mono text-[0.65rem] text-[var(--text-muted)]">Global Operatives</div>
                   </div>
                 </a>
-                <a href="https://chat.whatsapp.com/FacilitatorGroup" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 bg-[rgba(11,11,13,0.8)] backdrop-blur-sm border border-[var(--vault-outline)] p-4 hover:border-[#25D366] transition-colors group/link rounded-2xl">
+                <a href="https://chat.whatsapp.com/EaFgsyEUwSRD70ueBtZyH1?mode=gi_t" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 bg-[rgba(11,11,13,0.8)] backdrop-blur-sm border border-[var(--vault-outline)] p-4 hover:border-[#25D366] transition-colors group/link rounded-2xl">
                   <MessageCircle className="text-[#25D366] group-hover/link:animate-pulse" size={24} />
                   <div>
                     <div className="font-display text-lg text-white tracking-wider">WhatsApp Line</div>
