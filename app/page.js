@@ -94,14 +94,14 @@ export default function Home() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full relative overflow-hidden bg-[var(--heist-red)] text-white font-display text-2xl py-5 hover:bg-[var(--heist-red-bright)] hover:shadow-[0_0_30px_var(--heist-red)] transition-all group/btn border border-transparent hover:border-white"
+                  className="w-full relative overflow-hidden bg-[var(--heist-red)] text-white font-shlop text-4xl tracking-widest py-5 hover:bg-[var(--heist-red-bright)] hover:shadow-[0_0_30px_var(--heist-red)] transition-all group/btn border border-transparent hover:border-white uppercase"
                 >
                   <div className="absolute inset-0 bg-black -translate-x-full group-hover/btn:translate-x-0 transition-transform duration-500 ease-out z-0"></div>
-                  <div className="relative z-10 flex justify-center items-center gap-3">
+                  <div className="relative z-10 flex justify-center items-center gap-3 mt-1">
                     {loading ? (
                       <>
                         <MaskIcon size={28} loading={true} className="text-white" />
-                        <span className="tracking-[0.2em]">BREACHING VAULT...</span>
+                        <span className="tracking-[0.2em] font-mono text-sm mt-1">BREACHING VAULT...</span>
                       </>
                     ) : (
                       <span>ENTER THE SAFE HOUSE</span>
