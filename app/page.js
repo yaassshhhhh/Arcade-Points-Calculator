@@ -163,10 +163,10 @@ export default function Home() {
               initial={{ scale: 0.9, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.9, y: 20 }}
-              className="bg-[var(--vault-black)] border border-[var(--heist-red)] rounded-3xl p-8 max-w-md w-full relative shadow-[0_0_50px_rgba(193,18,31,0.4)] flex flex-col items-center text-center overflow-hidden"
+              className="group bg-[var(--vault-black)] border border-[var(--heist-red)] rounded-3xl p-8 max-w-md w-full relative shadow-[0_0_50px_rgba(193,18,31,0.4)] flex flex-col items-center text-center overflow-hidden"
             >
               {/* Background Image */}
-              <div className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-[0.15] mix-blend-screen pointer-events-none" style={{ backgroundImage: "url('/professor.png')" }}></div>
+              <div className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-[0.25] mix-blend-screen pointer-events-none transition-all duration-500 ease-out group-hover:opacity-[0.45] group-hover:drop-shadow-[0_0_30px_var(--heist-red)] group-hover:scale-105" style={{ backgroundImage: "url('/professor.png')" }}></div>
 
               {/* Close Button */}
               <button 
