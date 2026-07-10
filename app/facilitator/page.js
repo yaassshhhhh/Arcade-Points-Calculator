@@ -928,22 +928,8 @@ export default function FacilitatorPage() {
               </div>
 
               <div className="p-6 flex-1 overflow-y-auto max-h-[600px] space-y-6 custom-scrollbar pr-4 relative z-10">
-                {vibeMessages.map((msg, i) => (
-                  <div key={i} className={`flex flex-col ${i % 2 === 0 ? 'items-start' : 'items-end'}`}>
-                    <div className="font-mono text-[0.65rem] text-[var(--mint-gold)] mb-1 uppercase tracking-widest px-2">{msg.label} // {msg.sender}</div>
-                    <div className={`relative max-w-[85%] p-4 rounded-2xl ${i % 2 === 0 ? 'bg-[rgba(26,26,30,0.9)] rounded-tl-none border-l-2 border-[var(--heist-red)]' : 'bg-[rgba(193,18,31,0.15)] rounded-tr-none border-r-2 border-[var(--mint-gold)]'} shadow-[0_4px_15px_rgba(0,0,0,0.5)] backdrop-blur-sm group-hover:shadow-[0_0_15px_rgba(193,18,31,0.2)] transition-shadow`}>
-                      <p className="font-mono text-sm text-[var(--text-secondary)] leading-relaxed">
-                        {msg.text}
-                      </p>
-                      <div className="absolute -bottom-2 -right-2 bg-[var(--vault-black)] rounded-full p-1 border border-[var(--vault-outline)]">
-                        <CheckCircle2 size={12} className="text-[var(--mint-gold)]" />
-                      </div>
-                    </div>
-                  </div>
-                ))}
-
-                {/* Original Images added below the chat messages */}
-                <div className="flex flex-col items-center gap-6 mt-8">
+                {/* Original Images */}
+                <div className="flex flex-col items-center gap-6">
                   <div className="w-full p-2 bg-[rgba(11,11,13,0.6)] rounded-xl border border-[var(--vault-outline)] shadow-[0_0_20px_rgba(0,0,0,0.6)]">
                     <img src="/cloud_vibe_original.jpg" alt="Cloud Vibe Image" className="w-full h-auto rounded-lg" />
                   </div>
