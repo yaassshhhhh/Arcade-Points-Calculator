@@ -867,10 +867,10 @@ export default function FacilitatorPage() {
               <div className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-[0.15] pointer-events-none mix-blend-screen" style={{ backgroundImage: "url('/Mafer.jpeg')" }}></div>
               <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--mint-gold-dim)] blur-[60px] opacity-20 -z-0 group-hover:opacity-40 transition-opacity pointer-events-none"></div>
               
-              {/* Centered Hover Tooltip */}
-              <div className="absolute inset-0 m-auto w-[85%] h-fit bg-[var(--vault-black)]/95 backdrop-blur-md text-white font-mono text-sm border-2 border-[var(--heist-red)] p-8 rounded-2xl shadow-[0_0_30px_rgba(193,18,31,0.8)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-50 text-center leading-relaxed flex flex-col justify-center items-center">
-                <p className="mb-4">These are the Top 10 participants who earned the Tier 1 Swag Kit as a token of appreciation for their outstanding performance.</p>
-                <p className="text-white">If you'd like to earn the Tier 1 Swag Kit this time, register using our Facilitator Code and secure a top position on the leaderboard. Best of luck!</p>
+              {/* Full Card Hover Tooltip */}
+              <div className="absolute inset-0 flex flex-col items-center justify-center bg-[var(--vault-black)]/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-8 text-center z-50 backdrop-blur-sm pointer-events-none">
+                <p className="font-shlop text-2xl md:text-3xl text-white tracking-wider drop-shadow-[0_0_15px_rgba(232,17,45,0.6)] leading-relaxed mb-6">These are the Top 10 participants who earned the Tier 1 Swag Kit as a token of appreciation for their outstanding performance.</p>
+                <p className="font-shlop text-2xl md:text-3xl text-[var(--mint-gold)] tracking-wider drop-shadow-[0_0_15px_rgba(212,175,55,0.6)] leading-relaxed">If you'd like to earn the Tier 1 Swag Kit this time, register using our Facilitator Code and secure a top position on the leaderboard. Best of luck!</p>
               </div>
 
               <div className="group-hover:opacity-0 transition-opacity duration-300 relative z-10">
