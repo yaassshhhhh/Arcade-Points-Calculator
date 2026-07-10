@@ -856,7 +856,7 @@ export default function FacilitatorPage() {
         {/* GRATITUDE & VIBE CIRCLE */}
         <section className="gsap-section mb-24 border-t border-[var(--vault-outline)] pt-16 relative bg-transparent">
           <div className="text-center mb-16 relative z-10">
-            <h2 className="font-shlop text-6xl md:text-7xl text-[var(--heist-red)] mb-2 uppercase tracking-wider drop-shadow-[0_0_15px_rgba(193,18,31,0.5)]">Wall of Honor</h2>
+            <h2 className="font-shlop text-6xl md:text-7xl text-[var(--heist-red)] mb-2 uppercase tracking-wider drop-shadow-[0_0_15px_rgba(193,18,31,0.5)]">Why should join with us</h2>
             <p className="font-mono text-sm text-[var(--mint-gold)] uppercase tracking-[0.2em] animate-pulse">Legends of the Heist & The Syndicate Vibe</p>
           </div>
 
