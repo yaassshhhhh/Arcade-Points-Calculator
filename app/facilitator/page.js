@@ -941,6 +941,16 @@ export default function FacilitatorPage() {
                     </div>
                   </div>
                 ))}
+
+                {/* Original Images added below the chat messages */}
+                <div className="flex flex-col items-center gap-6 mt-8">
+                  <div className="w-full p-2 bg-[rgba(11,11,13,0.6)] rounded-xl border border-[var(--vault-outline)] shadow-[0_0_20px_rgba(0,0,0,0.6)]">
+                    <img src="/cloud_vibe_original.jpg" alt="Cloud Vibe Image" className="w-full h-auto rounded-lg" />
+                  </div>
+                  <div className="w-full p-2 bg-[rgba(11,11,13,0.6)] rounded-xl border border-[var(--vault-outline)] shadow-[0_0_20px_rgba(0,0,0,0.6)]">
+                    <img src="/cloud_vibe_original_2.png" alt="Cloud Vibe Image 2" className="w-full h-auto rounded-lg" />
+                  </div>
+                </div>
               </div>
               
               <div className="p-4 border-t border-[var(--vault-outline)] bg-[rgba(255,255,255,0.02)] text-center relative z-10">
