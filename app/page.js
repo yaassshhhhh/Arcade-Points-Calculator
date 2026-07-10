@@ -37,34 +37,6 @@ export default function Home() {
 
       <div className="relative z-20 w-full bg-[var(--vault-black)] pb-24">
         <div className="container mx-auto px-6 max-w-7xl">
-          {/* ── Subscription Banner ───────────────────────────────────────── */}
-          <motion.div 
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1, duration: 0.8 }}
-            className="w-full max-w-4xl mx-auto mb-12 flex flex-col md:flex-row items-center justify-between bg-[var(--vault-charcoal)] border border-[var(--heist-red)] rounded-sm p-4 shadow-[0_0_15px_rgba(193,18,31,0.2)] relative overflow-hidden group"
-          >
-            <div className="absolute top-0 left-0 w-1 h-full bg-[var(--heist-red)] shadow-[0_0_10px_var(--heist-red)]"></div>
-            <div className="absolute inset-0 bg-[var(--heist-red)] opacity-0 group-hover:opacity-5 transition-opacity duration-500 pointer-events-none"></div>
-            
-            <div className="flex-1 px-4 mb-4 md:mb-0 z-10 text-center md:text-left">
-              <p className="text-[var(--text-primary)] font-mono text-xs md:text-sm leading-relaxed tracking-wide">
-                <span className="text-[var(--heist-red)] font-bold animate-pulse mr-2">[!] NOTICE:</span>
-                Subscription to the Google Skills Arcade is necessary to receive important email updates and perks. However, you can unsubscribe anytime you want.
-              </p>
-            </div>
-            
-            <div className="z-10 shrink-0">
-              <a 
-                href="https://docs.google.com/forms/d/e/1FAIpQLScwpRj34Ysw5GEjeubPlkG49MECZTG3z820O_2Uz85IxJ9qcg/viewform" target="_blank" rel="noopener noreferrer"
-                className="group/subbtn relative overflow-hidden inline-flex items-center justify-center px-8 py-3 bg-[var(--heist-red)] text-white font-shlop text-3xl tracking-widest uppercase border border-[var(--heist-red)] hover:border-white transition-all duration-300 hover:scale-105 shadow-[0_0_15px_rgba(193,18,31,0.5)] hover:shadow-[0_0_30px_var(--heist-red)]"
-              >
-                <div className="absolute inset-0 bg-black translate-y-full group-hover/subbtn:translate-y-0 transition-transform duration-500 ease-out z-0"></div>
-                <span className="relative z-10 drop-shadow-[0_2px_5px_rgba(0,0,0,0.8)] group-hover/subbtn:text-[var(--heist-red)] group-hover/subbtn:drop-shadow-[0_0_10px_var(--heist-red)] transition-colors duration-300 mt-2">Subscribe here!</span>
-              </a>
-            </div>
-          </motion.div>
-
           {/* ── Mission Briefing Form ─────────────────────────────────────── */}
           <section className="flex flex-col items-center justify-center pb-12 pt-2 md:pt-4">
             
@@ -139,6 +111,33 @@ export default function Home() {
               </motion.form>
           </div>
         </section>
+
+        {/* ── Subscription Banner ───────────────────────────────────────── */}
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1, duration: 0.8 }}
+          className="w-full max-w-4xl mx-auto mb-12 flex flex-col md:flex-row items-center justify-between bg-[var(--vault-charcoal)] border-y border-r border-[var(--heist-red)] border-l-[8px] border-l-[var(--heist-red)] rounded-tl-[3rem] rounded-br-[3rem] rounded-tr-md rounded-bl-md p-6 shadow-[0_0_25px_rgba(193,18,31,0.3)] relative overflow-hidden group hover:scale-[1.01] hover:shadow-[0_0_35px_rgba(193,18,31,0.5)] transition-all duration-300"
+        >
+          <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--heist-red)] blur-[60px] opacity-10 group-hover:opacity-30 transition-opacity pointer-events-none"></div>
+          
+          <div className="flex-1 px-4 mb-6 md:mb-0 z-10 text-center md:text-left">
+            <p className="text-[var(--text-primary)] font-mono text-sm md:text-base leading-relaxed tracking-wide">
+              <span className="text-[var(--heist-red)] font-bold animate-pulse mr-2 text-lg drop-shadow-[0_0_8px_var(--heist-red)]">[!] NOTICE:</span>
+              Subscription to the Google Skills Arcade is necessary to receive important email updates and perks. However, you can unsubscribe anytime you want.
+            </p>
+          </div>
+          
+          <div className="z-10 shrink-0 md:pr-4">
+            <a 
+              href="https://docs.google.com/forms/d/e/1FAIpQLScwpRj34Ysw5GEjeubPlkG49MECZTG3z820O_2Uz85IxJ9qcg/viewform" target="_blank" rel="noopener noreferrer"
+              className="group/subbtn relative overflow-hidden inline-flex items-center justify-center px-10 py-4 bg-[var(--heist-red)] text-white font-shlop text-3xl md:text-4xl tracking-widest uppercase border border-[var(--heist-red)] hover:border-white transition-all duration-300 hover:scale-105 shadow-[0_0_15px_rgba(193,18,31,0.5)] hover:shadow-[0_0_30px_var(--heist-red)] rounded-sm"
+            >
+              <div className="absolute inset-0 bg-black translate-y-full group-hover/subbtn:translate-y-0 transition-transform duration-500 ease-out z-0"></div>
+              <span className="relative z-10 drop-shadow-[0_2px_5px_rgba(0,0,0,0.8)] group-hover/subbtn:text-[var(--heist-red)] group-hover/subbtn:drop-shadow-[0_0_10px_var(--heist-red)] transition-colors duration-300 mt-2">Subscribe here!</span>
+            </a>
+          </div>
+        </motion.div>
         </div>
       </div>
     </main>

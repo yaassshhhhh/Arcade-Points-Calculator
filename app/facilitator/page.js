@@ -126,6 +126,30 @@ const gearBadges = [
   }
 ];
 
+const topAchievers = [
+  { name: "Pranav Arun Jadhav", points: 90 },
+  { name: "Ganesh Singh", points: 89 },
+  { name: "Rahul Vishwakarma", points: 88 },
+  { name: "Rohit Rathod", points: 87 },
+  { name: "Pushpak Jadhav", points: 87 },
+  { name: "Deepali Kulkarni", points: 86 },
+  { name: "Soujanya Bagali", points: 86 },
+  { name: "Akshay Paramane", points: 85 },
+  { name: "Rahul Gupta", points: 85 },
+  { name: "Madhura Borikar", points: 85 }
+];
+
+const vibeMessages = [
+  { label: "Gratitude", text: "Hi everyone! The Prize Counter is finally OPEN! 🎉 Your hard work has paid off - now it's time to claim your reward! 🏆", sender: "El Profesor" },
+  { label: "Progress", text: "Thank you satya for being a good facilitator through out this journey 🤩", sender: "Tokyo" },
+  { label: "Support", text: "Huge congratulations to all milestone achievers! Let's keep growing together! 💪", sender: "Nairobi" },
+  { label: "Arcade Legend", text: "finally complete ultimate milestone 🥳 thankful to our admins and group members to support each and every step.", sender: "Denver" },
+  { label: "Motivation", text: "You've earned 85 Arcade points and reached the Arcade Legend Tier. Thanks Buddy for Your support ♥️", sender: "Helsinki" },
+  { label: "Wins", text: "Huge round of applause for @@Satya 🇮🇳 for his hardwork... Once again heartly thank you for being our facilitator!", sender: "Rio" },
+  { label: "Community", text: "Congratulations for all participants 2025 cohort 2 big thanks to @@Satya 🇮🇳 Bhai 🤩💗", sender: "Stockholm" },
+  { label: "Achievement", text: "Finallyyy bhaiya 🥺❤️ @@Satya 🇮🇳 @Sambhav Arcade Facilitator 25", sender: "Bogotá" }
+];
+
 export default function FacilitatorPage() {
   const container = useRef(null);
   const [openFaq, setOpenFaq] = useState(null);
@@ -826,6 +850,102 @@ export default function FacilitatorPage() {
                 </div>
               </div>
             ))}
+          </div>
+        </section>
+
+        {/* GRATITUDE & VIBE CIRCLE */}
+        <section className="gsap-section mb-24 border-t border-[var(--vault-outline)] pt-16 relative">
+          <div className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-[0.15]" style={{ backgroundImage: "url('/money_heist_vault_bg.png')" }}></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-[var(--vault-black)] via-transparent to-[var(--vault-black)] z-0"></div>
+
+          <div className="text-center mb-16 relative z-10">
+            <h2 className="font-shlop text-6xl md:text-7xl text-[var(--heist-red)] mb-2 uppercase tracking-wider drop-shadow-[0_0_15px_rgba(193,18,31,0.5)]">Wall of Honor</h2>
+            <p className="font-mono text-sm text-[var(--mint-gold)] uppercase tracking-[0.2em] animate-pulse">Legends of the Heist & The Syndicate Vibe</p>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-12 relative z-10 max-w-7xl mx-auto px-4 md:px-8">
+            {/* Top 10 Achievers */}
+            <div className="bg-[rgba(11,11,13,0.85)] backdrop-blur-md border border-[var(--vault-outline)] border-l-[6px] border-l-[var(--vault-outline)] rounded-tl-[3rem] rounded-br-[3rem] rounded-tr-xl rounded-bl-xl overflow-hidden shadow-[0_0_30px_rgba(0,0,0,0.8)] relative group hover:border-[var(--mint-gold)] hover:border-l-[var(--mint-gold)] transition-colors duration-500">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--mint-gold-dim)] blur-[60px] opacity-20 -z-10 group-hover:opacity-40 transition-opacity"></div>
+              
+              {/* Centered Hover Tooltip */}
+              <div className="absolute inset-0 m-auto w-[85%] h-fit bg-[var(--vault-black)]/95 backdrop-blur-md text-white font-mono text-sm border-2 border-[var(--heist-red)] p-8 rounded-2xl shadow-[0_0_30px_rgba(193,18,31,0.8)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-50 text-center leading-relaxed flex flex-col justify-center items-center">
+                <p className="mb-4">These are the Top 10 participants who earned the Tier 1 Swag Kit as a token of appreciation for their outstanding performance.</p>
+                <p className="text-white">If you'd like to earn the Tier 1 Swag Kit this time, register using our Facilitator Code and secure a top position on the leaderboard. Best of luck!</p>
+              </div>
+
+              <div className="group-hover:opacity-0 transition-opacity duration-300">
+                <div className="p-6 border-b border-[var(--vault-outline)] bg-[rgba(255,255,255,0.02)]">
+                  <h3 className="font-shlop text-4xl text-white tracking-widest uppercase text-center flex items-center justify-center gap-3 drop-shadow-[0_0_10px_rgba(212,175,55,0.5)]">
+                    Top 10 Ultimate Achievers
+                  </h3>
+                  <p className="font-mono text-xs text-center text-[var(--text-muted)] mt-2 tracking-[0.2em]">ELIGIBLE FOR THE GRAND GIVEAWAY</p>
+                </div>
+                
+                <div className="p-6">
+                  <div className="grid grid-cols-12 text-xs font-mono text-[var(--text-muted)] tracking-widest border-b border-[var(--vault-outline)] pb-3 mb-4 uppercase">
+                    <div className="col-span-2 text-center">Rank</div>
+                    <div className="col-span-7">Operative Name</div>
+                    <div className="col-span-3 text-right">Skill Badges</div>
+                  </div>
+                  
+                  <div className="space-y-3">
+
+                    {topAchievers.map((achiever, i) => (
+                      <div key={i} className="grid grid-cols-12 items-center font-display text-lg py-2 border-b border-[rgba(255,255,255,0.05)] hover:bg-[rgba(193,18,31,0.05)] transition-colors rounded px-2 group/row">
+                        <div className="col-span-2 text-center text-[var(--mint-gold)] font-bold text-xl drop-shadow-[0_0_5px_rgba(212,175,55,0.5)]">
+                          #{i + 1}
+                        </div>
+                        <div className="col-span-7 text-white flex items-center gap-3">
+                          {i < 3 && <span className="inline-block w-2 h-2 rounded-full bg-[var(--heist-red)] animate-pulse shadow-[0_0_8px_var(--heist-red)]"></span>}
+                          {achiever.name}
+                        </div>
+                        <div className="col-span-3 text-right text-[var(--mint-gold)] font-mono text-xl group-hover/row:scale-110 transition-transform">
+                          {achiever.points}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  
+                  <div className="mt-8 text-center text-sm font-mono text-[var(--text-muted)]">
+                    <p>Happy Facilitating!</p>
+                    <p className="text-[var(--heist-red)] mt-1">— From Facilitators Satya & Yash ♥</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Cloud Vibe Circle */}
+            <div className="bg-[rgba(11,11,13,0.85)] backdrop-blur-md border border-[var(--vault-outline)] border-l-[6px] border-l-[var(--vault-outline)] rounded-tl-[3rem] rounded-br-[3rem] rounded-tr-xl rounded-bl-xl overflow-hidden shadow-[0_0_30px_rgba(0,0,0,0.8)] relative group hover:border-[var(--heist-red)] hover:border-l-[var(--heist-red)] transition-colors duration-500 flex flex-col">
+              <div className="absolute bottom-0 left-0 w-48 h-48 bg-[var(--heist-red)] blur-[80px] opacity-10 -z-10 group-hover:opacity-30 transition-opacity"></div>
+              
+              <div className="p-6 border-b border-[var(--vault-outline)] bg-[rgba(193,18,31,0.05)]">
+                <h3 className="font-shlop text-4xl text-white tracking-widest uppercase text-center flex items-center justify-center gap-3 drop-shadow-[0_0_10px_rgba(193,18,31,0.5)]">
+                  Cloud Vibe Circle
+                </h3>
+                <p className="font-mono text-xs text-center text-[var(--text-muted)] mt-2 tracking-[0.2em]">SECURE SYNDICATE COMMS</p>
+              </div>
+
+              <div className="p-6 flex-1 overflow-y-auto max-h-[600px] space-y-6 custom-scrollbar pr-4">
+                {vibeMessages.map((msg, i) => (
+                  <div key={i} className={`flex flex-col ${i % 2 === 0 ? 'items-start' : 'items-end'}`}>
+                    <div className="font-mono text-[0.65rem] text-[var(--mint-gold)] mb-1 uppercase tracking-widest px-2">{msg.label} // {msg.sender}</div>
+                    <div className={`relative max-w-[85%] p-4 rounded-2xl ${i % 2 === 0 ? 'bg-[rgba(26,26,30,0.9)] rounded-tl-none border-l-2 border-[var(--heist-red)]' : 'bg-[rgba(193,18,31,0.15)] rounded-tr-none border-r-2 border-[var(--mint-gold)]'} shadow-[0_4px_15px_rgba(0,0,0,0.5)] backdrop-blur-sm group-hover:shadow-[0_0_15px_rgba(193,18,31,0.2)] transition-shadow`}>
+                      <p className="font-mono text-sm text-[var(--text-secondary)] leading-relaxed">
+                        {msg.text}
+                      </p>
+                      <div className="absolute -bottom-2 -right-2 bg-[var(--vault-black)] rounded-full p-1 border border-[var(--vault-outline)]">
+                        <CheckCircle2 size={12} className="text-[var(--mint-gold)]" />
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              
+              <div className="p-4 border-t border-[var(--vault-outline)] bg-[rgba(255,255,255,0.02)] text-center">
+                <p className="font-shlop text-2xl text-white tracking-widest">Behind every milestone is a team that believed.</p>
+              </div>
+            </div>
           </div>
         </section>
 
