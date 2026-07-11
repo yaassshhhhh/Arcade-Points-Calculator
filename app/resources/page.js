@@ -76,6 +76,18 @@ export default function ResourcesPage() {
 
   const videos = [
     {
+      title: "Make Your Google Developer Profile Public & Earn Gear Badge",
+      url: "https://www.youtube.com/watch?v=CfpzYDjMpg0",
+      videoId: "CfpzYDjMpg0",
+      isLatest: true
+    },
+    {
+      title: "Google Cloud Arcade Facililator 2026",
+      url: "https://www.youtube.com/watch?v=ooNm2WP4RkY",
+      videoId: "ooNm2WP4RkY",
+      isLatest: true
+    },
+    {
       title: "Claim Your 400+ FREE Google Cloud Credits",
       url: "https://www.youtube.com/watch?v=lrPbSJyNCao",
       videoId: "lrPbSJyNCao",
@@ -179,7 +191,7 @@ export default function ResourcesPage() {
               <Shield size={16} className="text-[var(--heist-red)]" />
               INTEL REPOSITORY
             </div>
-            <h1 className="font-shlop text-5xl md:text-7xl tracking-[0.05em] mb-4 text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.15)] uppercase">
+            <h1 className="font-shlop text-4xl sm:text-5xl md:text-7xl tracking-[0.05em] mb-4 text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.15)] uppercase">
               CURRENT ARCADE RESOURCES
             </h1>
             <p className="font-mono text-[var(--text-muted)] max-w-2xl mx-auto uppercase tracking-widest text-xs md:text-sm">

@@ -277,7 +277,7 @@ export default function FacilitatorPage() {
         
         {/* HERO SECTION */}
         <section className="gsap-section text-center mb-24 pt-10">
-          <h1 className="font-shlop text-7xl md:text-8xl text-white tracking-wider mb-4 drop-shadow-[0_0_20px_rgba(193,18,31,0.5)] uppercase">
+          <h1 className="font-shlop text-5xl md:text-7xl lg:text-8xl text-white tracking-wider mb-4 drop-shadow-[0_0_20px_rgba(193,18,31,0.5)] uppercase">
             The <span className="text-[var(--heist-red)]">Mastermind</span> Program
           </h1>
           <p className="font-mono text-[var(--text-secondary)] text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
@@ -339,7 +339,7 @@ export default function FacilitatorPage() {
         </section>
         
         {/* REFERRAL SYSTEM SECTION */}
-        <section className="gsap-section max-w-4xl mx-auto mb-24 border border-[var(--heist-red)] bg-[var(--vault-charcoal)] p-8 relative overflow-hidden shadow-[0_0_30px_rgba(193,18,31,0.15)] group hover:border-[var(--heist-red-bright)] transition-colors duration-500 rounded-3xl">
+        <section className="gsap-section max-w-4xl mx-auto mb-24 border border-[var(--heist-red)] bg-[var(--vault-charcoal)] p-5 md:p-8 relative overflow-hidden shadow-[0_0_30px_rgba(193,18,31,0.15)] group hover:border-[var(--heist-red-bright)] transition-colors duration-500 rounded-3xl">
           {/* Animated Background Gradients & Image */}
           <div className="absolute inset-0 z-0 bg-contain bg-center bg-no-repeat opacity-[0.1] group-hover:opacity-[0.25] transition-opacity duration-500" style={{ backgroundImage: `url('/bank.png')` }}></div>
           <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--heist-red)] opacity-10 blur-[80px] rounded-full animate-pulse group-hover:opacity-20 transition-opacity z-0"></div>
@@ -349,7 +349,7 @@ export default function FacilitatorPage() {
           
 
           
-          <h3 className="relative z-10 font-display text-4xl text-white mb-4 uppercase tracking-wide drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">Facilitator Referral Code</h3>
+          <h3 className="relative z-10 font-display text-3xl md:text-4xl text-white mb-4 uppercase tracking-wide drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">Facilitator Referral Code</h3>
           <p className="relative z-10 font-mono text-[var(--text-muted)] text-sm mb-8 max-w-2xl leading-relaxed">
             Use your unique referral code to recruit more members into your crew and increase your overall syndicate bonus.
           </p>
@@ -364,7 +364,7 @@ export default function FacilitatorPage() {
                 navigator.clipboard.writeText("GCAF26-IN-5F3-M7U");
                 alert("Referral code copied to clipboard!");
               }}
-              className="bg-[rgba(212,175,55,0.1)] border border-[var(--mint-gold)] text-[var(--mint-gold)] px-8 py-3 font-display text-xl tracking-widest cursor-pointer flex items-center gap-3 hover:bg-[var(--mint-gold)] hover:text-black transition-colors duration-300 shadow-[inset_0_0_15px_rgba(212,175,55,0.2)] rounded-2xl"
+              className="bg-[rgba(212,175,55,0.1)] border border-[var(--mint-gold)] text-[var(--mint-gold)] px-6 md:px-8 py-3 font-display text-lg sm:text-xl tracking-widest cursor-pointer flex items-center gap-3 hover:bg-[var(--mint-gold)] hover:text-black transition-colors duration-300 shadow-[inset_0_0_15px_rgba(212,175,55,0.2)] rounded-2xl w-full sm:w-auto justify-center"
             >
               <Copy size={20} />
               COPY CODE
@@ -375,8 +375,8 @@ export default function FacilitatorPage() {
         {/* THE HEIST PHASES (Milestones) */}
         <section className="gsap-section mb-24 border-t border-[var(--vault-outline)] pt-16">
           <div className="text-center mb-12">
-            <h2 className="font-shlop text-6xl md:text-7xl text-white mb-2 uppercase tracking-wider drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">The Blueprint</h2>
-            <p className="font-mono text-sm text-[var(--text-muted)] uppercase tracking-[0.2em]">Milestones translated to Heist Phases. Secure the assets.</p>
+            <h2 className="font-shlop text-5xl md:text-7xl text-white mb-2 uppercase tracking-wider drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">The Blueprint</h2>
+            <p className="font-mono text-xs md:text-sm text-[var(--text-muted)] uppercase tracking-[0.2em]">Milestones translated to Heist Phases. Secure the assets.</p>
           </div>
 
           {/* BONUS MILESTONE BANNER */}
@@ -422,7 +422,7 @@ export default function FacilitatorPage() {
               ></div>
               
               {/* Modal Content */}
-              <div className="relative bg-[var(--vault-black)] text-[var(--text-primary)] p-8 md:p-12 border border-[var(--heist-red)] shadow-[0_0_50px_rgba(193,18,31,0.5)] rounded-lg w-full max-w-5xl my-auto z-10 max-h-[90vh] overflow-y-auto group animate-in zoom-in-95 fade-in duration-300">
+              <div className="relative bg-[var(--vault-black)] text-[var(--text-primary)] p-6 md:p-12 border border-[var(--heist-red)] shadow-[0_0_50px_rgba(193,18,31,0.5)] rounded-lg w-full max-w-5xl my-auto z-10 max-h-[90vh] overflow-y-auto group animate-in zoom-in-95 fade-in duration-300">
                 {/* Close Button */}
                 <button 
                   onClick={() => setShowBonusInfo(false)}
@@ -436,8 +436,8 @@ export default function FacilitatorPage() {
 
               {/* Dossier Header */}
               <div className="border-b border-[var(--vault-outline)] pb-4 mb-8 text-center relative z-10 flex flex-col items-center">
-                <h2 className="font-shlop text-5xl md:text-7xl uppercase tracking-widest text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">TOP SECRET INTEL</h2>
-                <div className="bg-[var(--heist-red)] text-white font-mono text-xs font-bold px-4 py-1 uppercase tracking-[0.3em] mt-4 shadow-[0_0_10px_var(--heist-red-glow)] animate-pulse">
+                <h2 className="font-shlop text-4xl md:text-7xl uppercase tracking-widest text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">TOP SECRET INTEL</h2>
+                <div className="bg-[var(--heist-red)] text-white font-mono text-[10px] md:text-xs font-bold px-4 py-1 uppercase tracking-[0.3em] mt-4 shadow-[0_0_10px_var(--heist-red-glow)] animate-pulse">
                   CLASSIFIED // PROFESSOR'S EYES ONLY
                 </div>
               </div>
@@ -490,22 +490,22 @@ export default function FacilitatorPage() {
 
                 <ul className="space-y-6 font-mono text-sm md:text-base text-[var(--text-secondary)]">
                   <li className="flex flex-col md:flex-row gap-4 items-start group">
-                    <div className="font-shlop text-5xl md:text-6xl text-[var(--vault-outline)] group-hover:text-[var(--heist-red)] transition-colors duration-300 drop-shadow-[0_0_10px_rgba(193,18,31,0)] group-hover:drop-shadow-[0_0_15px_rgba(193,18,31,0.8)] leading-none pt-2">01</div>
-                    <div className="bg-[rgba(255,255,255,0.03)] p-5 border border-[var(--vault-outline)] group-hover:border-[var(--heist-red)] transition-colors duration-300 w-full rounded-tr-xl rounded-bl-xl">
+                    <div className="font-shlop text-4xl md:text-6xl text-[var(--vault-outline)] group-hover:text-[var(--heist-red)] transition-colors duration-300 drop-shadow-[0_0_10px_rgba(193,18,31,0)] group-hover:drop-shadow-[0_0_15px_rgba(193,18,31,0.8)] leading-none pt-2">01</div>
+                    <div className="bg-[rgba(255,255,255,0.03)] p-4 md:p-5 border border-[var(--vault-outline)] group-hover:border-[var(--heist-red)] transition-colors duration-300 w-full rounded-tr-xl rounded-bl-xl">
                       <span className="text-white font-bold uppercase tracking-wider block mb-1">Criteria 1:</span> You need to be <span className="text-white font-bold">an active enrolled user</span> in the Arcade Facilitator 2026 cohort. Users who are not enrolled are not eligible to participate.
                     </div>
                   </li>
                   
                   <li className="flex flex-col md:flex-row gap-4 items-start group">
-                    <div className="font-shlop text-5xl md:text-6xl text-[var(--vault-outline)] group-hover:text-[var(--mint-gold)] transition-colors duration-300 drop-shadow-[0_0_10px_rgba(212,175,55,0)] group-hover:drop-shadow-[0_0_15px_rgba(212,175,55,0.8)] leading-none pt-2">02</div>
-                    <div className="bg-[rgba(255,255,255,0.03)] p-5 border border-[var(--vault-outline)] group-hover:border-[var(--mint-gold)] transition-colors duration-300 w-full rounded-tr-xl rounded-bl-xl">
+                    <div className="font-shlop text-4xl md:text-6xl text-[var(--vault-outline)] group-hover:text-[var(--mint-gold)] transition-colors duration-300 drop-shadow-[0_0_10px_rgba(212,175,55,0)] group-hover:drop-shadow-[0_0_15px_rgba(212,175,55,0.8)] leading-none pt-2">02</div>
+                    <div className="bg-[rgba(255,255,255,0.03)] p-4 md:p-5 border border-[var(--vault-outline)] group-hover:border-[var(--mint-gold)] transition-colors duration-300 w-full rounded-tr-xl rounded-bl-xl">
                       <span className="text-white font-bold uppercase tracking-wider block mb-1">Criteria 2:</span> You must have signed up for the <a href="#" className="text-[var(--mint-gold)] hover:text-white hover:underline underline-offset-4 transition-colors font-bold drop-shadow-[0_0_5px_rgba(212,175,55,0.5)]">GEAR program</a> while enrolling and have <span className="text-white font-bold">earned the GEAR badge</span> on your Google Developer profile. If you have not already done so, then please go to the <a href="#" className="text-[var(--mint-gold)] hover:text-white hover:underline underline-offset-4 transition-colors font-bold drop-shadow-[0_0_5px_rgba(212,175,55,0.5)]">following link</a> and use <a href="#" className="text-[var(--mint-gold)] hover:text-white hover:underline underline-offset-4 transition-colors font-bold drop-shadow-[0_0_5px_rgba(212,175,55,0.5)]">these instructions</a> to sign up and earn the badge.
                     </div>
                   </li>
                   
                   <li className="flex flex-col md:flex-row gap-4 items-start group">
-                    <div className="font-shlop text-5xl md:text-6xl text-[var(--vault-outline)] group-hover:text-[var(--heist-red)] transition-colors duration-300 drop-shadow-[0_0_10px_rgba(193,18,31,0)] group-hover:drop-shadow-[0_0_15px_rgba(193,18,31,0.8)] leading-none pt-2">03</div>
-                    <div className="bg-[rgba(255,255,255,0.03)] p-5 border border-[var(--vault-outline)] group-hover:border-[var(--heist-red)] transition-colors duration-300 w-full rounded-tr-xl rounded-bl-xl">
+                    <div className="font-shlop text-4xl md:text-6xl text-[var(--vault-outline)] group-hover:text-[var(--heist-red)] transition-colors duration-300 drop-shadow-[0_0_10px_rgba(193,18,31,0)] group-hover:drop-shadow-[0_0_15px_rgba(193,18,31,0.8)] leading-none pt-2">03</div>
+                    <div className="bg-[rgba(255,255,255,0.03)] p-4 md:p-5 border border-[var(--vault-outline)] group-hover:border-[var(--heist-red)] transition-colors duration-300 w-full rounded-tr-xl rounded-bl-xl">
                       <span className="text-white font-bold uppercase tracking-wider block mb-1">Criteria 3:</span> You should have <span className="text-white font-bold">earned at least Milestone #1</span> in the facilitator program to become eligible to participate. If you haven't earned it yet, then please go to the <a href="#" className="text-[var(--heist-red-bright)] hover:text-white hover:underline underline-offset-4 transition-colors font-bold drop-shadow-[0_0_5px_rgba(193,18,31,0.8)]">points system section</a> and see how to earn it.
                     </div>
                   </li>
@@ -856,8 +856,8 @@ export default function FacilitatorPage() {
         {/* GRATITUDE & VIBE CIRCLE */}
         <section className="gsap-section mb-24 border-t border-[var(--vault-outline)] pt-16 relative bg-transparent">
           <div className="text-center mb-16 relative z-10">
-            <h2 className="font-shlop text-6xl md:text-7xl text-[var(--heist-red)] mb-2 uppercase tracking-wider drop-shadow-[0_0_15px_rgba(193,18,31,0.5)]">Why should join with us</h2>
-            <p className="font-mono text-sm text-[var(--mint-gold)] uppercase tracking-[0.2em] animate-pulse">Legends of the Heist & The Syndicate Vibe</p>
+            <h2 className="font-shlop text-4xl md:text-6xl lg:text-7xl text-[var(--heist-red)] mb-2 uppercase tracking-wider drop-shadow-[0_0_15px_rgba(193,18,31,0.5)] px-4">Why should join with us</h2>
+            <p className="font-mono text-xs md:text-sm text-[var(--mint-gold)] uppercase tracking-[0.2em] animate-pulse">Legends of the Heist & The Syndicate Vibe</p>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-12 relative z-10 max-w-7xl mx-auto px-4 md:px-8">
@@ -868,8 +868,9 @@ export default function FacilitatorPage() {
               <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--mint-gold-dim)] blur-[60px] opacity-20 -z-0 group-hover:opacity-40 transition-opacity pointer-events-none"></div>
               
               {/* Full Card Hover Tooltip */}
-              <div className="absolute inset-0 flex flex-col items-center justify-center bg-[var(--vault-black)]/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-8 text-center z-50 backdrop-blur-sm pointer-events-none">
-                <p className="font-shlop text-2xl md:text-3xl text-white tracking-wider drop-shadow-[0_0_15px_rgba(232,17,45,0.6)] leading-relaxed">These are the Top 10 participants who earned the Tier 1 Swag Kit as a token of appreciation for their outstanding performance.</p>
+              <div className="absolute inset-0 flex flex-col items-center justify-center bg-[var(--vault-black)]/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-4 sm:p-8 text-center z-50 backdrop-blur-sm pointer-events-none">
+                <p className="font-shlop text-xl md:text-3xl text-white tracking-wider drop-shadow-[0_0_15px_rgba(232,17,45,0.6)] leading-relaxed">These are the Top 10 participants who earned the Tier 1 Swag Kit as a token of appreciation for their outstanding performance.</p>
+                <p className="font-mono text-xs md:text-base text-yellow-400 mt-2 md:mt-4 tracking-wide font-bold">Active participants enrolled under my referral may be eligible for exclusive community rewards. Please find a few snapshots of our previous winners below !!</p>
               </div>
 
               <div className="group-hover:opacity-0 transition-opacity duration-300 relative z-10">
@@ -880,8 +881,8 @@ export default function FacilitatorPage() {
                   <p className="font-mono text-xs text-center text-[var(--text-muted)] mt-2 tracking-[0.2em]">ELIGIBLE FOR THE GRAND GIVEAWAY</p>
                 </div>
                 
-                <div className="p-6">
-                  <div className="grid grid-cols-12 text-xs font-mono text-[var(--text-muted)] tracking-widest border-b border-[var(--vault-outline)] pb-3 mb-4 uppercase">
+                <div className="p-4 md:p-6">
+                  <div className="grid grid-cols-12 text-[10px] md:text-xs font-mono text-[var(--text-muted)] tracking-widest border-b border-[var(--vault-outline)] pb-3 mb-4 uppercase">
                     <div className="col-span-2 text-center">Rank</div>
                     <div className="col-span-7">Operative Name</div>
                     <div className="col-span-3 text-right">Skill Badges</div>
@@ -890,15 +891,15 @@ export default function FacilitatorPage() {
                   <div className="space-y-3">
 
                     {topAchievers.map((achiever, i) => (
-                      <div key={i} className="grid grid-cols-12 items-center font-display text-lg py-2 border-b border-[rgba(255,255,255,0.05)] hover:bg-[rgba(193,18,31,0.05)] transition-colors rounded px-2 group/row">
-                        <div className="col-span-2 text-center text-[var(--mint-gold)] font-bold text-xl drop-shadow-[0_0_5px_rgba(212,175,55,0.5)]">
+                      <div key={i} className="grid grid-cols-12 items-center font-display text-sm md:text-lg py-2 border-b border-[rgba(255,255,255,0.05)] hover:bg-[rgba(193,18,31,0.05)] transition-colors rounded px-1 md:px-2 group/row">
+                        <div className="col-span-2 text-center text-[var(--mint-gold)] font-bold text-base md:text-xl drop-shadow-[0_0_5px_rgba(212,175,55,0.5)]">
                           #{i + 1}
                         </div>
-                        <div className="col-span-7 text-white flex items-center gap-3">
+                        <div className="col-span-7 text-white flex items-center gap-2 md:gap-3">
                           {i < 3 && <span className="inline-block w-2 h-2 rounded-full bg-[var(--heist-red)] animate-pulse shadow-[0_0_8px_var(--heist-red)]"></span>}
-                          {achiever.name}
+                          <span className="truncate">{achiever.name}</span>
                         </div>
-                        <div className="col-span-3 text-right text-[var(--mint-gold)] font-mono text-xl group-hover/row:scale-110 transition-transform">
+                        <div className="col-span-3 text-right text-[var(--mint-gold)] font-mono text-base md:text-xl group-hover/row:scale-110 transition-transform">
                           {achiever.points}
                         </div>
                       </div>
@@ -946,11 +947,11 @@ export default function FacilitatorPage() {
         </section>
 
         {/* FAQ SECTION (Heist Intel) */}
-        <section className="gsap-section mb-24 border-t border-[var(--vault-outline)] pt-16 relative">
+        <section className="gsap-section mb-24 border-t border-[var(--vault-outline)] pt-16 relative px-4 md:px-0">
           
           <div className="text-center mb-12 relative z-10">
-            <h2 className="font-shlop text-6xl md:text-7xl text-white mb-2 uppercase tracking-wider drop-shadow-[0_0_15px_rgba(212,175,55,0.2)]">FAQ / Intel</h2>
-            <p className="font-mono text-sm text-[var(--text-muted)] uppercase tracking-[0.2em]">Crucial operational knowledge before the breach.</p>
+            <h2 className="font-shlop text-5xl md:text-7xl text-white mb-2 uppercase tracking-wider drop-shadow-[0_0_15px_rgba(212,175,55,0.2)]">FAQ / Intel</h2>
+            <p className="font-mono text-xs md:text-sm text-[var(--text-muted)] uppercase tracking-[0.2em]">Crucial operational knowledge before the breach.</p>
           </div>
 
           <div className="faq-container max-w-6xl mx-auto relative z-10 grid md:grid-cols-2 gap-4 items-start">

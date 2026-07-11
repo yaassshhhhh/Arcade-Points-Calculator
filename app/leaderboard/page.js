@@ -70,7 +70,7 @@ export default function Leaderboard() {
               <span className="w-2 h-2 rounded-full bg-[var(--heist-red)] shadow-[0_0_8px_var(--heist-red)]"></span>
               AUTHORIZED PERSONNEL ONLY
             </div>
-            <h1 className="font-shlop text-7xl md:text-9xl tracking-widest mb-4 text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.15)] uppercase">
+            <h1 className="font-shlop text-5xl sm:text-7xl md:text-9xl tracking-widest mb-4 text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.15)] uppercase">
               THE GANG
             </h1>
             <p className="font-mono text-[var(--text-muted)] max-w-xl mx-auto uppercase tracking-widest text-xs md:text-sm">
@@ -89,7 +89,7 @@ export default function Leaderboard() {
             <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[var(--heist-red)] to-transparent opacity-30 z-10"></div>
 
             {/* Header Row */}
-            <div className="relative z-10 grid grid-cols-12 gap-4 px-8 py-6 border-b border-[var(--vault-outline)] bg-black/40 text-[var(--text-secondary)] font-mono text-xs md:text-sm uppercase tracking-[0.2em]">
+            <div className="relative z-10 grid grid-cols-12 gap-2 md:gap-4 px-4 md:px-8 py-4 md:py-6 border-b border-[var(--vault-outline)] bg-black/40 text-[var(--text-secondary)] font-mono text-[10px] md:text-sm uppercase tracking-[0.2em]">
               <div className="col-span-2 md:col-span-1 text-center">Rank</div>
               <div className="col-span-6 md:col-span-7">Operative Profile</div>
               <div className="col-span-4 text-right">Vault Status</div>
@@ -146,38 +146,37 @@ export default function Leaderboard() {
                       <motion.div 
                         key={index}
                         variants={itemVariants}
-                        className={`grid grid-cols-12 gap-4 px-8 py-5 items-center hover:bg-[var(--heist-red)]/20 transition-colors group cursor-default relative overflow-hidden ${isTop1 ? 'bg-black/20' : ''}`}
+                        className={`grid grid-cols-12 gap-2 md:gap-4 px-4 md:px-8 py-4 md:py-5 items-center hover:bg-[var(--heist-red)]/20 transition-colors group cursor-default relative overflow-hidden ${isTop1 ? 'bg-black/20' : ''}`}
                       >
                         {/* Hover effect glow line */}
                         <div className="absolute left-0 top-0 bottom-0 w-1 bg-[var(--heist-red)] opacity-0 group-hover:opacity-100 transition-opacity"></div>
                         
                         {/* Rank */}
-                        <div className={`col-span-2 md:col-span-1 text-center font-display text-3xl md:text-4xl ${rankColor}`}>
+                        <div className={`col-span-2 md:col-span-1 text-center font-display text-2xl md:text-4xl ${rankColor}`}>
                           {index + 1}
                         </div>
                       
-                      {/* Profile */}
-                      <div className="col-span-6 md:col-span-7 flex items-center gap-4 md:gap-6 pl-2">
-                        <div className="relative">
-                          <div className={`relative ${isTop1 ? 'w-12 h-12' : 'w-10 h-10'} rounded-full overflow-hidden bg-black/50 border border-[var(--vault-outline)] group-hover:border-[var(--heist-red)] transition-colors`}>
+                      <div className="col-span-6 md:col-span-7 flex items-center gap-3 md:gap-6 pl-1 md:pl-2">
+                        <div className="relative flex-shrink-0">
+                          <div className={`relative ${isTop1 ? 'w-10 h-10 md:w-12 md:h-12' : 'w-8 h-8 md:w-10 md:h-10'} rounded-full overflow-hidden bg-black/50 border border-[var(--vault-outline)] group-hover:border-[var(--heist-red)] transition-colors`}>
                              <Image src="/professor1.png" alt="Avatar" fill className="object-cover p-1" />
                           </div>
-                          {isTop1 && <div className="absolute -top-1 -right-1 w-3 h-3 bg-yellow-400 rounded-full animate-ping"></div>}
+                          {isTop1 && <div className="absolute -top-1 -right-1 w-2 h-2 md:w-3 md:h-3 bg-yellow-400 rounded-full animate-ping"></div>}
                         </div>
-                        <div>
-                          <div className={`font-display tracking-[0.1em] uppercase ${isTop1 ? 'text-2xl md:text-3xl text-white' : 'text-xl text-[var(--text-primary)]'} group-hover:text-white transition-colors drop-shadow-md`}>
+                        <div className="min-w-0">
+                          <div className={`font-display tracking-[0.1em] uppercase truncate ${isTop1 ? 'text-lg md:text-3xl text-white' : 'text-sm md:text-xl text-[var(--text-primary)]'} group-hover:text-white transition-colors drop-shadow-md`}>
                             {user.userName}
                           </div>
                         </div>
                       </div>
                       
                       {/* Stats */}
-                      <div className="col-span-4 text-right">
-                        <div className="font-display text-2xl md:text-3xl text-white group-hover:text-[var(--heist-red-bright)] transition-colors drop-shadow-md">
-                          {user.points} <span className="text-sm font-mono text-[var(--text-secondary)]">PTS</span>
+                      <div className="col-span-4 text-right flex flex-col items-end justify-center">
+                        <div className="font-display text-lg md:text-3xl text-white group-hover:text-[var(--heist-red-bright)] transition-colors drop-shadow-md leading-none">
+                          {user.points} <span className="text-[10px] md:text-sm font-mono text-[var(--text-secondary)] hidden sm:inline">PTS</span>
                         </div>
-                        <div className="font-mono text-[10px] md:text-xs text-[var(--heist-red)] mt-1 uppercase tracking-widest drop-shadow-md">
-                          {user.badgeCount} BADGES EXTRACTED
+                        <div className="font-mono text-[8px] md:text-xs text-[var(--heist-red)] mt-1 md:mt-2 uppercase tracking-widest drop-shadow-md">
+                          {user.badgeCount} <span className="hidden sm:inline">BADGES EXTRACTED</span><span className="sm:hidden">BDG</span>
                         </div>
                       </div>
                     </motion.div>
@@ -187,7 +186,7 @@ export default function Leaderboard() {
 
                 {/* Pagination Controls */}
                 {leaders.length > itemsPerPage && (
-                  <div className="flex items-center justify-between px-8 py-6 border-t border-[var(--vault-outline)] bg-black/40">
+                  <div className="flex flex-col sm:flex-row gap-4 items-center justify-between px-4 md:px-8 py-4 md:py-6 border-t border-[var(--vault-outline)] bg-black/40">
                     <button
                       onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
                       disabled={currentPage === 1}

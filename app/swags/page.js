@@ -118,7 +118,7 @@ export default function SwagsPage() {
               <Gift size={16} className="text-[var(--heist-red)]" />
               THE VAULT
             </div>
-            <h1 className="font-shlop text-6xl md:text-8xl tracking-[0.05em] mb-4 text-white drop-shadow-[0_0_20px_rgba(255,0,0,0.3)] uppercase">
+            <h1 className="font-shlop text-5xl sm:text-6xl md:text-8xl tracking-[0.05em] mb-4 text-white drop-shadow-[0_0_20px_rgba(255,0,0,0.3)] uppercase">
               ARCADE SWAGS
             </h1>
             <p className="font-mono text-[var(--text-muted)] max-w-2xl mx-auto uppercase tracking-widest text-xs md:text-sm">
@@ -203,7 +203,7 @@ export default function SwagsPage() {
         {/* ── Old Swags Section ────────────────────────────────────────────── */}
         <section className="max-w-6xl mx-auto px-6 mb-24 relative z-1">
           <div className="flex items-center justify-center border-b border-[var(--vault-outline)] pb-6 mb-8 mt-12">
-            <h2 className="font-shlop text-5xl md:text-7xl text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.4)] uppercase text-center m-0">
+            <h2 className="font-shlop text-4xl md:text-7xl text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.4)] uppercase text-center m-0">
               PREVIOUS DROPS
             </h2>
           </div>

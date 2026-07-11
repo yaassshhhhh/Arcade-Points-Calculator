@@ -109,8 +109,8 @@ function DashboardContent() {
       {/* Loading State */}
       {loading && (
         <div className="flex flex-col items-center justify-center min-h-[80vh]">
-          <MaskIcon size={80} loading={true} className="text-[var(--heist-red)] mb-8" />
-          <h2 className="font-display text-4xl text-[var(--text-primary)] tracking-widest animate-pulse">
+          <MaskIcon size={60} className="text-[var(--heist-red)] mb-6 md:mb-8 md:scale-125" loading={true} />
+          <h2 className="font-display text-3xl md:text-4xl text-[var(--text-primary)] tracking-widest animate-pulse mt-4">
             CASING THE VAULT...
           </h2>
         </div>
@@ -139,7 +139,7 @@ function DashboardContent() {
         <div className="container mx-auto px-6 max-w-6xl mt-8">
           
           {/* Top Section: Points Ring & Target */}
-          <section className="grid lg:grid-cols-12 gap-8 mb-16">
+          <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16">
             <div className="lg:col-span-8 flex justify-center">
               <PointsRing points={data.totalPoints} maxPoints={80} />
             </div>
@@ -159,9 +159,9 @@ function DashboardContent() {
                     }}
                   />
                 </div>
-                <div className="bg-transparent border border-[var(--vault-outline)] px-8 py-3 rounded-lg shadow-lg text-center mt-2">
-                  <span className="font-mono text-[var(--text-muted)] text-sm uppercase tracking-widest block mb-1">OPERATIVE</span>
-                  <h4 className="font-shlop text-4xl md:text-5xl text-white tracking-[0.05em] uppercase drop-shadow-[0_0_10px_rgba(255,255,255,0.2)] mt-2">{data.userName}</h4>
+                <div className="bg-transparent border border-[var(--vault-outline)] px-6 py-3 md:px-8 md:py-3 rounded-lg shadow-lg text-center mt-2 w-full max-w-sm">
+                  <span className="font-mono text-[var(--text-muted)] text-xs md:text-sm uppercase tracking-widest block mb-1">OPERATIVE</span>
+                  <h4 className="font-shlop text-3xl md:text-5xl text-white tracking-[0.05em] uppercase drop-shadow-[0_0_10px_rgba(255,255,255,0.2)] mt-2">{data.userName}</h4>
                 </div>
                 
                 {data.facilitatorDetails && (
@@ -178,7 +178,7 @@ function DashboardContent() {
           </section>
 
           {/* Stats Breakdown Grid */}
-          <section className="mb-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 max-w-6xl mx-auto px-4">
+          <section className="mb-16 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4 max-w-6xl mx-auto px-4">
             {[
               { label: "SKILL LABS", value: data.counts.skillBadge || 0, color: "var(--heist-red)", bgClass: "bg-[var(--heist-red-dim)]" },
               { label: "GAMES", value: data.counts.game || 0, color: "var(--mint-gold)", bgClass: "bg-[var(--mint-gold-dim)]" },
@@ -213,8 +213,8 @@ function DashboardContent() {
           {/* Secured Assets / Badges List */}
           <section className="mt-16">
             <div className="mb-12 border-b border-[var(--vault-outline)] pb-8 flex flex-col items-center justify-center text-center gap-4">
-              <h2 className="font-shlop text-5xl md:text-6xl tracking-[0.05em] text-[var(--heist-red)] drop-shadow-[0_0_15px_rgba(193,18,31,0.6)] uppercase">SECURED ASSETS</h2>
-              <h3 className="font-shlop text-2xl md:text-3xl text-[var(--mint-gold)] tracking-widest uppercase">Loot Retrieved from the Vault</h3>
+              <h2 className="font-shlop text-4xl md:text-6xl tracking-[0.05em] text-[var(--heist-red)] drop-shadow-[0_0_15px_rgba(193,18,31,0.6)] uppercase">SECURED ASSETS</h2>
+              <h3 className="font-shlop text-xl md:text-3xl text-[var(--mint-gold)] tracking-widest uppercase">Loot Retrieved from the Vault</h3>
             </div>
             
             {data.badges && data.badges.length > 0 ? (
@@ -289,7 +289,7 @@ function DashboardContent() {
 
 export default function Dashboard() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-[var(--vault-black)] text-[var(--text-primary)] flex items-center justify-center font-display text-4xl">CASING THE VAULT...</div>}>
+    <Suspense fallback={<div className="min-h-screen bg-[var(--vault-black)] text-[var(--text-primary)] flex items-center justify-center font-display text-2xl md:text-4xl">CASING THE VAULT...</div>}>
       <DashboardContent />
     </Suspense>
   );
