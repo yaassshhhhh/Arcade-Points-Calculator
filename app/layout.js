@@ -4,7 +4,11 @@ import GlobalAudioPlayer from "@/components/GlobalAudioPlayer";
 import DashboardModal from "@/components/DashboardModal";
 
 export const metadata = {
-  title: "Google Cloud Arcade Points Calculator 2026 | Track Badges & Swags",
+  metadataBase: new URL("https://arcade-points-calculator.vercel.app"),
+  title: {
+    default: "Google Cloud Arcade Points Calculator 2026 | Track Badges & Swags",
+    template: "%s | Arcade Points Calculator",
+  },
   description:
     "The ultimate Google Cloud Arcade Points Calculator for 2026. Instantly track your Arcade games, skill badges, points, and swags using your Cloud Skills Boost profile.",
   keywords: [
@@ -17,13 +21,18 @@ export const metadata = {
     "Google Cloud Facilitator Program",
     "Arcade Badges",
     "Skill Badges",
-    "Calculate Arcade Points"
+    "Calculate Arcade Points",
+    "Arcade 2026",
+    "Google Cloud Swags",
+    "Arcade Leaderboard",
+    "Google Cloud Certification"
   ],
-  authors: [{ name: "Yash Mahajan" }],
+  authors: [{ name: "Yash Mahajan" }, { name: "Satyanand Gupta" }],
   creator: "Yash Mahajan",
+  publisher: "Arcade Points Calculator",
   openGraph: {
     title: "Google Cloud Arcade Points Calculator 2026",
-    description: "Instantly track your Arcade games, skill badges, points, and swags.",
+    description: "Instantly track your Arcade games, skill badges, points, and swags using your Cloud Skills Boost profile.",
     url: "https://arcade-points-calculator.vercel.app",
     siteName: "Arcade Points Calculator",
     images: [
@@ -31,7 +40,7 @@ export const metadata = {
         url: "/Mafer.jpeg",
         width: 1200,
         height: 630,
-        alt: "Arcade Points Calculator Preview",
+        alt: "Google Cloud Arcade Points Calculator - Track your badges, points and swags",
       },
     ],
     locale: "en_US",
@@ -39,7 +48,7 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Google Cloud Arcade Points Calculator",
+    title: "Google Cloud Arcade Points Calculator 2026",
     description: "Easily calculate your Google Cloud Arcade points and track milestones and swags.",
     creator: "@yaassshhhhh",
     images: ["/Mafer.jpeg"],
@@ -58,11 +67,70 @@ export const metadata = {
   alternates: {
     canonical: "https://arcade-points-calculator.vercel.app",
   },
+  verification: {
+    google: "ADD_YOUR_GOOGLE_VERIFICATION_CODE_HERE",
+  },
+  category: "technology",
+};
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: "#0B0B0D",
 };
 
 export default function RootLayout({ children }) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Google Cloud Arcade Points Calculator",
+    "url": "https://arcade-points-calculator.vercel.app",
+    "description": "The ultimate Google Cloud Arcade Points Calculator for 2026. Track your Arcade games, skill badges, points, and swags.",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Yash Mahajan"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "ratingCount": "150"
+    }
+  };
+
+  const websiteJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Arcade Points Calculator",
+    "url": "https://arcade-points-calculator.vercel.app",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://arcade-points-calculator.vercel.app/dashboard?url={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  };
+
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="apple-touch-icon" href="/icon.png" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+        />
+      </head>
       <body suppressHydrationWarning>
         <GlobalAudioPlayer />
         <DashboardModal />

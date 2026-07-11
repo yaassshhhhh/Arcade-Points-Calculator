@@ -9,14 +9,20 @@ export default function VisitorCounter() {
   useEffect(() => {
     const fetchCount = async () => {
       try {
-        let url = "https://api.counterapi.dev/v1/arcade-points-calc/visits/up";
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 5000);
 
-        
-        const response = await fetch(url);
+        const response = await fetch(
+          "https://api.counterapi.dev/v1/arcade-points-calc/visits/up",
+          { signal: controller.signal }
+        );
+        clearTimeout(timeoutId);
+
+        if (!response.ok) return;
         const data = await response.json();
         setCount(data.count);
       } catch (error) {
-        console.error("Error fetching visitor count:", error);
+        // Silently fail - visitor counter is non-critical
       }
     };
 

@@ -32,6 +32,12 @@ export default function sitemap() {
       priority: 0.8,
     },
     {
+      url: `${baseUrl}/completion-badges`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
       url: `${baseUrl}/resources`,
       lastModified: new Date(),
       changeFrequency: "weekly",
@@ -41,7 +47,7 @@ export default function sitemap() {
       url: `${baseUrl}/swags`,
       lastModified: new Date(),
       changeFrequency: "weekly",
-      priority: 0.8,
-    }
+      priority: 0.7,
+    },
   ];
 }
