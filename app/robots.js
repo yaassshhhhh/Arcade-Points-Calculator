@@ -5,6 +5,6 @@ export default function robots() {
       allow: "/",
       disallow: "/api/",
     },
-    sitemap: "https://arcade-points-calculator.vercel.app/sitemap.xml",
+    sitemap: "https://arcade-points-calc.vercel.app/sitemap.xml",
   };
 }

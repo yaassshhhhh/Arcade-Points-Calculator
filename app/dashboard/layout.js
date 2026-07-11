@@ -18,17 +18,17 @@ export default function DashboardLayout({ children }) {
     "@type": "WebPage",
     "name": "Google Cloud Arcade Dashboard 2026",
     "description": "Personalized progress dashboard for Google Cloud Arcade 2026 with real-time badge and points tracking.",
-    "url": "https://arcade-points-calculator.vercel.app/dashboard",
+    "url": "https://arcade-points-calc.vercel.app/dashboard",
     "isPartOf": {
       "@type": "WebSite",
       "name": "Arcade Points Calculator",
-      "url": "https://arcade-points-calculator.vercel.app"
+      "url": "https://arcade-points-calc.vercel.app"
     },
     "breadcrumb": {
       "@type": "BreadcrumbList",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://arcade-points-calculator.vercel.app" },
-        { "@type": "ListItem", "position": 2, "name": "Dashboard", "item": "https://arcade-points-calculator.vercel.app/dashboard" }
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://arcade-points-calc.vercel.app" },
+        { "@type": "ListItem", "position": 2, "name": "Dashboard", "item": "https://arcade-points-calc.vercel.app/dashboard" }
       ]
     }
   };

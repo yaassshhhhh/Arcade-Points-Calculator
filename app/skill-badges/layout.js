@@ -18,17 +18,17 @@ export default function SkillBadgesLayout({ children }) {
     "@type": "CollectionPage",
     "name": "Google Cloud Arcade Skill Badges 2026",
     "description": "Complete collection of Google Cloud Skill Badges available in the 2026 Arcade program.",
-    "url": "https://arcade-points-calculator.vercel.app/skill-badges",
+    "url": "https://arcade-points-calc.vercel.app/skill-badges",
     "isPartOf": {
       "@type": "WebSite",
       "name": "Arcade Points Calculator",
-      "url": "https://arcade-points-calculator.vercel.app"
+      "url": "https://arcade-points-calc.vercel.app"
     },
     "breadcrumb": {
       "@type": "BreadcrumbList",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://arcade-points-calculator.vercel.app" },
-        { "@type": "ListItem", "position": 2, "name": "Skill Badges", "item": "https://arcade-points-calculator.vercel.app/skill-badges" }
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://arcade-points-calc.vercel.app" },
+        { "@type": "ListItem", "position": 2, "name": "Skill Badges", "item": "https://arcade-points-calc.vercel.app/skill-badges" }
       ]
     }
   };

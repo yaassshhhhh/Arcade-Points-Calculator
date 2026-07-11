@@ -18,17 +18,17 @@ export default function ResourcesLayout({ children }) {
     "@type": "WebPage",
     "name": "Google Cloud Arcade Resources & Guides 2026",
     "description": "Latest live games, tutorials, access codes, and community resources for the Google Cloud Arcade 2026.",
-    "url": "https://arcade-points-calculator.vercel.app/resources",
+    "url": "https://arcade-points-calc.vercel.app/resources",
     "isPartOf": {
       "@type": "WebSite",
       "name": "Arcade Points Calculator",
-      "url": "https://arcade-points-calculator.vercel.app"
+      "url": "https://arcade-points-calc.vercel.app"
     },
     "breadcrumb": {
       "@type": "BreadcrumbList",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://arcade-points-calculator.vercel.app" },
-        { "@type": "ListItem", "position": 2, "name": "Resources", "item": "https://arcade-points-calculator.vercel.app/resources" }
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://arcade-points-calc.vercel.app" },
+        { "@type": "ListItem", "position": 2, "name": "Resources", "item": "https://arcade-points-calc.vercel.app/resources" }
       ]
     }
   };

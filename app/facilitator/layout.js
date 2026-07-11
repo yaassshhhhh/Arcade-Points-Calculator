@@ -18,17 +18,17 @@ export default function FacilitatorLayout({ children }) {
     "@type": "WebPage",
     "name": "Google Cloud Arcade Facilitator Hub 2026",
     "description": "Facilitator program hub for Google Cloud Arcade 2026 with codes, resources and community support.",
-    "url": "https://arcade-points-calculator.vercel.app/facilitator",
+    "url": "https://arcade-points-calc.vercel.app/facilitator",
     "isPartOf": {
       "@type": "WebSite",
       "name": "Arcade Points Calculator",
-      "url": "https://arcade-points-calculator.vercel.app"
+      "url": "https://arcade-points-calc.vercel.app"
     },
     "breadcrumb": {
       "@type": "BreadcrumbList",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://arcade-points-calculator.vercel.app" },
-        { "@type": "ListItem", "position": 2, "name": "Facilitator", "item": "https://arcade-points-calculator.vercel.app/facilitator" }
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://arcade-points-calc.vercel.app" },
+        { "@type": "ListItem", "position": 2, "name": "Facilitator", "item": "https://arcade-points-calc.vercel.app/facilitator" }
       ]
     }
   };

@@ -4,7 +4,7 @@ import GlobalAudioPlayer from "@/components/GlobalAudioPlayer";
 import DashboardModal from "@/components/DashboardModal";
 
 export const metadata = {
-  metadataBase: new URL("https://arcade-points-calculator.vercel.app"),
+  metadataBase: new URL("https://arcade-points-calc.vercel.app"),
   title: {
     default: "Google Cloud Arcade Points Calculator 2026 | Track Badges & Swags",
     template: "%s | Arcade Points Calculator",
@@ -33,7 +33,7 @@ export const metadata = {
   openGraph: {
     title: "Google Cloud Arcade Points Calculator 2026",
     description: "Instantly track your Arcade games, skill badges, points, and swags using your Cloud Skills Boost profile.",
-    url: "https://arcade-points-calculator.vercel.app",
+    url: "https://arcade-points-calc.vercel.app",
     siteName: "Arcade Points Calculator",
     images: [
       {
@@ -65,7 +65,7 @@ export const metadata = {
     },
   },
   alternates: {
-    canonical: "https://arcade-points-calculator.vercel.app",
+    canonical: "https://arcade-points-calc.vercel.app",
   },
   verification: {
     google: "uuGiI6lrarYKvn94DAWbroZeVZVLyvfiQYVLVjlNr28",
@@ -85,7 +85,7 @@ export default function RootLayout({ children }) {
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "name": "Google Cloud Arcade Points Calculator",
-    "url": "https://arcade-points-calculator.vercel.app",
+    "url": "https://arcade-points-calc.vercel.app",
     "description": "The ultimate Google Cloud Arcade Points Calculator for 2026. Track your Arcade games, skill badges, points, and swags.",
     "applicationCategory": "UtilityApplication",
     "operatingSystem": "Any",
@@ -109,10 +109,10 @@ export default function RootLayout({ children }) {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "Arcade Points Calculator",
-    "url": "https://arcade-points-calculator.vercel.app",
+    "url": "https://arcade-points-calc.vercel.app",
     "potentialAction": {
       "@type": "SearchAction",
-      "target": "https://arcade-points-calculator.vercel.app/dashboard?url={search_term_string}",
+      "target": "https://arcade-points-calc.vercel.app/dashboard?url={search_term_string}",
       "query-input": "required name=search_term_string"
     }
   };

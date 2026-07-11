@@ -1,5 +1,5 @@
 export default function sitemap() {
-  const baseUrl = "https://arcade-points-calculator.vercel.app";
+  const baseUrl = "https://arcade-points-calc.vercel.app";
   return [
     {
       url: baseUrl,

@@ -18,17 +18,17 @@ export default function LeaderboardLayout({ children }) {
     "@type": "WebPage",
     "name": "Google Cloud Arcade Leaderboard 2026",
     "description": "Global leaderboard showing top performers in the Google Cloud Arcade 2026 program.",
-    "url": "https://arcade-points-calculator.vercel.app/leaderboard",
+    "url": "https://arcade-points-calc.vercel.app/leaderboard",
     "isPartOf": {
       "@type": "WebSite",
       "name": "Arcade Points Calculator",
-      "url": "https://arcade-points-calculator.vercel.app"
+      "url": "https://arcade-points-calc.vercel.app"
     },
     "breadcrumb": {
       "@type": "BreadcrumbList",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://arcade-points-calculator.vercel.app" },
-        { "@type": "ListItem", "position": 2, "name": "Leaderboard", "item": "https://arcade-points-calculator.vercel.app/leaderboard" }
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://arcade-points-calc.vercel.app" },
+        { "@type": "ListItem", "position": 2, "name": "Leaderboard", "item": "https://arcade-points-calc.vercel.app/leaderboard" }
       ]
     }
   };
@@ -41,5 +41,6 @@ export default function LeaderboardLayout({ children }) {
       />
       {children}
     </>
+    
   );
 }

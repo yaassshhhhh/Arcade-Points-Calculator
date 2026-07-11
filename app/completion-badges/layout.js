@@ -18,17 +18,17 @@ export default function CompletionBadgesLayout({ children }) {
     "@type": "CollectionPage",
     "name": "Google Cloud Arcade Completion Badges 2026",
     "description": "Complete collection of Google Cloud Completion Badges available in the 2026 Arcade program.",
-    "url": "https://arcade-points-calculator.vercel.app/completion-badges",
+    "url": "https://arcade-points-calc.vercel.app/completion-badges",
     "isPartOf": {
       "@type": "WebSite",
       "name": "Arcade Points Calculator",
-      "url": "https://arcade-points-calculator.vercel.app"
+      "url": "https://arcade-points-calc.vercel.app"
     },
     "breadcrumb": {
       "@type": "BreadcrumbList",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://arcade-points-calculator.vercel.app" },
-        { "@type": "ListItem", "position": 2, "name": "Completion Badges", "item": "https://arcade-points-calculator.vercel.app/completion-badges" }
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://arcade-points-calc.vercel.app" },
+        { "@type": "ListItem", "position": 2, "name": "Completion Badges", "item": "https://arcade-points-calc.vercel.app/completion-badges" }
       ]
     }
   };

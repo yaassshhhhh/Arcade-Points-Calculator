@@ -18,17 +18,17 @@ export default function SwagsLayout({ children }) {
     "@type": "WebPage",
     "name": "Google Cloud Arcade Swags & Prize Tiers 2026",
     "description": "Complete guide to Google Cloud Arcade 2026 swag tiers and points requirements.",
-    "url": "https://arcade-points-calculator.vercel.app/swags",
+    "url": "https://arcade-points-calc.vercel.app/swags",
     "isPartOf": {
       "@type": "WebSite",
       "name": "Arcade Points Calculator",
-      "url": "https://arcade-points-calculator.vercel.app"
+      "url": "https://arcade-points-calc.vercel.app"
     },
     "breadcrumb": {
       "@type": "BreadcrumbList",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://arcade-points-calculator.vercel.app" },
-        { "@type": "ListItem", "position": 2, "name": "Swags", "item": "https://arcade-points-calculator.vercel.app/swags" }
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://arcade-points-calc.vercel.app" },
+        { "@type": "ListItem", "position": 2, "name": "Swags", "item": "https://arcade-points-calc.vercel.app/swags" }
       ]
     }
   };
