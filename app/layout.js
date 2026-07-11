@@ -68,7 +68,7 @@ export const metadata = {
     canonical: "https://arcade-points-calculator.vercel.app",
   },
   verification: {
-    google: "ADD_YOUR_GOOGLE_VERIFICATION_CODE_HERE",
+    google: "uuGiI6lrarYKvn94DAWbroZeVZVLyvfiQYVLVjlNr28",
   },
   category: "technology",
 };
