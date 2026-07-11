@@ -158,8 +158,13 @@ export default function Leaderboard() {
                       
                       <div className="col-span-6 md:col-span-7 flex items-center gap-3 md:gap-6 pl-1 md:pl-2">
                         <div className="relative flex-shrink-0">
-                          <div className={`relative ${isTop1 ? 'w-10 h-10 md:w-12 md:h-12' : 'w-8 h-8 md:w-10 md:h-10'} rounded-full overflow-hidden bg-black/50 border border-[var(--vault-outline)] group-hover:border-[var(--heist-red)] transition-colors`}>
-                             <Image src="/professor1.png" alt="Avatar" fill className="object-cover p-1" />
+                          <div className={`relative ${isTop1 ? 'w-10 h-10 md:w-12 md:h-12' : 'w-8 h-8 md:w-10 md:h-10'} rounded-full overflow-hidden bg-black/50 border border-[var(--vault-outline)] group-hover:border-[var(--heist-red)] transition-colors flex items-center justify-center`}>
+                             <img 
+                               src={user.avatarUrl && (user.avatarUrl.startsWith('http') || user.avatarUrl.startsWith('/')) && !user.avatarUrl.includes('public_profiles') ? user.avatarUrl : "/professor1.png"} 
+                               alt="Avatar" 
+                               className={`w-full h-full object-cover ${(!user.avatarUrl || user.avatarUrl.includes('public_profiles')) ? 'p-1' : ''}`}
+                               onError={(e) => { e.target.onerror = null; e.target.src = "/professor1.png"; e.target.className = "w-full h-full object-cover p-1"; }}
+                             />
                           </div>
                           {isTop1 && <div className="absolute -top-1 -right-1 w-2 h-2 md:w-3 md:h-3 bg-yellow-400 rounded-full animate-ping"></div>}
                         </div>

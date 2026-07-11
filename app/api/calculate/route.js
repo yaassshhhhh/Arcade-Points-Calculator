@@ -156,6 +156,7 @@ export async function POST(req) {
         points: totalPoints,
         badgeCount: validBadges.length,
         url: url,
+        avatarUrl: userAvatar,
         facilitatorCode: facilitatorCode,
         facilitatorName: facilitatorName
       });
