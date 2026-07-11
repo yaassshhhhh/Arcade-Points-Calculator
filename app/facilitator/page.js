@@ -869,7 +869,8 @@ export default function FacilitatorPage() {
               
               {/* Full Card Hover Tooltip */}
               <div className="absolute inset-0 flex flex-col items-center justify-center bg-[var(--vault-black)]/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-4 sm:p-8 text-center z-50 backdrop-blur-sm pointer-events-none">
-                <p className="font-shlop text-xl md:text-3xl text-white tracking-wider drop-shadow-[0_0_15px_rgba(232,17,45,0.6)] leading-relaxed">These are the Top 10 participants who earned the Tier 1 Swag Kit as a token of appreciation for their outstanding performance.</p>
+                <p className="font-shlop text-xl md:text-3xl text-white tracking-wider drop-shadow-[0_0_15px_rgba(232,17,45,0.6)] leading-relaxed mb-4">These are the Top 10 participants who earned the Tier 1 Swag Kit as a token of appreciation for their outstanding performance.</p>
+                <p className="font-shlop text-lg md:text-2xl text-[var(--mint-gold)] tracking-wider drop-shadow-[0_0_15px_rgba(212,175,55,0.4)] leading-relaxed">Active participants enrolled under our referral code may be eligible for exclusive community rewards.</p>
               </div>
 
               <div className="group-hover:opacity-0 transition-opacity duration-300 relative z-10">

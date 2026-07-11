@@ -64,7 +64,7 @@ export async function POST(req) {
     }
 
     // Attempt to parse avatar
-    let userAvatar = $('.ql-avatar img').attr('src') || $('.profile-avatar img').attr('src') || $('img.avatar').attr('src') || null;
+    let userAvatar = $('.ql-avatar img').attr('src') || $('.profile-avatar img').attr('src') || $('img.avatar').attr('src') || $('ql-avatar').attr('src') || null;
     if (userAvatar && userAvatar.startsWith('/')) {
        try {
          const urlObj = new URL(formattedUrl);
@@ -156,7 +156,7 @@ export async function POST(req) {
         points: totalPoints,
         badgeCount: validBadges.length,
         url: url,
-        avatarUrl: userAvatar,
+        userAvatar: userAvatar,
         facilitatorCode: facilitatorCode,
         facilitatorName: facilitatorName
       });
