@@ -90,13 +90,13 @@ export default function Home() {
                   <div className="relative">
                     <input
                       type="url"
-                      className="w-full bg-[rgba(11,11,13,0.8)] border border-[var(--vault-outline)] text-white font-mono text-sm px-6 py-4 focus:outline-none focus:border-[var(--heist-red)] focus:shadow-[0_0_20px_var(--heist-red-glow)] transition-all"
+                      className="w-full bg-[rgba(11,11,13,0.8)] border border-[var(--vault-outline)] text-white font-mono text-sm px-6 py-4 focus:outline-none focus:border-[var(--heist-red)] focus:shadow-[0_0_20px_var(--heist-red-glow)] transition-all rounded-tl-xl rounded-br-xl rounded-tr-sm rounded-bl-sm"
                       placeholder="https://www.cloudskillsboost.google/public_profiles/..."
                       value={url}
                       onChange={(e) => setUrl(e.target.value)}
                       required
                     />
-                    <div className="absolute inset-y-0 right-0 w-2 bg-[var(--heist-red)] shadow-[0_0_10px_var(--heist-red)] opacity-0 group-focus-within:opacity-100 transition-opacity"></div>
+                    <div className="absolute inset-y-0 right-0 w-2 bg-[var(--heist-red)] shadow-[0_0_10px_var(--heist-red)] opacity-0 group-focus-within:opacity-100 transition-opacity rounded-br-xl"></div>
                   </div>
                 </div>
 
