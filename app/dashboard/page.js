@@ -80,8 +80,8 @@ function DashboardContent() {
           // Trigger milestone modal if they have significant points (just an example threshold)
           if (result.data.totalPoints > 0 && result.data.totalPoints > lastTotal) {
             setLastTotal(result.data.totalPoints);
-            // In a real app we'd compare against specific breakpoints, here we just show it once if points > 0 for demo
-            if (result.data.totalPoints >= 10 && lastTotal === 0) {
+            // Show shout out / milestone if they have any points on first load
+            if (lastTotal === 0) {
               setShowMilestone(true);
             }
           }
