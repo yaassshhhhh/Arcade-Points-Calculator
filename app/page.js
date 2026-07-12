@@ -64,9 +64,9 @@ export default function Home() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.6, duration: 0.8 }}
-                className="text-xl md:text-2xl font-body text-[var(--text-muted)] mb-12"
+                className="text-2xl md:text-3xl font-shlop text-[var(--text-muted)] mb-12 tracking-widest uppercase"
               >
-                Every badge is a vault. Every point is gold. Let's rob the cloud.
+                Every Badge Is a Vault !! Every Point Is a Gold !! Let's Rob The Cloud !!
               </motion.p>
               
               <motion.form
