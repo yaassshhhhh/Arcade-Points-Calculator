@@ -104,20 +104,20 @@ export default function DashboardModal() {
               <div className="relative group-focus-within:shadow-[0_0_20px_var(--heist-red-glow)] transition-shadow duration-300">
                 <input
                   type="url"
-                  className="w-full bg-[rgba(11,11,13,0.85)] border border-[var(--vault-outline)] text-white font-mono text-sm px-6 py-4 focus:outline-none focus:border-[var(--heist-red)] transition-all relative z-10"
+                  className="w-full bg-[rgba(11,11,13,0.85)] border border-[var(--vault-outline)] text-white font-mono text-sm px-6 py-4 focus:outline-none focus:border-[var(--heist-red)] transition-all relative z-10 rounded-tl-xl rounded-br-xl rounded-tr-sm rounded-bl-sm"
                   placeholder="https://www.cloudskillsboost.google/public_profiles/..."
                   value={url}
                   onChange={(e) => setUrl(e.target.value)}
                   required
                 />
-                <div className="absolute inset-y-0 right-0 w-1 bg-[var(--heist-red)] opacity-0 group-focus-within:opacity-100 transition-opacity z-20"></div>
+                <div className="absolute inset-y-0 right-0 w-1 bg-[var(--heist-red)] opacity-0 group-focus-within:opacity-100 transition-opacity z-20 rounded-br-xl"></div>
               </div>
             </div>
 
             <button
               type="submit"
               disabled={loading}
-              className="w-full relative overflow-hidden bg-transparent border border-[var(--heist-red)] text-white font-display text-2xl py-4 group/btn transition-all mt-2"
+              className="w-full relative overflow-hidden bg-transparent border border-[var(--heist-red)] text-white font-display text-2xl py-4 group/btn transition-all mt-2 rounded-tl-2xl rounded-br-2xl rounded-tr-sm rounded-bl-sm"
             >
               <div className="absolute inset-0 bg-[var(--heist-red)] opacity-20 group-hover/btn:opacity-100 transition-all duration-300 z-0"></div>
               <div className="absolute inset-0 bg-black -translate-x-full group-hover/btn:translate-x-0 transition-transform duration-500 ease-out z-10"></div>

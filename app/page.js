@@ -183,7 +183,7 @@ export default function Home() {
                 Ultimate Support
               </h3>
               
-              <p className="font-mono text-[var(--text-secondary)] text-sm mb-6 leading-relaxed relative z-10">
+              <p className="font-shlop text-[var(--text-secondary)] text-xl mb-6 leading-relaxed relative z-10 tracking-wider">
                 <span className="text-[var(--mint-gold)]">Join with our code and get Ultimate help and support.</span>
               </p>
 
