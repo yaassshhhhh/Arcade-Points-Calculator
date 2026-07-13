@@ -13,9 +13,9 @@ export default function HeaderNav() {
 
   const links = [
     { label: "The Briefing", href: "/" },
-    { label: "The Vault Room", href: "/dashboard" },
-    { label: "The Gang", href: "/leaderboard" },
-    { label: "Safe House", href: "/facilitator", highlight: true },
+    { label: "Dashboard", href: "/dashboard" },
+    { label: "Leaderboard", href: "/leaderboard" },
+    { label: "Facilitator", href: "/facilitator", highlight: true },
     { label: "Skill Badges", href: "/skill-badges" },
     { label: "Resources", href: "/resources" },
     { label: "Swags", href: "/swags" },
