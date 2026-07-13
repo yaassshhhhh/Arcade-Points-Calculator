@@ -86,7 +86,7 @@ export default function MilestoneModal({ isOpen, onClose, pointsSecured, pointsR
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4 }}
-            className="absolute inset-0 bg-[var(--vault-black)]/95 backdrop-blur-sm z-[-2]"
+            className="absolute inset-0 bg-[var(--vault-black)] z-[-2]"
             onClick={onClose}
           />
 

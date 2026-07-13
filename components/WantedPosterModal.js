@@ -82,9 +82,7 @@ export default function WantedPosterModal({ isOpen, onClose, userName, avatar, p
                 <h2 className="font-shlop text-6xl sm:text-7xl lg:text-8xl text-[#2a2a2a] tracking-widest uppercase mt-4 mb-2 drop-shadow-md">
                   WANTED
                 </h2>
-                <h3 className="font-mono text-xl sm:text-2xl font-bold tracking-[0.3em] uppercase mb-8 pb-4 border-b-2 border-[#2a2a2a] border-dashed">
-                  DEAD OR ALIVE
-                </h3>
+
 
                 {/* Avatar Frame - Smaller and Unique */}
                 <div className="relative w-32 h-32 sm:w-48 sm:h-48 mx-auto mb-6 transform rotate-2">
@@ -108,7 +106,7 @@ export default function WantedPosterModal({ isOpen, onClose, userName, avatar, p
 
                 {/* Details */}
                 <div className="flex flex-col items-center justify-center space-y-4 font-mono font-bold">
-                  <div className="text-2xl sm:text-3xl uppercase tracking-wider text-center px-4 w-full break-words text-[#2a2a2a]">
+                  <div className="font-shlop text-4xl sm:text-5xl uppercase tracking-wider text-center px-4 w-full break-words text-[#2a2a2a]">
                     {userName}
                   </div>
                   
@@ -121,7 +119,7 @@ export default function WantedPosterModal({ isOpen, onClose, userName, avatar, p
 
                   <div className="mt-8 text-sm uppercase tracking-widest text-gray-600 flex flex-col items-center gap-1 border-t-2 border-[#2a2a2a] pt-4 w-full">
                     <span>KNOWN TO HAVE SECURED</span>
-                    <span className="text-xl font-black text-[#2a2a2a]">{points} ARCADE POINTS</span>
+                    <span className="font-shlop text-3xl sm:text-4xl text-[#2a2a2a] tracking-widest">{points} ARCADE POINTS</span>
                   </div>
                 </div>
               </div>
@@ -131,7 +129,7 @@ export default function WantedPosterModal({ isOpen, onClose, userName, avatar, p
             <button
               onClick={handleDownload}
               disabled={isGenerating}
-              className="mt-6 w-full flex items-center justify-center gap-3 bg-[var(--mint-gold)] text-black font-bold font-mono py-4 px-6 rounded hover:bg-yellow-500 transition-colors shadow-[0_0_20px_rgba(212,175,55,0.4)] uppercase tracking-widest text-lg group"
+              className="mt-6 w-full flex items-center justify-center gap-3 bg-[var(--mint-gold)] text-black font-bold font-mono py-4 px-6 rounded-tl-[2rem] rounded-br-[2rem] rounded-tr-sm rounded-bl-sm hover:bg-yellow-500 transition-colors shadow-[0_0_20px_rgba(212,175,55,0.4)] uppercase tracking-widest text-lg group"
             >
               {isGenerating ? (
                 <>
