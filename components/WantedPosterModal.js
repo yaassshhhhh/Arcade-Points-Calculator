@@ -86,18 +86,21 @@ export default function WantedPosterModal({ isOpen, onClose, userName, avatar, p
                   DEAD OR ALIVE
                 </h3>
 
-                {/* Avatar Frame */}
-                <div className="relative w-48 h-48 sm:w-64 sm:h-64 mx-auto mb-8 border-4 border-[#2a2a2a] p-2 bg-[#d1be90] shadow-inner">
-                  <div className="w-full h-full relative overflow-hidden bg-black flex items-center justify-center filter sepia-[0.8] contrast-[1.2]">
+                {/* Avatar Frame - Smaller and Unique */}
+                <div className="relative w-32 h-32 sm:w-48 sm:h-48 mx-auto mb-6 transform rotate-2">
+                  {/* Tape */}
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-16 h-6 bg-[#e4d5b7] opacity-80 rotate-[-4deg] z-20 shadow-sm border border-[#d1be90]"></div>
+                  
+                  <div className="w-full h-full relative overflow-hidden bg-black flex items-center justify-center border-4 border-[#2a2a2a] p-1 bg-white shadow-[0_5px_15px_rgba(0,0,0,0.5)]">
                     <img 
                       src={avatar} 
                       alt="Wanted Operative" 
-                      className="w-full h-full object-cover object-top"
+                      className="w-full h-full object-cover object-top filter grayscale contrast-125 sepia-[0.3]"
                       crossOrigin="anonymous"
                     />
                   </div>
                   {/* Stamp */}
-                  <div className="absolute -bottom-4 -right-8 rotate-[-15deg] border-4 border-red-700 text-red-700 px-4 py-1 font-bold text-xl sm:text-2xl font-mono tracking-widest uppercase opacity-80 backdrop-blur-sm" style={{ textShadow: '0 0 2px rgba(220,38,38,0.5)' }}>
+                  <div className="absolute -bottom-3 -right-6 rotate-[-15deg] border-4 border-red-800 text-red-800 px-3 py-1 font-black text-lg sm:text-xl font-mono tracking-widest uppercase opacity-90 backdrop-blur-sm z-20 bg-[rgba(255,255,255,0.2)]" style={{ textShadow: '0 0 2px rgba(220,38,38,0.5)' }}>
                     {rank}
                   </div>
                 </div>

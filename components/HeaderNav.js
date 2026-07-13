@@ -45,7 +45,7 @@ export default function HeaderNav() {
             <Link
               key={link.label}
               href={link.href}
-              className={`font-mono text-sm uppercase tracking-widest transition-all duration-300 pb-1 border-b-2 ${
+              className={`font-shlop text-xl md:text-2xl uppercase tracking-[0.05em] transition-all duration-300 pb-1 border-b-2 ${
                 isActive 
                   ? "text-[var(--heist-red-bright)] border-[var(--heist-red-bright)] drop-shadow-[0_0_8px_var(--heist-red-glow)]" 
                   : link.highlight 
@@ -86,7 +86,7 @@ export default function HeaderNav() {
                   key={link.label}
                   href={link.href}
                   onClick={() => setIsOpen(false)}
-                  className={`font-mono text-sm uppercase tracking-widest transition-all duration-300 py-3 border-b border-[var(--vault-outline)] last:border-0 ${
+                  className={`font-shlop text-2xl uppercase tracking-[0.05em] transition-all duration-300 py-3 border-b border-[var(--vault-outline)] last:border-0 ${
                     isActive 
                       ? "text-[var(--heist-red-bright)]" 
                       : link.highlight 
