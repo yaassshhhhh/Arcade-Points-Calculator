@@ -6,7 +6,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import HeaderNav from "@/components/HeaderNav";
 import PointsRing from "@/components/PointsRing";
 import MaskIcon from "@/components/MaskIcon";
+import ProgressRoadmap from "@/components/ProgressRoadmap";
 import MilestoneModal from "@/components/MilestoneModal";
+import FacilitatorMilestones from "@/components/FacilitatorMilestones";
 
 const getCategoryLabel = (category) => {
   switch (category) {
@@ -98,6 +100,34 @@ function DashboardContent() {
     fetchPoints();
   }, [url, router, lastTotal]);
 
+  const facilitatorStats = useMemo(() => {
+    if (!data || !data.badges) return { badgesCount: 0, gamesCount: 0 };
+    
+    let bCount = 0;
+    let gCount = 0;
+    
+    const startTime = new Date("2026-07-14T13:00:00+05:30").getTime();
+    const endTime = new Date("2026-09-13T23:59:59+05:30").getTime();
+    
+    data.badges.forEach(badge => {
+      const cleanDateStr = badge.earnedDate.replace(/^Earned\s+/i, "").trim();
+      const earnedTimestamp = Date.parse(cleanDateStr);
+      
+      // If we can parse the date, and it falls in the valid window
+      // (Note: Profiles often only provide dates without times, which parse to midnight.
+      // We check strictly against the timestamp logic provided.)
+      if (!isNaN(earnedTimestamp) && earnedTimestamp >= startTime && earnedTimestamp <= endTime) {
+        if (badge.category === 'skillBadge') {
+          bCount++;
+        } else if (['game', 'specialGame', 'specialGame3'].includes(badge.category)) {
+          gCount++;
+        }
+      }
+    });
+    
+    return { badgesCount: bCount, gamesCount: gCount };
+  }, [data]);
+
   return (
     <main className="min-h-screen bg-[var(--vault-black)] text-[var(--text-primary)] pb-20 relative">
       {/* Background Image Overlay */}
@@ -136,10 +166,10 @@ function DashboardContent() {
 
       {/* Dashboard Data */}
       {!loading && data && (
-        <div className="container mx-auto px-6 max-w-6xl mt-8">
+        <div className="container mx-auto px-6 max-w-[100rem] mt-8">
           
           {/* Top Section: Points Ring & Target */}
-          <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16">
+          <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16 max-w-7xl mx-auto">
             <div className="lg:col-span-8 flex justify-center">
               <PointsRing points={data.totalPoints} maxPoints={80} />
             </div>
@@ -198,6 +228,59 @@ function DashboardContent() {
             ))}
           </section>
 
+          {/* Visual Progress Roadmap */}
+          <ProgressRoadmap 
+            totalPoints={data.totalPoints} 
+            avatar={data.userAvatar || guessAvatar(data.userName)} 
+          />
+
+          {/* Milestone Tracker Section */}
+          <section className="mb-16 max-w-6xl mx-auto px-4 mt-8">
+            <div className="mb-8 border-b border-[var(--vault-outline)] pb-4 flex flex-col items-center justify-center text-center">
+              <h2 className="font-shlop text-4xl md:text-5xl tracking-[0.05em] text-[var(--heist-red)] drop-shadow-[0_0_15px_rgba(193,18,31,0.6)] uppercase">NEXT TARGETS</h2>
+              <h3 className="font-shlop text-xl md:text-2xl text-[var(--mint-gold)] tracking-widest uppercase">The Plan for the Heist</h3>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {[
+                { name: 'TROOPER', target: 50 },
+                { name: 'RANGER', target: 75 },
+                { name: 'CHAMPION', target: 95 },
+                { name: 'LEGEND', target: 120 },
+              ].map((tier, idx) => {
+                const remaining = Math.max(tier.target - data.totalPoints, 0);
+                const isAchieved = data.totalPoints >= tier.target;
+                return (
+                  <div key={idx} className={`bg-transparent border p-6 flex flex-col items-center justify-center text-center rounded-lg transition-all relative overflow-hidden group ${isAchieved ? 'border-[var(--mint-gold)] shadow-[0_0_20px_rgba(212,175,55,0.2)] hover:shadow-[0_0_30px_rgba(212,175,55,0.4)] hover:scale-105' : 'border-[var(--vault-outline)] hover:border-[var(--heist-red)] shadow-[0_0_20px_rgba(0,0,0,0.5)] hover:shadow-[0_0_20px_rgba(193,18,31,0.2)] hover:scale-105'}`}>
+                    <div className={`absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity ${isAchieved ? 'bg-[var(--mint-gold-dim)]' : 'bg-[var(--heist-red-dim)]'}`}></div>
+                    
+                    <div className="font-shlop text-3xl md:text-4xl tracking-widest uppercase mb-1 z-10" style={{ color: isAchieved ? 'var(--mint-gold)' : 'white' }}>
+                      {tier.name}
+                    </div>
+                    <div className="font-mono text-xs text-[var(--text-muted)] tracking-wider uppercase mb-5 z-10 border-b border-[var(--vault-outline)] pb-2 w-full">
+                      TARGET: {tier.target} PTS
+                    </div>
+                    
+                    {isAchieved ? (
+                       <div className="bg-[rgba(212,175,55,0.1)] text-[var(--mint-gold)] px-4 py-3 font-mono font-bold tracking-widest text-sm w-full border border-[var(--mint-gold-dim)] z-10 shadow-[inset_0_0_15px_rgba(212,175,55,0.15),0_0_10px_rgba(212,175,55,0.2)] rounded-tl-2xl rounded-br-2xl rounded-tr-sm rounded-bl-sm transition-all duration-300 [text-shadow:0_0_8px_currentColor]">
+                         TARGET ACQUIRED
+                       </div>
+                    ) : (
+                       <div className="bg-[rgba(193,18,31,0.1)] text-[var(--heist-red)] px-4 py-3 font-mono font-bold tracking-widest text-sm w-full border border-[var(--heist-red-dim)] z-10 shadow-[inset_0_0_15px_rgba(193,18,31,0.15),0_0_10px_rgba(193,18,31,0.2)] rounded-tl-2xl rounded-br-2xl rounded-tr-sm rounded-bl-sm transition-all duration-300 [text-shadow:0_0_8px_currentColor]">
+                         {remaining} PTS REMAINING
+                       </div>
+                    )}
+                  </div>
+                )
+              })}
+            </div>
+          </section>
+
+          <FacilitatorMilestones 
+            badgesCount={facilitatorStats.badgesCount} 
+            gamesCount={facilitatorStats.gamesCount} 
+          />
+
           {/* Work Meets Play Bonus Banner */}
           {data.workMeetsPlayBonus > 0 && (
             <section className="mb-12 max-w-3xl mx-auto px-4">
@@ -254,10 +337,16 @@ function DashboardContent() {
                       </div>
                       
                       <div className="text-xs text-[var(--text-muted)] uppercase tracking-wider font-mono border-t border-[var(--vault-outline)] pt-4 w-full flex flex-col gap-2">
-                        <div className="bg-[rgba(212,175,55,0.1)] text-[var(--mint-gold)] border border-[var(--mint-gold-dim)] px-2 py-1 text-center font-bold tracking-widest mb-1 shadow-[inset_0_0_10px_rgba(212,175,55,0.05)] backdrop-blur-sm">
+                        <div 
+                          className="bg-[rgba(212,175,55,0.1)] text-[var(--mint-gold)] border border-[var(--mint-gold-dim)] px-4 py-1.5 text-center font-bold tracking-widest mb-1 shadow-[inset_0_0_10px_rgba(212,175,55,0.05)] backdrop-blur-sm"
+                          style={{ clipPath: 'polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px)' }}
+                        >
                           {getCategoryLabel(badge.category)}
                         </div>
-                        <div className="flex justify-between items-center mt-1 bg-[rgba(0,0,0,0.4)] px-2 py-1 rounded backdrop-blur-sm">
+                        <div 
+                          className="flex justify-between items-center mt-2 bg-[rgba(0,0,0,0.5)] border border-[var(--vault-outline)] px-4 py-2 backdrop-blur-sm"
+                          style={{ clipPath: 'polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px))' }}
+                        >
                           <span className="text-[var(--heist-red)] font-bold tracking-widest">ACQUIRED:</span>
                           <span>{badge.earnedDate.replace(/Earned\s+/i, '')}</span>
                         </div>

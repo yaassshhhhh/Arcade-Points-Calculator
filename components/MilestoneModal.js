@@ -102,8 +102,8 @@ export default function MilestoneModal({ isOpen, onClose, pointsSecured, pointsR
               THE MINT IS OURS.
             </h2>
             
-            <p className="font-mono text-xl md:text-2xl text-[var(--mint-gold)] mb-10 tracking-widest uppercase mt-4 flex items-center justify-center">
-              You've secured <span className="font-shlop text-5xl text-white mx-3">{pointsSecured}</span> points. 
+            <p className="font-shlop text-4xl md:text-5xl text-[var(--mint-gold)] mb-10 tracking-widest uppercase mt-4 flex items-center justify-center">
+              You've secured <span className="font-shlop text-5xl md:text-6xl text-white mx-3">{pointsSecured}</span> points. 
             </p>
           </motion.div>
         </div>

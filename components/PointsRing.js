@@ -107,7 +107,7 @@ export default function PointsRing({ points, maxPoints = 80 }) {
             <span className="font-mono text-[var(--mint-gold)] text-sm sm:text-base">pt</span>
           </div>
           
-          <div className="font-display text-[var(--text-muted)] tracking-[0.2em] uppercase text-[10px] sm:text-xs mt-1">
+          <div className="font-display text-[var(--text-muted)] tracking-[0.2em] uppercase text-[10px] sm:text-xs mt-4">
             Total Haul
           </div>
         </div>
