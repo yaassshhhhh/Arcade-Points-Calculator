@@ -10,6 +10,8 @@ import ProgressRoadmap from "@/components/ProgressRoadmap";
 import MilestoneModal from "@/components/MilestoneModal";
 import FacilitatorMilestones from "@/components/FacilitatorMilestones";
 import RankAvatar from "@/components/RankAvatar";
+import WantedPosterModal from "@/components/WantedPosterModal";
+import { Camera } from "lucide-react";
 
 const getCategoryLabel = (category) => {
   switch (category) {
@@ -51,7 +53,16 @@ function DashboardContent() {
   
   // Milestone modal state
   const [showMilestone, setShowMilestone] = useState(false);
+  const [showWantedPoster, setShowWantedPoster] = useState(false);
   const [lastTotal, setLastTotal] = useState(0);
+
+  const getRank = (points) => {
+    if (points >= 120) return "LEGEND";
+    if (points >= 95) return "CHAMPION";
+    if (points >= 75) return "RANGER";
+    if (points >= 50) return "TROOPER";
+    return "RECRUIT";
+  };
 
   useEffect(() => {
     if (!url) {
@@ -201,6 +212,14 @@ function DashboardContent() {
                     </div>
                   </div>
                 )}
+                
+                <button 
+                  onClick={() => setShowWantedPoster(true)}
+                  className="mt-6 flex items-center justify-center gap-2 w-full max-w-sm bg-transparent border-2 border-[var(--mint-gold)] text-[var(--mint-gold)] hover:bg-[var(--mint-gold)] hover:text-black font-mono font-bold tracking-widest py-3 px-4 rounded transition-all duration-300 shadow-[0_0_10px_rgba(212,175,55,0.2)] hover:shadow-[0_0_20px_rgba(212,175,55,0.5)] group"
+                >
+                  <Camera size={20} className="group-hover:scale-110 transition-transform" />
+                  PRINT WANTED POSTER
+                </button>
               </div>
             </div>
           </section>
@@ -366,6 +385,15 @@ function DashboardContent() {
             onClose={() => setShowMilestone(false)}
             pointsSecured={data.totalPoints}
             pointsRemaining={Math.max(80 - data.totalPoints, 0)}
+          />
+
+          <WantedPosterModal
+            isOpen={showWantedPoster}
+            onClose={() => setShowWantedPoster(false)}
+            userName={data.userName}
+            avatar={data.userAvatar || guessAvatar(data.userName)}
+            points={data.totalPoints}
+            rank={getRank(data.totalPoints)}
           />
         </div>
       )}
