@@ -292,12 +292,14 @@ export default function FacilitatorPage() {
               <h3 className="relative z-10 font-display text-2xl text-white mb-2 uppercase tracking-wide">Registration Terminal</h3>
               <p className="relative z-10 font-mono text-xs text-[var(--text-muted)] mb-6">Need authorization code from your Lead.</p>
               
-              <div className="bg-[var(--vault-black)] border border-[var(--heist-red)] p-4 mb-6 relative z-10 rounded-2xl">
-                <div className="absolute -top-3 left-4 bg-[var(--vault-black)] px-2 font-mono text-[0.65rem] text-[var(--heist-red)]">DOOR OPENS IN</div>
-                <CountdownTimer targetDate="2026-07-13T17:00:00+05:30" />
+              <div className="bg-[var(--vault-black)] border border-[var(--heist-red)] p-4 mb-6 relative z-10 rounded-2xl flex items-center justify-center">
+                <div className="absolute -top-3 left-4 bg-[var(--vault-black)] px-2 font-mono text-[0.65rem] text-[var(--heist-red)]">STATUS</div>
+                <div className="font-shlop text-3xl md:text-4xl text-[var(--heist-red)] tracking-widest uppercase animate-pulse py-2">
+                  Enrollment Live !!
+                </div>
               </div>
               
-              <a href="https://rsvp.withgoogle.com/events/arcade-facilitator/form" target="_blank" rel="noopener noreferrer" className="relative z-10 overflow-hidden flex items-center justify-center gap-2 bg-[var(--heist-red)] text-white font-display text-xl py-4 w-full group border border-transparent hover:border-[var(--heist-red)] transition-colors duration-300 rounded-2xl">
+              <a href="https://docs.google.com/forms/d/e/1FAIpQLScjkkpNBMs0xR_EvqwLFQZRRVXccQQTLl-pUA37NvzvUQ3NJQ/viewform" target="_blank" rel="noopener noreferrer" className="relative z-10 overflow-hidden flex items-center justify-center gap-2 bg-[var(--heist-red)] text-white font-display text-xl py-4 w-full group border border-transparent hover:border-[var(--heist-red)] transition-colors duration-300 rounded-2xl">
                 <div className="absolute inset-0 bg-black -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out z-0"></div>
                 <span className="relative z-10 tracking-widest transition-all duration-300">ENTER AUTHORIZATION</span> 
                 <ChevronRight size={22} className="relative z-10 group-hover:translate-x-2 transition-transform duration-300" />

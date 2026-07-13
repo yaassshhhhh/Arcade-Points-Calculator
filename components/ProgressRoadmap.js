@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import MaskIcon from './MaskIcon';
+import RankAvatar from './RankAvatar';
 
 export default function ProgressRoadmap({ totalPoints, avatar }) {
   const maxPoints = 120;
@@ -101,14 +102,12 @@ export default function ProgressRoadmap({ totalPoints, avatar }) {
                <div className="absolute bottom-full left-1/2 -translate-x-1/2 border-solid border-b-[var(--heist-red)] border-b-8 border-x-transparent border-x-8 border-t-0"></div>
              </div>
 
-             <div className="bg-[var(--vault-charcoal)] border-[3px] border-[var(--mint-gold)] p-1 w-14 h-14 rounded-full shadow-[inset_0_0_15px_rgba(212,175,55,0.3)] flex items-center justify-center relative overflow-hidden group-hover:scale-110 transition-transform duration-500">
-               <div className="absolute inset-0 bg-[var(--mint-gold)] opacity-20 animate-ping"></div>
-               {avatar ? (
-                 <img src={avatar} alt="Operative" className="w-full h-full object-cover rounded-full relative z-10" />
-               ) : (
-                 <MaskIcon size={28} className="text-[var(--mint-gold)] relative z-10" />
-               )}
-             </div>
+             <RankAvatar 
+               points={totalPoints} 
+               avatar={avatar} 
+               size="sm" 
+               className="group-hover:scale-110 transition-transform duration-500 shadow-[inset_0_0_15px_rgba(212,175,55,0.3)] rounded-full" 
+             />
           </motion.div>
         </div>
       </div>

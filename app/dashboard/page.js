@@ -9,6 +9,7 @@ import MaskIcon from "@/components/MaskIcon";
 import ProgressRoadmap from "@/components/ProgressRoadmap";
 import MilestoneModal from "@/components/MilestoneModal";
 import FacilitatorMilestones from "@/components/FacilitatorMilestones";
+import RankAvatar from "@/components/RankAvatar";
 
 const getCategoryLabel = (category) => {
   switch (category) {
@@ -179,14 +180,11 @@ function DashboardContent() {
               <div className="flex flex-col items-center justify-center">
                 <div className="relative mb-6">
                   <div className="absolute inset-0 rounded-full bg-[var(--heist-red-glow)] blur-lg animate-pulse"></div>
-                  <img 
-                    src={data.userAvatar || guessAvatar(data.userName)} 
-                    alt={data.userName} 
-                    className="relative z-10 w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-[var(--heist-red)] shadow-[0_0_20px_rgba(193,18,31,0.5)] object-cover bg-[var(--vault-black)]" 
-                    onError={(e) => {
-                      // Fallback if the avatar url is broken
-                      e.target.src = guessAvatar(data.userName);
-                    }}
+                  <RankAvatar 
+                    points={data.totalPoints} 
+                    avatar={data.userAvatar || guessAvatar(data.userName)} 
+                    userName={data.userName} 
+                    size="lg" 
                   />
                 </div>
                 <div className="bg-transparent border border-[var(--vault-outline)] px-6 py-3 md:px-8 md:py-3 rounded-lg shadow-lg text-center mt-2 w-full max-w-sm">
