@@ -3,13 +3,29 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function HeaderNav() {
   const pathname = usePathname();
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  React.useEffect(() => {
+    const checkLogin = () => setIsLoggedIn(!!localStorage.getItem("arcadeProfileUrl"));
+    checkLogin();
+    window.addEventListener('storage', checkLogin);
+    return () => window.removeEventListener('storage', checkLogin);
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("arcadeProfileUrl");
+    setIsLoggedIn(false);
+    setIsOpen(false);
+    router.push("/");
+  };
 
   const links = [
     { label: "The Briefing", href: "/" },
@@ -57,6 +73,14 @@ export default function HeaderNav() {
             </Link>
           );
         })}
+        {isLoggedIn && (
+          <button
+            onClick={handleLogout}
+            className="font-shlop text-xl md:text-2xl uppercase tracking-[0.05em] text-[var(--heist-red)] hover:text-white transition-colors duration-300 pb-1"
+          >
+            ABORT MISSION
+          </button>
+        )}
       </div>
 
       {/* Mobile Menu Toggle */}
@@ -98,6 +122,14 @@ export default function HeaderNav() {
                 </Link>
               );
             })}
+            {isLoggedIn && (
+              <button
+                onClick={handleLogout}
+                className="text-left font-shlop text-2xl uppercase tracking-[0.05em] text-[var(--heist-red)] hover:text-white transition-all duration-300 py-3 border-b border-[var(--vault-outline)] last:border-0"
+              >
+                ABORT MISSION
+              </button>
+            )}
           </motion.div>
         )}
       </AnimatePresence>

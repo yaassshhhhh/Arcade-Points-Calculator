@@ -17,16 +17,25 @@ export default function Home() {
   const router = useRouter();
 
   useEffect(() => {
+    // Check if user is already "logged in"
+    const savedUrl = localStorage.getItem("arcadeProfileUrl");
+    if (savedUrl) {
+      router.push(`/dashboard?url=${encodeURIComponent(savedUrl)}`);
+    }
+
     const timer = setTimeout(() => {
       setShowPopup(true);
     }, 3000);
     return () => clearTimeout(timer);
-  }, []);
+  }, [router]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!url) return;
     setLoading(true);
+    
+    // Save to localStorage so they stay logged in
+    localStorage.setItem("arcadeProfileUrl", url);
     
     // Simulate vault unlock wait
     setTimeout(() => {
