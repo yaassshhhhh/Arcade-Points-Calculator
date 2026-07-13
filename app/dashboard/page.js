@@ -170,13 +170,13 @@ function DashboardContent() {
         <div className="container mx-auto px-6 max-w-[100rem] mt-8">
           
           {/* Top Section: Points Ring & Target */}
-          <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16 max-w-7xl mx-auto">
-            <div className="lg:col-span-8 flex justify-center">
+          <section className="flex flex-col lg:flex-row justify-center items-center gap-8 lg:gap-12 mb-16 max-w-7xl mx-auto">
+            <div className="flex justify-center">
               <PointsRing points={data.totalPoints} maxPoints={80} />
             </div>
             
             {/* Intel Panel */}
-            <div className="lg:col-span-4 flex flex-col justify-center">
+            <div className="flex flex-col justify-center">
               <div className="flex flex-col items-center justify-center">
                 <div className="relative mb-6">
                   <div className="absolute inset-0 rounded-full bg-[var(--heist-red-glow)] blur-lg animate-pulse"></div>
