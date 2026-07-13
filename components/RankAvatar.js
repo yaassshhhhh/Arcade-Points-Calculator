@@ -49,7 +49,7 @@ export default function RankAvatar({ points, avatar, userName, size = 'lg', clas
            {/* Image Container */}
            <div className="relative w-full h-full bg-[var(--vault-black)] rounded-full overflow-hidden flex items-center justify-center shadow-[inset_0_0_20px_rgba(0,0,0,0.8)]">
               {avatar ? (
-                <img src={avatar} alt={userName || "Legend"} className="w-full h-full object-cover" />
+                <img src={avatar} alt={userName || "Legend"} className="w-full h-full object-cover" referrerPolicy="no-referrer" onError={(e) => { e.currentTarget.src = '/professor.png'; }} />
               ) : (
                 <MaskIcon size={iconSize} className="text-white relative z-10" />
               )}
@@ -59,7 +59,7 @@ export default function RankAvatar({ points, avatar, userName, size = 'lg', clas
         /* Standard Ranks */
         <div className={`${wrapperClasses} ${sizeClasses} group-hover:scale-105 transition-transform duration-500`}>
            {avatar ? (
-             <img src={avatar} alt={userName || "Operative"} className="w-full h-full object-cover relative z-10" />
+             <img src={avatar} alt={userName || "Operative"} className="w-full h-full object-cover relative z-10" referrerPolicy="no-referrer" onError={(e) => { e.currentTarget.src = '/professor.png'; }} />
            ) : (
              <MaskIcon size={iconSize} className="text-[var(--mint-gold)] relative z-10" />
            )}

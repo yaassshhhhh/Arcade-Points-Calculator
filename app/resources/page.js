@@ -76,6 +76,12 @@ export default function ResourcesPage() {
 
   const videos = [
     {
+      title: "Google Cloud Arcade Facilitator Program 2026 Registration LIVE | Complete Guide",
+      url: "https://www.youtube.com/watch?v=gZ8WdrDXwJc",
+      videoId: "gZ8WdrDXwJc",
+      isLatest: true
+    },
+    {
       title: "Make Your Google Developer Profile Public & Earn Gear Badge",
       url: "https://www.youtube.com/watch?v=CfpzYDjMpg0",
       videoId: "CfpzYDjMpg0",

@@ -12,16 +12,33 @@ export default function HeaderNav() {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userProfile, setUserProfile] = useState(null);
 
   React.useEffect(() => {
-    const checkLogin = () => setIsLoggedIn(!!localStorage.getItem("arcadeProfileUrl"));
+    const checkLogin = () => {
+      const url = sessionStorage.getItem("arcadeProfileUrl");
+      if (url) {
+        setIsLoggedIn(true);
+        const name = sessionStorage.getItem("arcadeUserName") || "Operative";
+        let avatar = sessionStorage.getItem("arcadeUserAvatar");
+        if (!avatar || avatar === "null" || avatar === "undefined") {
+          avatar = "/professor.png";
+        }
+        setUserProfile({ name, avatar });
+      } else {
+        setIsLoggedIn(false);
+        setUserProfile(null);
+      }
+    };
     checkLogin();
     window.addEventListener('storage', checkLogin);
     return () => window.removeEventListener('storage', checkLogin);
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem("arcadeProfileUrl");
+    sessionStorage.removeItem("arcadeProfileUrl");
+    sessionStorage.removeItem("arcadeUserName");
+    sessionStorage.removeItem("arcadeUserAvatar");
     setIsLoggedIn(false);
     setIsOpen(false);
     router.push("/");
@@ -61,7 +78,7 @@ export default function HeaderNav() {
             <Link
               key={link.label}
               href={link.href}
-              className={`font-shlop text-xl md:text-2xl uppercase tracking-[0.05em] transition-all duration-300 pb-1 border-b-2 ${
+              className={`font-shlop text-xl md:text-2xl uppercase tracking-[0.05em] transition-all duration-300 pb-1 border-b-2 whitespace-nowrap ${
                 isActive 
                   ? "text-[var(--heist-red-bright)] border-[var(--heist-red-bright)] drop-shadow-[0_0_8px_var(--heist-red-glow)]" 
                   : link.highlight 
@@ -73,13 +90,27 @@ export default function HeaderNav() {
             </Link>
           );
         })}
-        {isLoggedIn && (
-          <button
-            onClick={handleLogout}
-            className="font-shlop text-xl md:text-2xl uppercase tracking-[0.05em] text-[var(--heist-red)] hover:text-white transition-colors duration-300 pb-1"
-          >
-            ABORT MISSION
-          </button>
+        {isLoggedIn && userProfile && (
+          <div className="flex items-center gap-3 ml-2 pl-4 border-l border-[var(--vault-outline)]">
+            <div className="flex items-center gap-2 group/profile cursor-pointer" onClick={() => router.push('/dashboard')} title={userProfile.name}>
+              <div className="w-8 h-8 rounded-full border border-[var(--vault-outline)] overflow-hidden bg-black flex items-center justify-center shrink-0">
+                <img 
+                  src={userProfile?.avatar || '/professor.png'} 
+                  alt={userProfile?.name} 
+                  className="w-full h-full object-cover" 
+                  referrerPolicy="no-referrer"
+                  onError={(e) => { e.currentTarget.src = '/professor.png'; }} 
+                />
+              </div>
+            </div>
+            <button
+              onClick={handleLogout}
+              className="font-shlop text-xl tracking-[0.05em] text-[var(--heist-red)] hover:text-white transition-colors duration-300 ml-2 bg-transparent border border-transparent hover:border-white px-2 rounded"
+              title="Logout"
+            >
+              LOGOUT
+            </button>
+          </div>
         )}
       </div>
 
@@ -122,13 +153,26 @@ export default function HeaderNav() {
                 </Link>
               );
             })}
-            {isLoggedIn && (
-              <button
-                onClick={handleLogout}
-                className="text-left font-shlop text-2xl uppercase tracking-[0.05em] text-[var(--heist-red)] hover:text-white transition-all duration-300 py-3 border-b border-[var(--vault-outline)] last:border-0"
-              >
-                ABORT MISSION
-              </button>
+            {isLoggedIn && userProfile && (
+              <div className="py-4 border-b border-[var(--vault-outline)] flex items-center justify-between">
+                <div className="flex items-center gap-3 cursor-pointer" onClick={() => { setIsOpen(false); router.push('/dashboard'); }} title={userProfile.name}>
+                  <div className="w-8 h-8 rounded-full border border-[var(--vault-outline)] overflow-hidden bg-black flex items-center justify-center">
+                    <img 
+                      src={userProfile?.avatar || '/professor.png'} 
+                      alt={userProfile?.name} 
+                      className="w-full h-full object-cover" 
+                      referrerPolicy="no-referrer"
+                      onError={(e) => { e.currentTarget.src = '/professor.png'; }} 
+                    />
+                  </div>
+                </div>
+                <button
+                  onClick={handleLogout}
+                  className="font-shlop text-xl tracking-[0.05em] text-[var(--heist-red)] hover:text-white transition-colors bg-[var(--vault-charcoal)] px-3 py-1 rounded border border-[var(--heist-red)]"
+                >
+                  LOGOUT
+                </button>
+              </div>
             )}
           </motion.div>
         )}

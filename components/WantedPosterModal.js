@@ -93,10 +93,11 @@ export default function WantedPosterModal({ isOpen, onClose, userName, avatar, p
                   
                   <div className="w-full h-full relative overflow-hidden bg-black flex items-center justify-center border-4 border-[#2a2a2a] p-1 bg-white shadow-[0_5px_15px_rgba(0,0,0,0.5)]">
                     <img 
-                      src={avatar} 
+                      src={avatar && avatar !== "null" && avatar !== "undefined" ? avatar : '/professor.png'} 
                       alt="Wanted Operative" 
                       className="w-full h-full object-cover object-top filter grayscale contrast-125 sepia-[0.3]"
-                      crossOrigin="anonymous"
+                      referrerPolicy="no-referrer"
+                      onError={(e) => { e.target.onerror = null; e.target.src = '/professor.png'; }}
                     />
                   </div>
                   {/* Stamp */}

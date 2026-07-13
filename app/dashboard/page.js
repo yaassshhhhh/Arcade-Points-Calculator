@@ -65,9 +65,16 @@ function DashboardContent() {
   };
 
   useEffect(() => {
-    if (!url) {
+    const urlParam = searchParams.get("url");
+    const finalUrl = urlParam || sessionStorage.getItem("arcadeProfileUrl");
+
+    if (!finalUrl) {
       router.push("/");
       return;
+    }
+
+    if (urlParam) {
+      sessionStorage.setItem("arcadeProfileUrl", urlParam);
     }
 
     const fetchPoints = async () => {
@@ -75,12 +82,16 @@ function DashboardContent() {
         const res = await fetch("/api/calculate", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ url }),
+          body: JSON.stringify({ url: finalUrl }),
         });
 
         const result = await res.json();
         if (res.ok) {
           setData(result.data);
+
+          // Save user details for HeaderNav
+          sessionStorage.setItem("arcadeUserName", result.data.userName);
+          sessionStorage.setItem("arcadeUserAvatar", result.data.userAvatar || guessAvatar(result.data.userName));
 
           // Play shoutout music
           try {
@@ -110,7 +121,7 @@ function DashboardContent() {
     };
 
     fetchPoints();
-  }, [url, router, lastTotal]);
+  }, [searchParams, router, lastTotal]);
 
   const facilitatorStats = useMemo(() => {
     if (!data || !data.badges) return { badgesCount: 0, gamesCount: 0 };

@@ -64,14 +64,19 @@ export async function POST(req) {
     }
 
     // Attempt to parse avatar
-    let userAvatar = $('.ql-avatar img').attr('src') || $('.profile-avatar img').attr('src') || $('img.avatar').attr('src') || $('ql-avatar').attr('src') || null;
-    if (userAvatar && userAvatar.startsWith('/')) {
-       try {
-         const urlObj = new URL(formattedUrl);
-         userAvatar = `${urlObj.origin}${userAvatar}`;
-       } catch (e) {
-         // Ignore URL parsing errors
-       }
+    let userAvatar = $('.ql-avatar img').attr('src') || $('.profile-avatar img').attr('src') || $('img.avatar').attr('src') || $('ql-avatar').attr('src') || $('meta[property="og:image"]').attr('content') || null;
+    
+    if (userAvatar) {
+      if (userAvatar.startsWith('//')) {
+        userAvatar = 'https:' + userAvatar;
+      } else if (userAvatar.startsWith('/')) {
+         try {
+           const urlObj = new URL(formattedUrl);
+           userAvatar = `${urlObj.origin}${userAvatar}`;
+         } catch (e) {
+           // Ignore URL parsing errors
+         }
+      }
     }
 
     // 4. Parsing Badges — works for both domain structures
