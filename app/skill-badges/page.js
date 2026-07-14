@@ -108,7 +108,7 @@ export default function SkillBadgesPage() {
               transition={{ duration: 0.6 }}
               className="mb-8 max-w-3xl mx-auto flex gap-4 justify-center"
             >
-              <div className="bg-[var(--vault-charcoal)] border border-[var(--vault-outline)] p-4 rounded-lg flex items-center justify-center gap-4 shadow-[0_0_15px_rgba(0,0,0,0.5)]">
+              <div className="bg-transparent backdrop-blur-sm border border-[var(--vault-outline)] p-4 rounded-lg flex items-center justify-center gap-4 shadow-[0_0_15px_rgba(0,0,0,0.5)]">
                 <div className="flex flex-col items-center px-4">
                   <span className="font-shlop text-4xl text-[var(--heist-red)]">{badges.length}</span>
                   <span className="font-mono text-[10px] text-[var(--text-muted)] tracking-widest uppercase">Total Badges</span>
@@ -135,7 +135,7 @@ export default function SkillBadgesPage() {
             className="mb-12 max-w-3xl mx-auto relative group"
           >
             <div className="absolute inset-0 bg-[var(--heist-red)] blur-[15px] opacity-0 group-focus-within:opacity-20 transition-opacity duration-300"></div>
-            <div className="relative flex items-center gap-4 bg-[var(--vault-charcoal)] border-2 border-[var(--vault-outline)] p-4 shadow-[0_0_20px_rgba(0,0,0,0.5)] focus-within:border-[var(--heist-red)] transition-all">
+            <div className="relative flex items-center gap-4 bg-transparent backdrop-blur-sm border-2 border-[var(--vault-outline)] p-4 shadow-[0_0_20px_rgba(0,0,0,0.5)] focus-within:border-[var(--heist-red)] transition-all rounded-tl-[2rem] rounded-br-[2rem] rounded-tr-md rounded-bl-md">
               <Search size={24} className="text-[var(--text-muted)] group-focus-within:text-[var(--heist-red)] transition-colors" />
               <input 
                 type="text" 
