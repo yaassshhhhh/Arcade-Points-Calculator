@@ -207,7 +207,7 @@ export default function SkillBadgesPage() {
                       maxWidth: "260px",
                       boxShadow: "0 10px 30px rgba(0,0,0,0.5)",
                       clipPath: "polygon(30px 0, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%, 0 30px)"
-                    }} className="transform group-hover:scale-105 transition-transform duration-500 relative z-10 border-l-4 border-[var(--heist-red)]">
+                    }} className="transform group-hover:scale-105 transition-transform duration-500 relative z-10">
                       {/* Google Cloud Logo */}
                       <div className="flex justify-center items-center mb-4">
                         <span style={{ fontSize: '1.1rem', fontWeight: 500, fontFamily: "'Product Sans', sans-serif" }}>
