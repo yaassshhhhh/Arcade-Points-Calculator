@@ -2,7 +2,7 @@
 
 import React, { useRef, useState, useEffect } from 'react';
 import html2canvas from 'html2canvas';
-import { X, Download, Loader2 } from 'lucide-react';
+import { X, Download, Loader2, Target, Crosshair } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function WantedPosterModal({ isOpen, onClose, userName, avatar, points, rank }) {
@@ -19,17 +19,16 @@ export default function WantedPosterModal({ isOpen, onClose, userName, avatar, p
     
     try {
       setIsGenerating(true);
-      // We use useCORS to allow cross-origin images (like external avatars) to load
       const canvas = await html2canvas(posterRef.current, {
-        scale: 2, // High resolution
+        scale: 2,
         useCORS: true,
-        backgroundColor: '#e8d5a7', // Match the parchment background
+        backgroundColor: '#1a1a1a', // Dark base
       });
       
       const image = canvas.toDataURL('image/png');
       const link = document.createElement('a');
       link.href = image;
-      link.download = `Wanted_${userName.replace(/\s+/g, '_')}.png`;
+      link.download = `Heist_Operative_${userName.replace(/\\s+/g, '_')}.png`;
       link.click();
     } catch (err) {
       console.error('Error generating poster:', err);
@@ -47,79 +46,121 @@ export default function WantedPosterModal({ isOpen, onClose, userName, avatar, p
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 md:p-8 backdrop-blur-sm">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 sm:p-6 md:p-8 backdrop-blur-md overflow-y-auto pt-16 sm:pt-4">
+          {/* Close Button - Moved to a fixed safe area so it doesn't get cut off on mobile */}
+          <button 
+            onClick={onClose}
+            className="fixed top-4 right-4 sm:absolute sm:-top-14 sm:-right-4 text-gray-400 hover:text-red-500 transition-colors p-2 bg-[#1a1a1a] border-2 border-red-900/50 rounded-full z-[70] shadow-[0_0_15px_rgba(185,28,28,0.5)]"
+          >
+            <X size={24} className="w-6 h-6 sm:w-7 sm:h-7" />
+          </button>
+
           <motion.div 
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className="relative flex flex-col items-center justify-center max-w-lg w-full"
+            className="relative flex flex-col items-center justify-center max-w-lg w-full my-auto"
           >
-            {/* Close Button */}
-            <button 
-              onClick={onClose}
-              className="absolute -top-12 right-0 text-[var(--text-muted)] hover:text-white transition-colors p-2 bg-[var(--vault-charcoal)] border border-[var(--vault-outline)] rounded-full z-10"
-            >
-              <X size={24} />
-            </button>
-
             {/* Poster Container */}
             <div 
               ref={posterRef}
-              className="w-full relative overflow-hidden flex flex-col items-center p-6 sm:p-10 shadow-[0_0_50px_rgba(0,0,0,0.8)]"
+              className="w-full relative flex flex-col items-center p-4 sm:p-8 md:p-10 shadow-[0_0_50px_rgba(220,38,38,0.3)] border-[3px] sm:border-[6px] border-[#1a1a1a] rounded-sm bg-[#1a1a1a] overflow-hidden"
               style={{
-                backgroundColor: '#e8d5a7',
-                backgroundImage: 'url("https://www.transparenttextures.com/patterns/old-wall.png")', // Sublte vintage texture
-                color: '#2a2a2a',
-                border: '12px solid #2a2a2a',
-                outline: '4px solid #e8d5a7',
-                outlineOffset: '-4px'
+                color: '#1a1a1a',
+                outline: '2px solid #b91c1c',
+                outlineOffset: '-2px'
               }}
             >
-              {/* Inner thin border */}
-              <div className="absolute inset-2 border-2 border-[#2a2a2a] pointer-events-none"></div>
+              {/* Vault Background Image - High Opacity */}
+              <div 
+                className="absolute inset-0 z-0 opacity-[0.9] bg-cover bg-center"
+                style={{ backgroundImage: 'url("/money_heist_vault_bg.png")' }}
+              ></div>
 
-              <div className="text-center w-full z-10">
-                <h2 className="font-shlop text-6xl sm:text-7xl lg:text-8xl text-[#2a2a2a] tracking-widest uppercase mt-4 mb-2 drop-shadow-md">
-                  WANTED
-                </h2>
+              {/* Yellow/Parchment Tint - Reduced Opacity */}
+              <div 
+                className="absolute inset-0 z-0 bg-[#e8d5a7] opacity-[0.55] mix-blend-hard-light"
+              ></div>
 
+              {/* Vintage Texture Overlay */}
+              <div 
+                className="absolute inset-0 z-0 opacity-50 mix-blend-overlay pointer-events-none"
+                style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/old-wall.png")' }}
+              ></div>
 
-                {/* Avatar Frame - Smaller and Unique */}
-                <div className="relative w-32 h-32 sm:w-48 sm:h-48 mx-auto mb-6 transform rotate-2">
-                  {/* Tape */}
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-16 h-6 bg-[#e4d5b7] opacity-80 rotate-[-4deg] z-20 shadow-sm border border-[#d1be90]"></div>
-                  
-                  <div className="w-full h-full relative overflow-hidden bg-black flex items-center justify-center border-4 border-[#2a2a2a] p-1 bg-white shadow-[0_5px_15px_rgba(0,0,0,0.5)]">
-                    <img 
-                      src={avatar && avatar !== "null" && avatar !== "undefined" ? avatar : '/professor.png'} 
-                      alt="Wanted Operative" 
-                      className="w-full h-full object-cover object-top filter grayscale contrast-125 sepia-[0.3]"
-                      referrerPolicy="no-referrer"
-                      onError={(e) => { e.target.onerror = null; e.target.src = '/professor.png'; }}
-                    />
+              {/* Inner Red Border Accent */}
+              <div className="absolute inset-1.5 sm:inset-3 border border-red-900/60 pointer-events-none z-10"></div>
+              <div className="absolute inset-2 sm:inset-4 border border-[#1a1a1a]/40 pointer-events-none z-10"></div>
+              
+              {/* Creative Elements (Target marks, Glows) */}
+              <div className="absolute top-4 left-4 sm:top-6 sm:left-6 z-10 opacity-70">
+                <Crosshair className="w-5 h-5 sm:w-6 sm:h-6 text-red-900" />
+              </div>
+              <div className="absolute top-4 right-4 sm:top-6 sm:right-6 z-10 opacity-70">
+                <Crosshair className="w-5 h-5 sm:w-6 sm:h-6 text-red-900" />
+              </div>
+              <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 z-10 opacity-70">
+                <Target className="w-5 h-5 sm:w-6 sm:h-6 text-[#1a1a1a]" />
+              </div>
+              <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 z-10 opacity-70">
+                <Target className="w-5 h-5 sm:w-6 sm:h-6 text-[#1a1a1a]" />
+              </div>
+
+              {/* Red Glow behind main text */}
+              <div className="absolute top-8 left-1/2 -translate-x-1/2 w-3/4 h-20 sm:h-24 bg-red-600/20 blur-2xl z-10 pointer-events-none"></div>
+
+              <div className="text-center w-full z-20 relative">
+                <div className="flex flex-col justify-center items-center gap-1 mt-2 sm:mt-4 mb-4 sm:mb-6">
+                  <div className="text-red-900 text-[10px] sm:text-sm font-bold tracking-[0.2em] sm:tracking-[0.3em] uppercase mb-1 drop-shadow-md">
+                    Target Profile
                   </div>
+                  <h2 className="font-shlop text-3xl sm:text-5xl md:text-6xl text-[#1a1a1a] tracking-widest uppercase drop-shadow-[0_0_15px_rgba(232,213,167,0.9)] bg-gradient-to-b from-[#1a1a1a] to-[#3a3a3a] bg-clip-text text-transparent leading-none" style={{ WebkitTextStroke: '1px rgba(232,213,167,0.5)' }}>
+                    HEIST OPERATIVE
+                  </h2>
+                  <div className="w-24 sm:w-32 h-[2px] bg-red-900/60 mt-1 sm:mt-2"></div>
+                </div>
+
+                {/* Avatar Frame - Polarid Style */}
+                <div className="relative w-28 h-28 sm:w-44 sm:h-44 md:w-52 md:h-52 mx-auto mb-6 sm:mb-8 transform -rotate-2 transition-transform hover:rotate-0 duration-300">
+                  {/* Tape */}
+                  <div className="absolute -top-3 sm:-top-4 left-1/2 -translate-x-1/2 w-12 sm:w-20 h-4 sm:h-6 bg-[#d4c399] opacity-90 rotate-[3deg] z-30 shadow-sm border border-[#bfae83]"></div>
+                  
+                  <div className="w-full h-full relative overflow-hidden bg-[#f0e6d2] p-1.5 sm:p-2 pb-5 sm:pb-6 shadow-[0_10px_20px_rgba(0,0,0,0.6)] border border-[#c4b595] group">
+                    <div className="w-full h-full relative overflow-hidden border border-[#1a1a1a]/20">
+                      <img 
+                        src={avatar && avatar !== "null" && avatar !== "undefined" ? avatar : '/professor.png'} 
+                        alt="Operative" 
+                        className="w-full h-full object-cover object-top filter grayscale contrast-125 sepia-[0.2] group-hover:grayscale-[0.3] transition-all duration-700 z-10 relative"
+                        referrerPolicy="no-referrer"
+                        onError={(e) => { e.target.onerror = null; e.target.src = '/professor.png'; }}
+                      />
+                    </div>
+                  </div>
+                  
                   {/* Stamp */}
-                  <div className="absolute -bottom-3 -right-6 rotate-[-15deg] border-4 border-red-800 text-red-800 px-3 py-1 font-black text-lg sm:text-xl font-mono tracking-widest uppercase opacity-90 backdrop-blur-sm z-20 bg-[rgba(255,255,255,0.2)]" style={{ textShadow: '0 0 2px rgba(220,38,38,0.5)' }}>
+                  <div className="absolute -bottom-3 -right-2 sm:-bottom-6 sm:-right-4 rotate-[-12deg] border-[1.5px] sm:border-4 border-red-700 text-red-700 px-2 py-0.5 sm:px-4 sm:py-2 font-black text-[10px] sm:text-lg md:text-xl font-mono tracking-[0.1em] sm:tracking-[0.2em] uppercase opacity-95 backdrop-blur-sm z-30 bg-[rgba(255,255,255,0.85)] shadow-lg mix-blend-multiply whitespace-nowrap" style={{ boxShadow: '0 4px 6px rgba(0,0,0,0.3)' }}>
                     {rank}
                   </div>
                 </div>
 
                 {/* Details */}
-                <div className="flex flex-col items-center justify-center space-y-4 font-mono font-bold">
-                  <div className="font-shlop text-4xl sm:text-5xl uppercase tracking-wider text-center px-4 w-full break-words text-[#2a2a2a]">
-                    {userName}
-                  </div>
-                  
-                  <div className="flex flex-col items-center mt-6 w-full px-8">
-                    <div className="text-sm uppercase tracking-widest mb-1 text-gray-700">REWARD FOR CAPTURE</div>
-                    <div className="font-shlop text-5xl sm:text-6xl text-[#2a2a2a] tracking-widest">
-                      {formattedBounty}
+                <div className="flex flex-col items-center justify-center space-y-3 sm:space-y-4 font-mono font-bold mt-2 sm:mt-4">
+                  <div className="bg-[#1a1a1a]/80 backdrop-blur-sm px-3 sm:px-4 py-1 border-l-[3px] sm:border-l-4 border-red-700 w-fit mx-auto shadow-md">
+                    <div className="text-base sm:text-2xl md:text-3xl uppercase tracking-wider text-center text-[#e8d5a7] break-words">
+                      {userName}
                     </div>
                   </div>
-
-                  <div className="mt-8 text-sm uppercase tracking-widest text-gray-600 flex flex-col items-center gap-1 border-t-2 border-[#2a2a2a] pt-4 w-full">
-                    <span>KNOWN TO HAVE SECURED</span>
-                    <span className="font-shlop text-3xl sm:text-4xl text-[#2a2a2a] tracking-widest">{points} ARCADE POINTS</span>
+                  
+                  <div className="mt-4 sm:mt-8 flex flex-col items-center gap-1.5 sm:gap-2 w-full max-w-[90%] sm:max-w-[80%] mx-auto">
+                    <div className="w-full flex items-center gap-2 sm:gap-3">
+                      <div className="h-[1px] flex-grow bg-[#1a1a1a]/40"></div>
+                      <span className="text-[9px] sm:text-xs font-bold text-[#1a1a1a] tracking-[0.1em] sm:tracking-[0.15em] uppercase">Secured Assets</span>
+                      <div className="h-[1px] flex-grow bg-[#1a1a1a]/40"></div>
+                    </div>
+                    
+                    <span className="font-shlop text-2xl sm:text-4xl md:text-5xl text-[#e8d5a7] tracking-widest bg-[#1a1a1a] px-3 sm:px-5 py-1.5 sm:py-3 mt-1 shadow-lg border border-[#333] leading-none text-center">
+                      {points} ARCADE POINTS
+                    </span>
                   </div>
                 </div>
               </div>
@@ -129,17 +170,17 @@ export default function WantedPosterModal({ isOpen, onClose, userName, avatar, p
             <button
               onClick={handleDownload}
               disabled={isGenerating}
-              className="mt-6 w-full flex items-center justify-center gap-3 bg-[var(--mint-gold)] text-black font-bold font-mono py-4 px-6 rounded-tl-[2rem] rounded-br-[2rem] rounded-tr-sm rounded-bl-sm hover:bg-yellow-500 transition-colors shadow-[0_0_20px_rgba(212,175,55,0.4)] uppercase tracking-widest text-lg group"
+              className="mt-4 sm:mt-8 w-full flex items-center justify-center gap-2 sm:gap-3 bg-red-700 text-white font-black font-mono py-2.5 sm:py-4 px-4 sm:px-6 hover:bg-red-800 transition-all shadow-[0_0_20px_rgba(185,28,28,0.6)] hover:shadow-[0_0_30px_rgba(185,28,28,0.8)] uppercase tracking-[0.1em] sm:tracking-[0.15em] text-xs sm:text-lg group border border-red-500 hover:scale-[1.02] rounded-sm"
             >
               {isGenerating ? (
                 <>
-                  <Loader2 size={24} className="animate-spin" />
+                  <Loader2 size={16} className="animate-spin sm:w-6 sm:h-6" />
                   PROCESSING...
                 </>
               ) : (
                 <>
-                  <Download size={24} className="group-hover:-translate-y-1 transition-transform" />
-                  DOWNLOAD POSTER
+                  <Download size={16} className="group-hover:-translate-y-1 transition-transform sm:w-6 sm:h-6" />
+                  DOWNLOAD DOSSIER
                 </>
               )}
             </button>
