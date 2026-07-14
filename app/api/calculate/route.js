@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import * as cheerio from 'cheerio';
 import { calculateScore, checkMilestones, checkFacilitatorMilestones, classifyBadge } from '../../../lib/arcadePoints';
 import { updateLeaderboard } from '../../../lib/leaderboardStore';
+import skillBadgesData from '../../../public/data/skill-badges.json';
 // Simple in-memory cache to prevent hammering Google's servers
 const cache = new Map();
 const CACHE_TTL = 5 * 60 * 1000; // 5 minutes in milliseconds
@@ -119,7 +120,8 @@ export async function POST(req) {
       counts,
       milestones: milestonesInfo,
       workMeetsPlayBonus,
-      badges: validBadges
+      badges: validBadges,
+      totalSkillBadges: skillBadgesData.length
     };
 
     // 5.5 Facilitator mapping (After July 13, 2026)

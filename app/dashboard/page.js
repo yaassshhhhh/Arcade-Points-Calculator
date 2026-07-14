@@ -238,7 +238,7 @@ function DashboardContent() {
           {/* Stats Breakdown Grid */}
           <section className="mb-16 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4 max-w-6xl mx-auto px-4">
             {[
-              { label: "SKILL LABS", value: data.counts.skillBadge || 0, color: "var(--heist-red)", bgClass: "bg-[var(--heist-red-dim)]" },
+              { label: "SKILL LABS", value: data.counts.skillBadge || 0, total: data.totalSkillBadges || 0, color: "var(--heist-red)", bgClass: "bg-[var(--heist-red-dim)]" },
               { label: "GAMES", value: data.counts.game || 0, color: "var(--mint-gold)", bgClass: "bg-[var(--mint-gold-dim)]" },
               { label: "2X SPECIAL GAMES", value: data.counts.specialGame || 0, color: "white", bgClass: "bg-[rgba(255,255,255,0.05)]" },
               { label: "3X SPECIAL GAMES", value: data.counts.specialGame3 || 0, color: "#00f0ff", bgClass: "bg-[rgba(0,240,255,0.05)]" },
@@ -249,6 +249,13 @@ function DashboardContent() {
                 <div className="font-shlop text-6xl md:text-7xl mb-2" style={{ color: stat.color, textShadow: `0 0 15px ${stat.color}80` }}>
                   {stat.value}
                 </div>
+                {stat.total > 0 && (
+                  <div className="font-mono text-[10px] md:text-xs text-[var(--text-muted)] mb-2 uppercase tracking-wider flex justify-center gap-2">
+                     <span className="text-white">COMPLETED: {stat.value}</span>
+                     <span className="text-[var(--vault-outline)]">|</span>
+                     <span className="text-[var(--heist-red)]">REMAINING: {Math.max(stat.total - stat.value, 0)}</span>
+                  </div>
+                )}
                 <div className="font-mono text-xs md:text-sm tracking-widest uppercase text-[var(--text-muted)] border-t border-[var(--vault-outline)] pt-3 w-full">
                   {stat.label}
                 </div>
