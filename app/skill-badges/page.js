@@ -24,18 +24,38 @@ export default function SkillBadgesPage() {
   const [badges, setBadges] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
+  const [completedCount, setCompletedCount] = useState(0);
+  const [isProfileLoaded, setIsProfileLoaded] = useState(false);
+  const [userBadges, setUserBadges] = useState([]);
 
   useEffect(() => {
-    fetch("/data/skill-badges.json")
-      .then((res) => res.json())
-      .then((data) => {
+    const loadData = async () => {
+      try {
+        const res = await fetch("/data/skill-badges.json");
+        const data = await res.json();
         setBadges(data);
+        
+        const profileUrl = sessionStorage.getItem("arcadeProfileUrl") || localStorage.getItem("arcadeProfileUrl");
+        if (profileUrl) {
+          const profileRes = await fetch("/api/calculate", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ url: profileUrl }),
+          });
+          const result = await profileRes.json();
+          if (profileRes.ok && result.data) {
+            setCompletedCount(result.data.counts.skillBadge || 0);
+            setUserBadges(result.data.badges || []);
+            setIsProfileLoaded(true);
+          }
+        }
+      } catch (err) {
+        console.error("Failed to load data", err);
+      } finally {
         setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Failed to load badges", err);
-        setLoading(false);
-      });
+      }
+    };
+    loadData();
   }, []);
 
   const filteredBadges = badges.filter((badge) => 
@@ -80,6 +100,33 @@ export default function SkillBadgesPage() {
             </p>
           </motion.header>
 
+          {/* Progress Stats */}
+          {badges.length > 0 && (
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="mb-8 max-w-3xl mx-auto flex gap-4 justify-center"
+            >
+              <div className="bg-[var(--vault-charcoal)] border border-[var(--vault-outline)] p-4 rounded-lg flex items-center justify-center gap-4 shadow-[0_0_15px_rgba(0,0,0,0.5)]">
+                <div className="flex flex-col items-center px-4">
+                  <span className="font-shlop text-4xl text-[var(--heist-red)]">{badges.length}</span>
+                  <span className="font-mono text-[10px] text-[var(--text-muted)] tracking-widest uppercase">Total Badges</span>
+                </div>
+                <div className="w-px h-12 bg-[var(--vault-outline)]"></div>
+                <div className="flex flex-col items-center px-4">
+                  <span className="font-shlop text-4xl text-[var(--mint-gold)]">{isProfileLoaded ? completedCount : "0"}</span>
+                  <span className="font-mono text-[10px] text-[var(--text-muted)] tracking-widest uppercase">Completed</span>
+                </div>
+                <div className="w-px h-12 bg-[var(--vault-outline)]"></div>
+                <div className="flex flex-col items-center px-4">
+                  <span className="font-shlop text-4xl text-white">{isProfileLoaded ? Math.max(badges.length - completedCount, 0) : badges.length}</span>
+                  <span className="font-mono text-[10px] text-[var(--text-muted)] tracking-widest uppercase">Remaining</span>
+                </div>
+              </div>
+            </motion.div>
+          )}
+
           {/* Search Bar */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
@@ -120,13 +167,23 @@ export default function SkillBadgesPage() {
               animate="show"
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
             >
-              {filteredBadges.map((badge, idx) => (
+              {filteredBadges.map((badge, idx) => {
+                const isCompleted = isProfileLoaded && userBadges.some(userBadge => 
+                  userBadge.name.toLowerCase().trim() === badge.title.toLowerCase().trim()
+                );
+                
+                return (
                 <motion.div 
                   key={idx} 
                   variants={itemVariants}
-                  className="bg-[var(--vault-charcoal)] border border-[var(--vault-outline)] flex flex-col h-full overflow-hidden group cursor-pointer hover:border-[var(--heist-red)] transition-colors duration-300 relative rounded-tl-[4rem] rounded-br-[4rem] rounded-tr-xl rounded-bl-xl shadow-[0_0_20px_rgba(0,0,0,0.5)]"
+                  className={`bg-[var(--vault-charcoal)] border ${isCompleted ? 'border-[var(--mint-gold)] shadow-[0_0_15px_rgba(212,175,55,0.3)]' : 'border-[var(--vault-outline)] shadow-[0_0_20px_rgba(0,0,0,0.5)]'} flex flex-col h-full overflow-hidden group cursor-pointer hover:border-[var(--heist-red)] transition-all duration-300 relative rounded-tl-[4rem] rounded-br-[4rem] rounded-tr-xl rounded-bl-xl`}
                   onClick={() => window.open(`https://www.skills.google${badge.path}`, "_blank")}
                 >
+                  {isCompleted && (
+                    <div className="absolute top-4 right-4 z-20 bg-[var(--mint-gold)] text-black font-mono text-[10px] font-bold px-2 py-1 uppercase tracking-widest rounded shadow-[0_0_10px_rgba(212,175,55,0.8)]">
+                      COMPLETED
+                    </div>
+                  )}
                   {/* Professor Background for the ENTIRE CARD */}
                   <div 
                     className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-[0.08] pointer-events-none group-hover:opacity-[0.15] transition-opacity duration-500" 
@@ -217,7 +274,8 @@ export default function SkillBadgesPage() {
                     </div>
                   </div>
                 </motion.div>
-              ))}
+                );
+              })}
             </motion.div>
           )}
 

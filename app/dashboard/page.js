@@ -66,7 +66,7 @@ function DashboardContent() {
 
   useEffect(() => {
     const urlParam = searchParams.get("url");
-    const finalUrl = urlParam || sessionStorage.getItem("arcadeProfileUrl");
+    const finalUrl = urlParam || sessionStorage.getItem("arcadeProfileUrl") || localStorage.getItem("arcadeProfileUrl");
 
     if (!finalUrl) {
       router.push("/");
@@ -75,6 +75,7 @@ function DashboardContent() {
 
     if (urlParam) {
       sessionStorage.setItem("arcadeProfileUrl", urlParam);
+      localStorage.setItem("arcadeProfileUrl", urlParam);
     }
 
     const fetchPoints = async () => {
@@ -91,7 +92,9 @@ function DashboardContent() {
 
           // Save user details for HeaderNav
           sessionStorage.setItem("arcadeUserName", result.data.userName);
+          localStorage.setItem("arcadeUserName", result.data.userName);
           sessionStorage.setItem("arcadeUserAvatar", result.data.userAvatar || guessAvatar(result.data.userName));
+          localStorage.setItem("arcadeUserAvatar", result.data.userAvatar || guessAvatar(result.data.userName));
 
           // Play shoutout music
           try {
