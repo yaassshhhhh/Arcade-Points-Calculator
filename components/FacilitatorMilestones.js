@@ -187,7 +187,7 @@ export default function FacilitatorMilestones({ badgesCount = 0, gamesCount = 0 
                 <div className="flex justify-between items-end">
                   <span className="font-shlop text-2xl text-[var(--text-secondary)] tracking-widest uppercase">ASSETS:</span>
                   <div className="text-right">
-                    <span className="font-shlop text-2xl tracking-widest text-white">{ms.targetGames} Games</span>
+                    <span className="font-shlop text-2xl tracking-widest text-white">{Math.min(gamesCount, ms.targetGames)} / {ms.targetGames} Games</span>
                     <div className="font-shlop text-xl tracking-widest text-[var(--heist-red)] mt-1 uppercase">
                       {gamesRemaining === 0 ? <span className="text-[var(--mint-gold)]">✓ DONE</span> : `${gamesRemaining} REMAINING`}
                     </div>
@@ -197,7 +197,7 @@ export default function FacilitatorMilestones({ badgesCount = 0, gamesCount = 0 
                 <div className="flex justify-between items-end">
                   <span className="font-shlop text-2xl text-[var(--text-secondary)] tracking-widest uppercase">BREACHES:</span>
                   <div className="text-right">
-                    <span className="font-shlop text-2xl tracking-widest text-white">{ms.targetBadges} Badges</span>
+                    <span className="font-shlop text-2xl tracking-widest text-white">{Math.min(badgesCount, ms.targetBadges)} / {ms.targetBadges} Skill Labs</span>
                     <div className="font-shlop text-xl tracking-widest text-[var(--heist-red)] mt-1 uppercase">
                       {badgesRemaining === 0 ? <span className="text-[var(--mint-gold)]">✓ DONE</span> : `${badgesRemaining} REMAINING`}
                     </div>

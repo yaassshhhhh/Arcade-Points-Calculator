@@ -132,7 +132,8 @@ function DashboardContent() {
     let bCount = 0;
     let gCount = 0;
     
-    const startTime = new Date("2026-07-14T13:00:00+05:30").getTime();
+    // Use the same cutoff timestamp as checkFacilitatorMilestones (July 13, 2026 11:30 UTC)
+    const startTime = new Date("2026-07-13T11:30:00Z").getTime();
     const endTime = new Date("2026-09-13T23:59:59+05:30").getTime();
     
     data.badges.forEach(badge => {
