@@ -183,3 +183,19 @@ h1, h2, h3, h4, h5, h6 {
   color: #FFFFFF;
 }
 
+
+/* Custom Scrollbar for Heist Theme */
+.heist-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+.heist-scrollbar::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+.heist-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--vault-outline);
+  border-radius: 4px;
+}
+.heist-scrollbar:hover::-webkit-scrollbar-thumb {
+  background: var(--heist-red);
+}

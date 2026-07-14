@@ -258,7 +258,7 @@ export default function SkillBadgesPage() {
 
                   {/* Dark Theme Description Area */}
                   <div className="p-6 flex flex-col flex-grow relative">
-                    <p className="text-[var(--text-secondary)] font-mono text-xs md:text-sm leading-relaxed mb-6 flex-grow line-clamp-3 uppercase tracking-wider group-hover:text-white transition-colors duration-300">
+                    <p className="text-[var(--text-secondary)] font-mono text-xs md:text-sm leading-relaxed mb-6 overflow-y-auto max-h-[72px] pr-2 heist-scrollbar uppercase tracking-wider group-hover:text-white transition-colors duration-300">
                       {badge.description}
                     </p>
 
