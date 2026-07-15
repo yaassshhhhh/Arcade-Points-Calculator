@@ -230,10 +230,17 @@ function DashboardContent() {
                 
                 <button 
                   onClick={() => setShowWantedPoster(true)}
-                  className="mt-6 flex items-center justify-center gap-2 w-full max-w-sm bg-transparent border-2 border-[var(--mint-gold)] text-[var(--mint-gold)] hover:bg-[var(--mint-gold)] hover:text-black font-mono font-bold tracking-widest py-3 px-4 rounded transition-all duration-300 shadow-[0_0_10px_rgba(212,175,55,0.2)] hover:shadow-[0_0_20px_rgba(212,175,55,0.5)] group"
+                  className="mt-6 relative flex items-center justify-center gap-3 w-full max-w-sm bg-gradient-to-r from-[rgba(212,175,55,0.1)] to-[rgba(212,175,55,0.05)] border border-[var(--mint-gold)] text-[var(--mint-gold)] hover:bg-[var(--mint-gold)] hover:text-black font-mono font-bold tracking-[0.15em] py-4 px-6 rounded-[4px] transition-all duration-300 shadow-[0_0_15px_rgba(212,175,55,0.2),inset_0_0_10px_rgba(212,175,55,0.1)] hover:shadow-[0_0_25px_rgba(212,175,55,0.5),inset_0_0_15px_rgba(255,255,255,0.3)] hover:-translate-y-1 group overflow-hidden backdrop-blur-sm"
                 >
-                  <Camera size={20} className="group-hover:scale-110 transition-transform" />
-                  PRINT WANTED POSTER
+                  {/* Scanner line effect overlay on hover */}
+                  <div className="absolute inset-0 bg-[linear-gradient(transparent_0%,rgba(255,255,255,0.3)_50%,transparent_100%)] h-[200%] -top-[100%] group-hover:top-[100%] transition-all duration-700 ease-in-out pointer-events-none opacity-0 group-hover:opacity-100"></div>
+                  
+                  {/* Corner accents */}
+                  <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-[var(--mint-gold)] group-hover:border-black transition-colors duration-300"></div>
+                  <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-[var(--mint-gold)] group-hover:border-black transition-colors duration-300"></div>
+                  
+                  <Camera size={22} className="relative z-10 group-hover:scale-110 transition-all duration-300 drop-shadow-[0_0_8px_rgba(212,175,55,0.5)] group-hover:drop-shadow-none" />
+                  <span className="relative z-10 drop-shadow-[0_0_8px_rgba(212,175,55,0.5)] group-hover:drop-shadow-none">PRINT WANTED POSTER</span>
                 </button>
               </div>
             </div>
