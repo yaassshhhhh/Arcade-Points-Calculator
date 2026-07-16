@@ -9,7 +9,11 @@ const CACHE_TTL = 5 * 60 * 1000; // 5 minutes in milliseconds
 
 export async function POST(req) {
   try {
-    const { url } = await req.json();
+    let { url } = await req.json();
+
+    if (url && url.includes('|||')) {
+      url = url.split('|||')[0];
+    }
 
     // 1. Validation
     if (!url || (!url.includes('cloudskillsboost.google/public_profiles/') && !url.includes('skills.google/public_profiles/'))) {

@@ -34,12 +34,17 @@ export default function Home() {
     if (!url) return;
     setLoading(true);
     
+    let finalUrl = url;
+    if (finalUrl.includes('|||')) {
+      finalUrl = finalUrl.split('|||')[0];
+    }
+    
     // Save to sessionStorage so they stay logged in
-    sessionStorage.setItem("arcadeProfileUrl", url);
+    sessionStorage.setItem("arcadeProfileUrl", finalUrl);
     
     // Simulate vault unlock wait
     setTimeout(() => {
-      router.push(`/dashboard?url=${encodeURIComponent(url)}`);
+      router.push(`/dashboard?url=${encodeURIComponent(finalUrl)}`);
     }, 900);
   };
 

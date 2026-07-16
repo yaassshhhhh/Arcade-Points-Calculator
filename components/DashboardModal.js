@@ -38,6 +38,11 @@ export default function DashboardModal() {
     if (!url) return;
     setLoading(true);
     
+    let finalUrl = url;
+    if (finalUrl.includes('|||')) {
+      finalUrl = finalUrl.split('|||')[0];
+    }
+    
     gsap.to(formRef.current, {
       x: () => (Math.random() - 0.5) * 10,
       y: () => (Math.random() - 0.5) * 10,
@@ -47,7 +52,7 @@ export default function DashboardModal() {
       onComplete: () => {
         setIsOpen(false);
         setLoading(false);
-        router.push(`/dashboard?url=${encodeURIComponent(url)}`);
+        router.push(`/dashboard?url=${encodeURIComponent(finalUrl)}`);
       }
     });
   };

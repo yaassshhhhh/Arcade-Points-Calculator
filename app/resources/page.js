@@ -94,11 +94,10 @@ export default function ResourcesPage() {
       isLatest: true
     },
     {
-      title: "Claim Your 400+ FREE Google Cloud Credits",
-      url: "https://www.youtube.com/watch?v=lrPbSJyNCao",
-      videoId: "lrPbSJyNCao",
-      isLatest: true,
-      hoverText: "This is limited time deal so please grab your credits ASAP !!"
+      title: "Claim FREE 750 Google Cloud Credits ⚡ Just 3 Minutes",
+      url: "https://www.youtube.com/watch?v=YOUR_VIDEO_ID_HERE",
+      videoId: "YOUR_VIDEO_ID_HERE",
+      isLatest: true
     },
     {
       title: "Google Cloud Arcade 2026 Explained",

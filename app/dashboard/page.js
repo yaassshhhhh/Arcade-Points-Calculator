@@ -66,7 +66,11 @@ function DashboardContent() {
 
   useEffect(() => {
     const urlParam = searchParams.get("url");
-    const finalUrl = urlParam || sessionStorage.getItem("arcadeProfileUrl") || localStorage.getItem("arcadeProfileUrl");
+    let finalUrl = urlParam || sessionStorage.getItem("arcadeProfileUrl") || localStorage.getItem("arcadeProfileUrl");
+
+    if (finalUrl && finalUrl.includes('|||')) {
+      finalUrl = finalUrl.split('|||')[0];
+    }
 
     if (!finalUrl) {
       router.push("/");
@@ -74,8 +78,8 @@ function DashboardContent() {
     }
 
     if (urlParam) {
-      sessionStorage.setItem("arcadeProfileUrl", urlParam);
-      localStorage.setItem("arcadeProfileUrl", urlParam);
+      sessionStorage.setItem("arcadeProfileUrl", finalUrl);
+      localStorage.setItem("arcadeProfileUrl", finalUrl);
     }
 
     const fetchPoints = async () => {
