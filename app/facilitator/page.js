@@ -789,8 +789,8 @@ export default function FacilitatorPage() {
                   <div className="flex justify-center mb-8 relative z-10">
                     <div className="absolute inset-0 bg-[var(--heist-red)] blur-[40px] opacity-20 rounded-full w-3/4 mx-auto"></div>
                     <button className="relative bg-[rgba(19,19,23,0.8)] backdrop-blur-md border border-[var(--heist-red)] text-[var(--heist-red)] font-shlop uppercase tracking-widest py-4 px-12 text-3xl shadow-[inset_0_0_20px_rgba(193,18,31,0.2)] transition-all duration-300 rounded cursor-not-allowed opacity-80 group overflow-hidden" disabled>
-                      <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px] flex items-center justify-center opacity-100 z-10 transition-all border border-transparent">
-                        <span className="font-mono text-sm tracking-[0.4em] text-[var(--heist-red)] shadow-[0_0_10px_rgba(193,18,31,0.5)]">ACCESS DENIED</span>
+                      <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px] flex items-center justify-center opacity-100 z-10 transition-all border border-transparent px-2 text-center">
+                        <span className="font-mono text-xs md:text-sm tracking-wider text-[var(--heist-red)] shadow-[0_0_10px_rgba(193,18,31,0.5)]">(Note: The submission form will open once the enrolments are closed !!)</span>
                       </div>
                       <span className="relative z-0 blur-[2px] transition-all duration-300">Submissions Opening Soon</span>
                     </button>
