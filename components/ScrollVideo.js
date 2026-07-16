@@ -111,10 +111,10 @@ export default function ScrollVideo({ videoSrc }) {
         className="absolute right-10 md:right-20 top-1/2 -translate-y-1/2 max-w-xl z-20 pointer-events-none opacity-0"
       >
         <p className="text-white font-dossier text-3xl md:text-5xl leading-relaxed text-right drop-shadow-[0_0_15px_rgba(0,0,0,0.8)]">
-          "The greatest heist isn't money. <br/>
+          &quot;The greatest heist isn&apos;t money. <br/>
           <span className="text-[var(--heist-red)] font-display tracking-[0.1em] text-4xl md:text-7xl mt-4 block">
-            IT'S CLOUD MASTERY.
-          </span>"
+            IT&apos;S CLOUD MASTERY.
+          </span>&quot;
         </p>
         <div className="text-[var(--text-muted)] font-mono text-right mt-6 text-sm uppercase tracking-[0.3em]">
           — Arcade Facilitator

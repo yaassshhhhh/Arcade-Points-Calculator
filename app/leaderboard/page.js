@@ -159,6 +159,7 @@ export default function Leaderboard() {
                       <div className="col-span-6 md:col-span-7 flex items-center gap-3 md:gap-6 pl-1 md:pl-2">
                         <div className="relative flex-shrink-0">
                           <div className={`relative ${isTop1 ? 'w-10 h-10 md:w-12 md:h-12' : 'w-8 h-8 md:w-10 md:h-10'} rounded-full overflow-hidden bg-black/50 border border-[var(--vault-outline)] group-hover:border-[var(--heist-red)] transition-colors`}>
+                             {/* eslint-disable-next-line @next/next/no-img-element */}
                              <img 
                                src={user.avatarUrl || "/professor1.png"} 
                                alt="Avatar" 

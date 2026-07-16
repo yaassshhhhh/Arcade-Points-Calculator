@@ -13,9 +13,10 @@ const MoneyHeistAnimation = ({ onComplete }) => {
       animationDuration: Math.random() * 2.5 + 2, // 2 to 4.5 seconds
       animationDelay: Math.random() * 2, // 0 to 2 seconds
       rotation: Math.random() * 360,
-      scale: Math.random() * 0.8 + 0.5 // 0.5 to 1.3
+      scale: Math.random() * 0.8 + 0.5, // 0.5 to 1.3
+      emoji: Math.random() > 0.6 ? "💶" : Math.random() > 0.3 ? "💵" : "💰"
     }));
-    setBills(newBills);
+    setTimeout(() => setBills(newBills), 0);
 
     // Stop animation after 7 seconds
     const timer = setTimeout(() => {
@@ -67,7 +68,7 @@ const MoneyHeistAnimation = ({ onComplete }) => {
             animation: `moneyFall ${bill.animationDuration}s ease-in ${bill.animationDelay}s forwards`,
           }}
         >
-          {Math.random() > 0.6 ? "💶" : Math.random() > 0.3 ? "💵" : "💰"}
+          {bill.emoji}
         </div>
       ))}
     </div>

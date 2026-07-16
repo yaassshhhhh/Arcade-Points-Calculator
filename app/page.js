@@ -80,7 +80,7 @@ export default function Home() {
                 transition={{ delay: 0.6, duration: 0.8 }}
                 className="text-2xl md:text-3xl font-shlop text-[var(--text-muted)] mb-12 tracking-widest uppercase"
               >
-                Every Badge Is a Vault !! Every Point Is a Gold !! Let's Rob The Cloud !!
+                Every Badge Is a Vault !! Every Point Is a Gold !! Let&apos;s Rob The Cloud !!
               </motion.p>
               
               <motion.form

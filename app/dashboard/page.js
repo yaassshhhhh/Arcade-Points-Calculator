@@ -365,6 +365,7 @@ function DashboardContent() {
                     <div className="relative z-10 w-full flex flex-col items-center mt-4">
                       {badge.imageSrc ? (
                         <div className="w-36 h-36 mb-6 drop-shadow-[0_0_10px_rgba(255,255,255,0.1)] group-hover:drop-shadow-[0_0_15px_rgba(212,175,55,0.4)] relative flex items-center justify-center">
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img 
                             src={badge.imageSrc} 
                             alt={badge.name} 

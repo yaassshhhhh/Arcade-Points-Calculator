@@ -94,6 +94,7 @@ export default function HeaderNav() {
           <div className="flex items-center gap-3 ml-2 pl-4 border-l border-[var(--vault-outline)]">
             <div className="flex items-center gap-2 group/profile cursor-pointer" onClick={() => router.push('/dashboard')} title={userProfile.name}>
               <div className="w-8 h-8 rounded-full border border-[var(--vault-outline)] overflow-hidden bg-black flex items-center justify-center shrink-0">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img 
                   src={userProfile?.avatar || '/professor.png'} 
                   alt={userProfile?.name} 
@@ -157,6 +158,7 @@ export default function HeaderNav() {
               <div className="py-4 border-b border-[var(--vault-outline)] flex items-center justify-between">
                 <div className="flex items-center gap-3 cursor-pointer" onClick={() => { setIsOpen(false); router.push('/dashboard'); }} title={userProfile.name}>
                   <div className="w-8 h-8 rounded-full border border-[var(--vault-outline)] overflow-hidden bg-black flex items-center justify-center">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img 
                       src={userProfile?.avatar || '/professor.png'} 
                       alt={userProfile?.name} 

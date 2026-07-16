@@ -11,7 +11,7 @@ export default function WantedPosterModal({ isOpen, onClose, userName, avatar, p
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
+    setTimeout(() => setMounted(true), 0);
   }, []);
 
   const handleDownload = async () => {
@@ -127,6 +127,7 @@ export default function WantedPosterModal({ isOpen, onClose, userName, avatar, p
                   
                   <div className="w-full h-full relative overflow-hidden bg-[#f0e6d2] p-1.5 sm:p-2 pb-5 sm:pb-6 shadow-[0_10px_20px_rgba(0,0,0,0.6)] border border-[#c4b595] group">
                     <div className="w-full h-full relative overflow-hidden border border-[#1a1a1a]/20">
+                      {/* eslint-disable @next/next/no-img-element */}
                       <img 
                         src={avatar && avatar !== "null" && avatar !== "undefined" ? avatar : '/professor.png'} 
                         alt="Operative" 

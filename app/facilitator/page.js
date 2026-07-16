@@ -311,7 +311,7 @@ export default function FacilitatorPage() {
               <div className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-[0.1] group-hover:opacity-[0.25] transition-opacity duration-500" style={{ backgroundImage: `url('/Money heist (3).jpeg')` }}></div>
               <div className="absolute bottom-0 left-0 w-32 h-32 bg-[var(--mint-gold-dim)] blur-[50px] opacity-20 -z-10 rounded-full group-hover:opacity-40 transition-opacity duration-700"></div>
               <h3 className="relative z-10 font-display text-2xl text-white mb-2 uppercase tracking-wide">Crew Comms</h3>
-              <p className="relative z-10 font-mono text-xs text-[var(--text-muted)] mb-6">Secure channels for El Profesor's syndicate.</p>
+              <p className="relative z-10 font-mono text-xs text-[var(--text-muted)] mb-6">Secure channels for El Profesor&apos;s syndicate.</p>
               
               <div className="space-y-4 relative z-10">
                 <a href="https://t.me/SatyaGCP25" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 bg-[rgba(11,11,13,0.8)] backdrop-blur-sm border border-[var(--vault-outline)] p-4 hover:border-[var(--mint-gold)] transition-colors group/link rounded-2xl">
@@ -440,7 +440,7 @@ export default function FacilitatorPage() {
               <div className="border-b border-[var(--vault-outline)] pb-4 mb-8 text-center relative z-10 flex flex-col items-center">
                 <h2 className="font-shlop text-4xl md:text-7xl uppercase tracking-widest text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">TOP SECRET INTEL</h2>
                 <div className="bg-[var(--heist-red)] text-white font-mono text-[10px] md:text-xs font-bold px-4 py-1 uppercase tracking-[0.3em] mt-4 shadow-[0_0_10px_var(--heist-red-glow)] animate-pulse">
-                  CLASSIFIED // PROFESSOR'S EYES ONLY
+                  CLASSIFIED // PROFESSOR&apos;S EYES ONLY
                 </div>
               </div>
               
@@ -451,10 +451,10 @@ export default function FacilitatorPage() {
               <div className="grid md:grid-cols-2 gap-10 font-mono text-sm md:text-base leading-relaxed text-justify relative z-10 text-[var(--text-secondary)]">
                 <div>
                   <p className="mb-6">
-                    <span className="font-display text-6xl float-left mr-4 leading-[0.8] text-white">F</span>or the first time ever, there is more than one way to earn "Bonus Points" in the Arcade Facilitator program and this time we want to make sure that you actually step away with some <span className="text-white font-bold">industry-ready skills</span> after completing this and even <span className="bg-[var(--heist-red)] text-white px-2 py-0.5 font-bold shadow-[0_0_10px_rgba(193,18,31,0.5)]">create your FIRST AI Agent.</span>
+                    <span className="font-display text-6xl float-left mr-4 leading-[0.8] text-white">F</span>or the first time ever, there is more than one way to earn &quot;Bonus Points&quot; in the Arcade Facilitator program and this time we want to make sure that you actually step away with some <span className="text-white font-bold">industry-ready skills</span> after completing this and even <span className="bg-[var(--heist-red)] text-white px-2 py-0.5 font-bold shadow-[0_0_10px_rgba(193,18,31,0.5)]">create your FIRST AI Agent.</span>
                   </p>
                   <p className="mb-6">
-                    See the information below to learn about the "Bonus Milestone's" eligibility criteria and the steps required to complete the milestone to earn an <span className="text-[var(--mint-gold)] font-bold tracking-wider drop-shadow-[0_0_5px_rgba(212,175,55,0.8)]">EXTRA 10 Bonus points.</span>
+                    See the information below to learn about the &quot;Bonus Milestone&apos;s&quot; eligibility criteria and the steps required to complete the milestone to earn an <span className="text-[var(--mint-gold)] font-bold tracking-wider drop-shadow-[0_0_5px_rgba(212,175,55,0.8)]">EXTRA 10 Bonus points.</span>
                   </p>
                 </div>
                 
@@ -508,7 +508,7 @@ export default function FacilitatorPage() {
                   <li className="flex flex-col md:flex-row gap-4 items-start group">
                     <div className="font-shlop text-4xl md:text-6xl text-[var(--vault-outline)] group-hover:text-[var(--heist-red)] transition-colors duration-300 drop-shadow-[0_0_10px_rgba(193,18,31,0)] group-hover:drop-shadow-[0_0_15px_rgba(193,18,31,0.8)] leading-none pt-2">03</div>
                     <div className="bg-[rgba(255,255,255,0.03)] p-4 md:p-5 border border-[var(--vault-outline)] group-hover:border-[var(--heist-red)] transition-colors duration-300 w-full rounded-tr-xl rounded-bl-xl">
-                      <span className="text-white font-bold uppercase tracking-wider block mb-1">Criteria 3:</span> You should have <span className="text-white font-bold">earned at least Milestone #1</span> in the facilitator program to become eligible to participate. If you haven't earned it yet, then please go to the <a href="#" className="text-[var(--heist-red-bright)] hover:text-white hover:underline underline-offset-4 transition-colors font-bold drop-shadow-[0_0_5px_rgba(193,18,31,0.8)]">points system section</a> and see how to earn it.
+                      <span className="text-white font-bold uppercase tracking-wider block mb-1">Criteria 3:</span> You should have <span className="text-white font-bold">earned at least Milestone #1</span> in the facilitator program to become eligible to participate. If you haven&apos;t earned it yet, then please go to the <a href="#" className="text-[var(--heist-red-bright)] hover:text-white hover:underline underline-offset-4 transition-colors font-bold drop-shadow-[0_0_5px_rgba(193,18,31,0.8)]">points system section</a> and see how to earn it.
                     </div>
                   </li>
                 </ul>
@@ -933,9 +933,11 @@ export default function FacilitatorPage() {
                 {/* Original Images */}
                 <div className="flex flex-col items-center gap-6">
                   <div className="w-full p-2 bg-[rgba(11,11,13,0.6)] rounded-xl border border-[var(--vault-outline)] shadow-[0_0_20px_rgba(0,0,0,0.6)]">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src="/cloud_vibe_original.jpg" alt="Cloud Vibe Image" className="w-full h-auto rounded-lg" />
                   </div>
                   <div className="w-full p-2 bg-[rgba(11,11,13,0.6)] rounded-xl border border-[var(--vault-outline)] shadow-[0_0_20px_rgba(0,0,0,0.6)]">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src="/cloud_vibe_original_2.png" alt="Cloud Vibe Image 2" className="w-full h-auto rounded-lg" />
                   </div>
                 </div>

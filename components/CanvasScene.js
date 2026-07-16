@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useMemo } from 'react';
+import { useRef, useMemo, useState, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Float, Sparkles, Environment, Instances, Instance } from '@react-three/drei';
 import * as THREE from 'three';
@@ -107,8 +107,11 @@ function VaultDoor() {
 // ----------------------------------------------------
 function GoldBars() {
   const count = 20;
-  const positions = useMemo(() => {
-    return Array.from({ length: count }, () => ({
+  const [positions, setPositions] = useState([]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setPositions(Array.from({ length: count }, () => ({
       position: [
         (Math.random() - 0.5) * 15,
         (Math.random() - 0.5) * 15,
@@ -119,17 +122,21 @@ function GoldBars() {
         Math.random() * Math.PI,
         Math.random() * Math.PI
       ],
-      scale: 0.5 + Math.random() * 0.5
-    }));
+      scale: 0.5 + Math.random() * 0.5,
+      speed: 1 + Math.random()
+    })));
+    }, 0);
   }, []);
+
+  if (positions.length === 0) return null;
 
   return (
     <Instances range={count}>
       <boxGeometry args={[1, 0.3, 0.5]} />
       <meshStandardMaterial color="#F2C230" metalness={0.9} roughness={0.1} />
       {positions.map((props, i) => (
-        <Float key={i} speed={1 + Math.random()} rotationIntensity={1} floatIntensity={2}>
-          <Instance {...props} />
+        <Float key={i} speed={props.speed} rotationIntensity={1} floatIntensity={2}>
+          <Instance position={props.position} rotation={props.rotation} scale={props.scale} />
         </Float>
       ))}
     </Instances>

@@ -10,7 +10,7 @@ export default function MilestoneModal({ isOpen, onClose, pointsSecured, pointsR
   useEffect(() => {
     if (isOpen) {
       // Trigger red alarm flash
-      setFlash(true);
+      setTimeout(() => setFlash(true), 0);
       const timer = setTimeout(() => setFlash(false), 150);
 
       // Trigger custom confetti (gold bars / money)
@@ -103,7 +103,7 @@ export default function MilestoneModal({ isOpen, onClose, pointsSecured, pointsR
             </h2>
             
             <p className="font-shlop text-4xl md:text-5xl text-[var(--mint-gold)] mb-10 tracking-widest uppercase mt-4 flex items-center justify-center">
-              You've secured <span className="font-shlop text-5xl md:text-6xl text-white mx-3">{pointsSecured}</span> points. 
+              You&apos;ve secured <span className="font-shlop text-5xl md:text-6xl text-white mx-3">{pointsSecured}</span> points. 
             </p>
           </motion.div>
         </div>
