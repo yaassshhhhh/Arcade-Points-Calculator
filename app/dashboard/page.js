@@ -171,7 +171,7 @@ function DashboardContent() {
       {loading && (
         <div className="flex flex-col items-center justify-center min-h-[80vh]">
           <MaskIcon size={60} className="text-[var(--heist-red)] mb-6 md:mb-8 md:scale-125" loading={true} />
-          <h2 className="font-display text-3xl md:text-4xl text-[var(--text-primary)] tracking-widest animate-pulse mt-4">
+          <h2 className="font-shlop text-3xl md:text-4xl text-[var(--text-primary)] tracking-widest animate-pulse mt-4">
             CASING THE VAULT...
           </h2>
         </div>
@@ -431,7 +431,7 @@ function DashboardContent() {
 
 export default function Dashboard() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-[var(--vault-black)] text-[var(--text-primary)] flex items-center justify-center font-display text-2xl md:text-4xl">CASING THE VAULT...</div>}>
+    <Suspense fallback={<div className="min-h-screen bg-[var(--vault-black)] text-[var(--text-primary)] flex items-center justify-center font-shlop text-2xl md:text-4xl">CASING THE VAULT...</div>}>
       <DashboardContent />
     </Suspense>
   );
