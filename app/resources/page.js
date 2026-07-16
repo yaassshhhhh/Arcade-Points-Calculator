@@ -95,8 +95,8 @@ export default function ResourcesPage() {
     },
     {
       title: "Claim FREE 750 Google Cloud Credits ⚡ Just 3 Minutes",
-      url: "https://www.youtube.com/watch?v=YOUR_VIDEO_ID_HERE",
-      videoId: "YOUR_VIDEO_ID_HERE",
+      url: "https://www.youtube.com/watch?v=-V-AMSq28nw",
+      videoId: "-V-AMSq28nw",
       isLatest: true
     },
     {
