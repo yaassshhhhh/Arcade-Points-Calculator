@@ -13,6 +13,8 @@ export async function POST(req) {
 
     if (url && url.includes('|||')) {
       url = url.split('|||')[0];
+    } else if (url && url.includes('||')) {
+      url = url.split('||')[0];
     }
 
     // 1. Validation

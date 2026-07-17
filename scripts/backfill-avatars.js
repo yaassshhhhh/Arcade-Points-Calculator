@@ -60,7 +60,7 @@ async function run() {
   let updatedCount = 0;
 
   for (const user of users) {
-    if (!user.profile_url || user.profile_url.includes('|||')) {
+    if (!user.profile_url || user.profile_url.includes('|||') || user.profile_url.includes('||')) {
       // Skip if already has avatar or no URL
       continue;
     }
