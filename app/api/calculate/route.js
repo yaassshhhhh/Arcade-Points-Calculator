@@ -115,13 +115,21 @@ export async function POST(req) {
     }
 
     // 5. Logic Integration
-    const { counts, totalPoints, workMeetsPlayBonus } = calculateScore(validBadges);
+    const { counts, totalPoints: basePoints, workMeetsPlayBonus } = calculateScore(validBadges);
     const milestonesInfo = checkFacilitatorMilestones(validBadges);
+
+    let finalTotalPoints = basePoints;
+    if (milestonesInfo && milestonesInfo.achieved && milestonesInfo.achieved.length > 0) {
+      const highestAchieved = milestonesInfo.achieved[milestonesInfo.achieved.length - 1];
+      if (highestAchieved.bonusPoints) {
+        finalTotalPoints += highestAchieved.bonusPoints;
+      }
+    }
 
     const data = {
       userName,
       userAvatar,
-      totalPoints,
+      totalPoints: finalTotalPoints,
       badgeCount: validBadges.length,
       counts,
       milestones: milestonesInfo,
@@ -166,7 +174,7 @@ export async function POST(req) {
     try {
       await updateLeaderboard({
         userName,
-        points: totalPoints,
+        points: finalTotalPoints,
         badgeCount: validBadges.length,
         url: url,
         userAvatar: userAvatar,
