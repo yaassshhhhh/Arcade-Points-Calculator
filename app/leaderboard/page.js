@@ -49,7 +49,7 @@ export default function Leaderboard() {
       {/* Background Image */}
       <div 
         className="fixed inset-0 z-0 bg-cover bg-center opacity-15 pointer-events-none mix-blend-luminosity" 
-        style={{ backgroundImage: 'url("/faq-bg.jpg")' }}
+        style={{ backgroundImage: 'url("/tokyo.jpeg")' }}
       ></div>
       
       {/* Red Glowing Overlays */}
