@@ -339,39 +339,7 @@ export default function FacilitatorPage() {
           </div>
         </section>
         
-        {/* REFERRAL SYSTEM SECTION */}
-        <section className="gsap-section max-w-4xl mx-auto mb-24 border border-[var(--heist-red)] bg-[var(--vault-charcoal)] p-5 md:p-8 relative overflow-hidden shadow-[0_0_30px_rgba(193,18,31,0.15)] group hover:border-[var(--heist-red-bright)] transition-colors duration-500 rounded-3xl">
-          {/* Animated Background Gradients & Image */}
-          <div className="absolute inset-0 z-0 bg-contain bg-center bg-no-repeat opacity-[0.1] group-hover:opacity-[0.25] transition-opacity duration-500" style={{ backgroundImage: `url('/bank.png')` }}></div>
-          <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--heist-red)] opacity-10 blur-[80px] rounded-full animate-pulse group-hover:opacity-20 transition-opacity z-0"></div>
-          <div className="absolute bottom-0 left-0 w-64 h-64 bg-[var(--mint-gold-dim)] opacity-5 blur-[80px] rounded-full z-0"></div>
-          
 
-          
-
-          
-          <h3 className="relative z-10 font-display text-3xl md:text-4xl text-white mb-4 uppercase tracking-wide drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">Facilitator Referral Code</h3>
-          <p className="relative z-10 font-mono text-[var(--text-muted)] text-sm mb-8 max-w-2xl leading-relaxed">
-            Use your unique referral code to recruit more members into your crew and increase your overall syndicate bonus.
-          </p>
-          
-          <div className="relative z-10 bg-[rgba(0,0,0,0.7)] border border-[var(--vault-outline)] p-5 flex flex-col sm:flex-row items-center justify-between gap-6 backdrop-blur-md group-hover:border-[var(--heist-red)] transition-colors rounded-2xl">
-            <div className="font-mono text-xl sm:text-3xl text-white tracking-[0.1em] font-bold flex items-center gap-4">
-              <Unlock size={24} className="text-[var(--mint-gold)]" />
-              <span className="drop-shadow-[0_0_10px_rgba(255,255,255,0.4)]">GCAF26-IN-5F3-M7U</span>
-            </div>
-            <button 
-              onClick={() => {
-                navigator.clipboard.writeText("GCAF26-IN-5F3-M7U");
-                alert("Referral code copied to clipboard!");
-              }}
-              className="bg-[rgba(212,175,55,0.1)] border border-[var(--mint-gold)] text-[var(--mint-gold)] px-6 md:px-8 py-3 font-display text-lg sm:text-xl tracking-widest cursor-pointer flex items-center gap-3 hover:bg-[var(--mint-gold)] hover:text-black transition-colors duration-300 shadow-[inset_0_0_15px_rgba(212,175,55,0.2)] rounded-2xl w-full sm:w-auto justify-center"
-            >
-              <Copy size={20} />
-              COPY CODE
-            </button>
-          </div>
-        </section>
 
         {/* THE HEIST PHASES (Milestones) */}
         <section className="gsap-section mb-24 border-t border-[var(--vault-outline)] pt-16">
