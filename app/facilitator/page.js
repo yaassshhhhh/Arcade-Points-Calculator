@@ -295,15 +295,14 @@ export default function FacilitatorPage() {
               <div className="bg-[var(--vault-black)] border border-[var(--heist-red)] p-4 mb-6 relative z-10 rounded-2xl flex items-center justify-center">
                 <div className="absolute -top-3 left-4 bg-[var(--vault-black)] px-2 font-mono text-[0.65rem] text-[var(--heist-red)]">STATUS</div>
                 <div className="font-shlop text-3xl md:text-4xl text-[var(--heist-red)] tracking-widest uppercase animate-pulse py-2">
-                  Enrollment Live !!
+                  Enrollment Closed
                 </div>
               </div>
               
-              <a href="https://docs.google.com/forms/d/e/1FAIpQLScjkkpNBMs0xR_EvqwLFQZRRVXccQQTLl-pUA37NvzvUQ3NJQ/viewform" target="_blank" rel="noopener noreferrer" className="relative z-10 overflow-hidden flex items-center justify-center gap-2 bg-[var(--heist-red)] text-white font-display text-xl py-4 w-full group border border-transparent hover:border-[var(--heist-red)] transition-colors duration-300 rounded-2xl">
+              <div className="relative z-10 overflow-hidden flex items-center justify-center gap-2 bg-[var(--heist-red)] text-white font-shlop text-3xl py-4 w-full group border border-transparent hover:border-[var(--heist-red)] transition-colors duration-300 rounded-2xl cursor-not-allowed">
                 <div className="absolute inset-0 bg-black -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out z-0"></div>
-                <span className="relative z-10 tracking-widest transition-all duration-300">REGISTER HERE</span> 
-                <ChevronRight size={22} className="relative z-10 group-hover:translate-x-2 transition-transform duration-300" />
-              </a>
+                <span className="relative z-10 tracking-widest transition-all duration-300">See you in next cohort</span> 
+              </div>
             </div>
 
             {/* Intel & Comms */}
