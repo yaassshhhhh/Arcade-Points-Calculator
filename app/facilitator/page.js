@@ -276,7 +276,7 @@ export default function FacilitatorPage() {
       <div className="relative z-10 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 mt-24">
         
         {/* HERO SECTION */}
-        <section className="gsap-section text-center mb-24 pt-10">
+        <section className="text-center mb-24 pt-10 animate-fade-in-up">
           <h1 className="font-shlop text-5xl md:text-7xl lg:text-8xl text-white tracking-wider mb-4 drop-shadow-[0_0_20px_rgba(193,18,31,0.5)] uppercase">
             The <span className="text-[var(--heist-red)]">Mastermind</span> Program
           </h1>
