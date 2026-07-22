@@ -755,12 +755,10 @@ export default function FacilitatorPage() {
 
                   <div className="flex justify-center mb-8 relative z-10">
                     <div className="absolute inset-0 bg-[var(--heist-red)] blur-[40px] opacity-20 rounded-full w-3/4 mx-auto"></div>
-                    <button className="relative bg-[rgba(19,19,23,0.8)] backdrop-blur-md border border-[var(--heist-red)] text-[var(--heist-red)] font-shlop uppercase tracking-widest py-4 px-12 text-3xl shadow-[inset_0_0_20px_rgba(193,18,31,0.2)] transition-all duration-300 rounded cursor-not-allowed opacity-80 group overflow-hidden" disabled>
-                      <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px] flex items-center justify-center opacity-100 z-10 transition-all border border-transparent px-2 text-center">
-                        <span className="font-mono text-xs md:text-sm tracking-wider text-[var(--heist-red)] shadow-[0_0_10px_rgba(193,18,31,0.5)]">(Note: The submission form will open once the enrolments are closed !!)</span>
-                      </div>
-                      <span className="relative z-0 blur-[2px] transition-all duration-300">Submissions Opening Soon</span>
-                    </button>
+                    <a href="https://forms.gle/MMfH5RKp83TfRtXj9" target="_blank" rel="noopener noreferrer" className="relative bg-[var(--heist-red)] border border-transparent hover:border-[var(--heist-red)] text-white font-shlop uppercase tracking-widest py-4 px-8 md:px-12 text-2xl md:text-3xl shadow-[0_0_20px_rgba(193,18,31,0.4)] transition-all duration-300 rounded-2xl cursor-pointer group overflow-hidden block text-center w-full max-w-3xl">
+                      <div className="absolute inset-0 bg-black -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out z-0"></div>
+                      <span className="relative z-10 tracking-widest transition-all duration-300">Bonus milestone and Updation form are now LIVE !!</span>
+                    </a>
                   </div>
                 </div>
 
