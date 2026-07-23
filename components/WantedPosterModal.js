@@ -114,7 +114,7 @@ export default function WantedPosterModal({ isOpen, onClose, userName, avatar, p
                   <div className="text-red-900 text-[10px] sm:text-sm font-bold tracking-[0.2em] sm:tracking-[0.3em] uppercase mb-1 drop-shadow-md">
                     Target Profile
                   </div>
-                  <h2 className="font-shlop text-3xl sm:text-5xl md:text-6xl text-[#1a1a1a] tracking-widest uppercase drop-shadow-[0_0_15px_rgba(232,213,167,0.9)] bg-gradient-to-b from-[#1a1a1a] to-[#3a3a3a] bg-clip-text text-transparent leading-none" style={{ WebkitTextStroke: '1px rgba(232,213,167,0.5)' }}>
+                  <h2 className="font-shlop text-3xl sm:text-5xl md:text-6xl text-[#2a2a2a] tracking-widest uppercase drop-shadow-[0_0_15px_rgba(232,213,167,0.9)] leading-none" style={{ WebkitTextStroke: '1px rgba(232,213,167,0.5)' }}>
                     HEIST OPERATIVE
                   </h2>
                   <div className="w-24 sm:w-32 h-[2px] bg-red-900/60 mt-1 sm:mt-2"></div>
@@ -146,7 +146,7 @@ export default function WantedPosterModal({ isOpen, onClose, userName, avatar, p
 
                 {/* Details */}
                 <div className="flex flex-col items-center justify-center space-y-3 sm:space-y-4 font-mono font-bold mt-2 sm:mt-4">
-                  <div className="bg-[#1a1a1a]/80 backdrop-blur-sm px-3 sm:px-4 py-1 border-l-[3px] sm:border-l-4 border-red-700 w-fit mx-auto shadow-md">
+                  <div className="bg-[#1a1a1a]/80 backdrop-blur-sm px-3 sm:px-4 py-1 border-l-[3px] sm:border-l-4 border-red-700 w-fit max-w-full mx-auto shadow-md">
                     <div className="text-base sm:text-2xl md:text-3xl uppercase tracking-wider text-center text-[#e8d5a7] break-words">
                       {userName}
                     </div>
@@ -159,9 +159,9 @@ export default function WantedPosterModal({ isOpen, onClose, userName, avatar, p
                       <div className="h-[1px] flex-grow bg-[#1a1a1a]/40"></div>
                     </div>
                     
-                    <span className="font-shlop text-2xl sm:text-4xl md:text-5xl text-[#e8d5a7] tracking-widest bg-[#1a1a1a] px-3 sm:px-5 py-1.5 sm:py-3 mt-1 shadow-lg border border-[#333] leading-none text-center">
+                    <div className="font-shlop text-2xl sm:text-4xl md:text-5xl text-[#e8d5a7] tracking-widest bg-[#1a1a1a] px-3 sm:px-5 py-2 sm:py-3 mt-1 shadow-lg border border-[#333] leading-[1.2] text-center w-fit mx-auto break-words max-w-full">
                       {points} ARCADE POINTS
-                    </span>
+                    </div>
                   </div>
                 </div>
               </div>
