@@ -47,10 +47,10 @@ export default function WantedPosterModal({ isOpen, onClose, userName, avatar, p
     <AnimatePresence>
       {isOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 sm:p-6 md:p-8 backdrop-blur-md overflow-y-auto pt-16 sm:pt-4">
-          {/* Close Button - Moved to a fixed safe area so it doesn't get cut off on mobile */}
+          {/* Close Button - Fixed to top right of viewport on all devices */}
           <button 
             onClick={onClose}
-            className="fixed top-4 right-4 sm:absolute sm:-top-14 sm:-right-4 text-gray-400 hover:text-red-500 transition-colors p-2 bg-[#1a1a1a] border-2 border-red-900/50 rounded-full z-[70] shadow-[0_0_15px_rgba(185,28,28,0.5)]"
+            className="fixed top-4 right-4 sm:top-8 sm:right-8 text-gray-400 hover:text-red-500 transition-colors p-2 bg-[#1a1a1a] border-2 border-red-900/50 rounded-full z-[70] shadow-[0_0_15px_rgba(185,28,28,0.5)]"
           >
             <X size={24} className="w-6 h-6 sm:w-7 sm:h-7" />
           </button>
