@@ -239,8 +239,8 @@ export default function ResourcesPage() {
                 
                 <div className="relative z-10 p-6 h-full flex flex-col">
                   {game.image ? (
-                    <div className="w-full h-48 relative rounded-xl overflow-hidden mb-6 border border-[var(--vault-outline)] group-hover:border-[var(--heist-red)]/50 transition-colors">
-                      <Image src={game.image} alt={game.title} fill style={{ objectFit: "cover" }} className="group-hover:scale-105 transition-transform duration-500" />
+                    <div className="w-full h-56 md:h-48 relative rounded-xl overflow-hidden mb-6 border border-[var(--vault-outline)] group-hover:border-[var(--heist-red)]/50 transition-colors bg-black/40">
+                      <Image src={game.image} alt={game.title} fill style={{ objectFit: "contain" }} className="group-hover:scale-105 transition-transform duration-500 p-2" />
                     </div>
                   ) : (
                     <div className="mb-6 p-4 bg-black/40 rounded-xl inline-flex self-start border border-[var(--vault-outline)]">
@@ -248,7 +248,7 @@ export default function ResourcesPage() {
                     </div>
                   )}
                   
-                  <h3 className="font-display text-2xl tracking-widest text-white mb-6 uppercase group-hover:text-[var(--heist-red-bright)] transition-colors">
+                  <h3 className="font-shlop text-xl md:text-2xl tracking-widest text-white mb-6 uppercase group-hover:text-[var(--heist-red-bright)] transition-colors">
                     {game.title}
                   </h3>
 
