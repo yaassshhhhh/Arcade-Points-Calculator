@@ -26,7 +26,7 @@ export default function ResourcesPage() {
   const games = [
     {
       title: "The Arcade Basecamp",
-      code: "Coming Soon",
+      code: "1q-basecamp-10219",
       icon: <Box size={32} color="#F5BB11" />,
       color: "#F5BB11",
       image: "/images/basecamp_new.jpg",
@@ -34,7 +34,7 @@ export default function ResourcesPage() {
     },
     {
       title: "Arcade Adventure",
-      code: "Coming Soon",
+      code: "1q-datamgt-92372",
       icon: <Play size={32} color="#34A853" />,
       color: "#34A853",
       image: "/images/adventure_new.jpg",
@@ -42,7 +42,7 @@ export default function ResourcesPage() {
     },
     {
       title: "Arcade Voyage",
-      code: "Coming Soon",
+      code: "1q-sheets-29185",
       icon: <Cloud size={32} color="#4285F4" />,
       color: "#4285F4",
       image: "/images/voyage_new.jpg",
@@ -50,7 +50,7 @@ export default function ResourcesPage() {
     },
     {
       title: "Arcade Trail",
-      code: "Coming Soon",
+      code: "1q-delivery-31058",
       icon: <Library size={32} color="#EA4335" />,
       color: "#EA4335",
       image: "/images/trail_new.jpg",
@@ -58,7 +58,7 @@ export default function ResourcesPage() {
     },
     {
       title: "Spans and Plans",
-      code: "No Code Required",
+      code: "1q-schema-27083",
       icon: <Lock size={32} color="#9C27B0" />,
       color: "#9C27B0",
       image: "/images/spansandplans_new.jpg",
