@@ -46,7 +46,7 @@ export default function ResourcesPage() {
       icon: <Cloud size={32} color="#4285F4" />,
       color: "#4285F4",
       image: "/images/voyage_new.jpg",
-      url: "https://www.skills.google/games/7315?utm_source=googleskills&utm_medium=lp&utm_campaign=voyage-july-arcade26",
+      url: "https://www.skills.google/games/7398?utm_source=googleskills&utm_medium=lp&utm_campaign=voyage-Aug-arcade26",
     },
     {
       title: "Arcade Trail",
