@@ -29,7 +29,7 @@ export default function ResourcesPage() {
       code: "Coming Soon",
       icon: <Box size={32} color="#F5BB11" />,
       color: "#F5BB11",
-      image: "/images/basecamp_aug.png",
+      image: "/images/basecamp_new.jpg",
       url: "https://www.skills.google/games/7313?utm_source=googleskills&utm_medium=lp&utm_campaign=basecamp-july-arcade26",
     },
     {
@@ -37,7 +37,7 @@ export default function ResourcesPage() {
       code: "Coming Soon",
       icon: <Play size={32} color="#34A853" />,
       color: "#34A853",
-      image: "/images/adventure_aug.png",
+      image: "/images/adventure_new.jpg",
       url: "https://www.skills.google/games/7314?utm_source=googleskills&utm_medium=lp&utm_campaign=adv-july-arcade26",
     },
     {
@@ -45,7 +45,7 @@ export default function ResourcesPage() {
       code: "Coming Soon",
       icon: <Cloud size={32} color="#4285F4" />,
       color: "#4285F4",
-      image: "/images/voyage_aug.png",
+      image: "/images/voyage_new.jpg",
       url: "https://www.skills.google/games/7315?utm_source=googleskills&utm_medium=lp&utm_campaign=voyage-july-arcade26",
     },
     {
@@ -53,24 +53,24 @@ export default function ResourcesPage() {
       code: "Coming Soon",
       icon: <Library size={32} color="#EA4335" />,
       color: "#EA4335",
-      image: "/images/trail_aug.png",
+      image: "/images/trail_new.jpg",
       url: "https://www.skills.google/games/7316?utm_source=googleskills&utm_medium=lp&utm_campaign=trail-july-arcade26",
     },
     {
-      title: "Safe Spaces",
-      code: "Coming Soon",
+      title: "Spans and Plans",
+      code: "No Code Required",
       icon: <Lock size={32} color="#9C27B0" />,
       color: "#9C27B0",
-      image: "/images/safespaces_aug.png",
-      url: "https://www.skills.google/games/7318?utm_source=googleskills&utm_medium=lp&utm_campaign=wmpgame-july-arcade26",
+      image: "/images/spansandplans_new.jpg",
+      url: "https://www.skills.google/games/7399?utm_source=googleskills&utm_medium=lp&utm_campaign=special-Aug-arcade26",
     },
     {
-      title: "Arcade Simulator: Data Mesh Architect",
-      code: "Coming Soon",
+      title: "Arcade Simulator: Network Security Engineer",
+      code: "1q-network-51470",
       icon: <Database size={32} color="#00BCD4" />,
       color: "#00BCD4",
-      image: "/images/datamesh_aug.png",
-      url: "https://www.skills.google/games/7317?utm_source=googleskills&utm_medium=lp&utm_campaign=spegame-july-arcade26",
+      image: "/images/simulator_new.jpg",
+      url: "https://www.skills.google/games/7397?utm_source=googleskills&utm_medium=lp&utm_campaign=specgame-Aug-arcade26",
     }
   ];
 
