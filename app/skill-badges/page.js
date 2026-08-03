@@ -2,9 +2,10 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Search, Clock, BookOpen, Shield, ScanLine } from "lucide-react";
+import { Search, Clock, BookOpen, Shield, ScanLine, LayoutGrid, Map } from "lucide-react";
 import HeaderNav from "@/components/HeaderNav";
 import MaskIcon from "@/components/MaskIcon";
+import SkillTreeRoadmap from "@/components/SkillTreeRoadmap";
 
 // Framer motion variants
 const containerVariants = {
@@ -24,6 +25,7 @@ export default function SkillBadgesPage() {
   const [badges, setBadges] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
+  const [viewMode, setViewMode] = useState("roadmap");
   const [completedCount, setCompletedCount] = useState(0);
   const [isProfileLoaded, setIsProfileLoaded] = useState(false);
   const [userBadges, setUserBadges] = useState([]);
@@ -58,10 +60,21 @@ export default function SkillBadgesPage() {
     loadData();
   }, []);
 
-  const filteredBadges = badges.filter((badge) => 
-    badge.title.toLowerCase().includes(search.toLowerCase()) || 
-    badge.description.toLowerCase().includes(search.toLowerCase())
-  );
+  const filteredBadges = badges
+    .filter((badge) => 
+      badge.title.toLowerCase().includes(search.toLowerCase()) || 
+      badge.description.toLowerCase().includes(search.toLowerCase())
+    )
+    .map(badge => {
+      const isCompleted = isProfileLoaded && userBadges.some(userBadge => 
+        userBadge.name.toLowerCase().trim() === badge.title.toLowerCase().trim()
+      );
+      return { ...badge, isCompleted };
+    })
+    .sort((a, b) => {
+      if (a.isCompleted === b.isCompleted) return 0;
+      return a.isCompleted ? 1 : -1;
+    });
 
   return (
     <main className="bg-[var(--vault-black)] text-[var(--text-primary)] min-h-screen pb-20 relative overflow-hidden">
@@ -159,8 +172,33 @@ export default function SkillBadgesPage() {
             </div>
           )}
 
-          {/* Badge Grid */}
-          {!loading && (
+          {/* View Toggle */}
+          {!loading && badges.length > 0 && (
+            <div className="flex justify-center mb-8">
+              <div className="bg-[rgba(11,11,13,0.8)] border border-[var(--vault-outline)] p-1 rounded-lg flex gap-1 shadow-[0_0_15px_rgba(0,0,0,0.5)]">
+                <button 
+                  onClick={() => setViewMode("roadmap")}
+                  className={`px-4 py-2 font-mono text-xs md:text-sm tracking-widest uppercase rounded-md flex items-center gap-2 transition-all duration-300 ${viewMode === "roadmap" ? "bg-[var(--heist-red)] text-white shadow-[0_0_10px_var(--heist-red)]" : "text-[var(--text-muted)] hover:text-white hover:bg-[var(--vault-charcoal)]"}`}
+                >
+                  <Map size={16} /> ROADMAP VIEW
+                </button>
+                <button 
+                  onClick={() => setViewMode("grid")}
+                  className={`px-4 py-2 font-mono text-xs md:text-sm tracking-widest uppercase rounded-md flex items-center gap-2 transition-all duration-300 ${viewMode === "grid" ? "bg-[var(--heist-red)] text-white shadow-[0_0_10px_var(--heist-red)]" : "text-[var(--text-muted)] hover:text-white hover:bg-[var(--vault-charcoal)]"}`}
+                >
+                  <LayoutGrid size={16} /> LIST VIEW
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Roadmap View */}
+          {!loading && viewMode === "roadmap" && (
+            <SkillTreeRoadmap badges={filteredBadges} />
+          )}
+
+          {/* Grid View */}
+          {!loading && viewMode === "grid" && (
             <motion.div 
               variants={containerVariants}
               initial="hidden"
@@ -168,9 +206,7 @@ export default function SkillBadgesPage() {
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
             >
               {filteredBadges.map((badge, idx) => {
-                const isCompleted = isProfileLoaded && userBadges.some(userBadge => 
-                  userBadge.name.toLowerCase().trim() === badge.title.toLowerCase().trim()
-                );
+                const isCompleted = badge.isCompleted;
                 
                 return (
                 <motion.div 

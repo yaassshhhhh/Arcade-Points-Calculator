@@ -111,37 +111,6 @@ export default function ResourcesPage() {
       videoId: "jQRmZXMNRnI",
       isLatest: true
     },
-    {
-      title: "How to Get 120+ Arcade Points | Google Cloud Arcade Program 2026 Complete Roadmap",
-      url: "https://www.youtube.com/watch?v=sTkZORgZXcI",
-      videoId: "sTkZORgZXcI",
-      isLatest: true
-    },
-    {
-      title: "How to Enable Check My Progress.",
-      url: "https://www.youtube.com/watch?v=WgQGSD8w7mg",
-      videoId: "WgQGSD8w7mg"
-    },
-    {
-      title: "How to Make Your Google Cloud Skills Boost Profile Public | Step-by-Step Guide | New Update",
-      url: "https://www.youtube.com/watch?v=NG6hgB8l72Y",
-      videoId: "NG6hgB8l72Y"
-    },
-    {
-      title: "How to Get 600 FREE Google Cloud Credits.",
-      url: "https://www.youtube.com/watch?v=5HTL3J-B330",
-      videoId: "5HTL3J-B330"
-    },
-    {
-      title: "How to Start Google Cloud Arcade Journey 2026 | Full Guide |",
-      url: "https://www.youtube.com/watch?v=6QTni4LiAEs",
-      videoId: "6QTni4LiAEs"
-    },
-    {
-      title: "How to Calculate Your Arcade Points Correctly | Arcade Insider Mail Explained (without any mismatch).",
-      url: "https://www.youtube.com/watch?v=xusFbGexKyI",
-      videoId: "xusFbGexKyI"
-    }
   ];
 
   const communities = [
@@ -276,6 +245,7 @@ export default function ResourcesPage() {
             </motion.div>
           </div>
 
+
           {/* VIDEOS SECTION */}
           <div className="mb-16">
             <div className="flex items-center justify-center gap-4 border-b border-[var(--vault-outline)] pb-4 mb-8">
@@ -374,6 +344,88 @@ export default function ResourcesPage() {
                   </div>
                 </motion.a>
               ))}
+            </motion.div>
+          </div>
+
+          {/* FORUM SECTION */}
+          <div className="mb-16">
+            <div className="flex items-center justify-center gap-4 border-b border-[var(--vault-outline)] pb-4 mb-8">
+              <h2 className="font-shlop text-3xl md:text-4xl tracking-widest text-white uppercase m-0">
+                FORUM
+              </h2>
+              <span className="bg-[#9C27B0] text-white px-3 py-1 text-xs font-mono font-bold tracking-widest rounded-sm">LATEST</span>
+            </div>
+
+            <motion.div 
+              variants={containerVariants}
+              initial="hidden"
+              animate="show"
+              className="grid grid-cols-1 gap-8"
+            >
+              {/* Forum Post Card */}
+              <motion.a
+                variants={itemVariants}
+                whileHover={{ scale: 1.02 }}
+                href="https://discuss.google.dev/t/arcade-facilitator-2026-bonus-milestone/386412"
+                className="block bg-[var(--vault-charcoal)] border-2 border-[var(--vault-outline)] hover:border-[#9C27B0] transition-all duration-500 rounded-[2rem] p-1 shadow-[0_0_30px_rgba(156,39,176,0.1)] hover:shadow-[0_0_40px_rgba(156,39,176,0.3)] relative overflow-hidden group"
+              >
+                {/* Animated Gradient Border Effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#9C27B0]/20 to-transparent opacity-0 group-hover:opacity-100 group-hover:animate-[shimmer_2s_infinite] -skew-x-12 z-0"></div>
+                
+                <div className="relative z-10 bg-[var(--vault-charcoal)] rounded-[1.8rem] p-6 md:p-8 flex flex-col md:flex-row gap-8 items-center h-full">
+                  {/* Image Container with Glow */}
+                  <div className="w-full md:w-1/2 relative">
+                    <div className="absolute inset-0 bg-[#9C27B0] blur-xl opacity-20 group-hover:opacity-40 transition-opacity duration-500 rounded-xl"></div>
+                    <div className="relative w-full aspect-video rounded-xl overflow-hidden border border-white/10">
+                      <Image 
+                        unoptimized
+                        src="https://d2yds90mtvelsl.cloudfront.net/original/4X/4/2/9/429ccb20726ac1f0f6a510163dea8830398fd434.jpeg" 
+                        alt="Arcade Facilitator 2026 Bonus Milestone" 
+                        fill 
+                        style={{ objectFit: "cover" }} 
+                        className="group-hover:scale-110 transition-transform duration-700 ease-in-out"
+                      />
+                      {/* Overlay */}
+                      <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500"></div>
+                      
+                      {/* Badges */}
+                      <div className="absolute top-4 left-4 flex gap-2">
+                        <span className="bg-[#9C27B0]/90 backdrop-blur-sm text-white px-3 py-1 text-xs font-mono font-bold tracking-widest rounded-md border border-white/20 shadow-lg">
+                          MILESTONE
+                        </span>
+                        <span className="bg-[#F5BB11]/90 backdrop-blur-sm text-black px-3 py-1 text-xs font-mono font-bold tracking-widest rounded-md border border-white/20 shadow-lg animate-pulse">
+                          +10 PTS
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Content */}
+                  <div className="w-full md:w-1/2 flex flex-col justify-center">
+                    <div className="flex items-center gap-2 mb-3">
+                      <MessageCircle size={16} className="text-[#9C27B0]" />
+                      <span className="font-mono text-xs text-[#9C27B0] tracking-widest uppercase">Community News & Announcements</span>
+                    </div>
+                    
+                    <h3 className="font-shlop text-3xl md:text-5xl tracking-widest text-white mb-4 uppercase leading-none group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-[#9C27B0] transition-all duration-300">
+                      Arcade Facilitator 2026 Bonus Milestone
+                    </h3>
+                    
+                    <p className="font-mono text-white/70 leading-relaxed text-sm md:text-base mb-8">
+                      Build your first AI Agent on Google Cloud Vertex AI. Follow 4 simple steps: complete GEAR badges, activate free trial, build the agent, and submit details to earn your bonus!
+                    </p>
+                    
+                    <div className="mt-auto">
+                      <div className="inline-flex items-center gap-3 bg-white/5 hover:bg-[#9C27B0]/20 border border-white/10 hover:border-[#9C27B0]/50 px-6 py-3 rounded-full transition-all duration-300">
+                        <span className="font-mono text-sm tracking-widest text-white uppercase">Read Full Post</span>
+                        <div className="bg-[#9C27B0] rounded-full p-1 group-hover:translate-x-2 transition-transform duration-300">
+                          <Play size={14} color="#FFF" fill="#FFF" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.a>
             </motion.div>
           </div>
         </div>

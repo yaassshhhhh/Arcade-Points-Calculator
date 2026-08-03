@@ -29,6 +29,8 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, [router]);
 
+  const [loadingText, setLoadingText] = useState("");
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!url) return;
@@ -42,10 +44,28 @@ export default function Home() {
     // Save to sessionStorage so they stay logged in
     sessionStorage.setItem("arcadeProfileUrl", finalUrl);
     
-    // Simulate vault unlock wait
+    // Hacker typing sequence
+    const texts = [
+      "> Bypassing Google Cloud servers...",
+      "> Extracting badge data...",
+      "> Calculating points...",
+      "> Access Granted!"
+    ];
+    
+    let i = 0;
+    setLoadingText(texts[0]);
+    
+    const interval = setInterval(() => {
+      i++;
+      if (i < texts.length) {
+        setLoadingText(texts[i]);
+      }
+    }, 700);
+
     setTimeout(() => {
+      clearInterval(interval);
       router.push(`/dashboard?url=${encodeURIComponent(finalUrl)}`);
-    }, 900);
+    }, 3200);
   };
 
   return (
@@ -120,12 +140,13 @@ export default function Home() {
                   className="w-full relative overflow-hidden bg-[var(--heist-red)] text-white font-shlop text-3xl md:text-4xl tracking-widest py-4 md:py-5 hover:bg-[var(--heist-red-bright)] hover:shadow-[0_0_30px_var(--heist-red)] transition-all group/btn border border-transparent hover:border-white uppercase rounded-tl-2xl rounded-br-2xl rounded-tr-sm rounded-bl-sm"
                 >
                   <div className="absolute inset-0 bg-black -translate-x-full group-hover/btn:translate-x-0 transition-transform duration-500 ease-out z-0"></div>
-                  <div className="relative z-10 flex justify-center items-center gap-3 mt-1">
+                  <div className="relative z-10 flex justify-center items-center gap-3 mt-1 w-full">
                     {loading ? (
-                      <>
-                        <MaskIcon size={28} loading={true} className="text-white" />
-                        <span className="tracking-[0.2em] font-mono text-sm mt-1">BREACHING VAULT...</span>
-                      </>
+                      <div className="flex flex-col items-center justify-center w-full px-2 overflow-hidden">
+                        <span className="tracking-[0.15em] font-mono text-[11px] md:text-sm text-[var(--mint-gold)] whitespace-nowrap drop-shadow-[0_0_5px_var(--mint-gold)]">
+                          {loadingText}<span className="animate-pulse">_</span>
+                        </span>
+                      </div>
                     ) : (
                       <span>ENTER THE SAFE HOUSE</span>
                     )}

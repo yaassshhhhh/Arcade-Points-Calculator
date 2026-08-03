@@ -56,6 +56,29 @@ function DashboardContent() {
   const [showWantedPoster, setShowWantedPoster] = useState(false);
   const [lastTotal, setLastTotal] = useState(0);
 
+  const [loadingText, setLoadingText] = useState("> Bypassing Google Cloud servers...");
+
+  useEffect(() => {
+    if (!loading) return;
+    const texts = [
+      "> Bypassing Google Cloud servers...",
+      "> Extracting badge data...",
+      "> Calculating points...",
+      "> Access Granted!"
+    ];
+    let i = 0;
+    const interval = setInterval(() => {
+      i++;
+      if (i < texts.length) {
+        setLoadingText(texts[i]);
+      } else {
+        i = 0;
+        setLoadingText(texts[i]);
+      }
+    }, 700);
+    return () => clearInterval(interval);
+  }, [loading]);
+
   const getRank = (points) => {
     if (points >= 120) return "LEGEND";
     if (points >= 95) return "CHAMPION";
@@ -170,10 +193,12 @@ function DashboardContent() {
       {/* Loading State */}
       {loading && (
         <div className="flex flex-col items-center justify-center min-h-[80vh]">
-          <MaskIcon size={60} className="text-[var(--heist-red)] mb-6 md:mb-8 md:scale-125" loading={true} />
-          <h2 className="font-shlop text-3xl md:text-4xl text-[var(--text-primary)] tracking-widest animate-pulse mt-4">
-            CASING THE VAULT...
-          </h2>
+          <div className="flex flex-col items-center justify-center w-full max-w-xl px-6 py-12 overflow-hidden bg-[rgba(11,11,13,0.8)] border border-[var(--vault-outline)] rounded-2xl shadow-[0_0_50px_rgba(212,175,55,0.15)] relative backdrop-blur-md">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--mint-gold)] blur-[80px] opacity-20 pointer-events-none"></div>
+            <span className="tracking-[0.15em] font-mono text-sm md:text-lg text-[var(--mint-gold)] whitespace-nowrap drop-shadow-[0_0_8px_var(--mint-gold)]">
+              {loadingText}<span className="animate-pulse">_</span>
+            </span>
+          </div>
         </div>
       )}
 
