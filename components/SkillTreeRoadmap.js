@@ -61,7 +61,11 @@ const HexagonNode = ({ badge, onClick }) => {
            {isCompleted && (
              <div className="absolute inset-0 bg-[var(--mint-gold)] opacity-20 animate-pulse"></div>
            )}
-           <Shield size={24} className={isCompleted ? "text-[var(--mint-gold)] drop-shadow-[0_0_8px_var(--mint-gold)]" : "text-[var(--text-muted)] opacity-50"} />
+           {isCompleted && badge.badgeImage ? (
+             <img src={badge.badgeImage} alt={badge.title} className="w-10 h-10 md:w-12 md:h-12 object-contain z-10 drop-shadow-[0_0_5px_var(--mint-gold)]" />
+           ) : (
+             <Shield size={24} className={isCompleted ? "text-[var(--mint-gold)] drop-shadow-[0_0_8px_var(--mint-gold)]" : "text-[var(--text-muted)] opacity-50"} />
+           )}
         </div>
       </div>
       

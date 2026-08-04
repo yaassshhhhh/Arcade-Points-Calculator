@@ -66,10 +66,9 @@ export default function SkillBadgesPage() {
       badge.description.toLowerCase().includes(search.toLowerCase())
     )
     .map(badge => {
-      const isCompleted = isProfileLoaded && userBadges.some(userBadge => 
-        userBadge.name.toLowerCase().trim() === badge.title.toLowerCase().trim()
-      );
-      return { ...badge, isCompleted };
+      const userBadge = isProfileLoaded ? userBadges.find(ub => ub.name.toLowerCase().trim() === badge.title.toLowerCase().trim()) : null;
+      const isCompleted = !!userBadge;
+      return { ...badge, isCompleted, badgeImage: userBadge?.imageSrc || null };
     })
     .sort((a, b) => {
       if (a.isCompleted === b.isCompleted) return 0;
