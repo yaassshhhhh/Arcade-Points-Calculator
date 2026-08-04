@@ -54,7 +54,7 @@ export default function ResourcesPage() {
       icon: <Library size={32} color="#EA4335" />,
       color: "#EA4335",
       image: "/images/trail_new.jpg",
-      url: "https://www.skills.google/games/7316?utm_source=googleskills&utm_medium=lp&utm_campaign=trail-july-arcade26",
+      url: "https://www.skills.google/games/7396?utm_source=googleskills&utm_medium=lp&utm_campaign=trail-Aug-arcade26",
     },
     {
       title: "Spans and Plans",
