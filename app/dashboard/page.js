@@ -55,6 +55,7 @@ function DashboardContent() {
   const [showMilestone, setShowMilestone] = useState(false);
   const [showWantedPoster, setShowWantedPoster] = useState(false);
   const [lastTotal, setLastTotal] = useState(0);
+  const [joinedFacilitator, setJoinedFacilitator] = useState(false);
 
   const [loadingText, setLoadingText] = useState("> Bypassing Google Cloud servers...");
 
@@ -182,6 +183,16 @@ function DashboardContent() {
     return { badgesCount: bCount, gamesCount: gCount };
   }, [data]);
 
+  const displayPoints = useMemo(() => {
+    if (!data) return 0;
+    let bonus = 0;
+    if (data.milestones && data.milestones.achieved && data.milestones.achieved.length > 0) {
+      const highest = data.milestones.achieved[data.milestones.achieved.length - 1];
+      bonus = highest.bonusPoints || 0;
+    }
+    return joinedFacilitator ? data.totalPoints : (data.totalPoints - bonus);
+  }, [data, joinedFacilitator]);
+
   return (
     <main className="min-h-screen bg-[var(--vault-black)] text-[var(--text-primary)] pb-20 relative">
       {/* Background Image Overlay */}
@@ -227,7 +238,7 @@ function DashboardContent() {
           {/* Top Section: Points Ring & Target */}
           <section className="flex flex-col lg:flex-row justify-center items-center gap-8 lg:gap-12 mb-16 max-w-7xl mx-auto">
             <div className="flex justify-center">
-              <PointsRing points={data.totalPoints} maxPoints={80} />
+              <PointsRing points={displayPoints} maxPoints={80} />
             </div>
             
             {/* Intel Panel */}
@@ -236,7 +247,7 @@ function DashboardContent() {
                 <div className="relative mb-6">
                   <div className="absolute inset-0 rounded-full bg-[var(--heist-red-glow)] blur-lg animate-pulse"></div>
                   <RankAvatar 
-                    points={data.totalPoints} 
+                    points={displayPoints} 
                     avatar={data.userAvatar || guessAvatar(data.userName)} 
                     userName={data.userName} 
                     size="lg" 
@@ -245,6 +256,17 @@ function DashboardContent() {
                 <div className="bg-transparent border border-[var(--vault-outline)] px-6 py-3 md:px-8 md:py-3 rounded-lg shadow-lg text-center mt-2 w-full max-w-sm">
                   <span className="font-mono text-[var(--text-muted)] text-xs md:text-sm uppercase tracking-widest block mb-1">OPERATIVE</span>
                   <h4 className="font-shlop text-3xl md:text-5xl text-white tracking-[0.05em] uppercase drop-shadow-[0_0_10px_rgba(255,255,255,0.2)] mt-2">{data.userName}</h4>
+                </div>
+                
+                {/* Facilitator Toggle */}
+                <div className="mt-4 flex items-center justify-between w-full max-w-sm bg-[rgba(11,11,13,0.8)] border border-[var(--vault-outline)] px-4 py-3 rounded-lg shadow-[0_0_15px_rgba(0,0,0,0.5)]">
+                  <span className="font-mono text-[var(--text-secondary)] text-xs md:text-sm tracking-wider uppercase">Enrolled with Facilitator?</span>
+                  <button 
+                    onClick={() => setJoinedFacilitator(!joinedFacilitator)}
+                    className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[var(--mint-gold)] focus:ring-offset-2 focus:ring-offset-[var(--vault-black)] ${joinedFacilitator ? 'bg-[var(--mint-gold)]' : 'bg-gray-600'}`}
+                  >
+                    <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform duration-300 ${joinedFacilitator ? 'translate-x-6' : 'translate-x-1'}`} />
+                  </button>
                 </div>
                 
                 {data.facilitatorDetails && (
@@ -299,7 +321,7 @@ function DashboardContent() {
 
           {/* Visual Progress Roadmap */}
           <ProgressRoadmap 
-            totalPoints={data.totalPoints} 
+            totalPoints={displayPoints} 
             avatar={data.userAvatar || guessAvatar(data.userName)} 
           />
 
@@ -317,8 +339,8 @@ function DashboardContent() {
                 { name: 'CHAMPION', target: 95 },
                 { name: 'LEGEND', target: 120 },
               ].map((tier, idx) => {
-                const remaining = Math.max(tier.target - data.totalPoints, 0);
-                const isAchieved = data.totalPoints >= tier.target;
+                const remaining = Math.max(tier.target - displayPoints, 0);
+                const isAchieved = displayPoints >= tier.target;
                 return (
                   <div key={idx} className={`bg-transparent border p-6 flex flex-col items-center justify-center text-center rounded-lg transition-all relative overflow-hidden group ${isAchieved ? 'border-[var(--mint-gold)] shadow-[0_0_20px_rgba(212,175,55,0.2)] hover:shadow-[0_0_30px_rgba(212,175,55,0.4)] hover:scale-105' : 'border-[var(--vault-outline)] hover:border-[var(--heist-red)] shadow-[0_0_20px_rgba(0,0,0,0.5)] hover:shadow-[0_0_20px_rgba(193,18,31,0.2)] hover:scale-105'}`}>
                     <div className={`absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity ${isAchieved ? 'bg-[var(--mint-gold-dim)]' : 'bg-[var(--heist-red-dim)]'}`}></div>
@@ -436,8 +458,8 @@ function DashboardContent() {
           <MilestoneModal 
             isOpen={showMilestone} 
             onClose={() => setShowMilestone(false)}
-            pointsSecured={data.totalPoints}
-            pointsRemaining={Math.max(80 - data.totalPoints, 0)}
+            pointsSecured={displayPoints}
+            pointsRemaining={Math.max(80 - displayPoints, 0)}
           />
 
           <WantedPosterModal
@@ -445,8 +467,8 @@ function DashboardContent() {
             onClose={() => setShowWantedPoster(false)}
             userName={data.userName}
             avatar={data.userAvatar || guessAvatar(data.userName)}
-            points={data.totalPoints}
-            rank={getRank(data.totalPoints)}
+            points={displayPoints}
+            rank={getRank(displayPoints)}
           />
         </div>
       )}
