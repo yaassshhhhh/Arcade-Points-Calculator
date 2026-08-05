@@ -30,7 +30,7 @@ export default function ResourcesPage() {
       icon: <Box size={32} color="#F5BB11" />,
       color: "#F5BB11",
       image: "/images/basecamp_new.jpg",
-      url: "https://www.skills.google/games/7313?utm_source=googleskills&utm_medium=lp&utm_campaign=basecamp-july-arcade26",
+      url: "https://www.skills.google/games/7394?utm_source=googleskills&utm_medium=lp&utm_campaign=basecamp-Aug-arcade26",
     },
     {
       title: "Arcade Adventure",
@@ -38,7 +38,7 @@ export default function ResourcesPage() {
       icon: <Play size={32} color="#34A853" />,
       color: "#34A853",
       image: "/images/adventure_new.jpg",
-      url: "https://www.skills.google/games/7314?utm_source=googleskills&utm_medium=lp&utm_campaign=adv-july-arcade26",
+      url: "https://www.skills.google/games/7395?utm_source=googleskills&utm_medium=lp&utm_campaign=adv-Aug-arcade26",
     },
     {
       title: "Arcade Voyage",
