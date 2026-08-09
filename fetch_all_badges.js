@@ -34,7 +34,9 @@ async function fetchAllBadges() {
       console.log(`Fetching page ${page}...`);
       const badges = await fetchBadges(page);
       if (badges && badges.length > 0) {
-        allBadges = allBadges.concat(badges);
+        // Filter out the duplicate badge
+        const filteredBadges = badges.filter(b => b.title !== "Get Started with Sensitive Data Protection");
+        allBadges = allBadges.concat(filteredBadges);
         page++;
       } else {
         hasMore = false;
