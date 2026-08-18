@@ -77,6 +77,7 @@ export default function ResourcesPage() {
       code: "1q-vaults-39213",
       icon: <ScanLine size={32} color="#FF5722" />,
       color: "#FF5722",
+      image: "/images/retrail_new.jpg",
       url: "https://www.skills.google/games/7426?utm_source=googleskills&utm_medium=lp&utm_campaign=retrail-Aug-arcade26",
     }
   ];
