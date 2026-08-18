@@ -71,6 +71,13 @@ export default function ResourcesPage() {
       color: "#00BCD4",
       image: "/images/simulator_new.jpg",
       url: "https://www.skills.google/games/7397?utm_source=googleskills&utm_medium=lp&utm_campaign=specgame-Aug-arcade26",
+    },
+    {
+      title: "Arcade Re-Trail",
+      code: "1q-vaults-39213",
+      icon: <ScanLine size={32} color="#FF5722" />,
+      color: "#FF5722",
+      url: "https://www.skills.google/games/7426?utm_source=googleskills&utm_medium=lp&utm_campaign=retrail-Aug-arcade26",
     }
   ];
 
