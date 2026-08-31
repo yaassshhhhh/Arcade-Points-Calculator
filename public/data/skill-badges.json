@@ -1,15 +1,6 @@
 [
   {
     "type": "course",
-    "title": "Implement Sensitive Data Protection on Google Cloud",
-    "description": "Skill badge for sensitive data protection",
-    "path": "",
-    "duration": "",
-    "level": "intermediate",
-    "credentialType": "skill_badge",
-    "progress": null
-  },
-  {
     "title": "Manage Kubernetes in Google Cloud",
     "description": "Complete the intermediate Manage Kubernetes in Google Cloud skill badge course to demonstrate skills in the following: managing deployments with kubectl, monitoring and debugging applications on Google Kubernetes Engine (GKE), and continuous delivery techniques.",
     "path": "/course_templates/783?catalog_rank=%7B%22rank%22%3A1%2C%22num_filters%22%3A1%2C%22has_search%22%3Afalse%7D",
@@ -23,7 +14,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -40,7 +32,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -57,7 +50,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -74,7 +68,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -91,7 +86,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -108,7 +104,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -125,7 +122,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -142,7 +140,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -159,12 +158,13 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
     "title": "Prompt Design in Agent Platform",
-    "description": "Complete the introductory Prompt Design in Agent Platform skill badge to demonstrate skills in the following: prompt engineering, image analysis, and multimodal generative techniques, within Agent Platform. Discover how to craft effective prompts, guide generative AI output, and apply Gemini models to real-world marketing scenarios.",
+    "description": "Complete the introductory Prompt Design in Agent Platform skill badge to demonstrate skills in the following: prompt engineering, image analysis, and multimodal generative techniques, within Agent Platform. Discover how to craft effective prompts, guide generative AI output, and apply Gemini models to real-world marketing scenarios. Explore other content in the Gemini Enterprise Agent Ready (GEAR) program.",
     "path": "/course_templates/976?catalog_rank=%7B%22rank%22%3A10%2C%22num_filters%22%3A1%2C%22has_search%22%3Afalse%7D",
     "duration": "1 hour",
     "level": "introductory",
@@ -176,12 +176,13 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
     "title": "Explore Generative AI in Agent Platform",
-    "description": "Complete the intermediate Explore Generative AI in Agent Platform skill badge to demonstrate skills in text generation, image and video analysis for enhanced content creation, and applying function calling techniques within the Gemini API. Discover how to leverage sophisticated Gemini techniques, explore multimodal content generation, and expand the capabilities of your AI-powered projects.",
+    "description": "Complete the intermediate Explore Generative AI in Agent Platform skill badge to demonstrate skills in text generation, image and video analysis for enhanced content creation, and applying function calling techniques within the Gemini API. Discover how to leverage sophisticated Gemini techniques, explore multimodal content generation, and expand the capabilities of your AI-powered projects. Explore other content in the Gemini Enterprise Agent Ready (GEAR) program.",
     "path": "/course_templates/959?catalog_rank=%7B%22rank%22%3A11%2C%22num_filters%22%3A1%2C%22has_search%22%3Afalse%7D",
     "duration": "30 minutes",
     "level": "intermediate",
@@ -193,7 +194,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -210,7 +212,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -227,7 +230,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -244,7 +248,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -261,7 +266,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -278,7 +284,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -295,7 +302,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -312,7 +320,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -329,7 +338,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -346,7 +356,26 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
+  },
+  {
+    "type": "course",
+    "title": "Implement Sensitive Data Protection on Google Cloud",
+    "description": "Complete the Implement Sensitive Data Protection on Google Cloud Skill Badge course to demonstrate skills in the following: using Sensitive Data Protection services (including the Cloud Data Loss Prevention API) to inspect, redact, and de-identify sensitive data in Google Cloud.",
+    "path": "/course_templates/750?catalog_rank=%7B%22rank%22%3A21%2C%22num_filters%22%3A1%2C%22has_search%22%3Afalse%7D",
+    "duration": "30 minutes",
+    "level": "introductory",
+    "credentialType": "skill_badge",
+    "progress": null,
+    "required": null,
+    "dueDate": null,
+    "paid": null,
+    "overdue": null,
+    "locked": null,
+    "lockedMessage": null,
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -363,7 +392,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -380,7 +410,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -397,7 +428,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -414,7 +446,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -431,7 +464,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -448,7 +482,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -465,7 +500,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -482,12 +518,13 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
     "title": "Create Your First Gemini Enterprise Application",
-    "description": "Create your first Gemini Enterprise application to earn a skill badge! Connect diverse data sources to your application to build a powerful, unified search and analysis engine. Master advanced capabilities like deep research agents, multi-agent ideation, and NotebookLM for focused analysis.",
+    "description": "Create your first Gemini Enterprise application to earn a skill badge! Connect diverse data sources to your application to build a powerful, unified search and analysis engine. Master advanced capabilities like deep research agents, multi-agent ideation, and Gemini Notebook for focused analysis.",
     "path": "/course_templates/1586?catalog_rank=%7B%22rank%22%3A30%2C%22num_filters%22%3A1%2C%22has_search%22%3Afalse%7D",
     "duration": "1 hour",
     "level": "introductory",
@@ -499,12 +536,13 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
     "title": "Engineer AI Agents with Agent Development Kit (ADK)",
-    "description": "Complete the intermediate Engineer AI Agents with Agent Development Kit (ADK) skill badge by completing this course to demonstrate skills in the following: formulating real-world language model research problems; building a simple tokenizer; preparing a dataset for training a transformer language model; running the training loop of a small language model.",
+    "description": "Complete the intermediate Engineer AI Agents with Agent Development Kit (ADK) skill badge by completing this course to demonstrate skills in the following: formulating real-world language model research problems; building a simple tokenizer; preparing a dataset for training a transformer language model; running the training loop of a small language model. Explore other content in the Gemini Enterprise Agent Ready (GEAR) program.",
     "path": "/course_templates/1596?catalog_rank=%7B%22rank%22%3A31%2C%22num_filters%22%3A1%2C%22has_search%22%3Afalse%7D",
     "duration": "1 hour 45 minutes",
     "level": "intermediate",
@@ -516,14 +554,15 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
     "title": "Build Global and Regional Load Balancing Solutions",
     "description": "Complete the intermediate Build Global and Regional Load Balancing Solutions skill badge course to demonstrate skills in the following: deploy and utilize an internal client VM within the same VPC network and test traffic distribution, backend infrastructure suitable for a global external application Load Balancer, and backend VM instances and load balancer components using startup scripts and network tags to host a web application service.",
     "path": "/course_templates/1558?catalog_rank=%7B%22rank%22%3A32%2C%22num_filters%22%3A1%2C%22has_search%22%3Afalse%7D",
-    "duration": "4 hours 30 minutes",
+    "duration": "1 hour 30 minutes",
     "level": "intermediate",
     "credentialType": "skill_badge",
     "progress": null,
@@ -533,7 +572,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -550,12 +590,13 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
     "title": "Build a Smart Cloud Application with Vibe Coding and MCP",
-    "description": "Earn a skill badge by completing the Build a Smart Cloud Application with Vibe Coding and MCP course, where you will learn to leverage the power of Google's AI coding assistant and MCP servers",
+    "description": "Earn a skill badge by completing the Build a Smart Cloud Application with Vibe Coding and MCP course, where you will learn to leverage the power of Google's AI coding assistant and MCP servers. Explore other content in the Gemini Enterprise Agent Ready (GEAR) program.",
     "path": "/course_templates/1459?catalog_rank=%7B%22rank%22%3A34%2C%22num_filters%22%3A1%2C%22has_search%22%3Afalse%7D",
     "duration": "1 hour 45 minutes",
     "level": "intermediate",
@@ -567,14 +608,15 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
     "title": "Deploy Multi-Agent Architectures",
-    "description": "Complete the advanced Deploy Multi-Agent Architectures skill badge to demonstrate skills in the following: building multi-agent systems with ADK, connecting agents with the Agent-to-Agent (A2A) protocol, integrating external tools using the Model Context Protocol (MCP), and deploying a complete multi-agent solution to Agent Engine.",
+    "description": "Complete the advanced Deploy Multi-Agent Architectures skill badge to demonstrate skills in the following: building multi-agent systems with ADK, connecting agents with the Agent-to-Agent (A2A) protocol, integrating external tools using the Model Context Protocol (MCP), and deploying a complete multi-agent solution to Agent Engine. Explore other content in the Gemini Enterprise Agent Ready (GEAR) program.",
     "path": "/course_templates/1445?catalog_rank=%7B%22rank%22%3A35%2C%22num_filters%22%3A1%2C%22has_search%22%3Afalse%7D",
-    "duration": "2 hours 15 minutes",
+    "duration": "2 hours 45 minutes",
     "level": "advanced",
     "credentialType": "skill_badge",
     "progress": null,
@@ -584,12 +626,13 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
     "title": "Develop AI-Powered Prototypes in Google AI Studio",
-    "description": "Complete the introductory Develop AI-Powered Prototypes in Google AI Studio skill badge to demonstrate skills in the following: crafting effective prompts, leveraging multimodal capabilities for image and video analysis, prototyping functional AI-driven applications from templates and text prompts, and utilizing API keys to build and deploy custom AI solutions.",
+    "description": "Complete the introductory Develop AI-Powered Prototypes in Google AI Studio skill badge to demonstrate skills in the following: crafting effective prompts, leveraging multimodal capabilities for image and video analysis, prototyping functional AI-driven applications from templates and text prompts, and utilizing API keys to build and deploy custom AI solutions. Explore other content in the Gemini Enterprise Agent Ready (GEAR) program.",
     "path": "/course_templates/1426?catalog_rank=%7B%22rank%22%3A36%2C%22num_filters%22%3A1%2C%22has_search%22%3Afalse%7D",
     "duration": "45 minutes",
     "level": "introductory",
@@ -601,7 +644,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -618,7 +662,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -635,7 +680,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -652,7 +698,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -669,7 +716,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -686,7 +734,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -703,7 +752,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -720,7 +770,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -737,7 +788,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -754,7 +806,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -771,7 +824,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -788,7 +842,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -805,7 +860,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -822,12 +878,13 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
     "title": "Inspect Rich Documents with Gemini Multimodality and Multimodal RAG",
-    "description": "Complete the intermediate Inspect Rich Documents with Gemini Multimodality and Multimodal RAG skill badge course to demonstrate skills in the following: using multimodal prompts to extract information from text and visual data, generating a video description, and retrieving extra information beyond the video using multimodality with Gemini; building metadata of documents containing text and images, getting all relevant text chunks, and printing citations by using Multimodal Retrieval Augmented Generation (RAG) with Gemini.",
+    "description": "Complete the intermediate Inspect Rich Documents with Gemini Multimodality and Multimodal RAG skill badge course to demonstrate skills in the following: using multimodal prompts to extract information from text and visual data, generating a video description, and retrieving extra information beyond the video using multimodality with Gemini; building metadata of documents containing text and images, getting all relevant text chunks, and printing citations by using Multimodal Retrieval Augmented Generation (RAG) with Gemini. Explore other content in the Gemini Enterprise Agent Ready (GEAR) program.",
     "path": "/course_templates/981?catalog_rank=%7B%22rank%22%3A50%2C%22num_filters%22%3A1%2C%22has_search%22%3Afalse%7D",
     "duration": "45 minutes",
     "level": "intermediate",
@@ -839,14 +896,15 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
     "title": "Develop Gen AI Apps with Gemini and Streamlit",
-    "description": "Complete the intermediate Develop Gen AI Apps with Gemini and Streamlit skill badge course to demonstrate skills in text generation, applying function calls with the Python SDK and Gemini API, and deploying a Streamlit application with Cloud Run. In this course, you learn Gemini prompting, test Streamlit apps in Cloud Shell, and deploy them as Docker containers in Cloud Run.",
+    "description": "Complete the intermediate Develop Gen AI Apps with Gemini and Streamlit skill badge course to demonstrate skills in text generation, applying function calls with the Python SDK and Gemini API, and deploying a Streamlit application with Cloud Run. In this course, you learn Gemini prompting, test Streamlit apps in Cloud Shell, and deploy them as Docker containers in Cloud Run. Explore other content in the Gemini Enterprise Agent Ready (GEAR) program.",
     "path": "/course_templates/978?catalog_rank=%7B%22rank%22%3A51%2C%22num_filters%22%3A1%2C%22has_search%22%3Afalse%7D",
-    "duration": "1 hour",
+    "duration": "45 minutes",
     "level": "intermediate",
     "credentialType": "skill_badge",
     "progress": null,
@@ -856,7 +914,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -873,7 +932,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -890,7 +950,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -907,7 +968,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -924,7 +986,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -941,7 +1004,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -958,7 +1022,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -975,7 +1040,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -992,7 +1058,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -1009,7 +1076,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -1026,7 +1094,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -1043,14 +1112,15 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
     "title": "Implement DevOps Workflows in Google Cloud",
-    "description": "Complete the intermediate Implement DevOps Workflows in Google Cloud skill badge to demonstrate skills in the following: creating git repositories with Cloud Source Repositories, launching, managing, and scaling deployments on Google Kubernetes Engine (GKE), and architecting CI/CD pipelines that automate container image builds and deployments to GKE.",
+    "description": "Complete the intermediate Implement DevOps Workflows in Google Cloud skill badge to demonstrate skills in the following: creating and managing Git repositories, launching, managing, and scaling deployments on Google Kubernetes Engine (GKE), and architecting CI/CD pipelines that automate container image builds and deployments to GKE.",
     "path": "/course_templates/716?catalog_rank=%7B%22rank%22%3A63%2C%22num_filters%22%3A1%2C%22has_search%22%3Afalse%7D",
-    "duration": "1 hour",
+    "duration": "45 minutes",
     "level": "intermediate",
     "credentialType": "skill_badge",
     "progress": null,
@@ -1060,7 +1130,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -1077,7 +1148,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -1094,7 +1166,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -1111,7 +1184,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -1128,7 +1202,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -1145,7 +1220,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -1162,7 +1238,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -1179,7 +1256,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -1196,7 +1274,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -1213,7 +1292,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -1230,7 +1310,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -1247,7 +1328,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -1264,7 +1346,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -1281,7 +1364,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -1298,7 +1382,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -1315,7 +1400,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -1332,7 +1418,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -1349,7 +1436,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -1366,7 +1454,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -1383,7 +1472,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -1400,7 +1490,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -1417,7 +1508,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -1434,7 +1526,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -1451,7 +1544,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -1468,7 +1562,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -1485,7 +1580,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -1502,7 +1598,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -1519,7 +1616,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -1536,7 +1634,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -1553,7 +1652,8 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
   },
   {
     "type": "course",
@@ -1570,6 +1670,43 @@
     "overdue": null,
     "locked": null,
     "lockedMessage": null,
-    "inactiveLinks": null
+    "inactiveLinks": null,
+    "removeHref": null
+  },
+  {
+    "type": "course",
+    "title": "Use Agent Skills with Multi-Agent Systems",
+    "description": "Complete the advanced Use Agent Skills with Multi-Agent Systems skill badge course to demonstrate skills in building multi-agent systems with ADK, connecting agents with the Agent-to-Agent (A2A) protocol, integrating external tools using the Model Context Protocol (MCP), and deploying a complete multi-agent solution to Agent Engine.",
+    "path": "/course_templates/1842",
+    "duration": "",
+    "level": "advanced",
+    "credentialType": "skill_badge",
+    "progress": null,
+    "required": null,
+    "dueDate": null,
+    "paid": null,
+    "overdue": null,
+    "locked": null,
+    "lockedMessage": null,
+    "inactiveLinks": null,
+    "removeHref": null
+  },
+  {
+    "type": "course",
+    "title": "Design and Implement Network Security in Google Cloud",
+    "description": "Complete the intermediate Design and Implement Network Security in Google Cloud skill badge course to demonstrate skills in the following: Isolate a compromised VM via firewall rules and establish secure bastion access. Migrate tagged and untagged VPC firewall rules to a global network firewall policy. Troubleshoot outbound DNS resolution for a Google Compute Engine instance due to a misconfigured Cloud NAT.",
+    "path": "/course_templates/1736",
+    "duration": "",
+    "level": "intermediate",
+    "credentialType": "skill_badge",
+    "progress": null,
+    "required": null,
+    "dueDate": null,
+    "paid": null,
+    "overdue": null,
+    "locked": null,
+    "lockedMessage": null,
+    "inactiveLinks": null,
+    "removeHref": null
   }
 ]
