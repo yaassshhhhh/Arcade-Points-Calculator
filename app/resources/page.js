@@ -29,6 +29,7 @@ export default function ResourcesPage() {
       code: "1q-analysis-5026",
       icon: <Play size={32} color="#34A853" />,
       color: "#34A853",
+      image: "/images/pitch_perfect_sep.svg",
       url: "https://www.skills.google/games/7446?utm_source=googleskills&utm_medium=lp&utm_campaign=special-Sep-arcade26",
     },
     {
@@ -36,7 +37,7 @@ export default function ResourcesPage() {
       code: "1q-architecture-01381",
       icon: <Play size={32} color="#34A853" />,
       color: "#34A853",
-      image: "/images/adventure_new.jpg",
+      image: "/images/adventure_sep.svg",
       url: "https://www.skills.google/games/7441?utm_source=googleskills&utm_medium=lp&utm_campaign=adv-Sep-arcade26",
     },
     {
@@ -44,7 +45,7 @@ export default function ResourcesPage() {
       code: "1q-devops-065131",
       icon: <Database size={32} color="#00BCD4" />,
       color: "#00BCD4",
-      image: "/images/simulator_new.jpg",
+      image: "/images/simulator_sep.svg",
       url: "https://www.skills.google/games/7445?utm_source=googleskills&utm_medium=lp&utm_campaign=specgame-Sep-arcade26",
     },
     {
@@ -52,7 +53,7 @@ export default function ResourcesPage() {
       code: "1q-microservice-9210",
       icon: <Cloud size={32} color="#4285F4" />,
       color: "#4285F4",
-      image: "/images/voyage_new.jpg",
+      image: "/images/voyage_sep.svg",
       url: "https://www.skills.google/games/7442?utm_source=googleskills&utm_medium=lp&utm_campaign=voyage-Sep-arcade26",
     },
     {
@@ -60,7 +61,7 @@ export default function ResourcesPage() {
       code: "1q-basecamp-09304",
       icon: <Box size={32} color="#F5BB11" />,
       color: "#F5BB11",
-      image: "/images/basecamp_new.jpg",
+      image: "/images/basecamp_sep.svg",
       url: "https://www.skills.google/games/7444?utm_source=googleskills&utm_medium=lp&utm_campaign=basecamp-Sep-arcade26",
     },
     {
@@ -68,7 +69,7 @@ export default function ResourcesPage() {
       code: "1q-vpcpeering-3469",
       icon: <Library size={32} color="#EA4335" />,
       color: "#EA4335",
-      image: "/images/trail_new.jpg",
+      image: "/images/trail_sep.svg",
       url: "https://www.skills.google/games/7443?utm_source=googleskills&utm_medium=lp&utm_campaign=trail-Sep-arcade26",
     }
   ];

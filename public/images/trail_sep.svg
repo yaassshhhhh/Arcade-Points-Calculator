@@ -1,0 +1,8 @@
+<svg width="400" height="400" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="400" fill="#1e1e1e" rx="40" ry="40"/>
+  <text x="200" y="100" font-family="sans-serif" font-size="20" fill="white" text-anchor="middle">Google Cloud</text>
+  <text x="200" y="150" font-family="monospace" font-size="24" fill="#4285F4" text-anchor="middle">Google Skills</text>
+  <text x="200" y="200" font-family="monospace" font-weight="bold" font-size="48" fill="#F4B400" text-anchor="middle">ARCADE</text>
+  <text x="200" y="270" font-family="monospace" font-weight="bold" font-size="28" fill="white" text-anchor="middle">TRAIL</text>
+  <text x="200" y="320" font-family="monospace" font-size="24" fill="#4285F4" text-anchor="middle">SEP 2026</text>
+</svg>
