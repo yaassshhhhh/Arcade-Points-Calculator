@@ -366,7 +366,7 @@ export default function ResourcesPage() {
               <motion.a
                 variants={itemVariants}
                 whileHover={{ scale: 1.02 }}
-                href="https://discuss.google.dev/t/behind-the-scenes-not-anymore/3xt95104"
+                href="https://discuss.google.dev/t/behind-the-scenes-not-anymore/395104"
                 className="block bg-[var(--vault-charcoal)] border-2 border-[var(--vault-outline)] hover:border-[#9C27B0] transition-all duration-500 rounded-[2rem] p-1 shadow-[0_0_30px_rgba(156,39,176,0.1)] hover:shadow-[0_0_40px_rgba(156,39,176,0.3)] relative overflow-hidden group"
               >
                 {/* Animated Gradient Border Effect */}
