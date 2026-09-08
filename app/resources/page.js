@@ -362,6 +362,70 @@ export default function ResourcesPage() {
               animate="show"
               className="grid grid-cols-1 gap-8"
             >
+              {/* Forum Post Card - Swag Drops */}
+              <motion.a
+                variants={itemVariants}
+                whileHover={{ scale: 1.02 }}
+                href="https://discuss.google.dev/t/behind-the-scenes-not-anymore/3xt95104"
+                className="block bg-[var(--vault-charcoal)] border-2 border-[var(--vault-outline)] hover:border-[#9C27B0] transition-all duration-500 rounded-[2rem] p-1 shadow-[0_0_30px_rgba(156,39,176,0.1)] hover:shadow-[0_0_40px_rgba(156,39,176,0.3)] relative overflow-hidden group"
+              >
+                {/* Animated Gradient Border Effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#9C27B0]/20 to-transparent opacity-0 group-hover:opacity-100 group-hover:animate-[shimmer_2s_infinite] -skew-x-12 z-0"></div>
+                
+                <div className="relative z-10 bg-[var(--vault-charcoal)] rounded-[1.8rem] p-6 md:p-8 flex flex-col md:flex-row gap-8 items-center h-full">
+                  {/* Image Container with Glow */}
+                  <div className="w-full md:w-1/2 relative">
+                    <div className="absolute inset-0 bg-[#9C27B0] blur-xl opacity-20 group-hover:opacity-40 transition-opacity duration-500 rounded-xl"></div>
+                    <div className="relative w-full aspect-video rounded-xl overflow-hidden border border-white/10 bg-black/40 flex items-center justify-center">
+                      <Image 
+                        src="/images/legend-backpack.png" 
+                        alt="Swag Drops Preview" 
+                        fill 
+                        style={{ objectFit: "contain" }} 
+                        className="group-hover:scale-110 transition-transform duration-700 ease-in-out p-6"
+                      />
+                      {/* Overlay */}
+                      <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500"></div>
+                      
+                      {/* Badges */}
+                      <div className="absolute top-4 left-4 flex gap-2">
+                        <span className="bg-[#9C27B0]/90 backdrop-blur-sm text-white px-3 py-1 text-xs font-mono font-bold tracking-widest rounded-md border border-white/20 shadow-lg">
+                          ANNOUNCEMENT
+                        </span>
+                        <span className="bg-[#25D366]/90 backdrop-blur-sm text-black px-3 py-1 text-xs font-mono font-bold tracking-widest rounded-md border border-white/20 shadow-lg animate-pulse">
+                          NEW
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Content */}
+                  <div className="w-full md:w-1/2 flex flex-col justify-center">
+                    <div className="flex items-center gap-2 mb-3">
+                      <MessageCircle size={16} className="text-[#9C27B0]" />
+                      <span className="font-mono text-xs text-[#9C27B0] tracking-widest uppercase">Community News & Announcements</span>
+                    </div>
+                    
+                    <h3 className="font-shlop text-3xl md:text-5xl tracking-widest text-white mb-4 uppercase leading-none group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-[#9C27B0] transition-all duration-300">
+                      Behind the scenes? Not anymore
+                    </h3>
+                    
+                    <p className="font-mono text-white/70 leading-relaxed text-sm md:text-base mb-8">
+                      The wait is over! Google Cloud is ending the quiet period and offering a scouting window. Preview the upcoming lineup of gear, apparel, and collectibles available for Arcade Points before the Prize Counter officially opens.
+                    </p>
+                    
+                    <div className="mt-auto">
+                      <div className="inline-flex items-center gap-3 bg-white/5 hover:bg-[#9C27B0]/20 border border-white/10 hover:border-[#9C27B0]/50 px-6 py-3 rounded-full transition-all duration-300">
+                        <span className="font-mono text-sm tracking-widest text-white uppercase">Read Full Post</span>
+                        <div className="bg-[#9C27B0] rounded-full p-1 group-hover:translate-x-2 transition-transform duration-300">
+                          <Play size={14} color="#FFF" fill="#FFF" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.a>
+
               {/* Forum Post Card */}
               <motion.a
                 variants={itemVariants}
