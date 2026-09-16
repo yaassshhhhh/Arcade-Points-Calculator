@@ -378,7 +378,7 @@ export default function ResourcesPage() {
                     <div className="absolute inset-0 bg-[#9C27B0] blur-xl opacity-20 group-hover:opacity-40 transition-opacity duration-500 rounded-xl"></div>
                     <div className="relative w-full aspect-video rounded-xl overflow-hidden border border-white/10 bg-black/40 flex items-center justify-center">
                       <Image 
-                        src="/images/legend-backpack.png" 
+                        src="/images/behind_the_scenes.webp" 
                         alt="Swag Drops Preview" 
                         fill 
                         style={{ objectFit: "contain" }} 
