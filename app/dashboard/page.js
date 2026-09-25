@@ -194,11 +194,11 @@ function DashboardContent() {
   }, [data, joinedFacilitator]);
 
   return (
-    <main className="min-h-screen bg-[var(--vault-black)] text-[var(--text-primary)] pb-20 relative">
+    <main suppressHydrationWarning className="min-h-screen bg-[var(--vault-black)] text-[var(--text-primary)] pb-20 relative">
       {/* Background Image Overlay */}
       <div className="fixed inset-0 z-0 bg-[url('/faq-bg.jpg')] bg-cover bg-center bg-no-repeat opacity-15 pointer-events-none"></div>
       
-      <div className="relative z-10">
+      <div suppressHydrationWarning className="relative z-10">
         <HeaderNav />
 
       {/* Loading State */}

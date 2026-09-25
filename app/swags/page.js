@@ -35,31 +35,34 @@ export default function SwagsPage() {
       description: "Please stay tuned for the official drop!"
     },
     {
-      title: "Swags Coming Soon...",
+      title: "",
       points: "75",
       tier: "Ranger",
       icon: <Gift size={32} color="var(--mint-gold)" />,
       color: "var(--mint-gold)",
-      image: "https://images.unsplash.com/photo-1614729939124-032f0b56c9ce?auto=format&fit=crop&q=80&w=800",
-      description: "Please stay tuned for the official drop!"
+      image: "/swag ranger.gif",
+      description: "Get the exclusive Arcade Backpack! Read more at the Google Dev Forum.",
+      link: "https://discuss.google.dev/t/swag-drop-the-arcade-backpack/399232"
     },
     {
-      title: "Swags Coming Soon...",
+      title: "",
       points: "95",
       tier: "Champion",
       icon: <Star size={32} color="var(--mint-gold)" />,
       color: "var(--mint-gold)",
-      image: "https://images.unsplash.com/photo-1614729939124-032f0b56c9ce?auto=format&fit=crop&q=80&w=800",
-      description: "Please stay tuned for the official drop!"
+      image: "/champion-legend-swag.gif",
+      description: "Get the exclusive Arcade Weather Shield Jacket! Read more at the Google Dev Forum.",
+      link: "https://discuss.google.dev/t/swag-drop-the-arcade-weather-shield-jacket/397353"
     },
     {
-      title: "Swags Coming Soon...",
+      title: "",
       points: "120",
       tier: "Legend",
       icon: <Package size={32} color="var(--mint-gold)" />,
       color: "var(--mint-gold)",
-      image: "https://images.unsplash.com/photo-1614729939124-032f0b56c9ce?auto=format&fit=crop&q=80&w=800",
-      description: "Please stay tuned for the official drop!"
+      image: "/champion-legend-swag.gif",
+      description: "Get the exclusive Arcade Weather Shield Jacket! Read more at the Google Dev Forum.",
+      link: "https://discuss.google.dev/t/swag-drop-the-arcade-weather-shield-jacket/397353"
     }
   ];
 
@@ -170,34 +173,65 @@ export default function SwagsPage() {
                         {swag.points} Points
                       </div>
                     </div>
-                    <h3 className="font-display text-3xl tracking-wider text-white mb-4 uppercase group-hover:text-white transition-colors">
-                      {swag.title}
-                    </h3>
+                    {swag.title && (
+                      <h3 className="font-display text-3xl tracking-wider text-white mb-4 uppercase group-hover:text-white transition-colors">
+                        {swag.title}
+                      </h3>
+                    )}
+                    {swag.image && !swag.image.includes('unsplash') && (
+                      <a href={swag.link || "#"} target={swag.link ? "_blank" : "_self"} rel="noopener noreferrer" className="block relative h-60 w-full mb-6 mt-4 flex justify-center items-center cursor-pointer">
+                        <div className="relative w-4/5 h-full rounded-2xl overflow-hidden shadow-[0_0_20px_rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.1)] bg-[rgba(0,0,0,0.2)] group-hover:border-[var(--heist-red)] transition-colors duration-300">
+                          <Image src={swag.image} alt={swag.title} fill style={{ objectFit: 'contain' }} className="p-2 group-hover:scale-110 transition-transform duration-500" unoptimized={swag.image.endsWith('.gif')} />
+                        </div>
+                      </a>
+                    )}
                     <p className="font-mono text-sm text-[var(--text-muted)] tracking-wider leading-relaxed">
                     {swag.description}
                   </p>
                   </div>
                   
-                  <button
-                    className="mt-6 border px-4 py-3 rounded-lg font-mono text-xs tracking-widest uppercase transition-all duration-300 flex items-center justify-center gap-2 w-full"
-                    style={{
-                      borderColor: `${swag.color}40`,
-                      color: swag.color,
-                      backgroundColor: "rgba(0,0,0,0.2)"
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = `${swag.color}15`;
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = "rgba(0,0,0,0.2)";
-                    }}
-                  >
-                    <Zap size={14} /> Claim Details
-                  </button>
+                  {swag.link ? (
+                    <a
+                      href={swag.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-6 border px-4 py-3 rounded-lg font-mono text-xs tracking-widest uppercase transition-all duration-300 flex items-center justify-center gap-2 w-full"
+                      style={{
+                        borderColor: `${swag.color}40`,
+                        color: swag.color,
+                        backgroundColor: "rgba(0,0,0,0.2)"
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundColor = `${swag.color}15`;
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor = "rgba(0,0,0,0.2)";
+                      }}
+                    >
+                      <Zap size={14} /> Claim Details
+                    </a>
+                  ) : (
+                    <button
+                      className="mt-6 border px-4 py-3 rounded-lg font-mono text-xs tracking-widest uppercase transition-all duration-300 flex items-center justify-center gap-2 w-full opacity-50 cursor-not-allowed"
+                      style={{
+                        borderColor: `${swag.color}40`,
+                        color: swag.color,
+                        backgroundColor: "rgba(0,0,0,0.2)"
+                      }}
+                    >
+                      <Zap size={14} /> Coming Soon
+                    </button>
+                  )}
                 </div>
               </motion.div>
             ))}
           </motion.div>
+          
+          <div className="mt-16 text-center">
+            <h3 className="font-shlop text-3xl md:text-5xl text-[var(--heist-red)] animate-pulse tracking-widest uppercase drop-shadow-[0_0_15px_rgba(193,18,31,0.6)]">
+              More Drops Will Be Coming Soon!
+            </h3>
+          </div>
         </section>
         
         {/* ── Old Swags Section ────────────────────────────────────────────── */}

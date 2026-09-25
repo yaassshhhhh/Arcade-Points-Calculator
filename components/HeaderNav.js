@@ -55,7 +55,7 @@ export default function HeaderNav() {
   ];
 
   return (
-    <nav className="heist-nav">
+    <nav suppressHydrationWarning className="heist-nav">
       {/* Logo */}
       <Link href="/" className="flex items-center gap-3 group">
         <div className="relative w-10 h-10 md:w-12 md:h-12 group-hover:scale-110 transition-transform duration-300 drop-shadow-[0_0_8px_var(--heist-red)]">
