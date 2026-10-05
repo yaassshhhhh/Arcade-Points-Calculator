@@ -1744,5 +1744,23 @@
     "lockedMessage": null,
     "inactiveLinks": null,
     "removeHref": null
+  },
+  {
+    "type": "course",
+    "title": "Build a Certification Study Guide: PCSE Exam Prep",
+    "description": "Learn how to use Gemini Notebook to create a personalized study guide for the Professional Cloud Security Engineer certification exam. You'll review Gemini Notebook features, create a notebook, and learn how to use a study guide to practice for the certification exam.",
+    "path": "/course_templates/397",
+    "duration": "1 hour",
+    "level": "introductory",
+    "credentialType": "skill_badge",
+    "progress": null,
+    "required": null,
+    "dueDate": null,
+    "paid": null,
+    "overdue": null,
+    "locked": null,
+    "lockedMessage": null,
+    "inactiveLinks": null,
+    "removeHref": null
   }
 ]
