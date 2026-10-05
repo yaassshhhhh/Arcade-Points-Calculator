@@ -70,10 +70,7 @@ export default function SkillBadgesPage() {
       const isCompleted = !!userBadge;
       return { ...badge, isCompleted, badgeImage: userBadge?.imageSrc || null };
     })
-    .sort((a, b) => {
-      if (a.isCompleted === b.isCompleted) return 0;
-      return a.isCompleted ? 1 : -1;
-    });
+    .sort((a, b) => a.title.localeCompare(b.title));
 
   return (
     <main className="bg-[var(--vault-black)] text-[var(--text-primary)] min-h-screen pb-20 relative overflow-hidden">

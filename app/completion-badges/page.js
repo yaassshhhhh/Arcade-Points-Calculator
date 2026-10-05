@@ -38,10 +38,12 @@ export default function SkillBadgesPage() {
       });
   }, []);
 
-  const filteredBadges = badges.filter((badge) => 
-    badge.title.toLowerCase().includes(search.toLowerCase()) || 
-    badge.description.toLowerCase().includes(search.toLowerCase())
-  );
+  const filteredBadges = badges
+    .filter((badge) => 
+      badge.title.toLowerCase().includes(search.toLowerCase()) || 
+      badge.description.toLowerCase().includes(search.toLowerCase())
+    )
+    .sort((a, b) => a.title.localeCompare(b.title));
 
   return (
     <main className="bg-[var(--vault-black)] text-[var(--text-primary)] min-h-screen pb-20 relative overflow-hidden">
