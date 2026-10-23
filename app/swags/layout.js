@@ -1,12 +1,12 @@
 export const metadata = {
   title: "Swags & Prize Counter Tiers | Google Cloud Arcade 2026",
-  description: "Explore the Google Cloud Arcade prize counter. See the exact points required for Standard, Advanced, Premium, and Arcade Legend swag tiers.",
+  description: "Explore Google Cloud Arcade 2026 swag tiers: Trooper (50 PTS), Ranger (75 PTS), Champion (95 PTS), and Legend (120 PTS). Discover the latest drops including The Arcade Magic Mug, Backpack, and Weather Shield Jacket.",
   alternates: {
     canonical: "/swags",
   },
   openGraph: {
-    title: "Swags & Prize Tiers - Arcade Points Calculator",
-    description: "See the exact points needed for each Google Cloud Arcade swag tier in 2026.",
+    title: "Swags & Prize Tiers - Google Cloud Arcade 2026",
+    description: "Explore the 2026 Google Cloud Arcade swag drops: The Arcade Magic Mug, Arcade Backpack, and Weather Shield Jacket.",
     url: "/swags",
     type: "website",
   },
