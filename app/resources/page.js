@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -23,54 +23,56 @@ const itemVariants = {
 };
 
 export default function ResourcesPage() {
+  const [copiedCode, setCopiedCode] = useState(null);
+
   const games = [
     {
-      title: "Pitch Perfect",
-      code: "1q-analysis-5026",
-      icon: <Play size={32} color="#34A853" />,
+      title: "Arcade Adventure: Google Cloud ML APIs",
+      code: "1q-endpoint-01297",
+      icon: <Cpu size={32} color="#34A853" />,
       color: "#34A853",
-      image: "/images/pitch_perfect_sep.svg",
-      url: "https://www.skills.google/games/7446?utm_source=googleskills&utm_medium=lp&utm_campaign=special-Sep-arcade26",
+      image: "/images/adventure_oct.png",
+      url: "https://www.skills.google/games/7496?utm_source=googleskills&utm_medium=lp&utm_campaign=adv-oct-arcade26",
     },
     {
-      title: "Arcade Adventure",
-      code: "1q-architecture-01381",
-      icon: <Play size={32} color="#34A853" />,
-      color: "#34A853",
-      image: "/images/adventure_sep.svg",
-      url: "https://www.skills.google/games/7441?utm_source=googleskills&utm_medium=lp&utm_campaign=adv-Sep-arcade26",
-    },
-    {
-      title: "Arcade Simulator: DevOps Engineer",
-      code: "1q-devops-065131",
-      icon: <Database size={32} color="#00BCD4" />,
-      color: "#00BCD4",
-      image: "/images/simulator_sep.svg",
-      url: "https://www.skills.google/games/7445?utm_source=googleskills&utm_medium=lp&utm_campaign=specgame-Sep-arcade26",
-    },
-    {
-      title: "Arcade Voyage",
-      code: "1q-microservice-9210",
+      title: "Arcade Voyage: Language, Voice, and Multimodal Processing",
+      code: "1q-synthesis-10713",
       icon: <Cloud size={32} color="#4285F4" />,
       color: "#4285F4",
-      image: "/images/voyage_sep.svg",
-      url: "https://www.skills.google/games/7442?utm_source=googleskills&utm_medium=lp&utm_campaign=voyage-Sep-arcade26",
+      image: "/images/voyage_oct.png",
+      url: "https://www.skills.google/games/7497?utm_source=googleskills&utm_medium=lp&utm_campaign=voyage-oct-arcade26",
     },
     {
-      title: "Arcade Base Camp",
-      code: "1q-basecamp-09304",
+      title: "Arcade Trail: Containers & Load Balancing",
+      code: "1q-package-53921",
+      icon: <Layers size={32} color="#EA4335" />,
+      color: "#EA4335",
+      image: "/images/trail_oct.png",
+      url: "https://www.skills.google/games/7498?utm_source=googleskills&utm_medium=lp&utm_campaign=trail-oct-arcade26",
+    },
+    {
+      title: "Arcade Base Camp October 2026",
+      code: "1q-basecamp-61332",
       icon: <Box size={32} color="#F5BB11" />,
       color: "#F5BB11",
-      image: "/images/basecamp_sep.svg",
-      url: "https://www.skills.google/games/7444?utm_source=googleskills&utm_medium=lp&utm_campaign=basecamp-Sep-arcade26",
+      image: "/images/basecamp_oct.png",
+      url: "https://www.skills.google/games/7499?utm_source=googleskills&utm_medium=lp&utm_campaign=basecamp-oct-arcade26",
     },
     {
-      title: "Arcade Trail",
-      code: "1q-vpcpeering-3469",
-      icon: <Library size={32} color="#EA4335" />,
-      color: "#EA4335",
-      image: "/images/trail_sep.svg",
-      url: "https://www.skills.google/games/7443?utm_source=googleskills&utm_medium=lp&utm_campaign=trail-Sep-arcade26",
+      title: "Trick-or-Metric",
+      code: "1q-spooky-33057",
+      icon: <Zap size={32} color="#FF6D00" />,
+      color: "#FF6D00",
+      image: "/images/trick_or_metric_oct.png",
+      url: "https://www.skills.google/games/7501?utm_source=googleskills&utm_medium=lp&utm_campaign=special-oct-arcade26",
+    },
+    {
+      title: "Arcade Simulator: Site Reliability Engineer",
+      code: "1q-reliability-21924",
+      icon: <Database size={32} color="#00BCD4" />,
+      color: "#00BCD4",
+      image: "/images/simulator_oct.png",
+      url: "https://www.skills.google/games/7500?utm_source=googleskills&utm_medium=lp&utm_campaign=specgame-oct-arcade26",
     }
   ];
 
@@ -217,7 +219,7 @@ export default function ResourcesPage() {
                     </div>
                   )}
                   
-                  <h3 className="font-shlop text-xl md:text-2xl tracking-widest text-white mb-6 uppercase group-hover:text-[var(--heist-red-bright)] transition-colors">
+                  <h3 className="font-shlop text-lg md:text-xl tracking-wider text-white mb-6 uppercase group-hover:text-[var(--heist-red-bright)] transition-colors min-h-[3.2rem] flex items-center">
                     {game.title}
                   </h3>
 
@@ -231,11 +233,18 @@ export default function ResourcesPage() {
                         onClick={(e) => {
                           e.preventDefault();
                           navigator.clipboard.writeText(game.code);
-                          alert("Code copied to clipboard!");
+                          setCopiedCode(game.code);
+                          setTimeout(() => {
+                            setCopiedCode((curr) => (curr === game.code ? null : curr));
+                          }, 2000);
                         }}
-                        className="bg-transparent border border-[var(--vault-outline)] text-white hover:bg-[var(--heist-red)] hover:border-[var(--heist-red)] px-3 py-1 rounded text-xs font-mono tracking-widest transition-colors flex-shrink-0"
+                        className={`border px-3 py-1 rounded text-xs font-mono tracking-widest transition-all flex-shrink-0 ${
+                          copiedCode === game.code
+                            ? "bg-emerald-600 border-emerald-500 text-white font-bold"
+                            : "bg-transparent border-[var(--vault-outline)] text-white hover:bg-[var(--heist-red)] hover:border-[var(--heist-red)]"
+                        }`}
                       >
-                        COPY
+                        {copiedCode === game.code ? "COPIED!" : "COPY"}
                       </button>
                     </div>
                   </div>

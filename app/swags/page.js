@@ -13,7 +13,9 @@ import {
   Coffee, 
   Flame, 
   Sparkles, 
-  Maximize2 
+  Maximize2,
+  Shield,
+  Target
 } from "lucide-react";
 import HeaderNav from "@/components/HeaderNav";
 import TrooperSwagCard from "@/components/TrooperSwagCard";
@@ -49,97 +51,111 @@ export default function SwagsPage() {
     {
       id: "trooper",
       tier: "Trooper",
+      tierCode: "TIER 01",
+      status: "OPERATIVE CLEARANCE",
       points: "50",
       color: "var(--heist-red)",
       accentBorder: "var(--heist-red)",
-      icon: <Award size={30} className="text-[var(--heist-red-bright)]" />,
+      icon: <Award size={32} className="text-[var(--heist-red-bright)]" />,
       items: [
         {
           title: "The Arcade Trooper Vault Set",
-          tag: "EXCLUSIVE HEIST COMBO 🔥",
+          codename: "CODE: ARCTIC-REVEAL",
+          tag: "50 PTS • EXCLUSIVE DROP 🔥",
           tagBg: "bg-gradient-to-r from-[var(--heist-red)] via-red-600 to-[var(--heist-red-bright)] text-white shadow-[0_0_15px_rgba(193,18,31,0.8)] font-bold",
           points: "50",
           image: "/trooper-swag.jpg",
           isCustomViewer: true,
-          description: "The ultimate 50-point operative combo! Features the arctic white Google Cloud vacuum thermal flask alongside the iconic 8-bit Arcade collector ceramic mug, staged on the Professor's classified heist blueprint.",
+          viewerType: "trooper",
+          description: "FIRST CONFIDENTIAL BREACH INTO THE ARCADE REWARD VAULT. UNLOCKS THE ARCTIC WHITE DOUBLE-WALL VACUUM THERMAL FLASK AND THE ICONIC HEAT-ACTIVATED 8-BIT CERAMIC MAGIC MUG, STAGED DIRECTLY UPON THE PROFESSOR'S CLASSIFIED HEIST BLUEPRINT.",
           link: "https://discuss.google.dev/t/swag-drop-the-arcade-magic-mug/407455",
-          features: ["Double-Wall Vacuum Flask", "8-Bit Arcade Collector Mug", "Heist Blueprint Operative Staging", "Dual Swag Drop"]
+          features: ["Double-Wall Vacuum Flask", "8-Bit Heat-Shift Ceramic Mug", "Classified Heist Blueprint", "50 PTS Operative Clearance"]
         },
         {
           title: "The Arcade Magic Mug",
-          tag: "NEW DROP 🔥",
-          tagBg: "bg-[var(--heist-red)] text-white shadow-[0_0_12px_rgba(193,18,31,0.6)]",
+          codename: "CODE: HEAT-SHIFT-MUG",
+          tag: "50 PTS • STANDALONE DROP 🔥",
+          tagBg: "bg-[var(--heist-red)] text-white shadow-[0_0_12px_rgba(193,18,31,0.6)] font-bold",
           points: "50",
           image: "/magic-mug.gif",
-          description: "Clean minimal white ceramic mug that magically reveals the hidden Google Cloud Arcade design the moment heat hits it! Eco-friendly, solid weight, and the perfect morning daily driver.",
+          description: "MINIMAL WHITE CERAMIC MUG THAT MAGICELLY REVEALS THE HIDDEN GOOGLE CLOUD ARCADE DESIGN THE MOMENT HEAT HITS IT! SOLID DESK WEIGHT WITH THERMAL SENSITIVE COLOR SHIFT.",
           link: "https://discuss.google.dev/t/swag-drop-the-arcade-magic-mug/407455",
-          features: ["Heat-Activated Color Shift", "Eco-Friendly Ceramic", "Solid Desk Feel"]
+          features: ["Heat-Activated Color Shift", "Eco-Friendly Ceramic", "Solid Desk Feel", "Trooper Eligible"]
         }
       ]
     },
     {
       id: "ranger",
       tier: "Ranger",
+      tierCode: "TIER 02",
+      status: "TACTICAL CLEARANCE",
       points: "75",
       color: "var(--mint-gold)",
       accentBorder: "var(--mint-gold)",
-      icon: <Gift size={30} className="text-[var(--mint-gold-bright)]" />,
+      icon: <Gift size={32} className="text-[var(--mint-gold-bright)]" />,
       items: [
         {
           title: "The Arcade Ranger Vault Collection",
-          tag: "OFFICIAL 75 PTS DROP 🔥",
+          codename: "CODE: BALLISTIC-RUNNER",
+          tag: "75 PTS • TACTICAL ARSENAL ⚡",
           tagBg: "bg-gradient-to-r from-[var(--mint-gold)] via-amber-500 to-[var(--mint-gold-bright)] text-black font-black shadow-[0_0_15px_rgba(212,175,55,0.6)]",
           points: "75",
           image: "/swag-ranger.jpg",
           isCustomViewer: true,
           viewerType: "ranger",
-          description: "The complete 75-point Ranger Tier heist loot! Features the heavy-duty Google Cloud Arcade Backpack with dedicated laptop sleeve, the iconic 8-bit Arcade Magic Mug, and the arctic insulated Google Cloud Water Bottle staged on the heist counter.",
+          description: "TACTICAL EXTRACTION REWARDS FOR ADVANCED CLOUD ARCHITECTS. FEATURES THE HIGH-DURABILITY BALLISTIC ARCADE TECH BACKPACK WITH DEDICATED PADDED LAPTOP ARMOR, THE 8-BIT CERAMIC MAGIC MUG, AND THE ARCTIC VACUUM FLASK STAGED ON THE HEIST COUNTER.",
           link: "https://discuss.google.dev/t/swag-drop-the-arcade-backpack/399232",
-          features: ["Arcade Tech Backpack", "Heat-Shift Magic Mug", "Insulated Cloud Bottle", "Classified Heist Kit"]
+          features: ["Arcade Ballistic Tech Backpack", "Padded Laptop Compartment", "Heat-Shift Magic Mug", "Arctic Vacuum Flask"]
         }
       ]
     },
     {
       id: "champion",
       tier: "Champion",
+      tierCode: "TIER 03",
+      status: "MASTERMIND CLEARANCE",
       points: "95",
       color: "var(--heist-red)",
       accentBorder: "var(--heist-red)",
-      icon: <Star size={30} className="text-[var(--heist-red-bright)]" />,
+      icon: <Star size={32} className="text-[var(--heist-red-bright)]" />,
       items: [
         {
-          title: "The Arcade Weather Shield Jacket & Tech Kit",
-          tag: "PREMIUM TIER 🔥",
-          tagBg: "bg-[var(--heist-red-dark)] text-white border border-[var(--heist-red)] shadow-[0_0_10px_rgba(193,18,31,0.4)] font-bold",
+          title: "The Arcade Weather Shield & Multi-Tool Kit",
+          codename: "CODE: STORM-BREAKER",
+          tag: "95 PTS • MASTERMIND SUITE 🔥",
+          tagBg: "bg-[var(--heist-red-dark)] text-white border border-[var(--heist-red)] shadow-[0_0_12px_rgba(193,18,31,0.6)] font-bold",
           points: "95",
           image: "/champion-legend-swag.jpg",
           isCustomViewer: true,
           viewerType: "champion",
-          description: "Get the exclusive Arcade Weather Shield Jacket! Weatherproof, lightweight windbreaker tailored with sleek Google Cloud Arcade detailing, paired with the multi-gadget operative tech kit.",
+          description: "TACTICAL MASTERMIND ARMOR DESIGNED TO DEFY ANY ELEMENT. COMMAND THE ALL-WEATHER ARCADE WINDPROOF JACKET FEATURING SLEEK GOOGLE CLOUD EMBLEM DETAILING, PAIRED WITH THE UNIVERSAL FAST-CHARGE HARDWARE MULTI-TOOL DOCK.",
           link: "https://discuss.google.dev/t/swag-drop-the-arcade-weather-shield-jacket/397353",
-          features: ["Weather Shield Coating", "Lightweight Shell", "Multi-Cable Gadget Kit", "Collector Edition"]
+          features: ["Weather Shield Coating", "Storm-Resistant Zipper", "Multi-Cable Tech Toolkit", "Hardware SIM Ejector"]
         }
       ]
     },
     {
       id: "legend",
       tier: "Legend",
+      tierCode: "TIER 04",
+      status: "SOVEREIGN CLEARANCE",
       points: "120",
       color: "var(--mint-gold)",
       accentBorder: "var(--mint-gold)",
-      icon: <Package size={30} className="text-[var(--mint-gold-bright)]" />,
+      icon: <Package size={32} className="text-[var(--mint-gold-bright)]" />,
       items: [
         {
-          title: "The Arcade Weather Shield Jacket & Tech Set",
-          tag: "ULTIMATE REWARD 🏆",
-          tagBg: "bg-gradient-to-r from-[var(--mint-gold)] to-[var(--mint-gold-bright)] text-black font-black shadow-[0_0_15px_rgba(212,175,55,0.6)]",
+          title: "The Arcade Legend Pinnacle Swag Suite",
+          codename: "CODE: BELLA-CIAO-SOVEREIGN",
+          tag: "120 PTS • PINNACLE REWARD 🏆",
+          tagBg: "bg-gradient-to-r from-[var(--mint-gold)] via-amber-400 to-[var(--mint-gold-bright)] text-black font-black shadow-[0_0_20px_rgba(212,175,55,0.7)]",
           points: "120",
           image: "/champion-legend-swag.jpg",
           isCustomViewer: true,
           viewerType: "legend",
-          description: "The pinnacle tier of the Google Cloud Arcade 2026 program. Claim the top-tier Arcade Weather Shield Jacket, multi-gadget operative tech set, and supreme bragging rights in the Cloud!",
+          description: "THE ULTIMATE PRIZE OF THE ENTIRE GOOGLE CLOUD ARCADE 2026 CAMPAIGN. SECURE THE PINNACLE WEATHER SHIELD JACKET, THE HARDWARE MULTI-TOOL HARDWARE SET, AND SUPREME UNRIVALED PRESTIGE AT THE VERY PEAK OF THE CLOUD REWARD HIERARCHY.",
           link: "https://discuss.google.dev/t/swag-drop-the-arcade-weather-shield-jacket/397353",
-          features: ["Pinnacle Swag Tier", "All-Season Protection", "Multi-Cable Gadget Kit", "Legend Prestige"]
+          features: ["Pinnacle Weather Shield Jacket", "Complete Tech Tool Arsenal", "All-Season Operative Armor", "Supreme Cloud Bragging Rights"]
         }
       ]
     }
@@ -347,12 +363,16 @@ export default function SwagsPage() {
 
         {/* ── Swag Tiers Section ───────────────────────────────────────────── */}
         <section className="max-w-6xl mx-auto px-6 mb-24">
-          <div className="text-center mb-12">
-            <h2 className="font-shlop text-4xl sm:text-5xl md:text-6xl text-white tracking-widest uppercase drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]">
+          <div className="text-center mb-14">
+            <div className="font-mono text-sm text-[var(--heist-red)] tracking-[0.3em] uppercase mb-3 animate-pulse flex items-center justify-center gap-2">
+              <Shield size={16} className="text-[var(--heist-red)]" />
+              CONFIDENTIAL HEIST LOOT ARCHIVE
+            </div>
+            <h2 className="font-shlop text-5xl sm:text-6xl md:text-7xl text-white tracking-widest uppercase drop-shadow-[0_0_20px_rgba(255,255,255,0.25)]">
               2026 PRIZE COUNTER TIERS
             </h2>
-            <p className="font-mono text-xs md:text-sm text-[var(--text-secondary)] uppercase tracking-wider mt-2">
-              Select your tier to view unlocked rewards & official claims
+            <p className="font-mono text-xs md:text-sm text-[var(--text-muted)] uppercase tracking-widest mt-2 max-w-2xl mx-auto">
+              Breach milestone point thresholds to unlock classified operative gear, verified forum drops, and exclusive prize claims.
             </p>
           </div>
 
@@ -387,6 +407,12 @@ export default function SwagsPage() {
                     e.currentTarget.style.borderColor = `${swagGroup.accentBorder}40`;
                   }}
                 >
+                  {/* Left Hover Glow Line like Skill Badges */}
+                  <div 
+                    className="absolute left-0 top-0 bottom-0 w-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" 
+                    style={{ backgroundColor: swagGroup.color }}
+                  ></div>
+
                   {/* Professor Background Watermark */}
                   <div 
                     className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-5 pointer-events-none group-hover:opacity-10 transition-opacity duration-500" 
@@ -397,15 +423,22 @@ export default function SwagsPage() {
                     <div>
                       {/* Tier Top Header */}
                       <div className="flex items-center justify-between mb-4">
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-3">
                           {swagGroup.icon}
                           <div>
-                            <span className="font-display text-xl uppercase tracking-wider block" style={{ color: swagGroup.color }}>
-                              {swagGroup.tier} Tier
-                            </span>
+                            <div className="flex items-center gap-1.5 font-mono text-[9px] md:text-[10px] tracking-[0.25em] uppercase text-[var(--text-muted)] mb-1">
+                              <Shield size={11} style={{ color: swagGroup.color }} />
+                              <span>{swagGroup.tierCode} • {swagGroup.status}</span>
+                            </div>
+                            <h3 
+                              className="font-shlop text-3xl sm:text-4xl tracking-widest uppercase leading-none drop-shadow-[0_0_12px_rgba(255,255,255,0.15)]"
+                              style={{ color: swagGroup.color }}
+                            >
+                              {swagGroup.tier} TIER
+                            </h3>
                             {swagGroup.items.length > 1 && (
-                              <span className="font-mono text-[10px] text-[var(--mint-gold-bright)] uppercase tracking-wider block">
-                                {swagGroup.items.length} Swags in this Tier
+                              <span className="font-mono text-[9px] text-[var(--mint-gold-bright)] uppercase tracking-wider block mt-1">
+                                {swagGroup.items.length} Operative Options Available
                               </span>
                             )}
                           </div>
@@ -413,18 +446,18 @@ export default function SwagsPage() {
 
                         {/* Points Badge */}
                         <div
-                          className="text-black px-4 py-1.5 rounded-full font-mono text-xs font-bold uppercase shadow-lg flex items-center gap-1.5"
+                          className="text-black px-4 py-1.5 rounded-full font-mono text-xs font-bold uppercase shadow-lg flex items-center gap-1.5 tracking-wider"
                           style={{ 
                             background: swagGroup.color, 
                             boxShadow: `0 0 15px ${swagGroup.color}50` 
                           }}
                         >
                           <Zap size={13} className="text-black fill-current" />
-                          {swagGroup.points} Points
+                          {swagGroup.points} PTS
                         </div>
                       </div>
 
-                      {/* Multi-Item Switcher (for Ranger Tier) */}
+                      {/* Multi-Item Switcher (for Trooper Tier) */}
                       {swagGroup.items.length > 1 && (
                         <div className="mb-4 p-1.5 rounded-xl bg-black/40 border border-[var(--vault-outline)] flex gap-2">
                           {swagGroup.items.map((item, idx) => (
@@ -452,16 +485,23 @@ export default function SwagsPage() {
 
                       {/* Item Title & Tag */}
                       <div className="mb-3">
-                        <div className="flex items-center justify-between gap-2 mb-1">
-                          <h3 className="font-display text-2xl md:text-3xl tracking-wider text-white uppercase group-hover:text-white transition-colors">
+                        <div className="flex items-center justify-between gap-2 mb-1.5">
+                          <h4 className="font-display text-xl md:text-2xl tracking-wider text-white uppercase group-hover:text-white transition-colors">
                             {currentItem.title}
-                          </h3>
+                          </h4>
                         </div>
-                        {currentItem.tag && (
-                          <span className={`inline-block text-[10px] font-mono font-bold uppercase px-2.5 py-0.5 rounded-md ${currentItem.tagBg}`}>
-                            {currentItem.tag}
-                          </span>
-                        )}
+                        <div className="flex items-center gap-2 flex-wrap">
+                          {currentItem.tag && (
+                            <span className={`inline-block text-[10px] font-mono font-bold uppercase px-2.5 py-0.5 rounded-md ${currentItem.tagBg}`}>
+                              {currentItem.tag}
+                            </span>
+                          )}
+                          {currentItem.codename && (
+                            <span className="font-mono text-[9px] uppercase tracking-widest text-[var(--text-muted)] bg-black/40 px-2 py-0.5 rounded border border-white/5">
+                              {currentItem.codename}
+                            </span>
+                          )}
+                        </div>
                       </div>
 
                       {/* Swag Image Area (Standard Link or 3D Custom Holographic Viewer) */}
@@ -553,20 +593,21 @@ export default function SwagsPage() {
                         </div>
                       )}
 
-                      {/* Description */}
-                      <p className="font-mono text-xs md:text-sm text-[var(--text-secondary)] tracking-wider leading-relaxed mb-4">
+                      {/* Description styled like Skill Badges */}
+                      <p className="font-mono text-xs md:text-sm text-[var(--text-secondary)] uppercase tracking-wider leading-relaxed mb-5 group-hover:text-white transition-colors duration-300">
                         {currentItem.description}
                       </p>
 
-                      {/* Feature Bullet Pills */}
+                      {/* Feature Bullet Pills styled like Skill Badges */}
                       {currentItem.features && (
                         <div className="flex flex-wrap gap-2 mb-4">
                           {currentItem.features.map((feat) => (
                             <span 
                               key={feat}
-                              className="font-mono text-[10px] uppercase px-2.5 py-1 rounded bg-black/40 border border-white/5 text-[var(--text-secondary)]"
+                              className="font-mono text-[10px] uppercase tracking-wider px-3 py-1 rounded bg-black/50 border border-white/10 text-[var(--text-secondary)] group-hover:border-white/20 transition-all flex items-center gap-1.5"
                             >
-                              • {feat}
+                              <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: swagGroup.color }}></span>
+                              {feat}
                             </span>
                           ))}
                         </div>
