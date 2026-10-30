@@ -56,7 +56,8 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  /* Natural scroll physics for optimal GSAP ScrollTrigger performance */
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -198,4 +199,19 @@ h1, h2, h3, h4, h5, h6 {
 }
 .heist-scrollbar:hover::-webkit-scrollbar-thumb {
   background: var(--heist-red);
+}
+
+/* Hologram Laser Scanning Beam */
+@keyframes hologramScan {
+  0% {
+    top: 0%;
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.9;
+  }
+  100% {
+    top: 98%;
+    opacity: 0.2;
+  }
 }

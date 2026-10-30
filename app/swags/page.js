@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
@@ -21,6 +21,7 @@ import HeaderNav from "@/components/HeaderNav";
 import TrooperSwagCard from "@/components/TrooperSwagCard";
 import RangerSwagCard from "@/components/RangerSwagCard";
 import ChampionLegendSwagCard from "@/components/ChampionLegendSwagCard";
+import HolographicSwagProjectorModal from "@/components/HolographicSwagProjectorModal";
 
 // Framer motion variants
 const containerVariants = {
@@ -162,31 +163,71 @@ export default function SwagsPage() {
   ];
 
   const oldSwags = [
-    { title: "Legend Backpack", image: "/images/legend-backpack.png" },
-    { title: "Hoodie", image: "/images/hoodie.png" },
-    { title: "LED Lantern", image: "/images/led-lantern.png" },
-    { title: "Arcade Magnets", image: "/images/arcade-magnets.png" },
-    { title: "USB Hub", image: "/images/usb-hub.png" },
-    { title: "Dry Fit T-Shirt", image: "/images/dry-fit-t-shirt.png" },
-    { title: "DIY Logo", image: "/images/diy-logo.png" },
-    { title: "Trooper Backpack", image: "/images/trooper-backpack.png" },
-    { title: "Water Bottle", image: "/images/refresh-water-bottle.png" },
-    { title: "Sticker Sheet", image: "/images/sticker-sheet.png" },
-    { title: "Laptop Sleeve", image: "/images/laptop-sleeve.png" },
-    { title: "Pen Duo", image: "/images/pen-duo.png" },
-    { title: "Google Cloud Jug", image: "/images/arc1.jpeg" },
-    { title: "Mini Printer", image: "/images/arc2.jpeg" },
-    { title: "20 in 1 Cleaning Kit", image: "/images/arc3.jpeg" },
-    { title: "Polo T-Shirt", image: "/images/arc4.jpeg" },
-    { title: "Wireless Charger", image: "/images/arc5.jpeg" },
-    { title: "Desk Vacuum", image: "/images/arc6.jpeg" },
-    { title: "Classic Backpack", image: "/images/arc7.jpeg" },
-    { title: "Crystal Pens", image: "/images/arc8.jpeg" },
-    { title: "Premium Backpack", image: "/images/arc9.jpeg" },
-    { title: "Cloud Lamp", image: "/images/arc10.jpeg" },
-    { title: "Rolltop Backpack", image: "/images/arc11.jpeg" },
-    { title: "Lego Notebook", image: "/images/arc12.jpeg" }
+    { title: "Legend Backpack", image: "/images/legend-backpack.png", points: "120", tier: "Legend", color: "var(--mint-gold)" },
+    { title: "Hoodie", image: "/images/hoodie.png", points: "95", tier: "Champion", color: "var(--heist-red)" },
+    { title: "LED Lantern", image: "/images/led-lantern.png", points: "95", tier: "Champion", color: "var(--heist-red)" },
+    { title: "Arcade Magnets", image: "/images/arcade-magnets.png", points: "25", tier: "Milestone", color: "#00f0ff" },
+    { title: "USB Hub", image: "/images/usb-hub.png", points: "50", tier: "Trooper", color: "var(--heist-red)" },
+    { title: "Dry Fit T-Shirt", image: "/images/dry-fit-t-shirt.png", points: "50", tier: "Trooper", color: "var(--heist-red)" },
+    { title: "DIY Logo", image: "/images/diy-logo.png", points: "15", tier: "Milestone", color: "#00f0ff" },
+    { title: "Trooper Backpack", image: "/images/trooper-backpack.png", points: "75", tier: "Ranger", color: "var(--mint-gold)" },
+    { title: "Water Bottle", image: "/images/refresh-water-bottle.png", points: "50", tier: "Trooper", color: "var(--heist-red)" },
+    { title: "Sticker Sheet", image: "/images/sticker-sheet.png", points: "15", tier: "Milestone", color: "#00f0ff" },
+    { title: "Laptop Sleeve", image: "/images/laptop-sleeve.png", points: "75", tier: "Ranger", color: "var(--mint-gold)" },
+    { title: "Pen Duo", image: "/images/pen-duo.png", points: "20", tier: "Milestone", color: "#00f0ff" },
+    { title: "Google Cloud Jug", image: "/images/arc1.jpeg", points: "50", tier: "Trooper", color: "var(--heist-red)" },
+    { title: "Mini Printer", image: "/images/arc2.jpeg", points: "75", tier: "Ranger", color: "var(--mint-gold)" },
+    { title: "20 in 1 Cleaning Kit", image: "/images/arc3.jpeg", points: "95", tier: "Champion", color: "var(--heist-red)" },
+    { title: "Polo T-Shirt", image: "/images/arc4.jpeg", points: "50", tier: "Trooper", color: "var(--heist-red)" },
+    { title: "Wireless Charger", image: "/images/arc5.jpeg", points: "95", tier: "Champion", color: "var(--heist-red)" },
+    { title: "Desk Vacuum", image: "/images/arc6.jpeg", points: "50", tier: "Trooper", color: "var(--heist-red)" },
+    { title: "Classic Backpack", image: "/images/arc7.jpeg", points: "75", tier: "Ranger", color: "var(--mint-gold)" },
+    { title: "Crystal Pens", image: "/images/arc8.jpeg", points: "25", tier: "Milestone", color: "#00f0ff" },
+    { title: "Premium Backpack", image: "/images/arc9.jpeg", points: "120", tier: "Legend", color: "var(--mint-gold)" },
+    { title: "Cloud Lamp", image: "/images/arc10.jpeg", points: "95", tier: "Champion", color: "var(--heist-red)" },
+    { title: "Rolltop Backpack", image: "/images/arc11.jpeg", points: "120", tier: "Legend", color: "var(--mint-gold)" },
+    { title: "Lego Notebook", image: "/images/arc12.jpeg", points: "30", tier: "Milestone", color: "#00f0ff" }
   ];
+
+  const [isHologramOpen, setIsHologramOpen] = useState(false);
+  const [hologramItem, setHologramItem] = useState(null);
+
+  // Consolidated swags list for the 3D Holographic Projector with exact matching points
+  const allProjectorSwags = useMemo(() => {
+    const list = [];
+    swags.forEach(tier => {
+      tier.items.forEach(item => {
+        list.push({
+          ...item,
+          tierName: tier.tier,
+          tierCode: tier.tierCode,
+          tierColor: tier.color,
+          points: tier.points // Exact points matching the tier section (50, 75, 95, 120)
+        });
+      });
+    });
+    oldSwags.forEach(old => {
+      list.push({
+        title: old.title,
+        image: old.image,
+        codename: `CODE: VINTAGE-${old.title.replace(/\s+/g, '-').toUpperCase()}`,
+        points: old.points, // Exact points matching the vintage card!
+        tierName: old.tier,
+        tierCode: `VINTAGE DROP`,
+        tierColor: old.color,
+        tag: `${old.points} PTS • COLLECTOR DROP`,
+        description: `AUTHENTIC GOOGLE CLOUD ARCADE VINTAGE DROP: ${old.title.toUpperCase()}. VERIFIED HISTORIC SWAG ARCHIVE.`,
+        features: ["Official Google Cloud Collectible", "Vault Archive Artifact", `${old.points} PTS Standard Clearance`],
+        link: "https://discuss.google.dev/"
+      });
+    });
+    return list;
+  }, [swags]);
+
+  const openHologram = (item) => {
+    setHologramItem(item);
+    setIsHologramOpen(true);
+  };
 
   const handleOpenModal = (img, title, link = null) => {
     setSelectedImage(img);
@@ -195,7 +236,7 @@ export default function SwagsPage() {
   };
 
   return (
-    <main className="bg-[var(--vault-black)] text-[var(--text-primary)] min-h-screen relative overflow-hidden">
+    <main className="bg-[var(--vault-black)] text-[var(--text-primary)] min-h-screen relative overflow-x-clip">
       {/* Background Image */}
       <div 
         className="fixed inset-0 z-0 bg-cover bg-center opacity-20 pointer-events-none mix-blend-luminosity" 
@@ -228,6 +269,27 @@ export default function SwagsPage() {
             <p className="font-mono text-[var(--text-secondary)] max-w-2xl mx-auto uppercase tracking-widest text-xs md:text-sm">
               Discover official Google Cloud Arcade 2026 rewards. Hit milestone points, claim exclusive gear, and unlock your heist loot!
             </p>
+
+            {/* 3D Hologram Projector Hero Trigger */}
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+              <button
+                type="button"
+                onClick={() => openHologram({
+                  ...swags[0].items[0],
+                  tierName: swags[0].tier,
+                  tierCode: swags[0].tierCode,
+                  tierColor: swags[0].color,
+                  points: swags[0].points
+                })}
+                className="px-8 py-4 rounded-2xl font-mono text-xs md:text-sm font-bold uppercase tracking-widest text-black bg-gradient-to-r from-[var(--mint-gold)] via-amber-400 to-[var(--mint-gold-bright)] shadow-[0_0_30px_rgba(212,175,55,0.6)] hover:shadow-[0_0_45px_rgba(212,175,55,0.9)] hover:scale-105 transition-all duration-300 flex items-center gap-3 cursor-pointer group"
+              >
+                <Zap size={18} className="text-black fill-current animate-pulse" />
+                <span>ACTIVATE 3D HOLOGRAPHIC PROJECTOR</span>
+                <span className="px-2.5 py-0.5 rounded bg-black text-[var(--mint-gold-bright)] text-[10px] font-mono tracking-wider">
+                  3D WEBGL
+                </span>
+              </button>
+            </div>
           </motion.div>
         </header>
 
@@ -307,14 +369,28 @@ export default function SwagsPage() {
                 </div>
 
                 {/* Direct External Link CTA */}
-                <div>
+                <div className="flex flex-wrap items-center gap-3">
+                  <button
+                    type="button"
+                    onClick={() => openHologram({
+                      ...(swags[0].items[1] || swags[0].items[0]),
+                      tierName: swags[0].tier,
+                      tierCode: swags[0].tierCode,
+                      tierColor: swags[0].color,
+                      points: swags[0].points
+                    })}
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-mono text-xs md:text-sm font-bold uppercase tracking-widest text-black bg-[var(--mint-gold)] hover:bg-[var(--mint-gold-bright)] shadow-[0_0_20px_rgba(212,175,55,0.6)] hover:shadow-[0_0_30px_rgba(212,175,55,0.9)] transition-all duration-300 cursor-pointer"
+                  >
+                    <Zap size={16} className="fill-current animate-pulse" />
+                    <span>3D HOLOGRAM PROJECTOR</span>
+                  </button>
                   <a
                     href="https://discuss.google.dev/t/swag-drop-the-arcade-magic-mug/407455"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2.5 w-full sm:w-auto px-8 py-3.5 rounded-xl font-mono text-xs md:text-sm font-bold uppercase tracking-widest text-white bg-[var(--heist-red)] hover:bg-[var(--heist-red-bright)] border border-[var(--mint-gold)]/60 shadow-[0_0_25px_rgba(193,18,31,0.6)] hover:shadow-[0_0_35px_rgba(232,17,45,0.9)] transition-all duration-300 transform hover:-translate-y-0.5 cursor-pointer"
+                    className="inline-flex items-center justify-center gap-2.5 w-full sm:w-auto px-6 py-3.5 rounded-xl font-mono text-xs md:text-sm font-bold uppercase tracking-widest text-white bg-[var(--heist-red)] hover:bg-[var(--heist-red-bright)] border border-[var(--mint-gold)]/60 shadow-[0_0_25px_rgba(193,18,31,0.6)] hover:shadow-[0_0_35px_rgba(232,17,45,0.9)] transition-all duration-300 transform hover:-translate-y-0.5 cursor-pointer"
                   >
-                    <span>READ OFFICIAL FORUM DROP & CLAIM DETAILS</span>
+                    <span>FORUM DROP DETAILS</span>
                     <ExternalLink size={16} />
                   </a>
                 </div>
@@ -614,30 +690,47 @@ export default function SwagsPage() {
                       )}
                     </div>
                     
-                    {/* Official Discussion Link Button */}
-                    <a
-                      href={currentItem.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-6 border px-4 py-3 rounded-lg font-mono text-xs tracking-widest uppercase transition-all duration-300 flex items-center justify-center gap-2 w-full font-bold cursor-pointer"
-                      style={{
-                        borderColor: `${swagGroup.color}60`,
-                        color: swagGroup.color,
-                        backgroundColor: "rgba(0,0,0,0.3)"
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.backgroundColor = `${swagGroup.color}20`;
-                        e.currentTarget.style.borderColor = swagGroup.color;
-                        e.currentTarget.style.boxShadow = `0 0 15px ${swagGroup.color}40`;
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.backgroundColor = "rgba(0,0,0,0.3)";
-                        e.currentTarget.style.borderColor = `${swagGroup.color}60`;
-                        e.currentTarget.style.boxShadow = "none";
-                      }}
-                    >
-                      <ExternalLink size={14} /> View On Official Dev Forum
-                    </a>
+                    {/* Action Buttons: 3D Hologram + Official Forum */}
+                    <div className="mt-6 flex flex-col sm:flex-row gap-2.5">
+                      <button
+                        type="button"
+                        onClick={() => openHologram({
+                          ...currentItem,
+                          tierName: swagGroup.tier,
+                          tierCode: swagGroup.tierCode,
+                          tierColor: swagGroup.color,
+                          points: swagGroup.points
+                        })}
+                        className="flex-1 py-3 px-4 rounded-lg font-mono text-xs tracking-widest uppercase transition-all duration-300 flex items-center justify-center gap-2 font-bold cursor-pointer bg-black/60 border border-[var(--mint-gold)] text-[var(--mint-gold-bright)] hover:bg-[var(--mint-gold)] hover:text-black shadow-[0_0_15px_rgba(212,175,55,0.2)] hover:shadow-[0_0_25px_rgba(212,175,55,0.5)]"
+                      >
+                        <Zap size={14} className="fill-current animate-pulse" />
+                        <span>3D HOLOGRAM</span>
+                      </button>
+
+                      <a
+                        href={currentItem.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="py-3 px-4 rounded-lg font-mono text-xs tracking-widest uppercase transition-all duration-300 flex items-center justify-center gap-2 font-bold cursor-pointer border"
+                        style={{
+                          borderColor: `${swagGroup.color}60`,
+                          color: swagGroup.color,
+                          backgroundColor: "rgba(0,0,0,0.3)"
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.backgroundColor = `${swagGroup.color}20`;
+                          e.currentTarget.style.borderColor = swagGroup.color;
+                          e.currentTarget.style.boxShadow = `0 0 15px ${swagGroup.color}40`;
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.backgroundColor = "rgba(0,0,0,0.3)";
+                          e.currentTarget.style.borderColor = `${swagGroup.color}60`;
+                          e.currentTarget.style.boxShadow = "none";
+                        }}
+                      >
+                        <ExternalLink size={14} /> Forum
+                      </a>
+                    </div>
                   </div>
                 </motion.div>
               );
@@ -677,7 +770,7 @@ export default function SwagsPage() {
                 className="bg-[var(--vault-charcoal)] border border-[var(--vault-outline)] rounded-lg overflow-hidden flex flex-col items-center p-4 transition-all duration-300 group hover:border-[var(--heist-red)] hover:shadow-[0_0_15px_rgba(255,0,0,0.3)] cursor-pointer"
                 onClick={() => handleOpenModal(swag.image, swag.title)}
               >
-                <div className="relative h-24 w-full mb-4">
+                <div className="relative h-24 w-full mb-3 flex items-center justify-center">
                   <Image
                     src={swag.image}
                     alt={swag.title}
@@ -685,10 +778,57 @@ export default function SwagsPage() {
                     style={{ objectFit: "contain" }}
                     className="group-hover:scale-110 transition-transform duration-500 drop-shadow-[0_0_10px_rgba(255,255,255,0.1)]"
                   />
+                  {/* Hologram Hover Pill */}
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      openHologram({
+                        title: swag.title,
+                        image: swag.image,
+                        points: swag.points,
+                        tierName: swag.tier,
+                        tierCode: "VINTAGE DROP",
+                        tierColor: swag.color,
+                        codename: `CODE: VINTAGE-${swag.title.replace(/\s+/g, '-').toUpperCase()}`,
+                        tag: `${swag.points} PTS • COLLECTOR DROP`,
+                        description: `AUTHENTIC GOOGLE CLOUD ARCADE VINTAGE DROP: ${swag.title.toUpperCase()}.`,
+                        features: ["Official Google Cloud Collectible", "Vault Archive Artifact", `${swag.points} PTS Standard Clearance`]
+                      });
+                    }}
+                    className="absolute inset-0 bg-black/85 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center gap-1.5 text-[var(--mint-gold-bright)] z-20 rounded-md cursor-pointer"
+                    title="Launch 3D Holographic Projector"
+                  >
+                    <Zap size={18} className="animate-pulse fill-current text-[var(--mint-gold-bright)]" />
+                    <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-white">
+                      3D HOLOGRAM
+                    </span>
+                    <span className="font-mono text-[9px] font-black uppercase px-2 py-0.5 rounded bg-[var(--mint-gold)] text-black">
+                      {swag.points} PTS
+                    </span>
+                  </button>
                 </div>
-                <h3 className="font-display text-xs tracking-wider text-[var(--text-muted)] text-center uppercase group-hover:text-white transition-colors">
+
+                <h3 className="font-display text-xs tracking-wider text-white text-center uppercase group-hover:text-[var(--mint-gold-bright)] transition-colors line-clamp-1">
                   {swag.title}
                 </h3>
+
+                {/* Exact Price and Tier Pill matching Section */}
+                <div className="flex items-center justify-between w-full mt-2 pt-2 border-t border-white/5">
+                  <span className="font-mono text-[9px] uppercase tracking-wider text-[var(--text-muted)]">
+                    {swag.tier}
+                  </span>
+                  <span 
+                    className="font-mono text-[10px] font-black uppercase px-2 py-0.5 rounded shadow-sm"
+                    style={{
+                      backgroundColor: swag.color?.includes("gold") ? "rgba(244, 209, 96, 0.15)" : "rgba(232, 17, 45, 0.15)",
+                      color: swag.color?.includes("gold") ? "#F4D160" : "#E8112D",
+                      border: `1px solid ${swag.color?.includes("gold") ? "rgba(244, 209, 96, 0.3)" : "rgba(232, 17, 45, 0.3)"}`
+                    }}
+                  >
+                    {swag.points} PTS
+                  </span>
+                </div>
               </motion.div>
             ))}
           </motion.div>
@@ -742,9 +882,29 @@ export default function SwagsPage() {
                 />
               </div>
 
-              {/* Modal Link CTA if available */}
-              {selectedModalLink && (
-                <div className="mt-6 w-full flex justify-center">
+              {/* Modal Link CTA & 3D Hologram Button */}
+              <div className="mt-6 w-full flex flex-wrap items-center justify-center gap-3">
+                <button
+                  type="button"
+                  onClick={() => {
+                    const itemToProject = allProjectorSwags.find(s => s.title === selectedModalTitle) || {
+                      title: selectedModalTitle,
+                      image: selectedImage,
+                      link: selectedModalLink,
+                      points: "VAULT ARTIFACT",
+                      codename: "VAULT-RECONSTRUCT",
+                      tag: "3D PROJECTION"
+                    };
+                    setSelectedImage(null);
+                    openHologram(itemToProject);
+                  }}
+                  className="px-6 py-2.5 rounded-xl font-mono text-xs font-bold uppercase tracking-widest text-black bg-gradient-to-r from-[var(--mint-gold)] via-amber-400 to-[var(--mint-gold-bright)] hover:scale-105 shadow-[0_0_20px_rgba(212,175,55,0.6)] flex items-center gap-2 cursor-pointer transition-all"
+                >
+                  <Zap size={14} className="fill-current animate-pulse" />
+                  <span>PROJECT IN 3D VOLUMETRIC HOLOGRAM</span>
+                </button>
+
+                {selectedModalLink && (
                   <a
                     href={selectedModalLink}
                     target="_blank"
@@ -754,12 +914,20 @@ export default function SwagsPage() {
                     <span>View Official Post on Google Dev Forums</span>
                     <ExternalLink size={14} />
                   </a>
-                </div>
-              )}
+                )}
+              </div>
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* ── Real-Time 3D Swag Holographic Projector Modal ──────────────── */}
+      <HolographicSwagProjectorModal
+        isOpen={isHologramOpen}
+        onClose={() => setIsHologramOpen(false)}
+        initialItem={hologramItem}
+        allSwags={allProjectorSwags}
+      />
     </main>
   );
 }

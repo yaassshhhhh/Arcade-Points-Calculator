@@ -1,127 +1,206 @@
 "use client";
 
-import React, { useRef, useEffect } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import React, { useRef, useEffect } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ChevronDown } from "lucide-react";
 
 export default function ScrollVideo({ videoSrc }) {
   const containerRef = useRef(null);
   const videoRef = useRef(null);
   const quoteRef = useRef(null);
   const titleRef = useRef(null);
+  const indicatorRef = useRef(null);
 
   useEffect(() => {
-    // Register ScrollTrigger inside useEffect for Next.js SSR compatibility
+    // Register GSAP ScrollTrigger
     gsap.registerPlugin(ScrollTrigger);
-    
+
     const video = videoRef.current;
-    if (!video) return;
+    const container = containerRef.current;
+    if (!video || !container) return;
 
     let tl;
+    let isSeeking = false;
+    let targetTime = 0;
+    let rafId = null;
+
+    // Smoothly seek video on animation frame to avoid blocking the main scroll thread
+    const updateVideoFrame = () => {
+      if (video && video.duration) {
+        if (Math.abs(video.currentTime - targetTime) > 0.02) {
+          video.currentTime = targetTime;
+        }
+      }
+      isSeeking = false;
+    };
 
     const setupScroll = () => {
-      // Create GSAP timeline
+      // Kill previous timeline if re-initializing
+      if (tl) tl.kill();
+
+      // Create responsive GSAP timeline with optimized scrub distance
       tl = gsap.timeline({
         scrollTrigger: {
-          trigger: containerRef.current,
+          trigger: container,
           start: "top top",
-          end: "+=300%", // 300vh of scrolling distance
-          scrub: 0.5, // Smooth scrubbing
-          pin: true, // Pin the container while scrolling
+          end: "+=120%", // Fast, responsive 120vh scroll distance (no stuck feeling!)
+          scrub: 0.2, // Ultra-responsive scrub without sluggish delay
+          pin: true, // Cleanly pin the vault door while opening
+          anticipatePin: 1, // Smoothly prepare pin without layout jerk
+          fastScrollEnd: true,
+          invalidateOnRefresh: true,
           onUpdate: (self) => {
             if (video && video.duration) {
-              // Smoothly map scroll progress (0-1) to video duration
-              video.currentTime = video.duration * self.progress;
+              targetTime = video.duration * self.progress;
+              if (!isSeeking) {
+                isSeeking = true;
+                rafId = requestAnimationFrame(updateVideoFrame);
+              }
             }
           }
         }
       });
 
-      // Dummy tween to define a timeline length of 1
+      // Dummy tween to establish timeline duration
       tl.to({}, { duration: 1 });
 
-      // Fade out the center title "THE BRIEFING"
-      tl.to(titleRef.current, {
-        opacity: 0,
-        y: -50,
-        duration: 0.3
-      }, 0.1); // Starts fading out shortly after scroll begins
+      // Center title "THE BRIEFING" fades out smoothly early in scroll
+      tl.to(
+        titleRef.current,
+        {
+          opacity: 0,
+          y: -40,
+          duration: 0.35,
+          ease: "power1.out"
+        },
+        0.05
+      );
 
-      // Animate the quote in from the right at the end of the video (progress 0.7 to 1.0)
-      tl.fromTo(quoteRef.current,
-        { opacity: 0, x: 100 },
-        { opacity: 1, x: 0, duration: 0.3 },
-        0.7
+      // Scroll Down Indicator fades out immediately when scrolling starts
+      tl.to(
+        indicatorRef.current,
+        {
+          opacity: 0,
+          y: 20,
+          duration: 0.2,
+          ease: "power1.out"
+        },
+        0.02
+      );
+
+      // Quote emerges smoothly near the end of the vault door sequence
+      tl.fromTo(
+        quoteRef.current,
+        { opacity: 0, x: 60 },
+        { opacity: 1, x: 0, duration: 0.35, ease: "power2.out" },
+        0.65
       );
     };
 
     const handleVideoLoad = () => {
-      // Force video to pause and reset so seeking works reliably on all devices
-      video.pause();
-      video.currentTime = 0;
-      // Some browsers (like Safari) need a tiny play/pause nudge to unlock the video for seeking
-      video.play().then(() => {
+      try {
         video.pause();
-      }).catch(() => {
-        // Autoplay might be blocked, that's okay, we just want to seek
-      });
+        video.currentTime = 0;
+      } catch (e) {
+        // Ignore
+      }
       setupScroll();
     };
 
-    if (video.readyState >= 3) { // HAVE_FUTURE_DATA
+    // If video is already ready
+    if (video.readyState >= 2) {
       handleVideoLoad();
     } else {
-      // Use loadeddata instead of loadedmetadata to ensure the first frame is actually ready
-      video.addEventListener('loadeddata', handleVideoLoad);
+      video.addEventListener("loadeddata", handleVideoLoad, { once: true });
+      // Fallback: If network is slow, setup scroll trigger immediately so page doesn't glitch
+      const fallbackTimer = setTimeout(setupScroll, 500);
+      return () => {
+        clearTimeout(fallbackTimer);
+        video.removeEventListener("loadeddata", handleVideoLoad);
+      };
     }
 
     return () => {
-      if (video) {
-        video.removeEventListener('loadeddata', handleVideoLoad);
-      }
-      if (tl) {
-        tl.kill();
-      }
-      // Clean up all ScrollTriggers created in this component
-      ScrollTrigger.getAll().forEach(t => t.kill());
+      if (rafId) cancelAnimationFrame(rafId);
+      if (tl) tl.kill();
+      ScrollTrigger.getAll().forEach((t) => {
+        if (t.vars.trigger === container) t.kill();
+      });
     };
-  }, []);
+  }, [videoSrc]);
+
+  // Smooth scroll directly to the mission briefing form
+  const handleScrollToForm = () => {
+    const formEl = document.getElementById("mission-briefing");
+    if (formEl) {
+      formEl.scrollIntoView({ behavior: "smooth" });
+    } else {
+      window.scrollTo({
+        top: window.innerHeight * 1.3,
+        behavior: "smooth"
+      });
+    }
+  };
 
   return (
-    <div ref={containerRef} className="h-screen w-full relative bg-black overflow-hidden flex items-center justify-center">
+    <div
+      ref={containerRef}
+      className="h-screen w-full relative bg-black overflow-hidden flex items-center justify-center select-none"
+    >
+      {/* Background Vault Video */}
       <video
         ref={videoRef}
         src={videoSrc}
-        className="w-full h-full object-cover opacity-80"
+        className="w-full h-full object-cover opacity-85 pointer-events-none"
         muted
         playsInline
         preload="auto"
       />
-      
-      {/* Center Title (Fades out) */}
-      <div ref={titleRef} className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-10">
-        <h2 className="text-white text-6xl md:text-8xl font-display uppercase tracking-widest drop-shadow-[0_0_20px_rgba(255,255,255,0.3)] opacity-70 mix-blend-overlay">
+
+      {/* Subtle Vignette Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/60 pointer-events-none z-10" />
+
+      {/* Center Title (Fades out smoothly on scroll) */}
+      <div
+        ref={titleRef}
+        className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-10 px-4"
+      >
+        <h2 className="text-white text-6xl md:text-8xl font-display uppercase tracking-widest drop-shadow-[0_0_25px_rgba(255,255,255,0.4)] opacity-80 mix-blend-overlay text-center">
           THE BRIEFING
         </h2>
       </div>
 
-      {/* Quote Overlay (Appears at the end of scroll) */}
-      <div 
-        ref={quoteRef} 
-        className="absolute right-10 md:right-20 top-1/2 -translate-y-1/2 max-w-xl z-20 pointer-events-none opacity-0"
+      {/* Quote Overlay (Emerges as the vault door opens) */}
+      <div
+        ref={quoteRef}
+        className="absolute right-8 md:right-20 top-1/2 -translate-y-1/2 max-w-xl z-20 pointer-events-none opacity-0 px-4"
       >
-        <p className="text-white font-dossier text-3xl md:text-5xl leading-relaxed text-right drop-shadow-[0_0_15px_rgba(0,0,0,0.8)]">
-          &quot;The greatest heist isn&apos;t money. <br/>
-          <span className="text-[var(--heist-red)] font-display tracking-[0.1em] text-4xl md:text-7xl mt-4 block">
+        <p className="text-white font-dossier text-2xl sm:text-3xl md:text-5xl leading-relaxed text-right drop-shadow-[0_0_20px_rgba(0,0,0,0.9)]">
+          &quot;The greatest heist isn&apos;t money. <br />
+          <span className="text-[var(--heist-red)] font-display tracking-[0.1em] text-3xl sm:text-4xl md:text-7xl mt-3 block">
             IT&apos;S CLOUD MASTERY.
-          </span>&quot;
+          </span>
+          &quot;
         </p>
-        <div className="text-[var(--text-muted)] font-mono text-right mt-6 text-sm uppercase tracking-[0.3em]">
-          — Arcade Facilitator
+        <div className="text-[var(--text-muted)] font-mono text-right mt-4 text-xs sm:text-sm uppercase tracking-[0.3em]">
+          &mdash; Arcade Facilitator
         </div>
       </div>
-      
 
+      {/* Interactive "Scroll to Enter Vault" Helper Indicator */}
+      <div
+        ref={indicatorRef}
+        onClick={handleScrollToForm}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-1.5 cursor-pointer group"
+      >
+        <span className="font-mono text-[10px] md:text-xs font-bold uppercase tracking-[0.25em] text-[var(--mint-gold)] group-hover:text-white transition-colors drop-shadow-[0_0_8px_rgba(212,175,55,0.8)]">
+          SCROLL TO ENTER VAULT
+        </span>
+        <div className="w-8 h-8 rounded-full border border-[var(--mint-gold)]/50 group-hover:border-white bg-black/60 backdrop-blur-md flex items-center justify-center shadow-[0_0_15px_rgba(212,175,55,0.4)] group-hover:scale-110 transition-all">
+          <ChevronDown size={18} className="text-[var(--mint-gold)] group-hover:text-white animate-bounce" />
+        </div>
+      </div>
     </div>
   );
 }

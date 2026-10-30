@@ -69,7 +69,7 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-[var(--vault-black)] text-[var(--text-primary)] -mt-[7rem]">
+    <main className="min-h-screen bg-[var(--vault-black)] text-[var(--text-primary)] -mt-[7rem] overflow-x-clip">
       <HeaderNav />
 
       {/* Cinematic Frame-by-Frame Scroll Video */}
@@ -81,7 +81,7 @@ export default function Home() {
       <div className="relative z-20 w-full bg-[var(--vault-black)] pb-24">
         <div className="container mx-auto px-6 max-w-7xl">
           {/* ── Mission Briefing Form ─────────────────────────────────────── */}
-          <section className="flex flex-col items-center justify-center pb-12 pt-2 md:pt-4">
+          <section id="mission-briefing" className="flex flex-col items-center justify-center pb-12 pt-2 md:pt-4">
             
             <div className="text-center max-w-3xl z-10 w-full">
               <h1 className="sr-only">Google Cloud Arcade Points Calculator 2026</h1>

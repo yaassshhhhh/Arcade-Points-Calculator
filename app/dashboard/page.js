@@ -11,6 +11,7 @@ import MilestoneModal from "@/components/MilestoneModal";
 import FacilitatorMilestones from "@/components/FacilitatorMilestones";
 import RankAvatar from "@/components/RankAvatar";
 import WantedPosterModal from "@/components/WantedPosterModal";
+import ProfessorsMasterPlan from "@/components/ProfessorsMasterPlan";
 import { Camera } from "lucide-react";
 
 const getCategoryLabel = (category) => {
@@ -194,7 +195,7 @@ function DashboardContent() {
   }, [data, joinedFacilitator]);
 
   return (
-    <main suppressHydrationWarning className="min-h-screen bg-[var(--vault-black)] text-[var(--text-primary)] pb-20 relative">
+    <main suppressHydrationWarning className="min-h-screen bg-[var(--vault-black)] text-[var(--text-primary)] pb-20 relative overflow-x-clip">
       {/* Background Image Overlay */}
       <div className="fixed inset-0 z-0 bg-[url('/faq-bg.jpg')] bg-cover bg-center bg-no-repeat opacity-15 pointer-events-none"></div>
       
@@ -366,6 +367,13 @@ function DashboardContent() {
               })}
             </div>
           </section>
+
+          {/* ─── The Professor's Master Plan (AI Tactical Infiltration Blueprint) ─── */}
+          <ProfessorsMasterPlan 
+            userName={data.userName}
+            totalPoints={displayPoints}
+            badges={data.badges || []}
+          />
 
           <FacilitatorMilestones 
             badgesCount={facilitatorStats.badgesCount} 

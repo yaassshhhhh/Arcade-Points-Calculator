@@ -140,7 +140,7 @@ export default function ResourcesPage() {
   ];
 
   return (
-    <main className="bg-[var(--vault-black)] text-[var(--text-primary)] min-h-screen pb-20 relative overflow-hidden">
+    <main className="bg-[var(--vault-black)] text-[var(--text-primary)] min-h-screen pb-20 relative overflow-x-clip">
       
       {/* Background Image */}
       <div 
