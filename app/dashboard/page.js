@@ -91,21 +91,20 @@ function DashboardContent() {
 
   useEffect(() => {
     const urlParam = searchParams.get("url");
-    let finalUrl = urlParam || sessionStorage.getItem("arcadeProfileUrl") || localStorage.getItem("arcadeProfileUrl");
+    let finalUrl = urlParam || localStorage.getItem("arcadeProfileUrl") || sessionStorage.getItem("arcadeProfileUrl");
 
     if (finalUrl && finalUrl.includes('|||')) {
       finalUrl = finalUrl.split('|||')[0];
     }
 
     if (!finalUrl) {
-      router.push("/");
+      router.push("/?briefing=1");
       return;
     }
 
-    if (urlParam) {
-      sessionStorage.setItem("arcadeProfileUrl", finalUrl);
-      localStorage.setItem("arcadeProfileUrl", finalUrl);
-    }
+    // Always ensure current operative profile URL is persisted
+    sessionStorage.setItem("arcadeProfileUrl", finalUrl);
+    localStorage.setItem("arcadeProfileUrl", finalUrl);
 
     const fetchPoints = async () => {
       try {
@@ -119,11 +118,15 @@ function DashboardContent() {
         if (res.ok) {
           setData(result.data);
 
-          // Save user details for HeaderNav
+          // Save user details for HeaderNav and persistent memory across visits
+          const avatarUrl = result.data.userAvatar || guessAvatar(result.data.userName);
           sessionStorage.setItem("arcadeUserName", result.data.userName);
           localStorage.setItem("arcadeUserName", result.data.userName);
-          sessionStorage.setItem("arcadeUserAvatar", result.data.userAvatar || guessAvatar(result.data.userName));
-          localStorage.setItem("arcadeUserAvatar", result.data.userAvatar || guessAvatar(result.data.userName));
+          sessionStorage.setItem("arcadeUserAvatar", avatarUrl);
+          localStorage.setItem("arcadeUserAvatar", avatarUrl);
+
+          window.dispatchEvent(new Event('storage'));
+          window.dispatchEvent(new Event('arcadeProfileUpdated'));
 
           // Play shoutout music
           try {

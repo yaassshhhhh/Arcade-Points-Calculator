@@ -14,13 +14,34 @@ export default function Home() {
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
+  const [savedUser, setSavedUser] = useState(null);
   const router = useRouter();
 
   useEffect(() => {
-    // Check if user is already "logged in"
-    const savedUrl = sessionStorage.getItem("arcadeProfileUrl");
+    // Check if user is already remembered on this PC
+    const savedUrl = localStorage.getItem("arcadeProfileUrl") || sessionStorage.getItem("arcadeProfileUrl");
+    const savedName = localStorage.getItem("arcadeUserName") || sessionStorage.getItem("arcadeUserName");
+    const savedAvatar = localStorage.getItem("arcadeUserAvatar") || sessionStorage.getItem("arcadeUserAvatar");
+
+    const params = new URLSearchParams(window.location.search);
+    const isBriefing = params.get("briefing") === "1" || params.get("view") === "briefing";
+
     if (savedUrl) {
-      router.push(`/dashboard?url=${encodeURIComponent(savedUrl)}`);
+      // If user directly opened website root without explicitly asking for briefing, jump straight to their dashboard
+      if (!isBriefing) {
+        router.push(`/dashboard?url=${encodeURIComponent(savedUrl)}`);
+        return;
+      }
+
+      // Schedule state updates asynchronously so we avoid direct synchronous setState in effect
+      queueMicrotask(() => {
+        setUrl(savedUrl);
+        setSavedUser({
+          url: savedUrl,
+          name: savedName || "Operative",
+          avatar: savedAvatar || "/professor.png"
+        });
+      });
     }
 
     const timer = setTimeout(() => {
@@ -36,13 +57,16 @@ export default function Home() {
     if (!url) return;
     setLoading(true);
     
-    let finalUrl = url;
+    let finalUrl = url.trim();
     if (finalUrl.includes('|||')) {
       finalUrl = finalUrl.split('|||')[0];
     }
     
-    // Save to sessionStorage so they stay logged in
+    // Save to both localStorage & sessionStorage so user NEVER has to re-type on this PC
+    localStorage.setItem("arcadeProfileUrl", finalUrl);
     sessionStorage.setItem("arcadeProfileUrl", finalUrl);
+    window.dispatchEvent(new Event('storage'));
+    window.dispatchEvent(new Event('arcadeProfileUpdated'));
     
     // Hacker typing sequence
     const texts = [
@@ -114,6 +138,58 @@ export default function Home() {
                 <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--heist-red)] blur-[60px] opacity-20 group-hover:opacity-40 transition-opacity pointer-events-none"></div>
                 <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[var(--heist-red)] to-transparent opacity-50"></div>
                 
+                {savedUser && (
+                  <div className="mb-6 p-4 rounded-xl border border-[var(--mint-gold)] bg-[rgba(230,175,46,0.08)] flex flex-col sm:flex-row items-center justify-between gap-4 text-left relative z-10 shadow-[0_0_20px_rgba(230,175,46,0.15)]">
+                    <div className="flex items-center gap-3">
+                      <div className="w-12 h-12 rounded-full border-2 border-[var(--mint-gold)] overflow-hidden shrink-0 bg-black flex items-center justify-center">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img 
+                          src={savedUser.avatar || '/professor.png'} 
+                          alt={savedUser.name} 
+                          className="w-full h-full object-cover" 
+                          referrerPolicy="no-referrer"
+                          onError={(e) => { e.currentTarget.src = '/professor.png'; }}
+                        />
+                      </div>
+                      <div>
+                        <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-[var(--mint-gold)] font-bold flex items-center gap-1.5">
+                          <span className="w-2 h-2 rounded-full bg-[var(--mint-gold)] animate-ping inline-block"></span>
+                          KEY CODE PRE-STORED ON THIS PC
+                        </div>
+                        <div className="font-shlop text-2xl text-white tracking-wider">{savedUser.name}</div>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2 w-full sm:w-auto">
+                      <button
+                        type="button"
+                        onClick={() => router.push(`/dashboard?url=${encodeURIComponent(savedUser.url)}`)}
+                        className="flex-1 sm:flex-none px-4 py-2 bg-[var(--mint-gold)] hover:bg-yellow-400 text-black font-mono font-bold text-xs uppercase tracking-wider rounded transition-all shadow-[0_0_15px_rgba(230,175,46,0.4)]"
+                      >
+                        OPEN DASHBOARD ➔
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          localStorage.removeItem("arcadeProfileUrl");
+                          localStorage.removeItem("arcadeUserName");
+                          localStorage.removeItem("arcadeUserAvatar");
+                          sessionStorage.removeItem("arcadeProfileUrl");
+                          sessionStorage.removeItem("arcadeUserName");
+                          sessionStorage.removeItem("arcadeUserAvatar");
+                          setUrl("");
+                          setSavedUser(null);
+                          window.dispatchEvent(new Event('storage'));
+                          window.dispatchEvent(new Event('arcadeProfileUpdated'));
+                        }}
+                        className="px-3 py-2 text-[var(--text-muted)] hover:text-white font-mono text-xs border border-transparent hover:border-[var(--vault-outline)] rounded transition-all"
+                        title="Switch to another Google Cloud profile"
+                      >
+                        SWITCH
+                      </button>
+                    </div>
+                  </div>
+                )}
+
                 <div className="mb-8 text-left relative z-10">
                   <div className="flex items-center justify-between mb-3">
                     <label className="font-mono text-[var(--text-secondary)] text-sm tracking-[0.2em] uppercase">

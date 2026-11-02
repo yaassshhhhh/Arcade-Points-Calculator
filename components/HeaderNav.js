@@ -16,15 +16,15 @@ export default function HeaderNav() {
 
   React.useEffect(() => {
     const checkLogin = () => {
-      const url = sessionStorage.getItem("arcadeProfileUrl");
+      const url = localStorage.getItem("arcadeProfileUrl") || sessionStorage.getItem("arcadeProfileUrl");
       if (url) {
         setIsLoggedIn(true);
-        const name = sessionStorage.getItem("arcadeUserName") || "Operative";
-        let avatar = sessionStorage.getItem("arcadeUserAvatar");
+        const name = localStorage.getItem("arcadeUserName") || sessionStorage.getItem("arcadeUserName") || "Operative";
+        let avatar = localStorage.getItem("arcadeUserAvatar") || sessionStorage.getItem("arcadeUserAvatar");
         if (!avatar || avatar === "null" || avatar === "undefined") {
           avatar = "/professor.png";
         }
-        setUserProfile({ name, avatar });
+        setUserProfile({ name, avatar, url });
       } else {
         setIsLoggedIn(false);
         setUserProfile(null);
@@ -32,21 +32,36 @@ export default function HeaderNav() {
     };
     checkLogin();
     window.addEventListener('storage', checkLogin);
-    return () => window.removeEventListener('storage', checkLogin);
+    window.addEventListener('arcadeProfileUpdated', checkLogin);
+    return () => {
+      window.removeEventListener('storage', checkLogin);
+      window.removeEventListener('arcadeProfileUpdated', checkLogin);
+    };
   }, []);
 
   const handleLogout = () => {
+    localStorage.removeItem("arcadeProfileUrl");
+    localStorage.removeItem("arcadeUserName");
+    localStorage.removeItem("arcadeUserAvatar");
     sessionStorage.removeItem("arcadeProfileUrl");
     sessionStorage.removeItem("arcadeUserName");
     sessionStorage.removeItem("arcadeUserAvatar");
     setIsLoggedIn(false);
+    setUserProfile(null);
     setIsOpen(false);
-    router.push("/");
+    window.dispatchEvent(new Event('storage'));
+    window.dispatchEvent(new Event('arcadeProfileUpdated'));
+    router.push("/?briefing=1");
   };
 
+  const savedUrl = userProfile?.url;
+
   const links = [
-    { label: "The Briefing", href: "/" },
-    { label: "Dashboard", href: "/dashboard" },
+    { label: "The Briefing", href: "/?briefing=1" },
+    { 
+      label: "Dashboard", 
+      href: savedUrl ? `/dashboard?url=${encodeURIComponent(savedUrl)}` : "/dashboard" 
+    },
     { label: "Leaderboard", href: "/leaderboard" },
     { label: "Facilitator", href: "/facilitator", highlight: true },
     { label: "Skill Badges", href: "/skill-badges" },
@@ -92,7 +107,11 @@ export default function HeaderNav() {
         })}
         {isLoggedIn && userProfile && (
           <div className="flex items-center gap-3 ml-2 pl-4 border-l border-[var(--vault-outline)]">
-            <div className="flex items-center gap-2 group/profile cursor-pointer" onClick={() => router.push('/dashboard')} title={userProfile.name}>
+            <div 
+              className="flex items-center gap-2 group/profile cursor-pointer" 
+              onClick={() => router.push(savedUrl ? `/dashboard?url=${encodeURIComponent(savedUrl)}` : '/dashboard')} 
+              title={userProfile.name}
+            >
               <div className="w-8 h-8 rounded-full border border-[var(--vault-outline)] overflow-hidden bg-black flex items-center justify-center shrink-0">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img 
@@ -156,7 +175,14 @@ export default function HeaderNav() {
             })}
             {isLoggedIn && userProfile && (
               <div className="py-4 border-b border-[var(--vault-outline)] flex items-center justify-between">
-                <div className="flex items-center gap-3 cursor-pointer" onClick={() => { setIsOpen(false); router.push('/dashboard'); }} title={userProfile.name}>
+                <div 
+                  className="flex items-center gap-3 cursor-pointer" 
+                  onClick={() => { 
+                    setIsOpen(false); 
+                    router.push(savedUrl ? `/dashboard?url=${encodeURIComponent(savedUrl)}` : '/dashboard'); 
+                  }} 
+                  title={userProfile.name}
+                >
                   <div className="w-8 h-8 rounded-full border border-[var(--vault-outline)] overflow-hidden bg-black flex items-center justify-center">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img 
