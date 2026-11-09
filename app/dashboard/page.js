@@ -11,7 +11,6 @@ import MilestoneModal from "@/components/MilestoneModal";
 import FacilitatorMilestones from "@/components/FacilitatorMilestones";
 import RankAvatar from "@/components/RankAvatar";
 import WantedPosterModal from "@/components/WantedPosterModal";
-import ProfessorsMasterPlan from "@/components/ProfessorsMasterPlan";
 import { Camera } from "lucide-react";
 
 const getCategoryLabel = (category) => {
@@ -370,13 +369,6 @@ function DashboardContent() {
               })}
             </div>
           </section>
-
-          {/* ─── The Professor's Master Plan (AI Tactical Infiltration Blueprint) ─── */}
-          <ProfessorsMasterPlan 
-            userName={data.userName}
-            totalPoints={displayPoints}
-            badges={data.badges || []}
-          />
 
           <FacilitatorMilestones 
             badgesCount={facilitatorStats.badgesCount} 
