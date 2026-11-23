@@ -47,9 +47,47 @@ function DashboardContent() {
   const url = searchParams.get("url");
   const router = useRouter();
 
-  const [data, setData] = useState(null);
+  // Instant optimistic render from localStorage cache (nano-second initial display)
+  const [data, setData] = useState(() => {
+    if (typeof window === "undefined") return null;
+    try {
+      const urlParam = new URLSearchParams(window.location.search).get("url") ||
+        localStorage.getItem("arcadeProfileUrl") ||
+        sessionStorage.getItem("arcadeProfileUrl");
+      if (urlParam) {
+        const clean = urlParam.split('|||')[0].split('||')[0].trim();
+        const cached = localStorage.getItem(`arcadeData_${clean}`) || localStorage.getItem('arcadeData_latest');
+        if (cached) {
+          const parsed = JSON.parse(cached);
+          if (parsed && typeof parsed.totalPoints === 'number') {
+            return parsed;
+          }
+        }
+      }
+    } catch (e) {}
+    return null;
+  });
+
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(() => {
+    if (typeof window === "undefined") return true;
+    try {
+      const urlParam = new URLSearchParams(window.location.search).get("url") ||
+        localStorage.getItem("arcadeProfileUrl") ||
+        sessionStorage.getItem("arcadeProfileUrl");
+      if (urlParam) {
+        const clean = urlParam.split('|||')[0].split('||')[0].trim();
+        const cached = localStorage.getItem(`arcadeData_${clean}`) || localStorage.getItem('arcadeData_latest');
+        if (cached) {
+          const parsed = JSON.parse(cached);
+          if (parsed && typeof parsed.totalPoints === 'number') {
+            return false; // Instant display! No loading spinner!
+          }
+        }
+      }
+    } catch (e) {}
+    return true;
+  });
   
   // Milestone modal state
   const [showMilestone, setShowMilestone] = useState(false);
@@ -117,6 +155,12 @@ function DashboardContent() {
         if (res.ok) {
           setData(result.data);
 
+          // Save full data for instant nano-second load next time
+          try {
+            localStorage.setItem(`arcadeData_${finalUrl}`, JSON.stringify(result.data));
+            localStorage.setItem('arcadeData_latest', JSON.stringify(result.data));
+          } catch (e) {}
+
           // Save user details for HeaderNav and persistent memory across visits
           const avatarUrl = result.data.userAvatar || guessAvatar(result.data.userName);
           sessionStorage.setItem("arcadeUserName", result.data.userName);
@@ -145,10 +189,14 @@ function DashboardContent() {
             }
           }
         } else {
-          setError(result.error || "Failed to authenticate profile.");
+          if (!data) {
+            setError(result.error || "Failed to authenticate profile.");
+          }
         }
       } catch (err) {
-        setError("Connection to field servers lost. Check your URL and retry.");
+        if (!data) {
+          setError("Connection to field servers lost. Check your URL and retry.");
+        }
       } finally {
         setLoading(false);
       }

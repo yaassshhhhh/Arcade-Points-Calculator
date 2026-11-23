@@ -50,7 +50,34 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, [router]);
 
-  const [loadingText, setLoadingText] = useState("");
+  const triggerPrefetch = (rawUrl) => {
+    if (!rawUrl) return;
+    const clean = rawUrl.trim().split('|||')[0].split('||')[0];
+    if (clean.includes('cloudskillsboost.google/public_profiles/') || clean.includes('skills.google/public_profiles/')) {
+      fetch('/api/calculate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url: clean })
+      })
+        .then((r) => r.json())
+        .then((res) => {
+          if (res?.data) {
+            localStorage.setItem(`arcadeData_${clean}`, JSON.stringify(res.data));
+            localStorage.setItem(`arcadeData_latest`, JSON.stringify(res.data));
+            if (res.data.userName) {
+              localStorage.setItem("arcadeUserName", res.data.userName);
+              localStorage.setItem("arcadeUserAvatar", res.data.userAvatar || '/professor.png');
+            }
+          }
+        })
+        .catch(() => {});
+    }
+  };
+
+  const handleUrlChange = (val) => {
+    setUrl(val);
+    triggerPrefetch(val);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -68,28 +95,11 @@ export default function Home() {
     window.dispatchEvent(new Event('storage'));
     window.dispatchEvent(new Event('arcadeProfileUpdated'));
     
-    // Hacker typing sequence
-    const texts = [
-      "> Bypassing Google Cloud servers...",
-      "> Extracting badge data...",
-      "> Calculating points...",
-      "> Access Granted!"
-    ];
-    
-    let i = 0;
-    setLoadingText(texts[0]);
-    
-    const interval = setInterval(() => {
-      i++;
-      if (i < texts.length) {
-        setLoadingText(texts[i]);
-      }
-    }, 700);
+    // Trigger instant prefetch
+    triggerPrefetch(finalUrl);
 
-    setTimeout(() => {
-      clearInterval(interval);
-      router.push(`/dashboard?url=${encodeURIComponent(finalUrl)}`);
-    }, 3200);
+    // Instant nanosecond navigation to dashboard
+    router.push(`/dashboard?url=${encodeURIComponent(finalUrl)}`);
   };
 
   return (
@@ -203,7 +213,11 @@ export default function Home() {
                       className="w-full bg-[rgba(11,11,13,0.8)] border border-[var(--vault-outline)] text-white font-mono text-sm px-6 py-4 focus:outline-none focus:border-[var(--heist-red)] focus:shadow-[0_0_20px_var(--heist-red-glow)] transition-all rounded-tl-xl rounded-br-xl rounded-tr-sm rounded-bl-sm"
                       placeholder="https://www.cloudskillsboost.google/public_profiles/..."
                       value={url}
-                      onChange={(e) => setUrl(e.target.value)}
+                      onChange={(e) => handleUrlChange(e.target.value)}
+                      onPaste={(e) => {
+                        const pasted = e.clipboardData?.getData('text');
+                        if (pasted) triggerPrefetch(pasted);
+                      }}
                       required
                     />
                     <div className="absolute inset-y-0 right-0 w-2 bg-[var(--heist-red)] shadow-[0_0_10px_var(--heist-red)] opacity-0 group-focus-within:opacity-100 transition-opacity rounded-br-xl"></div>

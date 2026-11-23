@@ -3,9 +3,15 @@ import * as cheerio from 'cheerio';
 import { calculateScore, checkMilestones, checkFacilitatorMilestones, classifyBadge } from '../../../lib/arcadePoints';
 import { updateLeaderboard } from '../../../lib/leaderboardStore';
 import skillBadgesData from '../../../public/data/skill-badges.json';
-// Simple in-memory cache to prevent hammering Google's servers
+// High-performance in-memory cache to prevent hammering Google's servers & deliver instant responses
 const cache = new Map();
-const CACHE_TTL = 5 * 60 * 1000; // 5 minutes in milliseconds
+const CACHE_TTL = 30 * 60 * 1000; // 30 minutes in milliseconds
+
+function extractProfileKey(rawUrl) {
+  if (!rawUrl) return '';
+  const match = rawUrl.match(/public_profiles\/([a-zA-Z0-9_-]+)/i);
+  return match ? match[1].toLowerCase() : rawUrl.toLowerCase().trim();
+}
 
 export async function POST(req) {
   try {
@@ -16,6 +22,8 @@ export async function POST(req) {
     } else if (url && url.includes('||')) {
       url = url.split('||')[0];
     }
+
+    url = (url || '').trim();
 
     // 1. Validation
     if (!url || (!url.includes('cloudskillsboost.google/public_profiles/') && !url.includes('skills.google/public_profiles/'))) {
@@ -28,19 +36,31 @@ export async function POST(req) {
       formattedUrl = 'https://' + formattedUrl;
     }
 
-    // 2. Check Cache
-    const cachedResult = cache.get(url);
+    // 2. Check Instant Cache
+    const profileKey = extractProfileKey(formattedUrl);
+    const cachedResult = cache.get(profileKey) || cache.get(url) || cache.get(formattedUrl);
     if (cachedResult && (Date.now() - cachedResult.timestamp < CACHE_TTL)) {
-      return NextResponse.json({ success: true, data: cachedResult.data });
+      return NextResponse.json(
+        { success: true, data: cachedResult.data, fromCache: true },
+        { headers: { 'Cache-Control': 'public, s-maxage=120, stale-while-revalidate=86400', 'X-Arcade-Cache': 'HIT' } }
+      );
     }
 
-    // 3. Fetching with Timeout
+    // 3. Fetching with Timeout & Fast Headers
     const fetchController = new AbortController();
     const timeoutId = setTimeout(() => fetchController.abort(), 10000); // 10s timeout
 
     let response;
     try {
-      response = await fetch(formattedUrl, { signal: fetchController.signal });
+      response = await fetch(formattedUrl, {
+        signal: fetchController.signal,
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+          'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+          'Accept-Language': 'en-US,en;q=0.9',
+          'Cache-Control': 'no-cache'
+        }
+      });
       clearTimeout(timeoutId);
     } catch (err) {
       if (err.name === 'AbortError') {
@@ -172,24 +192,33 @@ export async function POST(req) {
     }
 
     // 6. Caching & Leaderboard
-    cache.set(url, { data, timestamp: Date.now() });
-    
-    // Wait for the leaderboard to update before returning so Vercel doesn't kill the function early
-    try {
-      await updateLeaderboard({
-        userName,
-        points: finalTotalPoints,
-        badgeCount: validBadges.length,
-        url: url,
-        userAvatar: userAvatar,
-        facilitatorCode: facilitatorCode,
-        facilitatorName: facilitatorName
-      });
-    } catch (err) {
-      console.error("Leaderboard update failed:", err);
-    }
+    const cacheEntry = { data, timestamp: Date.now() };
+    cache.set(profileKey, cacheEntry);
+    cache.set(url, cacheEntry);
+    cache.set(formattedUrl, cacheEntry);
 
-    return NextResponse.json({ success: true, data });
+    // Update leaderboard asynchronously in background without delaying HTTP response to user
+    updateLeaderboard({
+      userName,
+      points: finalTotalPoints,
+      badgeCount: validBadges.length,
+      url: url,
+      userAvatar: userAvatar,
+      facilitatorCode: facilitatorCode,
+      facilitatorName: facilitatorName
+    }).catch((err) => {
+      console.error("Leaderboard background update failed:", err);
+    });
+
+    return NextResponse.json(
+      { success: true, data },
+      {
+        headers: {
+          'Cache-Control': 'public, s-maxage=120, stale-while-revalidate=86400',
+          'X-Arcade-Cache': 'MISS'
+        }
+      }
+    );
 
   } catch (error) {
     console.error('Error in calculate API:', error);

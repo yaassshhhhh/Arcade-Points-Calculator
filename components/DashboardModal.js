@@ -38,23 +38,34 @@ export default function DashboardModal() {
     if (!url) return;
     setLoading(true);
     
-    let finalUrl = url;
+    let finalUrl = url.trim();
     if (finalUrl.includes('|||')) {
       finalUrl = finalUrl.split('|||')[0];
     }
-    
-    gsap.to(formRef.current, {
-      x: () => (Math.random() - 0.5) * 10,
-      y: () => (Math.random() - 0.5) * 10,
-      duration: 0.05,
-      repeat: 5,
-      yoyo: true,
-      onComplete: () => {
-        setIsOpen(false);
-        setLoading(false);
-        router.push(`/dashboard?url=${encodeURIComponent(finalUrl)}`);
-      }
-    });
+
+    localStorage.setItem("arcadeProfileUrl", finalUrl);
+    sessionStorage.setItem("arcadeProfileUrl", finalUrl);
+    window.dispatchEvent(new Event('storage'));
+    window.dispatchEvent(new Event('arcadeProfileUpdated'));
+
+    // Instant background prefetch
+    fetch('/api/calculate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ url: finalUrl })
+    })
+      .then((r) => r.json())
+      .then((res) => {
+        if (res?.data) {
+          localStorage.setItem(`arcadeData_${finalUrl}`, JSON.stringify(res.data));
+          localStorage.setItem(`arcadeData_latest`, JSON.stringify(res.data));
+        }
+      })
+      .catch(() => {});
+
+    setIsOpen(false);
+    setLoading(false);
+    router.push(`/dashboard?url=${encodeURIComponent(finalUrl)}`);
   };
 
   return (
