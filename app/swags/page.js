@@ -104,12 +104,12 @@ export default function SwagsPage() {
       link: "https://discuss.google.dev/t/swag-drop-the-arcade-weather-shield-jacket/397353",
       items: [
         {
-          title: "Weather Shield & Multi-Tool",
+          title: "Champion Tactical Arsenal",
           tag: "Mastermind Suite 🛡️",
           image: "/swag-champion-new.png",
           description:
-            "All-weather windproof jacket with Google Cloud emblem, multi-cable charging dock, and LumiSnap fill light.",
-          features: ["Weather Shield Jacket", "Fast-Charge Tech Dock", "LumiSnap Magnetic Light"],
+            "Google Cloud Weather Shield jacket, ballistic backpack, multi-cable tech kit, LumiSnap magnetic fill light, and thermal bottle.",
+          features: ["Weather Shield Jacket & Backpack", "Fast-Charge Tech Dock & Light", "Google Cloud Thermal Bottle"],
         },
       ],
     },
@@ -128,10 +128,10 @@ export default function SwagsPage() {
         {
           title: "Legend Pinnacle Suite",
           tag: "Pinnacle Reward 🏆",
-          image: "/swag-champion-new.png",
+          image: "/swag-legend-new.png",
           description:
-            "The premier reward tier: official Google Cloud weather shield jacket, complete multi-tool kit, and top honors.",
-          features: ["Pinnacle Weather Armor", "Complete Tech Arsenal", "Highest Cloud Clearance"],
+            "The premier reward tier: official Google Cloud weather shield jacket, ballistic backpack, vacuum thermal bottle, complete multi-tool kit, and top honors.",
+          features: ["Pinnacle Weather Armor & Backpack", "Complete Tech Arsenal & Bottle", "Highest Cloud Clearance"],
         },
       ],
     },

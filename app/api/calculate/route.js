@@ -118,17 +118,21 @@ export async function POST(req) {
     const { counts, totalPoints: basePoints, workMeetsPlayBonus } = calculateScore(validBadges);
     const milestonesInfo = checkFacilitatorMilestones(validBadges);
 
-    let finalTotalPoints = basePoints;
+    let facilitatorBonus = 0;
     if (milestonesInfo && milestonesInfo.achieved && milestonesInfo.achieved.length > 0) {
       const highestAchieved = milestonesInfo.achieved[milestonesInfo.achieved.length - 1];
       if (highestAchieved.bonusPoints) {
-        finalTotalPoints += highestAchieved.bonusPoints;
+        facilitatorBonus = highestAchieved.bonusPoints;
       }
     }
+
+    const finalTotalPoints = basePoints + facilitatorBonus;
 
     const data = {
       userName,
       userAvatar,
+      basePoints,
+      facilitatorBonus,
       totalPoints: finalTotalPoints,
       badgeCount: validBadges.length,
       counts,

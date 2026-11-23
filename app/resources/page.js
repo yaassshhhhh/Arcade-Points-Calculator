@@ -31,7 +31,7 @@ export default function ResourcesPage() {
       code: "1q-cluster-51301",
       icon: <Cpu size={32} color="#34A853" />,
       color: "#34A853",
-      image: "/images/adventure_oct.png",
+      image: "/images/adventure_nov.png",
       url: "https://www.skills.google/games/7561?utm_source=googleskills&utm_medium=lp&utm_campaign=adv-nov-arcade26",
     },
     {
@@ -39,7 +39,7 @@ export default function ResourcesPage() {
       code: "1q-analytics-29273",
       icon: <Cloud size={32} color="#4285F4" />,
       color: "#4285F4",
-      image: "/images/voyage_oct.png",
+      image: "/images/voyage_nov.png",
       url: "https://www.skills.google/games/7562?utm_source=googleskills&utm_medium=lp&utm_campaign=voyage-nov-arcade26",
     },
     {
@@ -47,7 +47,7 @@ export default function ResourcesPage() {
       code: "1q-machine-42361",
       icon: <Layers size={32} color="#EA4335" />,
       color: "#EA4335",
-      image: "/images/trail_oct.png",
+      image: "/images/trail_nov.png",
       url: "https://www.skills.google/games/7563?utm_source=googleskills&utm_medium=lp&utm_campaign=trail-nov-arcade26",
     },
     {
@@ -55,7 +55,7 @@ export default function ResourcesPage() {
       code: "1q-basecamp-02108",
       icon: <Box size={32} color="#F5BB11" />,
       color: "#F5BB11",
-      image: "/images/basecamp_oct.png",
+      image: "/images/basecamp_nov.png",
       url: "https://www.skills.google/games/7564?utm_source=googleskills&utm_medium=lp&utm_campaign=basecamp-nov-arcade26",
     },
     {
@@ -63,7 +63,7 @@ export default function ResourcesPage() {
       code: "1q-diwali-10000",
       icon: <Zap size={32} color="#FF6D00" />,
       color: "#FF6D00",
-      image: "/images/trick_or_metric_oct.png",
+      image: "/images/diwali_nov.png",
       url: "https://www.skills.google/games/7565?utm_source=googleskills&utm_medium=lp&utm_campaign=special-nov-arcade26",
     },
     {
@@ -71,7 +71,7 @@ export default function ResourcesPage() {
       code: "1q-infraeng-41850",
       icon: <Database size={32} color="#00BCD4" />,
       color: "#00BCD4",
-      image: "/images/simulator_oct.png",
+      image: "/images/simulator_nov.png",
       url: "https://www.skills.google/games/7566?utm_source=googleskills&utm_medium=lp&utm_campaign=spegame-nov-arcade26",
     }
   ];
@@ -211,7 +211,7 @@ export default function ResourcesPage() {
                 <div className="relative z-10 p-6 h-full flex flex-col">
                   {game.image ? (
                     <div className="w-full h-56 md:h-48 relative rounded-xl overflow-hidden mb-6 border border-[var(--vault-outline)] group-hover:border-[var(--heist-red)]/50 transition-colors bg-black/40">
-                      <Image src={game.image} alt={game.title} fill style={{ objectFit: "contain" }} className="group-hover:scale-105 transition-transform duration-500 p-2" />
+                      <Image src={game.image} alt={game.title} fill style={{ objectFit: "contain" }} unoptimized className="group-hover:scale-105 transition-transform duration-500 p-2" />
                     </div>
                   ) : (
                     <div className="mb-6 p-4 bg-black/40 rounded-xl inline-flex self-start border border-[var(--vault-outline)]">

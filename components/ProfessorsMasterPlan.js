@@ -25,75 +25,76 @@ import {
   Radio
 } from "lucide-react";
 
-// Active October Arcade Games for maximum 1-point infiltration
-const OCTOBER_ARCADE_GAMES = [
+// Active November Arcade Games for maximum 1-point infiltration
+const NOVEMBER_ARCADE_GAMES = [
   {
     id: "adventure",
-    title: "Arcade Adventure: Google Cloud ML APIs",
-    code: "1q-endpoint-01297",
+    title: "Arcade Adventure: Cloud Infrastructure & App Scale",
+    code: "1q-cluster-51301",
     points: 1,
-    url: "https://www.skills.google/games/7496?utm_source=googleskills&utm_medium=lp&utm_campaign=adv-oct-arcade26",
-    image: "/images/adventure_oct.png",
+    url: "https://www.skills.google/games/7561?utm_source=googleskills&utm_medium=lp&utm_campaign=adv-nov-arcade26",
+    image: "/images/adventure_nov.png",
     duration: "~40 mins",
     difficulty: "Medium",
-    keywords: ["adventure", "cloud ml apis"]
+    keywords: ["adventure", "cloud infrastructure", "app scale"]
   },
   {
     id: "voyage",
-    title: "Arcade Voyage: Language, Voice & Multimodal",
-    code: "1q-synthesis-10713",
+    title: "Arcade Voyage: Python Apps & Data Analytics",
+    code: "1q-analytics-29273",
     points: 1,
-    url: "https://www.skills.google/games/7497?utm_source=googleskills&utm_medium=lp&utm_campaign=voyage-oct-arcade26",
-    image: "/images/voyage_oct.png",
+    url: "https://www.skills.google/games/7562?utm_source=googleskills&utm_medium=lp&utm_campaign=voyage-nov-arcade26",
+    image: "/images/voyage_nov.png",
     duration: "~45 mins",
     difficulty: "Medium",
-    keywords: ["voyage", "language, voice", "multimodal"]
+    keywords: ["voyage", "python apps", "data analytics"]
   },
   {
     id: "trail",
-    title: "Arcade Trail: Containers & Load Balancing",
-    code: "1q-package-53921",
+    title: "Arcade Trail: Cloud Security & GKE Cost Control",
+    code: "1q-machine-42361",
     points: 1,
-    url: "https://www.skills.google/games/7498?utm_source=googleskills&utm_medium=lp&utm_campaign=trail-oct-arcade26",
-    image: "/images/trail_oct.png",
+    url: "https://www.skills.google/games/7563?utm_source=googleskills&utm_medium=lp&utm_campaign=trail-nov-arcade26",
+    image: "/images/trail_nov.png",
     duration: "~35 mins",
     difficulty: "Fast",
-    keywords: ["trail", "containers & load balancing"]
+    keywords: ["trail", "cloud security", "gke cost control"]
   },
   {
     id: "basecamp",
-    title: "Arcade Base Camp October 2026",
-    code: "1q-basecamp-61332",
+    title: "Arcade Base Camp November 2026",
+    code: "1q-basecamp-02108",
     points: 1,
-    url: "https://www.skills.google/games/7499?utm_source=googleskills&utm_medium=lp&utm_campaign=basecamp-oct-arcade26",
-    image: "/images/basecamp_oct.png",
+    url: "https://www.skills.google/games/7564?utm_source=googleskills&utm_medium=lp&utm_campaign=basecamp-nov-arcade26",
+    image: "/images/basecamp_nov.png",
     duration: "~30 mins",
     difficulty: "Easy",
     keywords: ["base camp", "basecamp"]
   },
   {
-    id: "trick_or_metric",
-    title: "Trick-or-Metric Special Challenge",
-    code: "1q-spooky-33057",
+    id: "diwali",
+    title: "Diwali in the Arcade",
+    code: "1q-diwali-10000",
     points: 1,
-    url: "https://www.skills.google/games/7501?utm_source=googleskills&utm_medium=lp&utm_campaign=special-oct-arcade26",
-    image: "/images/trick_or_metric_oct.png",
+    url: "https://www.skills.google/games/7565?utm_source=googleskills&utm_medium=lp&utm_campaign=special-nov-arcade26",
+    image: "/images/diwali_nov.png",
     duration: "~25 mins",
     difficulty: "Super Fast",
-    keywords: ["trick-or-metric", "trick or metric"]
+    keywords: ["diwali in the arcade", "diwali in the cloud", "diwali"]
   },
   {
     id: "simulator",
-    title: "Arcade Simulator: Site Reliability Engineer",
-    code: "1q-reliability-21924",
+    title: "Arcade Simulator: Cloud Infrastructure Engineer",
+    code: "1q-infraeng-41850",
     points: 1,
-    url: "https://www.skills.google/games/7500?utm_source=googleskills&utm_medium=lp&utm_campaign=specgame-oct-arcade26",
-    image: "/images/simulator_oct.png",
+    url: "https://www.skills.google/games/7566?utm_source=googleskills&utm_medium=lp&utm_campaign=spegame-nov-arcade26",
+    image: "/images/simulator_nov.png",
     duration: "~45 mins",
     difficulty: "Medium",
-    keywords: ["simulator", "site reliability engineer"]
+    keywords: ["simulator", "cloud infrastructure engineer"]
   }
 ];
+const OCTOBER_ARCADE_GAMES = NOVEMBER_ARCADE_GAMES;
 
 // Recommended Fast Skill Badges (0.5 PT each, duration <= 1 hr)
 const FAST_SKILL_BADGES = [
@@ -285,7 +286,7 @@ export default function ProfessorsMasterPlan({
     let planText = `Listen to me carefully, Operative ${userName}. The Royal Mint was child's play compared to this. You are currently ${pointsNeeded} points away from breaching the ${nextTier.name}. `;
     
     if (unearnedGames.length > 0) {
-      planText += `Your immediate strike: infiltrate the ${Math.min(unearnedGames.length, Math.ceil(pointsNeeded))} unplayed October games (+1 point each). `;
+      planText += `Your immediate strike: infiltrate the ${Math.min(unearnedGames.length, Math.ceil(pointsNeeded))} unplayed November games (+1 point each). `;
     }
     if (badgesCount > 0) {
       planText += `Then, execute ${badgesCount} quick 45-minute Skill Badges (+0.5 point each). `;
@@ -501,7 +502,7 @@ export default function ProfessorsMasterPlan({
         {/* Interactive Tactical Nodes Grid */}
         <div className="relative z-10 p-6 md:p-8">
           
-          {/* Section 1: Highest-Yield October Games (1 PT Each) */}
+          {/* Section 1: Highest-Yield November Games (1 PT Each) */}
           <div className="mb-10">
             <div className="flex items-center justify-between mb-4 border-b border-[var(--vault-outline)] pb-3">
               <div className="flex items-center gap-2">

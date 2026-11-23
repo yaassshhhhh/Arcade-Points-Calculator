@@ -31,47 +31,57 @@ export default function ChampionLegendSwagCard({
 
   const isLegend = tier === "legend";
 
-  // Hotspots definition tailored to the Weather Shield Jacket & Tech Kit photo
+  // Hotspots definition tailored to the Weather Shield Jacket, Backpack & Tech Kit photo
   const hotspots = [
     {
-      id: "jacket",
-      x: 50, // % from left
-      y: 36, // % from top
-      title: "Arcade Weather Shield Jacket",
-      subtitle: isLegend ? "Pinnacle Operative Shell" : "Premium Weatherproof Shell",
-      desc: "Lightweight windbreaker tailored with sleek Google Cloud chest logo, emblem sleeve detailing, storm-resistant zipper, and collector finish.",
+      id: "backpack",
+      x: 33, // % from left
+      y: 46, // % from top
+      title: "Google Cloud Tactical Backpack",
+      subtitle: isLegend ? "Pinnacle Ballistic Carry" : "Mastermind Ballistic Pack",
+      desc: "Heavy-duty rolltop backpack with ergonomic harness, waterproof compartments, and Google Cloud branding.",
       icon: <Package size={14} className={isLegend ? "text-yellow-400" : "text-red-400"} />,
       color: isLegend ? "#ffd700" : "#ff2a4d"
     },
     {
-      id: "kit-left",
-      x: 39,
-      y: 74,
+      id: "jacket",
+      x: 68, // % from left
+      y: 46, // % from top
+      title: "Arcade Weather Shield Jacket",
+      subtitle: isLegend ? "Pinnacle Operative Shell" : "Premium Weatherproof Shell",
+      desc: "Lightweight windbreaker tailored with sleek Google Cloud chest logo, emblem sleeve detailing, storm-resistant zipper, and collector finish.",
+      icon: <ShieldCheck size={14} className={isLegend ? "text-yellow-400" : "text-red-400"} />,
+      color: isLegend ? "#ffd700" : "#ff2a4d"
+    },
+    {
+      id: "kit",
+      x: 23,
+      y: 72,
       title: "Google Cloud Multi-Tool Kit",
       subtitle: "Universal Connectivity",
-      desc: "Compact tech operative EDC kit with USB interfaces, fast-charging cable adapters, and classified memory slots.",
+      desc: "Compact tech operative EDC kit with USB interfaces, fast-charging cable adapters, and lanyard loop.",
       icon: <Zap size={14} className="text-cyan-400" />,
       color: "#00f0ff"
     },
     {
-      id: "kit-right",
-      x: 61,
-      y: 74,
-      title: "Tactical Lanyard Gadget",
-      subtitle: "Hardware Armor",
-      desc: "Rugged multi-purpose toolkit equipped with quick-release loop strap, SIM card ejector pin, and high-speed terminals.",
-      icon: <ShieldCheck size={14} className="text-emerald-400" />,
-      color: "#10b981"
-    },
-    {
-      id: "mask",
-      x: 12,
-      y: 84,
-      title: "Bank of Spain Vault Arsenal",
-      subtitle: isLegend ? "120 PTS Pinnacle Clearance" : "95 PTS Master Clearance",
-      desc: "Authentic Money Heist vault staging featuring Bella Ciao masks, tactical blast door, and cash bundle reserves.",
+      id: "lumisnap",
+      x: 53,
+      y: 75,
+      title: "LumiSnap Magnetic Fill Light",
+      subtitle: "Studio Illumination",
+      desc: "Portable 360-degree magnetic ring light engineered for video streaming, conferencing, and crisp operative content.",
       icon: <Sparkles size={14} className="text-amber-400" />,
       color: "#f59e0b"
+    },
+    {
+      id: "bottle",
+      x: 71,
+      y: 72,
+      title: "Google Cloud Thermal Bottle",
+      subtitle: "Double-Wall Vacuum Armor",
+      desc: "Matte black insulated flask with carry handle and Google Cloud typography keeping your drinks hot or cold on all missions.",
+      icon: <Sparkles size={14} className="text-emerald-400" />,
+      color: "#10b981"
     }
   ];
 

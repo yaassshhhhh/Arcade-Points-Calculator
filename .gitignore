@@ -29,6 +29,10 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
+debug-*.cjs
+debug-*.mjs
+test-check.cjs
+pdf_generator/
 
 # env files (can opt-in for committing if needed)
 .env*

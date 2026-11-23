@@ -55,7 +55,7 @@ function DashboardContent() {
   const [showMilestone, setShowMilestone] = useState(false);
   const [showWantedPoster, setShowWantedPoster] = useState(false);
   const [lastTotal, setLastTotal] = useState(0);
-  const [joinedFacilitator, setJoinedFacilitator] = useState(false);
+  const [joinedFacilitator, setJoinedFacilitator] = useState(true);
 
   const [loadingText, setLoadingText] = useState("> Bypassing Google Cloud servers...");
 
@@ -189,11 +189,14 @@ function DashboardContent() {
   const displayPoints = useMemo(() => {
     if (!data) return 0;
     let bonus = 0;
-    if (data.milestones && data.milestones.achieved && data.milestones.achieved.length > 0) {
+    if (data.facilitatorBonus) {
+      bonus = data.facilitatorBonus;
+    } else if (data.milestones && data.milestones.achieved && data.milestones.achieved.length > 0) {
       const highest = data.milestones.achieved[data.milestones.achieved.length - 1];
       bonus = highest.bonusPoints || 0;
     }
-    return joinedFacilitator ? data.totalPoints : (data.totalPoints - bonus);
+    const base = typeof data.basePoints === 'number' ? data.basePoints : (data.totalPoints - bonus);
+    return joinedFacilitator ? (base + bonus) : base;
   }, [data, joinedFacilitator]);
 
   return (
