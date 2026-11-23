@@ -129,13 +129,6 @@ export default function ResourcesPage() {
       icon: <MessageCircle size={32} color="#25D366" />,
       color: "#25D366",
       image: "/images/whatsapp.png"
-    },
-    {
-      title: "Join Our Arcade Discord Community",
-      url: "https://discord.gg/gQEP4TyFh",
-      icon: <MessageCircle size={32} color="#5865F2" />,
-      color: "#5865F2",
-      image: "/images/discord.png"
     }
   ];
 
@@ -323,7 +316,7 @@ export default function ResourcesPage() {
               variants={containerVariants}
               initial="hidden"
               animate="show"
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+              className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto"
             >
               {communities.map((comm, i) => (
                 <motion.a
